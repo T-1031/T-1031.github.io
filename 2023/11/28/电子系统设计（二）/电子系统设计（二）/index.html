@@ -16,7 +16,7 @@
 <meta property="og:description" content="第二章 现代电子系统设计方法 系统级建模和仿真有什么样的重要性？    对于复杂的系统，可以提供简单有效的求解方法。 在实际系统建立之前，可以对系统的性能进行研究，优化系统架构和参数的设计，提高设计质量。 可以避免某些实际系统实验的危险性，操作更方便安全。 仿真可以重复进行，无需物理耗材，可以降低设计成本，提高设计效率，缩短设计周期。 对系统操作人员而言，是学习系统原理和实际操作方法的良好训练方式">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-28T13:51:45.000Z">
-<meta property="article:modified_time" content="2023-11-28T14:42:01.153Z">
+<meta property="article:modified_time" content="2023-11-30T11:11:42.936Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -246,7 +246,7 @@
 <ul>
 <li><strong>软IP</strong>：指以硬件描述语言来描述的功能模块；灵活性和适应性强，设计时间短，成本不高；但对面积&#x2F;时序&#x2F;功耗的可预测性差，性能上不可能得到全面优化。</li>
 <li><strong>固IP</strong>：指完成了综合的功能模块，在结构上已经有了一定的布局和优化，以网表文件的形式呈现。与软IP相比，固IP具有可综合性和物理实现效率。</li>
-<li><strong>硬IP</strong>：指已经对性能&#x2F;尺寸&#x2F;功耗进行了优化，并映射到一个特定的工艺技术，其物理掩膜布局已经得到验证的电路模，以版图的形式呈现。硬IP需要较少的反复，不要求设计者具有丰富的电路知识；与软IP相比价值更高，但灵活性小，不易修改。</li>
+<li><strong>硬IP</strong>：指已经对性能&#x2F;尺寸&#x2F;功耗进行了优化，并映射到一个特定的工艺技术，其物理掩膜布局已经得到验证的电路模块，以版图的形式呈现。硬IP需要较少的反复，不要求设计者具有丰富的电路知识；与软IP相比价值更高，但灵活性小，不易修改。</li>
 </ul>
 </li>
 <li><p>IP复用方法有什么重要性？  </p>
@@ -258,7 +258,7 @@
 <li>电路拓扑结构及参数确定</li>
 <li>电路特性仿真</li>
 <li>版图设计</li>
-<li>DRC LVC检查</li>
+<li>DRC LVS检查（DRC：版图设计规则检查 &#x2F; LVS：电学连接关系检查）</li>
 <li>布线参数提取</li>
 <li>电路特性后仿真</li>
 <li>记带（GDS II）</li>
@@ -293,7 +293,6 @@
 <li>电容耦合</li>
 <li>光电耦合</li>
 <li>变压器耦合</li>
-<li>数字电路上拉&#x2F;下拉电阻</li>
 </ul>
 </li>
 <li><p>系统电路有几种“地”？在包含数字电路和模拟电路的系统中，应如何设计接地方式？  </p>
