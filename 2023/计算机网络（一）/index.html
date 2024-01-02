@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://T-1031.github.io">
-  <title>电子系统设计（四） | TG仓库</title>
+  <title>计算机网络（一） | TG仓库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第七章 以 FPGA 为核心的系统电路设计 为什么以微处理器为核心的电子系统被称为智能电子系统？    因为这种系统可以对输入信号&#x2F;环境条件进行感知&#x2F;预测&#x2F;采集&#x2F;处理&#x2F;判断，进而可以对外界条件&#x2F;外界设备做出响应和控制。这种自适应和自学习的能力是智能控制的重要特点。  简述智能电子系统的软、硬件设计的相互关系以及各自的特点。    软&amp;#x">
+  <meta name="description" content="第1章 引言   协议层次结构 多层通信过程   服务 面向连接的服务 无连接服务   参考模型 OSI参考模型 TCP&#x2F;IP参考模型      协议层次结构绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。 协议：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层协议。 协议栈：一个特定的系统所">
 <meta property="og:type" content="article">
-<meta property="og:title" content="电子系统设计（四）">
-<meta property="og:url" content="http://t-1031.github.io/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%9B%9B%EF%BC%89/index.html">
+<meta property="og:title" content="计算机网络（一）">
+<meta property="og:url" content="http://t-1031.github.io/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="TG仓库">
-<meta property="og:description" content="第七章 以 FPGA 为核心的系统电路设计 为什么以微处理器为核心的电子系统被称为智能电子系统？    因为这种系统可以对输入信号&#x2F;环境条件进行感知&#x2F;预测&#x2F;采集&#x2F;处理&#x2F;判断，进而可以对外界条件&#x2F;外界设备做出响应和控制。这种自适应和自学习的能力是智能控制的重要特点。  简述智能电子系统的软、硬件设计的相互关系以及各自的特点。    软&amp;#x">
+<meta property="og:description" content="第1章 引言   协议层次结构 多层通信过程   服务 面向连接的服务 无连接服务   参考模型 OSI参考模型 TCP&#x2F;IP参考模型      协议层次结构绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。 协议：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层协议。 协议栈：一个特定的系统所">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-28T14:47:38.000Z">
-<meta property="article:modified_time" content="2023-12-01T16:00:00.638Z">
+<meta property="article:published_time" content="2023-12-12T08:15:10.000Z">
+<meta property="article:modified_time" content="2024-01-02T13:55:40.654Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -144,297 +144,125 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-电子系统设计（四）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-计算机网络（一）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      电子系统设计（四）
+      计算机网络（一）
     </h1>
   
 
         
-        <a href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-11-28T14:47:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
+        <a href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2023-12-12T08:15:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第七章-以-FPGA-为核心的系统电路设计"><a href="#第七章-以-FPGA-为核心的系统电路设计" class="headerlink" title="第七章 以 FPGA 为核心的系统电路设计"></a>第七章 以 FPGA 为核心的系统电路设计</h1><ul>
-<li><p>为什么以微处理器为核心的电子系统被称为智能电子系统？  </p>
-<p> 因为这种系统可以对输入信号&#x2F;环境条件进行感知&#x2F;预测&#x2F;采集&#x2F;处理&#x2F;判断，进而可以对外界条件&#x2F;外界设备做出响应和控制。这种自适应和自学习的能力是智能控制的重要特点。</p>
-</li>
-<li><p>简述智能电子系统的软、硬件设计的相互关系以及各自的特点。  </p>
-<p> 软&#x2F;硬件设计之间既相互依存又相互制约。<br> 较多地使用硬件来完成系统功能，可以提高工作速度，减少软件工作量，但硬件结构会比较复杂。<br> 较多地使用软件来完成系统功能，可降低硬件的结构和成本，但运行速度会受到影响，也增加了软件工作量。</p>
-</li>
-<li><p>采用通用微处理器、DSP和PLD为核心构建的系统各有什么侧重点？  </p>
+        <h1><span id="第1章-引言">第1章 引言</span></h1><!-- toc -->
+
 <ul>
-<li>微处理器：着重于控制功能。</li>
-<li>DSP：侧重于实时数字信号处理运算。</li>
-<li>PLD：侧重于灵活的硬件重构。</li>
+<li><a href="#%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">协议层次结构</a><ul>
+<li><a href="#%E5%A4%9A%E5%B1%82%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B">多层通信过程</a></li>
 </ul>
 </li>
-<li><p>简述FPGA的三个发展阶段。  </p>
-<ul>
-<li>第一阶段：<strong>逻辑级 FPGA</strong>。是可编程逻辑芯片，内部结构包括必要的三个部分：可编程逻辑块，可编程 I&#x2F;O 模块，可编程内部连线。主要实现逻辑功能，起到逻辑粘合作用。</li>
-<li>第二阶段：<strong>系统级 FPGA</strong>。其内部添加了诸如大块的嵌入式 RAM、数字时钟管理器等模块，也支持更多类型的 I&#x2F;O 接口标准，可以实现一个系统的功能。</li>
-<li>第三阶段：<strong>平台级 FPGA</strong>。芯片内部集成了更加丰富的硬件资源，如乘法器、DSP 模块、高速接口等，应用延伸到数字信号处理、高密度运算、通信接口等更广阔的领域。单个 FPGA 平台就可以实现多种应用功能。</li>
+<li><a href="#%E6%9C%8D%E5%8A%A1">服务</a><ul>
+<li><a href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%9C%8D%E5%8A%A1">面向连接的服务</a></li>
+<li><a href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1">无连接服务</a></li>
 </ul>
 </li>
-<li><p>什么叫做FPGA基本系统？  </p>
-<p> 以 FPGA 为核心构建的系统电路在硬件上主要包括基本系统和各种通道接口。<br> 基本系统包括 FPGA 正常工作所需的电源、时钟和配置等电路，在各种应用系统中基本相同，具有典型结构。</p>
-</li>
-<li><p>以Cyclone器件中的EP1C6为例（TQFP封装），说明FPGA引脚功能的分类以及I&#x2F;O内部分块（BANK）的目的。  </p>
-<p> <strong>引脚功能分类</strong>  </p>
-<ul>
-<li>专用功能引脚：主要有电源、地端、时钟、配置和 JTAG 引脚等，其功能固定。</li>
-<li>通用 I&#x2F;O 引脚：可以由用户进行设计和使用。</li>
-</ul>
-<p> <strong>分块目的</strong><br> 可以使同一个块内的引脚具有相同的特性，而处于不同块的引脚可以使用不同电压值的电源或不同频率的时钟，也可以支持不同的 I&#x2F;O 标准。因此同一片 FPGA 芯片就可以通过配置不同块里的引脚来连接不同的外部设备。</p>
-</li>
-<li><p>以EP1C6为例（TQFP封装），说明其外部电源引脚、时钟引脚有哪几种类型？  </p>
-<p> <strong>电源引脚</strong>  </p>
-<ul>
-<li>VCCINT：内部操作和输入缓冲器的电源，BANK2 和 BANK4 各有3个。</li>
-<li>VCCIO：I&#x2F;O 端口输出驱动的电源，每个 BANK 有2个（VCCIO1-VCCIO4 各2个）。</li>
-<li>VREF：外接诸如 DDR 存储器时的参考电源，每个 BANK 有3个（VREF0Bx-VREF2Bx, x取1、2、3、4）。</li>
-<li>其中 VCCINT 和 VCCIO 是专用引脚，只能作为电源使用；VREF 在不连接外部存储器时，可以作为通用的 I&#x2F;O 引脚使用。</li>
-</ul>
-<p> <strong>时钟引脚</strong>  </p>
-<ul>
-<li>4个专用的时钟引脚（CLK0-CLK3）：2个位于 BANK1，2个位于 BANK3。</li>
-<li>8个时钟的复用引脚（DPCLK0-DPCLK7）：可用于高扇出数的控制信号；不用于时钟引脚时，可以当作通用 I&#x2F;O 引脚来使用。</li>
-</ul>
-</li>
-<li><p>什么叫做FPGA的配置？Cyclone系列FPGA的配置有哪几种方式？上电时的配置方式是如何确定的？  </p>
-<p> 在系统上电时，对 FPGA 内部的 SRAM 装载数据的物理过程叫做配置。  </p>
-<p> Cyclone 器件的配置有三种模式：主动串行（AS）、被动串行（PS）和 JTAG 模式。</p>
-<p> MSEL1 和 MSEL0 两个引脚的电平决定了器件的配置模式。<br> MSEL 引脚必须连接到所在 BANK 的 VCCIO 或者 GND，并且不加上拉或下拉电阻。<br> 若采用 JTAG 模式，则忽略 MSEL 的状态；若不采用 JTAG 模式，MSEL1 &#x3D; 0 MSEL0 &#x3D; 0 时使用主动串行，MSEL1 &#x3D; 0 MSEL0 &#x3D; 1 时使用被动串行。</p>
-</li>
-<li><p>以FPGA为核心构建的系统电路的外围电路包括哪些通道？各部分的主要功能是什么？  </p>
-<ul>
-<li><strong>输入通道</strong>：被测信号通过输入通道进入系统电路。  <ul>
-<li>信号获取：通过敏感元件&#x2F;传感器&#x2F;测量仪表将外界非电参量转换成电信号量。</li>
-<li>信号调节：将输出的电信号转换成能满足数字电路接口或A&#x2F;D输入要求的标准电平信号。</li>
-<li>A&#x2F;D转换：对于频率信号和开关信号，满足TTL电平要求后可直接接入FPGA系统；对于模拟信号，则采用A&#x2F;D转换器转换成数字信号，再进行数字信号处理。</li>
-<li>抗干扰措施：包括电源隔离、模拟通道隔离、数字通道隔离。</li>
-</ul>
-</li>
-<li><strong>输出通道</strong>：输出经过处理的信号并对控制对象实施控制。</li>
-<li><strong>人机交互通道</strong>：方便人对应用系统进行状态干预、数据输入，同时应用程序向人报告运行状态和运行结果。</li>
-<li><strong>相互通道</strong>：FPGA 与微处理器或 FPGA 与其他外部设备之间实现通信的通信接口。</li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B">参考模型</a><ul>
+<li><a href="#osi%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B">OSI参考模型</a></li>
+<li><a href="#tcpip%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B">TCP&#x2F;IP参考模型</a></li>
 </ul>
 </li>
 </ul>
-<p>~</p>
-<ul>
-<li><p>了解LED灯、按键、矩阵键盘、数码管、点阵、蜂鸣器的工作原理以及用FPGA控制它们的方式。  </p>
-<ul>
-<li><p><strong>单个LED</strong>  </p>
-<ul>
-<li>工作原理<br>与一般的二极管工作原理相似，有一个阴极和一个阳极。当阳极电压高于阴极电压时，LED导通（导通电压大约在2.0V左右），同时发光；当阴极电压高于阳极电压时，LED截止，不发光。导通时，发光强度随着流通LED的电流大小而变化。</li>
-<li>控制方式<br>采用静态方式，一个LED灯占用一个端口，同一时刻显示不同灯的状态。</li>
-</ul>
-</li>
-<li><p><strong>七段数码管</strong>  </p>
-<ul>
-<li>工作原理<br>共阳极数码管，8个发光二极管的阳极连接在一起，形成公共端 COM；阴极分开，分别用a b c d e f g dp来表示。其中dp用于显示小数点，a-g用于控制其他七个灯的亮&#x2F;灭，以此组成字母或数字。</li>
-<li>控制方式<br>采用动态扫描方式，在不同的时刻送出不同LED灯的控制信号，轮流循环地控制各LED灯，利用人眼的残留效应得到稳定的显示状态。<br>在电路连接中，多个数码管的a端连接在一起，占用一个 I&#x2F;O 端口（b-dp端接法相同）；每个数码管的 COM 独立占据一个 I&#x2F;O 端口。在进行显示时，FPGA 将要显示的字符的编码信号同时送到多个数码管的阴极端，但只有 COM 为高电平的数码管会显示。</li>
-</ul>
-</li>
-<li><p><strong>8 $\times$ 8LED点阵</strong></p>
-<ul>
-<li>工作原理<br>每行的8个LED灯的阳极接在一起，每列的8个LED灯的阴极接在一起。限流电阻可以接在行方向或列方向。第i行接高电平，第j列接低电平时，第(i, j)个LED灯被点亮，由多个LED灯的点亮状态就可以显示图形、汉字或字符。</li>
-<li>控制方式<br>将LED点阵的8条列线连接在 FPGA 的一组 I&#x2F;O 引脚上，8条行线通过限流电阻接在 FPGA 的另一组 I&#x2F;O 引脚上。FPGA 内部逻辑按照设定在在行和列两组 I&#x2F;O 接口输出与内部字符对应的代码电平，送至LED点阵的行列线，从而选中相应的像素LED发光，并利用人眼的视觉残留效应显示整个字符。</li>
-</ul>
-</li>
-<li><p><strong>独立按键</strong>  </p>
-<ul>
-<li>工作原理<br>以开关状态来设置控制功能和输入数据，按键按下则开关所在连线接通。</li>
-<li>控制方式<br>一个按键单独连接一根 I&#x2F;O 端口线，其状态不会影响其他 I&#x2F;O 端口线的工作状态。</li>
-</ul>
-</li>
-<li><p><strong>矩阵键盘</strong></p>
-<ul>
-<li>工作原理<br>将多个按键排成阵列，通过由列线送入全扫描字、行线读入状态来判断有无按键按下。</li>
-<li>控制方式<br>每一行按键共用一根 I&#x2F;O 端口线，每一列按键也共用一根 I&#x2F;O 端口线。<br>给列线依次输入低电平，如果行线输入状态都为高电平，则无按键被按下；否则送入低电平的列线与读到低电平的行线的交叉点上的按键被按下。</li>
-</ul>
-</li>
-<li><p><strong>蜂鸣器</strong></p>
-<ul>
-<li>工作原理<br>压电蜂鸣器中包含一个压电陶瓷片。当施加交变电压时，陶瓷片产生震动并传导到蜂鸣器的振动片或共振腔，使整个蜂鸣器产生声音。通过控制施加在压电蜂鸣器上的交变电压的频率，可以控制蜂鸣器产生的声音的频率。</li>
-<li>控制方式<br>蜂鸣器一端接高电平，另一端接到三极管的发射极。三级管的基极通过一个电阻接到 FPGA 的 I&#x2F;O 端口，集电极接地。<br>当 I&#x2F;O 端口输出高电平时，三极管截止，蜂鸣器无法发声；输出低电平时三极管导通，蜂鸣器发声。<br>通过改变输出端口的占空比，即可改变蜂鸣器的发声频率。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>以讲义中 TLC549 模&#x2F;数转换器和 TLC7528 数&#x2F;模转换器为例，了解 ADC 和 DAC 与 FPGA 的硬件连接方法，了解在 FPGA 中设计 ADC&#x2F;DAC 控制器的方法。  </p>
-<ul>
-<li><p><strong>TLC549 (ADC)</strong>  </p>
-<table>
+<!-- tocstop -->
+
+<h2><span id="协议层次结构">协议层次结构</span></h2><p>绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。</p>
+<p><strong>协议</strong>：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层协议。</p>
+<p><strong>协议栈</strong>：一个特定的系统所使用的一组协议。</p>
+<p><strong>对等体</strong>：不同机器上构成相应层次的实体称为对等体。</p>
+<p><strong>接口</strong>：定义了下层向上层提供哪些原语操作和服务。</p>
+<p><strong>网络体系结构</strong>：层和协议的集合。</p>
+<h3><span id="多层通信过程">多层通信过程</span></h3><ol>
+<li>在输出端的机器上，上层向下层传递消息时，下层在消息前加上一个头，用来标识该信息，并把结果传递给再下一层。该头包含一些控制信息。  </li>
+<li>在限制消息大小的层（几乎所有的第3层协议），把入境消息分割成较小的单元，即数据包或包，并在每个数据包前面加上该层的头。每个数据包单独传输。  </li>
+<li>第2层给每个信息加上一个头和一个尾，然后将结果传送给第1层进行物理传输。  </li>
+<li>在接收端的机器上，消息自底向上逐层传递，在传递过程中各个头被逐层剥离。没有一个第n层以下的头会被传递到第n层。</li>
+</ol>
+<h2><span id="服务">服务</span></h2><h3><span id="面向连接的服务">面向连接的服务</span></h3><p>首先在信源和信宿之间建立连接，然后在此连接上通信，最后拆除连接。</p>
+<p>特点：占用一定资源，可靠，按序传送。</p>
+<p>可靠服务：接收方向发送方确认收到的每个报文。确认过程本身要引入额外的开销和延迟。</p>
+<p>可靠的面向连接服务可分为可靠的报文流和可靠的字节流。前者保持报文的边界，而后者没有。此外还有不可靠的连接，及不进行确认。  </p>
+<h3><span id="无连接服务">无连接服务</span></h3><p>传送数据前不需要建立连接，即有即送。每个报文都携带了完整的目标地址。</p>
+<p>特点：每个数据包独自寻路（重复劳动），同一数据流的包可能经过不同的路径到达目的地，到达的顺序也可能颠倒。</p>
+<p>可分为不可靠的无连接服务（数据报服务），有确认的数据报服务，请求-应答服务（发送方传输一个包含了某个请求的数据报，接受方以一个包含了请求结果的应答数据报作为反馈）。</p>
+<h2><span id="参考模型">参考模型</span></h2><h3><span id="osi参考模型">OSI参考模型</span></h3><table>
 <thead>
 <tr>
-<th>管脚</th>
-<th>说明</th>
+<th>名字</th>
+<th>功能</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>REF+</td>
-<td>正基准电压输入</td>
+<td><strong>物理层</strong></td>
+<td>主要涉及机械，电子，时序接口，以及物理层之下的物理传输介质等。</td>
 </tr>
 <tr>
-<td>ANALOG IN</td>
-<td>模拟信号输入</td>
+<td><strong>数据链路层</strong></td>
+<td>发送方将输入数据拆分成数据帧，然后顺序发送；错误检测和纠正；流量控制。</td>
 </tr>
 <tr>
-<td>REF-</td>
-<td>负基准电压输入</td>
+<td><strong>网络层</strong></td>
+<td>寻址和路由数据包，拥塞控制。</td>
 </tr>
 <tr>
-<td>GND</td>
-<td>接地</td>
+<td><strong>传输层</strong></td>
+<td>接收来自上一层的数据（必要时分割），然后传递给网络层；决定了向会话层（用户）提供的服务类型。</td>
 </tr>
 <tr>
-<td>VCC</td>
-<td>接系统电源</td>
+<td><strong>会话层</strong></td>
+<td>建立（或清除）在两个通信的表示层之间的通信通道；包括交互管理，同步，异常报告。</td>
 </tr>
 <tr>
-<td>I&#x2F;O CLOCK</td>
-<td>外接输入&#x2F;输出时钟输入，用于同步芯片的输入输出操作；连接到 EP1C6 FPGA 的27脚</td>
+<td><strong>表示层</strong></td>
+<td>负责数据的表示语法。</td>
 </tr>
 <tr>
-<td>DATA OUT</td>
-<td>数字信号串行输出，高位在前，低位在后；连接到 EP1C6 FPGA 的11脚</td>
-</tr>
-<tr>
-<td>#CS</td>
-<td>片选信号，低电平有效；连接到 EP1C6 FPGA 的28脚</td>
+<td><strong>应用层</strong></td>
+<td>处理应用进程之间所发送和接收的数据中包含的信息内容，包含各种协议。</td>
 </tr>
 </tbody></table>
-</li>
-<li><p><strong>TLC7528 (DAC)</strong>  </p>
-<table>
+<h3><span id="tcpx2fip参考模型">TCP&#x2F;IP参考模型</span></h3><table>
 <thead>
 <tr>
-<th>管脚</th>
-<th>说明</th>
-<th>与 EP1C6 的连接</th>
+<th>名字</th>
+<th>功能</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>#CS, #WR</td>
-<td>当 #CS 和 #WR 有一个是高电平时，两路输出均处于保持状态；当两个信号均为低电平时，依据 #DACA&#x2F;DACB 将数据写入到对应锁存器</td>
-<td>分别连接到142、143脚</td>
+<td><strong>链路层</strong></td>
+<td>主机和传输线路之间的一个接口。</td>
 </tr>
 <tr>
-<td>#DACA&#x2F;DACB</td>
-<td>若该端口为低电平，则数据写入到锁存器A；若该端口为高电平，则数据写入到锁存器B</td>
-<td>连接到144脚</td>
+<td><strong>互联网层</strong></td>
+<td>提供非连接的分组交换功能；定义了官方的数据包格式和协议，因特网协议(IP)及辅助协议，因特网控制报文协议(ICMP)。</td>
 </tr>
 <tr>
-<td>DB7 - DB0</td>
-<td>8位并行数据输入</td>
-<td>依次连接到10,7,6,5,4,3,2,1脚</td>
+<td><strong>传输层</strong></td>
+<td>定义了两个端到端的传输协议：可靠的，面向连接的传输控制协议(TCP)；不可靠的，无连接的用户数据报协议(UDP)。</td>
+</tr>
+<tr>
+<td><strong>应用层</strong></td>
+<td>包含了所有的高层协议。</td>
 </tr>
 </tbody></table>
-</li>
-</ul>
-</li>
-<li><p>了解FPGA与各种接口的连接方法。  </p>
-<ul>
-<li><p>与存储器的连接  </p>
-<ul>
-<li>24LC02（串行 EEPROM 存储器）  <table>
-<thead>
-<tr>
-<th>管脚</th>
-<th>说明</th>
-<th>连接</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>SCL</td>
-<td>向存储器提供时钟信号</td>
-<td>I2C线，连接到 FPGA 的 I&#x2F;O端口</td>
-</tr>
-<tr>
-<td>SDA</td>
-<td>控制存储器的读写</td>
-<td>I2C线，连接到 FPGA 的 I&#x2F;O端口</td>
-</tr>
-</tbody></table>
-</li>
-<li>SDRAM<br>SDRAM 的引脚直接与 FPGA 的通用 I&#x2F;O 引脚连接。</li>
-</ul>
-</li>
-<li><p>与接口芯片的连接<br>以下 FPGA 端口 均为 I&#x2F;O 端口。</p>
-<ul>
-<li><p>UART 转 RS232  </p>
-<table>
-<thead>
-<tr>
-<th>FPGA</th>
-<th>MAX232</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>UART_TX1</td>
-<td>T1in</td>
-<td>转换后，T1out 和 R1in 接到9针插座（J5），插座外接电缆线</td>
-</tr>
-<tr>
-<td>UART_RX1</td>
-<td>R1out</td>
-<td></td>
-</tr>
-<tr>
-<td>UART_TX2</td>
-<td>T2in</td>
-<td>转换后，T2out 和 R2in 接到 J7 插座上</td>
-</tr>
-<tr>
-<td>UART_RX2</td>
-<td>R2out</td>
-<td></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>UART 转 USB  </p>
-<table>
-<thead>
-<tr>
-<th>FPGA</th>
-<th>CH340</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>USB_TXD</td>
-<td>RXD</td>
-<td>转换后由 UD+ 和 UD- 连接到USB插座 J16 上</td>
-</tr>
-<tr>
-<td>USB_RXD</td>
-<td>TXD</td>
-<td></td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-<li><p>与处理器的连接<br>FPGA 与微处理器、DSP 等连接的方式有多种形式，可以通过标准接口连接，也可以通过微处理器提供的总线连接。  </p>
-<p>以 S3C2410X 为例。  </p>
-<p>S3C2410X 提供了地址线 [L]ADDR[0:25]、数据线 [L]DATA[0:31] 和控制线 1。<br>这些连接线首先通过 74LVCH162245 (U6-U9) 进行第一步缓冲，得到相应的地址线 ADDR[0:25]、数据线 DATA[0:31] 和控制线 2。<br>再经过 74LVCH162245 (U67-U70) 进行第二级缓冲，得到连接 FPGA 的地址线 XADDR[0:24]、数据线 XDATA[0:31] 和控制线 3。<br>这些信号线都接到 FPGA 的通用 I&#x2F;O 引脚上。<br>其中控制线1是一组信号线，包括写使能信号 nWE、输出使能信号 nOE 以及写字节使能信号 nWBE[3:0] 等。控制线1中各信号线通过两级缓冲器后，只是名称改变，性质不变。</p>
-<p>S3C2410X 芯片内部还有一些专用的标准接口，包括 I2C 总线、I2S 总线和 SPI 总线接口等，也可以通过这些标准接口与 FPGA 相连。</p>
-</li>
-</ul>
-</li>
-</ul>
 
       
 
@@ -453,7 +281,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/电子系统设计//" class="article-tag-list-link color2">电子系统设计</a>
+        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -508,7 +336,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://t-1031.github.io/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%9B%9B%EF%BC%89/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://t-1031.github.io/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -522,18 +350,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/11/29/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%8C%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          电子系统设计（五）
+          计算机网络（二）
         
       </div>
     </a>
   
   
-    <a href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">电子系统设计（三）</div>
+    <a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">电子系统设计（五）</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -576,7 +404,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2023 TG
+    		&copy; 2024 TG
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

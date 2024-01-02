@@ -144,6 +144,1173 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-计算机网络（五）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%94%EF%BC%89/">计算机网络（五）</a>
+    </h1>
+  
+
+        
+        <a href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%94%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2024-01-02T14:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="第5章-网络层">第5章 网络层</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#%E5%90%91%E4%BC%A0%E8%BE%93%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1">向传输层提供的服务</a></li>
+<li><a href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0">无连接服务&#x2F;面向连接服务的实现</a><ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%BD%91%E7%BB%9C">数据报网络</a></li>
+<li><a href="#%E8%99%9A%E7%94%B5%E8%B7%AF%E7%BD%91%E7%BB%9C">虚电路网络</a></li>
+<li><a href="#%E4%BA%8C%E8%80%85%E5%AF%B9%E6%AF%94">二者对比</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95">路由算法</a><ul>
+<li><a href="#%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99">优化原则</a></li>
+<li><a href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95-dijkstra">最短路径算法 (Dijkstra)</a></li>
+<li><a href="#%E6%B3%9B%E6%B4%AA%E7%AE%97%E6%B3%95">泛洪算法</a></li>
+<li><a href="#%E8%B7%9D%E7%A6%BB%E7%9F%A2%E9%87%8F-distance-vector-%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95">距离矢量 (Distance Vector) 路由算法</a><ul>
+<li><a href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E8%85%BF">存在问腿</a></li>
+</ul>
+</li>
+<li><a href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81-link-state-%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95">链路状态 (Link State) 路由算法</a><ul>
+<li><a href="#%E4%B8%8E%E8%B7%9D%E7%A6%BB%E7%9F%A2%E9%87%8F%E7%AE%97%E6%B3%95%E6%AF%94%E8%BE%83">与距离矢量算法比较</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B1%82%E6%AC%A1%E8%B7%AF%E7%94%B1-hierarchical-routing">层次路由 (Hierarchical Routing)</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95">拥塞控制算法</a><ul>
+<li><a href="#%E5%BC%80%E7%8E%AF%E6%8E%A7%E5%88%B6">开环控制</a><ul>
+<li><a href="#%E6%BC%8F%E6%A1%B6%E7%AE%97%E6%B3%95">漏桶算法</a></li>
+<li><a href="#%E4%BB%A4%E7%89%8C%E6%A1%B6%E7%AE%97%E6%B3%95">令牌桶算法</a></li>
+</ul>
+</li>
+<li><a href="#%E9%97%AD%E7%8E%AF%E6%8E%A7%E5%88%B6">闭环控制</a><ul>
+<li><a href="#%E8%99%9A%E7%94%B5%E8%B7%AF%E4%B8%AD%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">虚电路中的拥塞控制</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E4%B8%AD%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">数据报中的拥塞控制</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E4%BA%92%E8%BF%9E">网络互连</a><ul>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%A6%82%E4%BD%95%E4%B8%8D%E5%90%8C">网络如何不同</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%A6%82%E4%BD%95%E8%BF%9E%E6%8E%A5">网络如何连接</a></li>
+<li><a href="#%E4%BA%92%E8%81%94%E7%BD%91%E8%B7%AF%E7%94%B1">互联网路由</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%AE%B5">数据包分段</a><ul>
+<li><a href="#%E9%80%8F%E6%98%8E%E5%88%86%E6%AE%B5">透明分段</a></li>
+<li><a href="#%E4%B8%8D%E9%80%8F%E6%98%8E%E5%88%86%E6%AE%B5">不透明分段</a></li>
+<li><a href="#%E8%B7%AF%E5%BE%84-mtu-%E5%8F%91%E7%8E%B0">路径 MTU 发现</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#internet-%E7%9A%84%E7%BD%91%E7%BB%9C%E5%B1%82">Internet 的网络层</a><ul>
+<li><a href="#ipv4-%E5%8D%8F%E8%AE%AE">IPv4 协议</a></li>
+<li><a href="#ipv4-%E5%9C%B0%E5%9D%80">IPv4 地址</a><ul>
+<li><a href="#%E5%89%8D%E7%BC%80%E5%AD%90%E7%BD%91">前缀&#x2F;子网</a></li>
+<li><a href="#ip-%E5%9C%B0%E5%9D%80%E5%92%8C-mac-%E5%9C%B0%E5%9D%80">IP 地址和 MAC 地址</a></li>
+</ul>
+</li>
+<li><a href="#ip-%E5%AF%BB%E5%9D%80">IP 寻址</a><ul>
+<li><a href="#%E8%B7%AF%E7%94%B1%E8%A1%A8%E4%B8%8E%E8%BD%AC%E5%8F%91%E8%A1%A8">路由表与转发表</a></li>
+<li><a href="#%E6%97%A0%E7%B1%BB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1-cidr">无类域间路由 (CIDR)</a></li>
+<li><a href="#%E5%88%86%E7%B1%BB%E5%92%8C%E7%89%B9%E6%AE%8A%E5%AF%BB%E5%9D%80">分类和特殊寻址</a></li>
+<li><a href="#nat">NAT</a></li>
+</ul>
+</li>
+<li><a href="#ipv6-%E5%8D%8F%E8%AE%AE">IPv6 协议</a><ul>
+<li><a href="#%E6%89%A9%E5%B1%95%E5%A4%B4">扩展头</a></li>
+</ul>
+</li>
+<li><a href="#ipv6-%E5%9C%B0%E5%9D%80">IPv6 地址</a><ul>
+<li><a href="#%E5%88%86%E7%B1%BB">分类</a></li>
+</ul>
+</li>
+<li><a href="#internet-%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE">Internet 控制协议</a><ul>
+<li><a href="#icmp">ICMP</a></li>
+<li><a href="#arp">ARP</a></li>
+<li><a href="#dhcp">DHCP</a></li>
+</ul>
+</li>
+<li><a href="#internet-%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE">Internet 路由协议</a><ul>
+<li><a href="#rip">RIP</a></li>
+<li><a href="#ospf">OSPF</a></li>
+<li><a href="#bgp">BGP</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE%E5%88%86%E7%B1%BB%E4%B8%8E%E5%8D%8F%E8%AE%AE%E6%A0%88">路由协议分类与协议栈</a></li>
+</ul>
+</li>
+<li><a href="#internet-%E7%BB%84%E6%92%AD">Internet 组播</a><ul>
+<li><a href="#%E7%BB%84%E6%92%AD%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE">组播路由协议</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<h2><span id="向传输层提供的服务">向传输层提供的服务</span></h2><p>网路层的必要性：  </p>
+<ul>
+<li>相距较远的局域网之间的互联互通需要有结构化的统一的地址编排，而 MAC 地址是硬件地址，与位置无关，无法用来路由。</li>
+<li>二层交换机不隔离广播域，网络规模较大时易形成广播风暴。</li>
+</ul>
+<p>网络层设计目标：</p>
+<ul>
+<li>向上提供的服务应该独立于路由器技术。</li>
+<li>应该向传输层屏蔽路由器的数量、类型和拓扑关系。</li>
+<li>传输层可用的网络地址应该有一个统一的编址方案，甚至可以跨越 LAN 和 WAN。</li>
+</ul>
+<p>争论：</p>
+<ul>
+<li>网络层提供面向连接的服务还是无连接的服务。</li>
+</ul>
+<h2><span id="无连接服务x2f面向连接服务的实现">无连接服务&#x2F;面向连接服务的实现</span></h2><p>OSI 的网络层提供两种服务</p>
+<ul>
+<li>面向连接：<strong>虚电路</strong></li>
+<li>无连接：<strong>数据报</strong></li>
+</ul>
+<h3><span id="数据报网络">数据报网络</span></h3><p>所有的数据包都被独立地注入到网络中，并且每个数据包独立路由，不需要提前建立任何设置。</p>
+<p>特点：</p>
+<ul>
+<li>如果分组的寻路是独立的，可以合理利用网路资源。</li>
+<li>如果途中一个节点或一条链路发生故障，能给分组重选路由。</li>
+<li>分组头需要包含地址字段，会增加开销。</li>
+<li>各分组途经的路径可能不同，又肯出现先发后到现象。</li>
+<li>分组必须有生存时间限制，当生存期满时，分组则被抛弃；避免在网络内死转。</li>
+</ul>
+<h3><span id="虚电路网络">虚电路网络</span></h3><p>在发送数据包之前，必须首先建立起一条从源路由器到目标路由器之间的路径。<br>每个数据包包含一个标识符，指明了它属于哪一条虚电路。</p>
+<p>特点：</p>
+<ul>
+<li>一条物理链路可以对应多条逻辑信道。</li>
+<li>一条虚电路由各物理链路上的逻辑信道级联而成，占用了节点上的一条逻辑信道实际上就是占用了该节点上缓存器内的一个存储空间。</li>
+<li>分组考逻辑信道号 (LCN) 选择路由；因 LCN 只有局部意义，所以减少了分组头标的开销和处理的复杂度。</li>
+<li>能有效防止拥塞。</li>
+</ul>
+<h3><span id="二者对比">二者对比</span></h3><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>数据报网络</th>
+<th>虚电路网络</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>连接建立</td>
+<td>不需要</td>
+<td>需要</td>
+</tr>
+<tr>
+<td>路由与转发</td>
+<td>每个分组都包含源&#x2F;目的地址，独立路由；路由器根据分组的目的地址进行路由转发</td>
+<td>建立连接时需要路由，一旦建立逻辑通道，后续分组都根据分组头的逻辑通道号转发</td>
+</tr>
+<tr>
+<td>路由器状态</td>
+<td>不保留分组路由过的状态信息</td>
+<td>路由器需要保留每个连接的状态信息，一遍后续分组的转发</td>
+</tr>
+<tr>
+<td>分组路径与到达顺序</td>
+<td>同一流的分组可能沿不同的路径到达目的端，有可能乱序</td>
+<td>同一流的分组沿建立好的虚电路按序到达目的端</td>
+</tr>
+<tr>
+<td>路由器故障影响</td>
+<td>通过相邻节点的路由表更新，能迂回故障节点</td>
+<td>故障路由器上所有的连接都将中断</td>
+</tr>
+<tr>
+<td>服务质量</td>
+<td>较难提供</td>
+<td>易于在建立连接时在路径上的各个节点预留资源</td>
+</tr>
+<tr>
+<td>拥塞控制</td>
+<td>较难提供</td>
+<td>在建立连接时，可根据网络的资源选择路径，避免网络拥塞</td>
+</tr>
+</tbody></table>
+<h2><span id="路由算法">路由算法</span></h2><p>网络层的主要功能是根据分组目的地址选择路径。  </p>
+<p><strong>路由算法</strong>是网络层软件的一部分，负责确定一个入境数据包应该被发送到哪一条输出线路上。</p>
+<ul>
+<li>对数据报，路由器针对每一个到达的数据包重新选择路径。</li>
+<li>对虚电路，只有当建立一条新的虚电路时才需要做路由决策。</li>
+</ul>
+<p>路由算法可以分成两大类：</p>
+<ul>
+<li><strong>非自适应算法</strong>：<ul>
+<li>不会根据当前测量或者估计的流量和拓扑结构，来调整它们的路由决策。</li>
+<li>路由表固定，也称为<strong>静态路由</strong>。</li>
+<li>简便、可靠、易行，适用于负荷稳定、拓扑结构变化不大的网络。</li>
+</ul>
+</li>
+<li><strong>自适应算法</strong>：<ul>
+<li>根据拓扑结构的变化、流量的变化情况改变路由决策。</li>
+<li>路由表定时刷新，也称为<strong>动态路由</strong>。</li>
+<li>算法复杂，会增加网络负担，但能根据网络状态动态调整路由表，改善网络的性能。</li>
+</ul>
+</li>
+</ul>
+<p>路由器上可以同时运行多个路由协议，当有到达同一个目的地址的多条路由时，可以根据优先级的大小，选择其中一个优先级数值最小的作为最优路由。</p>
+<h3><span id="优化原则">优化原则</span></h3><p><strong>最优化原则</strong>：如果路由器 J 在从路由器 I 到路由器 K 的最优路径上，那么从 J 到 K 的最优路径也必定遵循同样的路由。</p>
+<p><strong>汇集树</strong>：从所有的源到一个指定目标的最优路径的集合构成了一棵以目标节点为根的树。</p>
+<p>所有路由算法的目标是为所有路由器找到这样的汇集树，并根据汇集树来转发数据包。</p>
+<h3><span id="最短路径算法-dijkstra">最短路径算法 (Dijkstra)</span></h3><p>在全双工链路连接的网络上，每条链路的每个方向上都有一个与之相关的权值。两个节点之间一条路由的代价是它所经过的链路权值之和。这两个节点间的最佳路由为其所有可能路径中具有最小代价的那条路径。</p>
+<p>标示路径长短的度量可以有：跳数、物理距离、带宽、平均流量、通信成本、平均延迟等。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_NODES 1024 <span class="comment">//最大节点数</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INFINITY 1000000000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//n表示节点数，dist[i][j]表示节点i到节点j的距离</span></span><br><span class="line"><span class="type">int</span> n, dist[MAX_NODES][MAX_NODES]; </span><br><span class="line"></span><br><span class="line"><span class="comment">//寻找节点t到节点s的最短路径</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">shortest_path</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> t, <span class="type">int</span> path[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">state</span>&#123;</span></span><br><span class="line">        <span class="type">int</span> pre; <span class="comment">//前任节点</span></span><br><span class="line">        <span class="type">int</span> length; <span class="comment">//该节点经过路径的长度</span></span><br><span class="line">        <span class="class"><span class="keyword">enum</span> &#123;</span>permanent, tentative&#125; label; <span class="comment">//该节点的标签</span></span><br><span class="line">    &#125;state[MAX_NODES];</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> k, min;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">state</span> *<span class="title">p</span>;</span></span><br><span class="line">    <span class="comment">//初始化</span></span><br><span class="line">    <span class="keyword">for</span> (p = &amp;state[<span class="number">0</span>]; p &lt; &amp;state[n]; p++)</span><br><span class="line">    &#123;</span><br><span class="line">        p-&gt;pre = <span class="number">-1</span>;</span><br><span class="line">        p-&gt;length = INFINITY;</span><br><span class="line">        p-&gt;label = tentative;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    state[t].length = <span class="number">0</span>;</span><br><span class="line">    state[t].label = permanet;</span><br><span class="line">    k = t; <span class="comment">//k表示当前操作的节点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(k != s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//找到k的哪些相邻节点从k走的距离小于原来的距离，更新距离</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++&gt;)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (dist[k][i] != <span class="number">0</span> &amp;&amp; state[i].label == tentative)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (state[k].length + dist[k][i] &lt; state[i].length)</span><br><span class="line">                &#123;</span><br><span class="line">                    state[i].pre = k;</span><br><span class="line">                    state[i].length = state[k].length + dist[k][i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//找到当前length最小的节点</span></span><br><span class="line">        k = <span class="number">0</span>;</span><br><span class="line">        min = INFINITY</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (state[i].label == teneative &amp;&amp; state[i].length &lt; min)</span><br><span class="line">            &#123;</span><br><span class="line">                min = state[i].length;</span><br><span class="line">                k = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        state[k].label == permanent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将路径存到path中</span></span><br><span class="line">    k = s;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; k &gt;= <span class="number">0</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        path[i] = k;</span><br><span class="line">        k = state[k].pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="泛洪算法">泛洪算法</span></h3><p>将每一个数据包发送到除了该数据包到达的那条线路以外的每条出境线路。</p>
+<p>为了抑制数据包泛滥，可以：</p>
+<ul>
+<li><p>在每个数据包的头中设置一个跳计数器，每经过一跳该计数器减一，当计数器到达 0 时就丢弃该数据包。<br>理想情况下，跳计数器的初始值应该等于从源端到接收方之间路径的长度。<br>如果发送方不知道该路径有多长，可以将计数器的初始值设置为最坏情况下的长度，即网络的直径。</p>
+</li>
+<li><p>每个源路由器在接收来自主机的数据包时填上一个序号，每个路由器为每个源路由器准备一张表，记录已经观察到的来自源路由器的序号。如果入境数据包在该表中，它就不能再被泛洪到其他路由器。<br>每个表使用一个计数器 k 作为参考，它表示直到 k 的所有序号都已经观察到了。</p>
+</li>
+</ul>
+<h3><span id="距离矢量-distance-vector-路由算法">距离矢量 (Distance Vector) 路由算法</span></h3><ul>
+<li>每个路由器维护一张路由表，它以网络每个路由器为索引，并且每个路由器对应一个表项，包含：<ul>
+<li>到达该目标路由器的首选出境线路；</li>
+<li>到达该目标路由器的距离估计值</li>
+</ul>
+</li>
+<li>每个路由节点定期地向它的相邻路由节点交换路由表。</li>
+<li>每个节点根据收到的相邻节点的路由信息更新自己的路由表，最终发现到每个目标的最佳估计值。</li>
+</ul>
+<h4><span id="存在问腿">存在问腿</span></h4><p><strong>收敛</strong>：整个网络最佳路径寻找的过程。</p>
+<p>对于距离矢量路由算法，它总是能收敛到正确的答案，但速度可能非常慢。它对好消息的反应非常迅速，而对于坏消息的反应异常迟缓。</p>
+<p><strong>无穷计算问题</strong>：当路由器 A 停机或 A、B 之间的链路断开时，路由器 B 认为可以从 C 到达 A，但实际上 C 的路线是经过 B 的，无法到达 A。逐渐地，所有的路由器都会趋向无穷大，但是所需的交换次数依赖于代表无穷大的数值。</p>
+<p>解决方案：水平分割算法。<br>防止路由器向邻居返回一个从该邻居获得的最佳路径。</p>
+<h3><span id="链路状态-link-state-路由算法">链路状态 (Link State) 路由算法</span></h3><p>也叫最短路径优先 (SPF) 算法。</p>
+<ul>
+<li><p>发现邻居节点，了解其网络地址。</p>
+<p>当一个路由器启动时，在每一条点到点线路上发送一个特殊的 HELLO 数据包。线路另一端的路由器返回一个应答说明自己是谁。<br>对于广播 LAN，可以视作一个新的人造节点，LAN 上的一个指定路由器被选中替代该节点运行路由协议。</p>
+</li>
+<li><p>设置到每个邻居节点的距离或成本度量值。</p>
+<p>常用的选择是使成本与链路带宽成反比。<br>如果网络在地理上分散，链路的延迟可作为成本的组成部分（发送 ECHO 数据包获得延迟估算值）。</p>
+</li>
+<li><p>构造一个包含所有刚刚获知的链路信息包。</p>
+<p>该数据包的内容首先是发送方的标识符，接着使一个序号和年龄，以及一个邻居列表。对于每个邻居，同时要给出到这个邻居的延迟。<br>可以周期性地创建数据包，也可以每当发生某些重要的使其时才创建数据包。</p>
+</li>
+<li><p>将这个包发送给所有其他的路由器，并接收来自所有其他路由器的信息包。</p>
+<p>基本思路是使用<a href="#%E6%B3%9B%E6%B4%AA%E7%AE%97%E6%B3%95">泛洪算法</a>将链路状态数据包分发给所有路由器。<br>每个数据包包含一个序号，序号随着每一个新数据包发出而逐一递增。<br>序号之后包含一个年龄字段，每秒中将年龄减一，为 0 时丢弃该数据包。</p>
+</li>
+<li><p>计算出到每个其他路由器的最短路径。</p>
+<p>在路由器本地运行 Dijkstra 算法。</p>
+</li>
+</ul>
+<h4><span id="与距离矢量算法比较">与距离矢量算法比较</span></h4><ul>
+<li>需要更多的内存和计算，在大型网络中运行存在问题。</li>
+<li>没有慢收敛问题。</li>
+<li>可扩展性好，可靠。</li>
+</ul>
+<h3><span id="层次路由-hierarchical-routing">层次路由 (Hierarchical Routing)</span></h3><p>路由表项大小与网络规模成正比，当网络规模变大时，路由表也变大，消耗更多的内存、带宽、查找时间。</p>
+<p>采用层次化路由解决问题：</p>
+<ul>
+<li>将网络分区域，区域内的路由器只负责本区域内的分组转发，目的地址不在本区域内的分组都发给指定的区域路由器（边界路由器）去处理。</li>
+<li>路由信息的交换旨在域内进行，路由器内部需存储的路由表项大大减少。</li>
+<li>对于大型网络，可以分成多层次结构，每一层次的边界路由器相互之间交流路由信息。</li>
+</ul>
+<p>缺点：选择的路由可能不是最佳的，增加了路径长度。</p>
+<p>对于一个包含 N 个路由器的网络，最优的层数是 lnN，每个路由器所需的路由表项是 elnN 个</p>
+<h2><span id="拥塞控制算法">拥塞控制算法</span></h2><p><strong>拥塞</strong>：当大量分组进入通信子网，超出了网络的处理能力时，就会引起网络局部或整体性能下降。</p>
+<ul>
+<li>路由器的队列溢出，分组丢失。</li>
+<li>后果：使许多分组重传；导致更多的业务量，直至崩溃。</li>
+<li>原因：路由器的处理速度、存储空间、带宽不匹配，网络负载的不平衡。</li>
+</ul>
+<p><strong>拥塞控制</strong>：</p>
+<ul>
+<li>网络负载的不均衡。</li>
+<li>是全局问题，涉及的节点包括主机、路由器。</li>
+<li>由网络层和传输层共同承担。</li>
+</ul>
+<p><strong>流量控制</strong>：</p>
+<ul>
+<li>接收端或所在网络的接受速度小于发送端的发送速度。</li>
+<li>是局部问题，只涉及收发两端。</li>
+</ul>
+<p>指示网络拥塞的参数：</p>
+<ul>
+<li>分组丢失率</li>
+<li>平均队列长度</li>
+<li>分组重传率</li>
+<li>评价分组延时</li>
+</ul>
+<h3><span id="开环控制">开环控制</span></h3><p>基于良好的设计，进行业务量整形。</p>
+<h4><span id="漏桶算法">漏桶算法</span></h4><p>无论流入漏桶的水的速率多大，只要漏桶中还有水，那么水流出桶的速率为恒定速率 R；如果桶内没有水，则流出桶的速率降为 0。<br>一旦桶内的水达到桶的容量 B，任何额外进入桶的水都会沿着桶侧分流，最终流失。</p>
+<p>每个主机在连接到网络的接口中包含一个漏桶。为了向网络发送数据包，漏桶必须由空余。<br>如果桶满时有数据包到达，那么该数据包必须排入队列等待漏桶空出来时再接纳，或者被丢弃。</p>
+<h4><span id="令牌桶算法">令牌桶算法</span></h4><p>水龙头向水桶中灌水。水龙头速率为 R，水桶容量为 B。<br>为了发送一个数据包，必须能够从桶内掏出水或令牌。桶内只能积累固定数量的令牌，即 B。<br>如果桶是空的，必须等待更多的令牌到达才能发送另一个数据包。</p>
+<p>最大突发长度：清空令牌桶所需时间。<br>假设突发长度为 S 秒，最大输出率为 M B&#x2F;s，令牌桶的容量为 B 字节，令牌到达率为 R B&#x2F;s。<br>则 $B + RS &#x3D; MS$。</p>
+<h3><span id="闭环控制">闭环控制</span></h3><p>基于反馈概念。</p>
+<ul>
+<li>检测到拥塞时，就发一个分组给源端，或向所有主机广播。</li>
+<li>在每个分组头中保留一个位或域，当拥塞超过一定值时，路由器就在该位或域上填上拥塞信息通知网络节点。</li>
+<li>由主机或路由器发送询问分组查询拥塞情况。</li>
+</ul>
+<h4><span id="虚电路中的拥塞控制">虚电路中的拥塞控制</span></h4><p>采用<strong>准入控制</strong> (Admission Control) 的三种策略：</p>
+<ul>
+<li>一旦出现拥塞的信号，就不再创建任何虚电路，直至拥塞解除。</li>
+<li>允许建立新的虚电路，但要仔细选择路由，以便所有新的虚电路绕过拥塞的区域。</li>
+<li>在虚电路建立时，子网与主机对所需服务质量进行协商。<br>若不能满足主机最低要求，则拒绝建立连接；反之则保留连接所需的多种资源，避免拥塞发生。</li>
+</ul>
+<h4><span id="数据报中的拥塞控制">数据报中的拥塞控制</span></h4><ul>
+<li><p><strong>抑制分组</strong> (Choke Packet)：<br>每个路由器监视本节点的资源利用情况，若某个方向的资源利用率超过一定的门限，则该路由器向有关源节点发送抑制分组，源节点相应减少发往该方向的数据量，直至该方向的拥塞解除。</p>
+</li>
+<li><p><strong>随机早期检测</strong> (RED)：<br>路由器维护一个运行队列长度的平均值。当某条链路上的平均队列长度超过某个阈值时，该链路就被认为即将拥塞，路由器随机丢弃一小部分数据包。</p>
+</li>
+</ul>
+<h2><span id="网络互连">网络互连</span></h2><h3><span id="网络如何不同">网络如何不同</span></h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>不同处</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>提供的服务</td>
+<td>无连接与面向连接</td>
+</tr>
+<tr>
+<td>寻址</td>
+<td>不同大小，扁平或层次</td>
+</tr>
+<tr>
+<td>广播</td>
+<td>提供或缺乏</td>
+</tr>
+<tr>
+<td>数据包尺寸</td>
+<td>每个网络有自己的最大尺寸</td>
+</tr>
+<tr>
+<td>有序性</td>
+<td>有序和无序传递</td>
+</tr>
+<tr>
+<td>服务质量</td>
+<td>提供或缺乏，种类不同</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>丢包的不同级别</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>隐私规则，加密等</td>
+</tr>
+<tr>
+<td>参数</td>
+<td>不同超时值，流规范等</td>
+</tr>
+<tr>
+<td>记账</td>
+<td>按连接时间、包数、字节数或不收费</td>
+</tr>
+</tbody></table>
+<h3><span id="网络如何连接">网络如何连接</span></h3><ul>
+<li><p>源端接受来自传输层的数据，并生成一个带有公共网络层的头（IP头）。<br>网络层的头包含了最终的接收方地址，这个地址用来确定数据包应该通过第一个路由器发送。</p>
+</li>
+<li><p>数据包被封装在 802.11 帧内，帧的目标地址是第一个路由器的地址。</p>
+</li>
+<li><p>在路由器，数据包从帧的数据字段中被提取出来，802.11 帧头被丢弃。<br>路由器检查数据包的 IP 地址，并依此决定将数据包转发给第二个路由器。  </p>
+</li>
+<li><p>第一个路由器建立一条到第二个路由器的 MPLS 虚电路，并且用 MPLS 报头封装该数据包。</p>
+</li>
+<li><p>在远端，MPLS 头被丢弃，并在此检查 IP 地址以便寻找下一跳网络层。</p>
+</li>
+</ul>
+<h3><span id="互联网路由">互联网路由</span></h3><p>采用两级路由算法。<br>在每个网络中，使用一个<strong>域内</strong>或<strong>内部网关协议</strong>进行路由。<br>为了让数据包跨越构成互联网的网络，需要<strong>域间</strong>或<strong>外部网关协议</strong>。</p>
+<p>网络可能全部使用不同的域内协议，但必须使用相同的域间协议。</p>
+<p>在 Internet 上，域间路由协议称为<strong>边界网关协议</strong> (BGP)。</p>
+<p><strong>自洽系统</strong> (AS)：每个网络都独立于所有其他网络运行。</p>
+<h3><span id="数据包分段">数据包分段</span></h3><p><strong>路径最大传输单元</strong> (MTU)。</p>
+<h4><span id="透明分段">透明分段</span></h4><p>当一个超大的数据包到达 G1，该路由器将它分割成多个段；每个段都发向同样的出口路由器 G2，在这里这些段被重新组合起来。</p>
+<p>问题：</p>
+<ul>
+<li>每个分段中必须提供一个计数字段或者一个数据包结束标志位。</li>
+<li>所有数据包必须经过同一个出口路由器才能重组，路由受到限制，损失一些性能。</li>
+<li>路由器需要做大量的工作。</li>
+</ul>
+<h4><span id="不透明分段">不透明分段</span></h4><p>IP 采用这种方式工作。<br>给每个段一个数据包序号、一个数据包内的绝对字节偏移量和一个指明是否到达数据包末尾的标志位。段到达目的地后被放置在一个缓冲区中以便重组</p>
+<p>问题：</p>
+<ul>
+<li>增加头开销。</li>
+<li>数据包的丢失概率增加。</li>
+</ul>
+<h4><span id="路径-mtu-发现">路径 MTU 发现</span></h4><p>每个 IP 数据包发出时在头设置一个比特，指示不允许对该数据包实施分段操作。<br>如果一个路由器接收的数据包太大，它就生成一个报错数据包并发给源端，然后丢弃该数据包。<br>当源端收到报错数据包，它就使用报错数据包携带的信息重新将出错数据包分段，每个段足够小到报错路由器能处理。<br>如果沿路径前进又遇到一个 MTU 更小的路由器，则重复上述过程。</p>
+<h2><span id="internet-的网络层">Internet 的网络层</span></h2><p>Internet 是一个基于 IP 的分组交换网络，根据 IP 协议信息（主要是目的地址）来转发分组。</p>
+<p>IP 提供尽力传送 (best-effort) 服务</p>
+<ul>
+<li>不可靠：无连接，无确认；不保证分组可靠到达目的地，可能出现分组的丢失。</li>
+<li>乱序：分组可能不是按照发送顺序到达目的地。</li>
+</ul>
+<p>所有接入到 Internet 的节点都必须运行 IP 协议。  </p>
+<ul>
+<li>向上，可以互联采用各种通信技术的网络；</li>
+<li>向下，可以承载各种类型网络业务。</li>
+</ul>
+<h3><span id="ipv4-协议">IPv4 协议</span></h3><p>每个 IP 数据报包含两部分，一个头和一个正文（有效净荷）。头由一个20字节的定长部分和一个可选的变长部分组成。</p>
+<p>IP 数据报头依次有：</p>
+<ul>
+<li><p><strong>版本</strong> (Version)：4-bit<br>记录数据报属于协议的哪个版本。<br>IPv4 填 4，IPv6 填 6。</p>
+</li>
+<li><p><strong>IHL</strong>：4-bit<br>指明头的长度。<br>IHL 的最小值为 5，表明头没有可选项；最大值为 15，把头的长度限制为最大 60 字节。</p>
+</li>
+<li><p><strong>区分服务</strong> (Differentiated services)：8-bit</p>
+<ul>
+<li>最初称为<strong>服务类型</strong> (Type of service)，包含 6 位。<br>其中 3 位表示优先级，3 位代表主机最关心的是延迟、吞吐量或可靠性中的哪一种。</li>
+<li>现在，前 6 位用来标记数据包的服务类别，后 2 位用来携带显示拥塞通知信息。</li>
+</ul>
+</li>
+<li><p><strong>总长度</strong> (Total length)：16-bit<br>描述数据报总长度，包括头和数据。<br>最大长度是 65535 个字节。</p>
+</li>
+<li><p><strong>标识</strong> (Indentification)：16-bit<br>用于让目标主机确定一个新到达的分段属于哪一个数据报。<br>同一个数据报的所有段包含相同的标识值。</p>
+</li>
+<li><p>莫名其妙空了 1 位。</p>
+</li>
+<li><p><strong>DF</strong> (Don’t Fragment)：1-bit<br>不分段标志位，不允许路由器分割该数据报。<br>可用于发现路径 MTU 过程中。</p>
+</li>
+<li><p><strong>MF</strong> (More Fragments)：1-bit<br>更多的段标志位，使接收方知道什么时候一个数据报的所有分段都到达了。<br>除了最后一个段以外其他所有段都要设置这一位。</p>
+</li>
+<li><p><strong>分段偏移量</strong> (Fragment offset)：13-bit<br>指明了该段在当前数据报中的位置。<br>除了数据报的最后一个段以外，其他所有段的长度必须是 8 字节的倍数。<br>每个数据报的第一个段的偏移量为 0，后面的段为前面所有段数据总字节数除以 8。<br>由于该字段有 13 位，所以每个数据报最多有 8192 个段。</p>
+</li>
+<li><p><strong>生存期</strong> (TTL)：8-bit<br>用于限制数据包生存期的计数器。<br>单位为秒，故最大生存期为 255 秒。<br>在每一跳上该计数器递减，而且当数据报在一台路由器上排队时间较长时，该计数器必须多倍递减。递减到 0 时，该数据包就被丢弃。</p>
+</li>
+<li><p><strong>协议</strong> (Protocol)：8-bit<br>表示高层协议类型，指明该将数据包交给哪个传输进程（如 TCP、UDP）。<br>协议的编号在整个 Internet 是全球统一的。</p>
+</li>
+<li><p><strong>头校验和</strong> (Header checksum)：16-bit  </p>
+<ul>
+<li>计算校验和：先将头校验和字段置为 0，然后将整个 IP 头以 16 位为单位相加求和，溢出的部分加回低位，再将结果取反，得到的数据填入头校验和字段。  </li>
+<li>验算：当数据到达时，同样将整个 IP 头以 16 位为单位相加求和，溢出的部分加回低位后取反，得到的结果如果是 0 则通过校验。</li>
+</ul>
+</li>
+<li><p><strong>源地址</strong> (Source address)：32-bit<br>表示源网络接口的 IP 地址。</p>
+</li>
+<li><p><strong>目标地址</strong> (Destination address)：32-bit<br>表示目标网络接口的 IP 地址。</p>
+</li>
+<li><p><strong>选项</strong> (Options)：具有可变长度，最多为 40 字节。<br>用于包含一些原设计中没有出现的信息，同时也用于将数据报头的长度填充到 4 字节的整数倍。</p>
+<ul>
+<li>安全 (Security)：指明了信息的秘密程度。</li>
+<li>严格源路由 (Strict source routing)：给出了从源到目标的完整路径。<br>形式是一系列 IP 地址。数据报必须严格遵循这条路线向前传输。</li>
+<li>松散源路由 (Loose source routing)：要求数据包穿越所指定的路由器列表。<br>要求按照表中的顺序前进，但是允许在途中经过其他路由器。</li>
+<li>记录路由 (Record route)：使沿途每个路由器附上自己的出口 IP 地址。<br>便于系统管理员跟踪路由算法中的错误。<br>最多只记录 9 个 IP 地址。</li>
+<li>时间戳 (Timestamp)：使沿途每个路由器附上自己的 IP 地址和 32 位时间戳。</li>
+</ul>
+</li>
+</ul>
+<h3><span id="ipv4-地址">IPv4 地址</span></h3><p>Internet 上的 IP 地址由 <strong>IANA</strong> (互联网编号分配机构) 负责分配和管理。</p>
+<p>IP 地址用于标识主机或网络设备（如路由器）的网络层地址，可用在 IP 数据包的 Source address 和 Destination address 字段，路由器根据目的 IP 地址转发分组。<br>注意，一个 IP 地址并不真正指向一台主机，而是指向一个网络接口。如果一台主机在两个网络上，它必须有两个 IP 地址。</p>
+<p>IP 地址具有层次性，每个 32 位地址由高位的可变长网络（前缀）和低位的主机两部分数据组成。</p>
+<p>IP 地址的书写方式是<strong>点分十进制</strong>表示法。<br>按此格式，4个字节中的每个写成十进制，取值范围从 0 到 255。<br>按照惯例，网络地址的书写格式是前缀 IP 地址后跟一个斜线，斜线后是网络部分的位长度。<br>eg. 32位十六进制地址 <code>80D00297</code> 写成 <code>128.208.2.151</code>。假设前缀包含 $2^8$ 个地址，即网络部分包含 $32 - 8 &#x3D; 24$ 位，网络地址写成 <code>128.208.0.0/24</code>。</p>
+<h4><span id="前缀x2f子网">前缀&#x2F;子网</span></h4><p>同一网络上的所有主机的前缀是相同的。</p>
+<ul>
+<li><p>简单地由长度表述。<br>如 24 位前缀表示为 <code>/24</code>。</p>
+</li>
+<li><p>前缀长度相当于网络部分中 1 的二进制掩码，称为<strong>子网掩码</strong>。<br>如 24 位前缀对应的子网掩码为 <code>255.255.255.0</code>。</p>
+</li>
+</ul>
+<p><strong>子网划分</strong>：在内部将一个网络块分成几个部分供多个内部网络，但对外部世界仍然像单个网络一样。<br>分割一个大型网络得到的一系列结果网络，称作<strong>子网</strong>。</p>
+<p>当数据包到达时，路由器会查看该数据包的目标地址，并检查它属于哪个子网。<br>具体操作：路由器把数据包的目标地址与每个子网的掩码进行 AND 操作，看结果是否对应于某个前缀。</p>
+<h4><span id="ip-地址和-mac-地址">IP 地址和 MAC 地址</span></h4><ul>
+<li>IP 地址在整个网络中标识不同的节点，而 MAC 地址在链路或者局域网内标识不同的节点。</li>
+<li>IP 地址包含有网络号（前缀），因此节点配置的 IP 地址与其所在的网络相关；而 MAC 地址与节点位置无关，因此一般事先固化在网络设备中。</li>
+<li>数据帧在链路上传送使用 MAC 地址，源 MAC 地址为发送主机的网络接口的 MAC 地址，而目的 MAC 地址为同一链路上接收主机的网络接口的 MAC 地址。</li>
+<li>IP 分组在 Internet 中传输使用 IP 地址，源 IP 地址为发送 IP 分组主机的 IP 地址，而目的 IP 地址为接收 IP 分组主机的 IP 地址。</li>
+<li>数据帧在不同链路上传输时，源和目的 MAC 地址变化，而源和目的 IP 地址不变。</li>
+</ul>
+<p>区别：</p>
+<table>
+<thead>
+<tr>
+<th>MAC</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>物理地址（数据链路层地址）</td>
+<td>逻辑地址（网络层地址）</td>
+</tr>
+<tr>
+<td>局部意义</td>
+<td>全局意义</td>
+</tr>
+<tr>
+<td>随机获得</td>
+<td>上级分配</td>
+</tr>
+<tr>
+<td>48位（如 <code>08:00:39:00:2f:c3</code>）</td>
+<td>32位（如 <code>202.38.75.11</code>）</td>
+</tr>
+</tbody></table>
+<h3><span id="ip-寻址">IP 寻址</span></h3><h4><span id="路由表与转发表">路由表与转发表</span></h4><ul>
+<li><p><strong>路由表</strong> (Routing Table)</p>
+<p>路由器根据分组的目的 IP 地址查找路由表，找出分组的下一个中继点。<br>每一个路由器都有一个路由表。</p>
+<p>路由表每个表项至少包含两个内容：</p>
+<ul>
+<li>目的网络（网络号或前缀）&#x2F;目的主机的地址</li>
+<li>下一跳地址</li>
+</ul>
+<p>在路由器上，一般通过路由协议来动态建立和维护路由表。</p>
+</li>
+<li><p><strong>转发表</strong> (Forwarding Table)</p>
+<p>与路由表相比，转发表包含了更多的信息。<br>包括包含目的网络的网络号&#x2F;目的户籍的地址、输出端口，以及一些 MAC 地址等信息。</p>
+<p>每个节点上都有转发表，节点根据转发表来转发分组。<br>主机上的转发表一般是手动或者通过 DHCP 等动态配置。</p>
+</li>
+<li><p>路由表是网络设备（通常是路由器）上的数据结构。<br>转发表是路由表的实际应用，是根据路由表中的信息生成的用于实际数据包转发的表格。</p>
+</li>
+</ul>
+<h4><span id="无类域间路由-cidr">无类域间路由 (CIDR)</span></h4><p><strong>路由聚合</strong>：把多个小前缀的地址块合并成一个大前缀的地址块。<br>由此产生的较大前缀地址块有时称为<strong>超网</strong>。</p>
+<p><strong>无类域间路由</strong>：同样一个 IP 地址，一台路由器把它当成 &#x2F;22 的一部分对待（其中包含 $2^{10}$ 个地址），而另一台路由器把它当作一个更大的 &#x2F;20 的一部分对待（其中包含 $2^{12}$ 个地址）；每个路由器有相应的前缀信息。</p>
+<p>分配地址时：</p>
+<ul>
+<li>$2^n$个地址的块必须位于 $2^n$ 的字节边界上，即地址的后 n 位为 0。</li>
+<li>先分配所需地址更多的地址块。</li>
+<li>确定子网掩码：首地址和末地址的前几位是相同的。<br>分配 $2^n$ 个地址，则子网掩码的长度是 $32 - n$</li>
+<li>全 0 和 全 1 的主机号地址一般不用于标识主机或路由器接口。</li>
+</ul>
+<p>eg.<br>有一块地址从 <code>194.24.0.0</code> 开始，可用的 IP 地址有 $2^{13} &#x3D; 8192$ 个，即该地址块到 <code>194.24.31.255</code>（后 13 位为 1）。<br>假设 A 需要 $2048 &#x3D; 2^{11}$ 个地址，B 需要 $1024 &#x3D; 2^{10}$ 个地址， C 需要 $4096 &#x3D; 2^{12}$ 个地址。</p>
+<table>
+<thead>
+<tr>
+<th>区域</th>
+<th>第一个地址</th>
+<th>最后一个地址</th>
+<th>地址数</th>
+<th>前缀</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C</td>
+<td><code>194.24.0.0</code></td>
+<td><code>194.24.15.255</code></td>
+<td>4096</td>
+<td><code>194.24.0.0/20</code></td>
+</tr>
+<tr>
+<td>A</td>
+<td><code>194.24.16.0</code></td>
+<td><code>194.24.23.255</code></td>
+<td>2048</td>
+<td><code>194.24.16.0/21</code></td>
+</tr>
+<tr>
+<td>B</td>
+<td><code>194.24.24.0</code></td>
+<td><code>194.24.27.255</code></td>
+<td>1024</td>
+<td><code>194.24.24.0/22</code></td>
+</tr>
+<tr>
+<td>空余</td>
+<td><code>194.24.28.0</code></td>
+<td><code>194.24.31.255</code></td>
+<td>1024</td>
+<td><code>194.24.28.0/22</code></td>
+</tr>
+</tbody></table>
+<p>A、B、C 三个网络具有一个聚合前缀 <code>192.24.0.0/19</code>。</p>
+<p>前缀允许重叠，规则是数据包按最具体的路由的方向发送，即具有最少 IP 地址的<strong>最长匹配前缀</strong>。</p>
+<p>CIDR 的工作原理：<br>当一个数据包到达时，路由器扫描路由表以确定目的地是否在前缀的地址块内。<br>有可能多个具有不同前缀的表项得到匹配，在这种情况下，使用具有最长前缀的表项。<br>例如有一个匹配 <code>/20</code> 掩码的表项，同时还有一个匹配 <code>/24</code> 掩码的表项，则使用 <code>/24</code> 表项来查询数据包的出境线路。</p>
+<h4><span id="分类和特殊寻址">分类和特殊寻址</span></h4><p><strong>分类寻址</strong>：IP 地址被分为以下五个类别。</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>位数划分</th>
+<th>主机地址范围</th>
+<th>网络数量</th>
+<th>每个网络可容纳主机数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A 类</td>
+<td>最高位，0；<br>网络号，随后 7 位；<br>主机号，最后 24 位</td>
+<td><code>1.0.0.0</code> 到<br><code>127.255.255.255</code></td>
+<td>$2^7 -2$</td>
+<td>$2^{24} - 2$</td>
+</tr>
+<tr>
+<td>B 类</td>
+<td>最高两位，10；<br>网络号，随后 14 位；<br>主机号，最后 16 位</td>
+<td><code>128.0.0.0</code> 到<br><code>191.255.255.255</code></td>
+<td>$2^{14} -2$</td>
+<td>$2^{16} - 2$</td>
+</tr>
+<tr>
+<td>C 类</td>
+<td>最高三位，110；<br>网络号，随后 21 位；<br>主机号，最后 8 位</td>
+<td><code>192.0.0.0</code> 到<br><code>223.255.255.255</code></td>
+<td>$2^{21} - 2$</td>
+<td>$2^8 -2$</td>
+</tr>
+<tr>
+<td>D 类</td>
+<td>最高四位，1110；<br>是组播地址</td>
+<td><code>224.0.0.0</code> 到<br><code>239.255.255.255</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E 类</td>
+<td>最高四位，1111；<br>是保留地址</td>
+<td><code>240.255.255.255</code> 到<br><code>255.255.255.255</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>具有特殊含义的地址：</p>
+<ul>
+<li><p>IP 地址 <code>0.0.0.0</code> &#x2F; 全 0 的 IP 地址：指当前网络&#x2F;当前主机。<br>这个地址允许机器在不知道网络号的情况下访问自己所在的网络（但它们必须知道子网掩码包括多少个 0）。</p>
+</li>
+<li><p>IP 地址 <code>255.255.255.255</code> &#x2F; 全 1 的 IP 地址：标识指定网络的所有主机。<br>用于广播。</p>
+</li>
+<li><p><code>127.xx.yy.zz</code> 形式的地址：保留给回环测试用。<br>发送到该地址的数据包并没有被真正放在线路上，它们如同入境数据包一样在本地处理。</p>
+</li>
+</ul>
+<h4><span id="nat">NAT</span></h4><p><strong>网路地址转换</strong> (NAT)：实现网络内多个主机共享一个全局的 IP 地址。<br>基本思想：<br>ISP (互联网服务提供商) 为每个家庭或公司分配一个（或少量）IP 地址，用这个 IP 地址来传输 Internet 流量。<br>在客户网络内部，每台计算机有唯一的 IP 地址，该地址主要用来路由内部流量。<br>当一个数据包需要离开客户网络，需要执行一个地址转换，把唯一的内部 IP 地址转换成共享的公共 IP 地址。</p>
+<p>内部网地址有：</p>
+<ul>
+<li><code>10.0.0.0</code> - <code>10.255.255.255</code> </li>
+<li><code>172.16.0.0</code> - <code>172.31.255.255</code> </li>
+<li><code>192.168.0.0</code> - <code>192.168.255.255</code></li>
+</ul>
+<p>NAT 技术可以在路由器、防火墙上实现内外地址的翻译工作。<br>实现方式：</p>
+<ul>
+<li><p><strong>静态 NAT</strong>：<br>内部地址与外部 IP 地址总是一一对应的。<br>如 <code>192.168.32.10</code>（内部地址） 总是翻译成 <code>213.18.123.110</code>（外部地址）。</p>
+</li>
+<li><p><strong>动态 NAT</strong>：<br>一组全局 IP 地址与内部 IP 地址对应。<br>如 <code>192.168.32.10</code> 总是翻译成 <code>213.18.123.100</code> 到 <code>213.18.123.150</code> 范围内第一个可用的 IP 地址。</p>
+</li>
+<li><p><strong>网络地址端口转换</strong> (NAPT)：<br>也是一种动态方式，用一个全局 IP 地址加上端口号实现与内部 IP 地址的翻译。  </p>
+<ul>
+<li><p>内部主机访问互联网：  </p>
+<ul>
+<li>假设公共 IP 地址为 <code>203.0.113.1</code>。</li>
+<li>内部主机 A 要访问一个网站，于是发起一个请求到该网站的服务器。</li>
+<li>NAPT 检测到主机 A 的请求，将主机 A 的内部 IP 地址 <code>192.168.1.1</code> 和一个唯一的端口号 <code>5001</code> 关联起来。</li>
+<li>NAPT 修改主机 A 的请求，将源 IP 地址改为 <code>203.0.113.1</code>，源端口号改为 <code>5001</code>，然后将修改后的请求发送到互联网。</li>
+</ul>
+</li>
+<li><p>互联网服务器响应：</p>
+<ul>
+<li>互联网服务器收到请求后，将响应发送回 203.0.113.1:5001。</li>
+<li>NAPT 根据会话表确定这个响应该被转发给内部主机 A。</li>
+<li>NAPT 修改响应，将目标 IP 地址和端口号还原为主机 A 的内部 IP 地址和端口号，然后将响应发送给主机 A。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="ipv6-协议">IPv6 协议</span></h3><p>IPv6 头依次有：</p>
+<ul>
+<li><p><strong>版本</strong> (Version)：4-bit</p>
+</li>
+<li><p><strong>区分服务</strong> (Differentiated services)：8-bit<br>使用方式与 IPv4 同名字段一样。</p>
+</li>
+<li><p><strong>流标签</strong> (Flow label)：20-bit<br>为源端和接收方提供了一种建立伪连接的方式，即源端和接收方把一组具有同样需求并希望网络同等对待的数据包打赏标记。<br>每个流由源地址、目标地址和流编号来指定。<br>流标签的选取最好随机，便于路由器对它们进行哈希处理。</p>
+</li>
+<li><p><strong>有效荷载长度</strong> (Payload length)：16-bit<br>与 IPv4 中的总长度字段，但是 40 字节的头不作为长度的一部分。</p>
+</li>
+<li><p><strong>下一个头</strong> (Next header)：8-bit<br>指明了当前头之后还有哪种扩展头，如果有的话。<br>如果当前的头是最后一个 IP 头，那么该字段指定了该数据包将被传递给哪个传输协议处理（如 TCP、UDP）。</p>
+</li>
+<li><p><strong>跳数限制</strong> (Hop linit)：8-bit<br>与 IPv4 中的 TTL 字段类似，但不再是以秒为单位。</p>
+</li>
+<li><p><strong>源地址</strong> (Source address)：16 字节  </p>
+</li>
+<li><p><strong>目标地址</strong> (Destnation address)：16 字节</p>
+</li>
+</ul>
+<h4><span id="扩展头">扩展头</span></h4><table>
+<thead>
+<tr>
+<th>头标值</th>
+<th>对应扩展头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>中继点选项 (Hop-by-hop options)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>IP</td>
+</tr>
+<tr>
+<td>6</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>17</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>43</td>
+<td>寻路头标 (Routing)</td>
+</tr>
+<tr>
+<td>44</td>
+<td>报片头标 (Fragment)</td>
+</tr>
+<tr>
+<td>45</td>
+<td>IDRP (互联域路由协议)</td>
+</tr>
+<tr>
+<td>46</td>
+<td>RSVP (网络通信协议，用于在IP网络中为数据流提供服务质量保证)</td>
+</tr>
+<tr>
+<td>50</td>
+<td>封装化安全净荷 (Encryption Security Payload)</td>
+</tr>
+<tr>
+<td>51</td>
+<td>认证头标 (Authentication)</td>
+</tr>
+<tr>
+<td>58</td>
+<td>ICMP (互联网控制报文协议)</td>
+</tr>
+<tr>
+<td>59</td>
+<td>无下一个头标</td>
+</tr>
+<tr>
+<td>60</td>
+<td>信宿选项头标</td>
+</tr>
+</tbody></table>
+<h3><span id="ipv6-地址">IPv6 地址</span></h3><p>16 个字节被分成 8 组来书写，每一组 4 个十六进制数字，组之间用冒号隔开。<br>如 <code>8000:0000:0000:0000:0123:4567:89AB:CDEF</code>  </p>
+<p>优化方式：</p>
+<ul>
+<li>在一个组内可以省略前导 0。</li>
+<li>一组或多组 0 可以用一对冒号来替代。<br>故上述地址可以写成 <code>8000::123:4567:89AB:CDEF</code></li>
+</ul>
+<p>地址前缀表示：IPv6 地址&#x2F;前缀长度</p>
+<p>与 IPv4：</p>
+<ul>
+<li>兼容 IPv4 的 IPv6 地址：<br>IPv4 地址写成一对冒号再加上老式的点分十进制数。<br>如 <code>::192.31.20.46</code>  </li>
+<li>映射 IPv4 的 IPv6 地址：<br>将 80 位 0 和随后的 16 位 1 组成的前缀置于 IPv4 地址之前。<br>如 <code>::FFFF:192.31.20.46</code></li>
+<li>IPv6 默认情况下禁用 IPv4 兼容地址。</li>
+</ul>
+<p>IPv6 地址即插即用。<br>工作原理：自动将 48 位 MAC 地址扩展成 64 位，再组合一个 64 位的 IPv6 网络前缀，组成一个 IPv6 地址。<br>IPv4 的 64 位接口地址可以根据 MAC 地址自动生成，属于 IEEE EUI-64 标准。</p>
+<h4><span id="分类">分类</span></h4><ul>
+<li><p>单播地址  </p>
+<ul>
+<li>可聚类全局地址 <code>2000::/3</code><ul>
+<li>3 位前缀：001</li>
+<li>13 位顶级聚类：TLA</li>
+<li>32 位次级聚类：NLA</li>
+<li>16 位网点级聚类：SLA</li>
+<li>64 位接口标识符：Interface ID</li>
+</ul>
+</li>
+<li>本地（局域）单播地址<ul>
+<li>链路局域地址 <code>FE80::/64</code><br>包含 64 位前缀和之后的 64 位接口标识符。<br>用于本地链路上各个相邻接口之间的发现、IPv6 地址自动配置和通信。<br>包含链路局域地址的分组不会被路由器转发。</li>
+<li>网点局域地址 <code>FEC0::/48</code><br>包含 48 位前缀，16 位子网 ID，64 位接口标识符。<br>只可以再一个网点内使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>未指明地址 <code>0:0:0:0:0:0:0:0</code> 或表示为 <code>::</code><br>只能作为尚未获得正式地址的主机的源地址使用，不能将该地址用作信宿地址。</p>
+</li>
+<li><p>环回地址 <code>0:0:0:0:0:0:0:1</code></p>
+</li>
+<li><p>组播地址<br>前 8 位为 1，4 位标志位（000T，T&#x3D;0 表示永久性组地址），4 位区域位，112 位 Group ID。</p>
+</li>
+<li><p>任播地址：从单薄地址空间中分配<br>前 n 位为子网前缀，后 128-n 位为 0。</p>
+</li>
+</ul>
+<h3><span id="internet-控制协议">Internet 控制协议</span></h3><h4><span id="icmp">ICMP</span></h4><p><strong>Internet 控制消息协议</strong> (ICMP)：当路由器在处理一个数据包的过程中发生了意外，通过 ICMP 向数据包的源端报告有关事件。</p>
+<p>ICMP 定义了两类报文，<strong>差错报文</strong>和<strong>信息报文</strong>：</p>
+<ul>
+<li><p>差错报文</p>
+<ul>
+<li>源抑制 (Source quench)：抑制发送过多分组的主机。</li>
+<li>超时 (Time exceeded)：分组的 TTL 为 0，或被分片的报文在一定时间内没有收齐。</li>
+<li>信宿不可达 (Destination unreachable)：报告子网、主机不能定位的信宿。</li>
+<li>重定向 (Redirect)：数据包看起来被错误地路由。</li>
+<li>参数问题 (Parameter problem)：分组头参数出错。</li>
+</ul>
+</li>
+<li><p>信息报文</p>
+<ul>
+<li>回音请求&#x2F;响应 (Echo request&#x2F;reply)</li>
+<li>地址掩码请求&#x2F;响应 (Address mask request&#x2F;reply)</li>
+<li>路由器发现 (Router discovery)</li>
+</ul>
+</li>
+</ul>
+<p>ICMP 的直接应用：</p>
+<ul>
+<li><p>Ping Progarm<br>用于测试主机的可到达性。<br>Ping 程序采用 ICMP 的回音请求&#x2F;响应报文，通过向信宿发送回音请求，返回响应报文，来测试目的主机的可达性。</p>
+</li>
+<li><p>Traceroute<br>通过发送递增的 TTL 值的回音报文，测试目的主机沿途经过的路由器地址。</p>
+</li>
+</ul>
+<h4><span id="arp">ARP</span></h4><p><strong>地址解析协议</strong> (ARP)：解析 IP 地址与 MAC 地址的关系。</p>
+<ul>
+<li><p>目的 IP 地址所对应的主机和发送主机在同一个网络内。</p>
+<ul>
+<li><p>每个主机都有 <strong>ARP 缓存</strong>，用于存放一些 IP 地址与 MAC 地址的对应关系。<br>通过 ARP 缓存可以减少频繁的 ARP 操作，从而减少网络开销、提高性能。</p>
+</li>
+<li><p>当分组到达时，主机根据分组头上的目的 IP 地址查阅自己的 ARP 缓存；如果没有查到，就向广播地址发送 <strong>ARP 请求</strong>。</p>
+</li>
+<li><p>被请求的 IP 地址所对应的主机返回一个 <strong>ARP 响应</strong>。</p>
+</li>
+<li><p>主机收到响应后，就可发送数据帧，并将该 IP 地址与 MAC 地址对存放在 ARP 缓存中。</p>
+</li>
+</ul>
+</li>
+<li><p>目的 IP 地址所对应的主机和发送主机在两个不同的网络内。</p>
+<ul>
+<li><p>发送主机通过查找转发表得到下一跳节点的 IP 地址（第一跳路由器），对该 IP 地址执行上述 ARP 过程，然后发送数据。</p>
+</li>
+<li><p>发送主机也可以直接用目的 IP 地址执行 ARP，路由器（而不是目的主机）响应该 ARP 请求。<br>这种解决方式叫 <strong>ARP 代理</strong>。</p>
+</li>
+<li><p>第一跳路由器查找转发表得到第二跳路由器的 IP 地址，对该 IP 地址执行 ARP 过程，然后发送数据。<br>$\cdots$<br>目的网络的路由器查找转发表知道目的节点和自己在同一个网络中，对目的 IP 地址执行 ARP 过程，然后将数据发送到目的节点。</p>
+</li>
+<li><p>ARP 过程被限制在同一个网络内，始终是查找转发表得到转发下一跳节点的 IP 地址，然后对该 IP 地址做 ARP。<br>在数据传输频繁时，ARP 缓存表中一般有对应的表项，节点间不需要交互 ARP 过程。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>反向 ARP (RARP)：用于查找物理地址所对应的 IP 地址。</p>
+<p>帧格式为 802.3 帧格式</p>
+<ul>
+<li><p>前导码 (Preamble)：8 字节</p>
+</li>
+<li><p>目标 MAC 地址：6 字节</p>
+</li>
+<li><p>源 MAC 地址：6 字节</p>
+</li>
+<li><p>帧类型 (Type)：2 字节<br>ARP 请求及响应为 0x0806</p>
+</li>
+<li><p>数据：42 字节</p>
+<ul>
+<li>硬件类型：2 字节。指发送者的网络接口类型，如以太网为 1。</li>
+<li>上层协议类型：2 字节。指发送者所采用的网络层协议类型，如 IP 协议为 0x0800。</li>
+<li>MAC 地址长度：1 字节</li>
+<li>IP 地址长度：1 字节</li>
+<li>操作类型：2 字节  <ul>
+<li>ARP 请求：1</li>
+<li>ARP 响应：2</li>
+<li>RARP 请求：3</li>
+<li>RARP 响应：4</li>
+</ul>
+</li>
+<li>源 MAC 地址：6 字节</li>
+<li>源 IP 地址：4 字节</li>
+<li>目的 MAC 地址：6 字节</li>
+<li>目的 IP 地址：4 字节</li>
+</ul>
+</li>
+<li><p>填充</p>
+</li>
+<li><p>校验和：4 字节，CRC。</p>
+</li>
+</ul>
+<h4><span id="dhcp">DHCP</span></h4><p>IP 地址的配置方式有：</p>
+<ul>
+<li>手动配置</li>
+<li>拨号用户通过 PPP 协议分配</li>
+<li>基于<strong>动态主机配置协议</strong> (DHCP) 的配置</li>
+</ul>
+<p>DHCP 过程：</p>
+<ul>
+<li><p>客户端广播 <code>DHCPDISCOVER</code> 消息。<br>源 IP 地址为 <code>0.0.0.0</code>，目的 IP 地址为 <code>255.255.255.255</code>。<br>使用 MAC 地址来标识客户端。</p>
+</li>
+<li><p>DHCP 服务器回应 <code>DHCPOFFER</code> 消息给客户端，其中包含分配的 IP 地址、租用期限和其他配置参数。</p>
+</li>
+<li><p>客户端选择一个 DHCP 服务器并在整个网络上广播 <code>DHCPREQUEST</code> 消息，告诉其他 DHCP 服务器它选择哪个服务器提供的 IP 地址。</p>
+</li>
+<li><p>选定的服务器给客户端回应 <code>DHCPACK</code>，其中包含配置参数。</p>
+</li>
+<li><p>客户端接收 <code>DHCPACK</code>，对参数进行最后的检查，然后开始使用分配的 IP 地址。</p>
+</li>
+<li><p>客户端可以通过向 <code>DHCPRELEASE</code> 消息来释放对 IP 地址的租用，其中包含有客户端的 MAC 地址和租用 IP 地址。</p>
+</li>
+</ul>
+<h3><span id="internet-路由协议">Internet 路由协议</span></h3><p><strong>自洽系统</strong> (Autonomous System)：</p>
+<ul>
+<li>内部管理由独立管理机构完成的一组网关和网络，整个网络由一个（或几个）核心网关与 Internet 相连。</li>
+<li>交换路由信息的两个网关如果属于不同的自洽系统，则称这两个网关是<strong>外部相邻</strong>；<br>如果同属于一个自洽系统，则称为<strong>内部相邻</strong>。</li>
+</ul>
+<p><strong>外部网关协议</strong> (EGP)：用于外部相邻的网关之间交换路由信息，也叫<strong>域间路由</strong>。(BGP)<br><strong>内部网关协议</strong> (IGP)：用于内部相邻的网关之间交换路由信息，也叫<strong>域内路由</strong>。(RIP, OSPF)</p>
+<h4><span id="rip">RIP</span></h4><p><strong>路由信息协议</strong> (RIP)：一种内部网关协议。</p>
+<p>特点：</p>
+<ul>
+<li><p>采用<a href="#%E8%B7%9D%E7%A6%BB%E7%9F%A2%E9%87%8F-distance-vector-%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95">距离矢量路由算法</a>。</p>
+</li>
+<li><p>使用跳数 (hop count)，即路由器到目的地的路径中经过的路由器数量，作为衡量路径长度的单位。</p>
+</li>
+<li><p>通过 Split Horizon 机制防止路由环路的产生。<br>即路由器不会将它已经学到的路由信息再发送回相同的接口。</p>
+</li>
+<li><p>路由器周期性地广播它们的整个路由表，以便告知其他路由器当前网络的可达性。<br>该广播过程通过 RIP 更新报文完成。</p>
+</li>
+<li><p>使用 Hold-down Timer 来减少路由表更新引起的不稳定。<br>当路由器检测到某个网络不可达时，它启动 Hold-down Timer，阻止对该网络的更新。</p>
+</li>
+<li><p>使用 UDP 在端口 520 上进行发送和接收路由信息。</p>
+</li>
+</ul>
+<h4><span id="ospf">OSPF</span></h4><p><strong>开放最短路径优先</strong> (OSFP)：一种内部网关协议。<br>借鉴了<strong>中间系统到中间系统</strong> (IS-IS) 协议，该协议已经成为一个 ISO 标准。 </p>
+<p>特点：</p>
+<ul>
+<li><p>是一种链路状态协议，采用<a href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81-link-state-%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95">最短路径优先算法 (SPF)</a>。</p>
+</li>
+<li><p>使用 IP 作为底层传输协议，其中 IP 头的协议字段为 89，表示该数据包用于传输 OSPF 信息。</p>
+</li>
+<li><p>只有当发生改变时才更新路由表.</p>
+</li>
+<li><p>要求从每个 LAN 中选举一台路由器作为<strong>指定路由器</strong> (DR)。<br>指定路由器与本 LAN 上所有其他路由器是邻接的，并且与它们交换信息。<br>有一台备份的指定路由器 (BDR) 总是保持最新的状态数据。</p>
+</li>
+<li><p>使用组播地址来发送 Hello 消息和路由更新。<br>OSPFv2 使用组播地址 <code>224.0.05</code>（所有 OSPF 路由器）和 <code>224.0.06</code>（DR 和 BDR 选举）<br>OSPFv3 使用组播地址 <code>FF02::5</code>（所有 OSPF 路由器）和 <code>FF02::6</code>（DR 和 BDR 选举）</p>
+</li>
+</ul>
+<p>5 种数据包：</p>
+<table>
+<thead>
+<tr>
+<th>消息类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hello</td>
+<td>用来发现所有的邻居</td>
+</tr>
+<tr>
+<td>Link State Update</td>
+<td>提供发送者到其邻居的成本</td>
+</tr>
+<tr>
+<td>Link State Ack</td>
+<td>对链路状态更新消息的确认</td>
+</tr>
+<tr>
+<td>Database Description</td>
+<td>声明发送者的链路状态更新情况</td>
+</tr>
+<tr>
+<td>Link State Request</td>
+<td>请求链路状态信息</td>
+</tr>
+</tbody></table>
+<h4><span id="bgp">BGP</span></h4><p><strong>边界网关协议</strong> (BGP)：一种外部网关协议。</p>
+<p>特点：</p>
+<ul>
+<li><p><strong>路径矢量协议</strong> (path vector protocol)<br>升级版距离矢量协议。<br>根据政策而不是最小距离来选择路由。<br>路由器不仅维护到每个目的地的成本，而且跟踪所使用的路径。</p>
+</li>
+<li><p>使用 TCP 协议来保障可靠性，使用端口 179。</p>
+</li>
+<li><p>使用增量和触发式更新方式。<br>当网络拓扑发生变化时，只有受到触发事件影响的路由信息才会被更新。</p>
+</li>
+<li><p>定期发送保持活动消息以验证 TCP 连接的连通性。</p>
+</li>
+<li><p>使用丰富的指标（路径矢量&#x2F;属性）来描述和选择路由。<br>包括 AS 路径、AS 路径长度、下一跳等信息。</p>
+</li>
+<li><p>设计用于大规模网络，如 Internet。</p>
+</li>
+</ul>
+<h4><span id="路由协议分类与协议栈">路由协议分类与协议栈</span></h4><p>路由协议分类：</p>
+<ul>
+<li><p>基于路由信息流的分类  </p>
+<ul>
+<li>内部网关协议 (IGP) &#x2F; 域内协议<ul>
+<li><a href="#rip">RIP</a></li>
+<li><a href="#ospf">OSPF</a></li>
+<li>IS-IS</li>
+</ul>
+</li>
+<li>外部网关协议 (EGP) &#x2F; 域间协议<ul>
+<li><a href="#bgp">BGP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>基于确定路由表所使用的信息类型的分类</p>
+<ul>
+<li>距离矢量路由协议<ul>
+<li><a href="#rip">RIP</a></li>
+<li><a href="#bgp">BGP</a></li>
+</ul>
+</li>
+<li>链路状态路由协议<ul>
+<li><a href="#ospf">OSPF</a></li>
+<li>IS-IS</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>协议栈：</p>
+<table>
+<thead>
+<tr>
+<th align="center">层</th>
+<th align="center">协议</th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">应用层</td>
+<td align="center">BGP</td>
+<td align="center">RIP</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">传输层</td>
+<td align="center">TCP</td>
+<td align="center">UDP</td>
+<td align="center">OSPF</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">网络层</td>
+<td align="center">IP</td>
+<td align="center">IP</td>
+<td align="center">IP</td>
+<td align="center">IS-IS</td>
+</tr>
+<tr>
+<td align="center">链路层</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">物理层</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h3><span id="internet-组播">Internet 组播</span></h3><ul>
+<li><p>单播 (unicast)：1 对 1</p>
+</li>
+<li><p>组播 (multicast)：1 对多，多对多</p>
+<ul>
+<li><p>IP 采用 D 类地址作为组播地址。<br>每个 D 类地址代表一组主机，共有 28 位可用来标识小组。</p>
+</li>
+<li><p>Internet 支持两类组地址：永久组地址和临时组地址。</p>
+<ul>
+<li><p>永久组地址：</p>
+<p>IP 地址 <code>224.0.0.0/24</code> 范围内的地址保留用作本地网络组播。<br>这种情况下不需要路由协议的支持，带有一个组播地址的数据包被简单广播到局域网上。<br>局域网上的所有主机接收广播数据包，只有属于组成员的主机对该数据包进行处理。</p>
+<ul>
+<li><code>224.0.0.1</code>：LAN 上的全部系统</li>
+<li><code>224.0.0.2</code>：LAN 上全部路由器</li>
+<li><code>224.0.0.5</code>：LAN 上全部 OSPF 路由器</li>
+<li><code>224.0.0.251</code>：LAN 上全部 DNS 服务器</li>
+</ul>
+</li>
+<li><p>临时组地址：</p>
+<p>需要路由协议，组播路由器需了解哪些主机属于某个组。  </p>
+<p><strong>Internet 组管理协议</strong> (IGMP)：</p>
+<ul>
+<li>一个进程要求它的主机加入某个指定的组&#x2F;离开该组。每台主机跟踪记录当前它的进程属于哪些组。当一台主机上的最后一个进程离开一个组时，该主机就不再属于这个组。  </li>
+<li>每个组播路由器定期向它所在 LAN 上的所有主机（使用 <code>224.0.0.1</code>）发送一个查询数据包，要求这些主机报告自己当前属于哪些组。  </li>
+<li>每个主机收到查询消息后，返回一个响应包，包括了自己感兴趣的所有 D 类地址。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>广播 (broadcast)：1 对多</p>
+</li>
+<li><p>任播 (anycast)：1 对多中的一个</p>
+</li>
+</ul>
+<h4><span id="组播路由协议">组播路由协议</span></h4><p>数据包沿着生成树发送，通过修建广播生成树把不通往组成员的链路从树中删掉，得到一棵有效的组播生成树。</p>
+<ul>
+<li><p>基于源的组播协议：以发送方为多播树的根，并且包含了所有的组成员。</p>
+<ul>
+<li><strong>距离矢量组播路由协议</strong> (DVMRP)</li>
+<li><strong>组播 OSPF</strong> (MOSPF)</li>
+</ul>
+</li>
+<li><p>基于共享树的协议：对每个组使用同一颗树。</p>
+<ul>
+<li><strong>基于核心树</strong> (Core Based Trees)</li>
+</ul>
+</li>
+<li><p>混合以上两种方法的协议</p>
+<ul>
+<li><strong>协议独立组播协议</strong> (PIM)<ul>
+<li>密集模式 PIM (PIM-DM)：创建一颗修建的逆向路径转发树。</li>
+<li>稀疏模式 PIM (PIM-SM)：创建的生成树类似于核心树。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-计算机网络（四）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -151,21 +1318,22 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/">计算机网络（四）</a>
+      <a class="article-title" href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/">计算机网络（四）</a>
     </h1>
   
 
         
-        <a href="/2023/12/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-12-21T13:16:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-21</time>
+        <a href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2024-01-02T14:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第4章-MAC-子层"><a href="#第4章-MAC-子层" class="headerlink" title="第4章 MAC 子层"></a>第4章 MAC 子层</h1><ul>
-<li><a href="#%E7%AC%AC4%E7%AB%A0-mac-%E5%AD%90%E5%B1%82">第4章 MAC 子层</a><ul>
+        <h1><span id="第4章-mac-子层">第4章 MAC 子层</span></h1><!-- toc -->
+
+<ul>
 <li><a href="#%E4%BC%A0%E7%BB%9F-lan-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">传统 LAN 基本概念</a></li>
 <li><a href="#%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE">多路访问协议</a><ul>
 <li><a href="#%E4%BF%A1%E9%81%93%E5%88%86%E9%85%8D">信道分配</a><ul>
@@ -227,9 +1395,9 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h2 id="传统-LAN-基本概念"><a href="#传统-LAN-基本概念" class="headerlink" title="传统 LAN 基本概念"></a>传统 LAN 基本概念</h2><p><strong>局域网</strong> (LAN)：在一个小区域范围内对各种数据通信设备s提供了互连的信息网。  </p>
+<!-- tocstop -->
+
+<h2><span id="传统-lan-基本概念">传统 LAN 基本概念</span></h2><p><strong>局域网</strong> (LAN)：在一个小区域范围内对各种数据通信设备提供了互连的信息网。  </p>
 <p>决定局域网特性的主要技术：</p>
 <ul>
 <li>传输媒体： 传输数据</li>
@@ -256,10 +1424,10 @@
 <li>总线型</li>
 <li>树型</li>
 </ul>
-<h2 id="多路访问协议"><a href="#多路访问协议" class="headerlink" title="多路访问协议"></a>多路访问协议</h2><h3 id="信道分配"><a href="#信道分配" class="headerlink" title="信道分配"></a>信道分配</h3><p>信道分配问题：如何在竞争用户之间分配单个广播信道。</p>
-<h4 id="静态信道分配"><a href="#静态信道分配" class="headerlink" title="静态信道分配"></a>静态信道分配</h4><p>采用多路复用技术，将信道容量拆开分给多个用户使用。<br>如传统的 FDM 或 TDM，对于 N 个用户，将带宽或时间分成 N 份，每个用户静态地占用一个。</p>
+<h2><span id="多路访问协议">多路访问协议</span></h2><h3><span id="信道分配">信道分配</span></h3><p>信道分配问题：如何在竞争用户之间分配单个广播信道。</p>
+<h4><span id="静态信道分配">静态信道分配</span></h4><p>采用多路复用技术，将信道容量拆开分给多个用户使用。<br>如传统的 FDM 或 TDM，对于 N 个用户，将带宽或时间分成 N 份，每个用户静态地占用一个。</p>
 <p>缺点：不能有效地处理突发数据，有些用户停止通信时带宽或时间被浪费。</p>
-<h4 id="动态信道分配"><a href="#动态信道分配" class="headerlink" title="动态信道分配"></a>动态信道分配</h4><p>异步时分多路复用。分为以下两种：</p>
+<h4><span id="动态信道分配">动态信道分配</span></h4><p>异步时分多路复用。分为以下两种：</p>
 <ul>
 <li><p><strong>随机访问</strong>：争用。只要有数据就直接发送，发生冲突后再采取措施解决冲突。<br>适用于负载轻的网络，负载重时效率低</p>
 </li>
@@ -279,22 +1447,22 @@
 <li><p><strong>载波侦听或不听</strong><br>载波侦听：发送前先侦听信道，可以知道该信道当前是否正被使用。</p>
 </li>
 </ul>
-<h3 id="ALOHA-协议"><a href="#ALOHA-协议" class="headerlink" title="ALOHA 协议"></a>ALOHA 协议</h3><h4 id="纯-ALOHA"><a href="#纯-ALOHA" class="headerlink" title="纯 ALOHA"></a>纯 ALOHA</h4><p>当用户有数据需要发送时就传输。</p>
+<h3><span id="aloha-协议">ALOHA 协议</span></h3><h4><span id="纯-aloha">纯 ALOHA</span></h4><p>当用户有数据需要发送时就传输。</p>
 <p>每个站在给中央计算机发送帧之后，该计算机把该帧重新广播给所有站。<br>发送站侦听来自集线器的广播，以此确定它的帧是否发送成功。</p>
 <p>如果帧被损坏了，则发送方等待一段随机时间后再次发送该帧。</p>
-<h4 id="分槽-ALOHA"><a href="#分槽-ALOHA" class="headerlink" title="分槽 ALOHA"></a>分槽 ALOHA</h4><p>将信道时间分为离散的时间槽，每个时间槽可以用来发送一个帧。<br>一个站点有数据发送时，必须等到下个时间槽的开始才可以发送。</p>
+<h4><span id="分槽-aloha">分槽 ALOHA</span></h4><p>将信道时间分为离散的时间槽，每个时间槽可以用来发送一个帧。<br>一个站点有数据发送时，必须等到下个时间槽的开始才可以发送。</p>
 <p>与纯 ALOHA 相比，信道利用率提高一倍。</p>
-<h3 id="CSMA-协议"><a href="#CSMA-协议" class="headerlink" title="CSMA 协议"></a>CSMA 协议</h3><p><strong>载波侦听多路访问</strong> (CSMA) 协议：站监听信道，根据信道的状态来采取相应的动作，只有发现信道空闲时才能发送数据。</p>
-<h4 id="1-坚持式-CSMA"><a href="#1-坚持式-CSMA" class="headerlink" title="1-坚持式 CSMA"></a>1-坚持式 CSMA</h4><p>当一个站点要发送数据时，先监听信道，若信道忙则坚持监听；一旦发现信道空闲，立即发送数据（发送数据概率为 1）。<br>若发生冲突，等待一随机场时间，再重新开始监听信道。</p>
+<h3><span id="csma-协议">CSMA 协议</span></h3><p><strong>载波侦听多路访问</strong> (CSMA) 协议：站监听信道，根据信道的状态来采取相应的动作，只有发现信道空闲时才能发送数据。</p>
+<h4><span id="1-坚持式-csma">1-坚持式 CSMA</span></h4><p>当一个站点要发送数据时，先监听信道，若信道忙则坚持监听；一旦发现信道空闲，立即发送数据（发送数据概率为 1）。<br>若发生冲突，等待一随机场时间，再重新开始监听信道。</p>
 <p>两种发生冲突可能：</p>
 <ul>
 <li>信号传输延迟造成冲突</li>
 <li>多个站点在监听到信道空闲时同时发送</li>
 </ul>
 <p>该协议的性能高于 ALOHA 协议。</p>
-<h4 id="非坚持式-CSMA"><a href="#非坚持式-CSMA" class="headerlink" title="非坚持式 CSMA"></a>非坚持式 CSMA</h4><p>当一个站点要发送数据时，先监听信道，若信道忙，随机等待一段时间后再开始监听信道（非坚持）；一旦发现信道空闲，立即发送数据。</p>
+<h4><span id="非坚持式-csma">非坚持式 CSMA</span></h4><p>当一个站点要发送数据时，先监听信道，若信道忙，随机等待一段时间后再开始监听信道（非坚持）；一旦发现信道空闲，立即发送数据。</p>
 <p>该协议的信道利用率高于 1-坚持式 CSMA 协议，但网络的延迟增大。</p>
-<h4 id="p-坚持式-CSMA"><a href="#p-坚持式-CSMA" class="headerlink" title="p-坚持式 CSMA"></a>p-坚持式 CSMA</h4><p>适用于分时间槽的信道。</p>
+<h4><span id="p-坚持式-csma">p-坚持式 CSMA</span></h4><p>适用于分时间槽的信道。</p>
 <p>当一个站点要发送数据时，先监听信道，若信道忙，则等到下个时间槽再监听信道；若信道空闲，则按照概率 p 发送数据，而以概率 q&#x3D;1-p 将此次发送推迟到下一个时间槽。若下一个时间槽信道也是空闲的，则它还是以概率 p 发送数据，或者以概率 q 再次推迟发送；重复该过程直到帧被发送出去。</p>
 <p>与前两种 CSMA 协议相比：</p>
 <ul>
@@ -302,9 +1470,9 @@
 <li>坚持监听：克服非坚持式协议中造成的时间延迟。</li>
 </ul>
 <p>p 的选择直接关系到协议的性能。</p>
-<h4 id="CSMA-CD"><a href="#CSMA-CD" class="headerlink" title="CSMA&#x2F;CD"></a>CSMA&#x2F;CD</h4><p><strong>带冲突检测的 CSMA</strong> (CSMA&#x2F;CD)<br>发送过程中仍然监听信道，通过检测回复信号的能量或脉冲宽度并将其与发送的信号作比较，可以判断是否发生冲突。<br>一旦发生冲突，立即取消发送，等待一随机时间后再尝试发送。</p>
+<h4><span id="csmax2fcd">CSMA&#x2F;CD</span></h4><p><strong>带冲突检测的 CSMA</strong> (CSMA&#x2F;CD)<br>发送过程中仍然监听信道，通过检测回复信号的能量或脉冲宽度并将其与发送的信号作比较，可以判断是否发生冲突。<br>一旦发生冲突，立即取消发送，等待一随机时间后再尝试发送。</p>
 <p>检测冲突的最小时间是将信号从一个站传播到另一个站所需要的时间。</p>
-<h4 id="CSMA-CA"><a href="#CSMA-CA" class="headerlink" title="CSMA&#x2F;CA"></a>CSMA&#x2F;CA</h4><p><strong>带避免冲突的 CSMA</strong>，被 WLAN 采用。</p>
+<h4><span id="csmax2fca">CSMA&#x2F;CA</span></h4><p><strong>带避免冲突的 CSMA</strong>，被 WLAN 采用。</p>
 <ul>
 <li>通过侦听确定在很短的一个时间内（这段时间称为 DIFS）没有信号。</li>
 <li>倒计数空闲时间槽，当有帧在发送时暂停该计数器。</li>
@@ -312,17 +1480,17 @@
 <li>如果帧发送成功，目标站立即发送一个短确认。</li>
 <li>如果该站没有收到确认，则说明传输过程中发生了错误，采用<a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a>算法重新发送。</li>
 </ul>
-<h4 id="二进制指数后退"><a href="#二进制指数后退" class="headerlink" title="二进制指数后退"></a>二进制指数后退</h4><p>如果发生冲突，等待一段随机时间后再重试。<br>一般地，在第 i 次冲突之后，从 $0$ ~ $2^i-1$ 之间随机选择一个数，然后等待这么多个时间槽。<br>在达到10次冲突之后，随机数的选择区间被固定在最大值1023，不再增加。<br>在16次冲突之后，控制器放弃努力，并给计算机返回一个失败报告，进一步的恢复工作由高层协议完成。</p>
-<h3 id="冲突避免多路访问-MACA"><a href="#冲突避免多路访问-MACA" class="headerlink" title="冲突避免多路访问 (MACA)"></a>冲突避免多路访问 (MACA)</h3><ul>
+<h4><span id="二进制指数后退">二进制指数后退</span></h4><p>如果发生冲突，等待一段随机时间后再重试。<br>一般地，在第 i 次冲突之后，从 $0$ ~ $2^i-1$ 之间随机选择一个数，然后等待这么多个时间槽。<br>在达到10次冲突之后，随机数的选择区间被固定在最大值1023，不再增加。<br>在16次冲突之后，控制器放弃努力，并给计算机返回一个失败报告，进一步的恢复工作由高层协议完成。</p>
+<h3><span id="冲突避免多路访问-maca">冲突避免多路访问 (MACA)</span></h3><ul>
 <li>A 向 B 发送一个 RTS (Request To Send) 短帧，包含了随后要发送的数据帧长度。</li>
 <li>B 向 A 回复一个 CTS (Clear To Send) 短帧，包含了从 RTS 中复制的数据帧长度。</li>
 <li>A 收到 CTS 后开始传输。</li>
 <li>如果一个站侦听到了 RTS，则它保持足够长时间的沉默使 A 能在无冲突的情况下收到 CTS。<br>该站如果只侦听到了 RTS 没有侦听到 CTS，则在数据帧传送过程中可以自由发送信息。</li>
 <li>如果一个站侦听到了 CTS，则它依据 CTS 中数据帧的长度，在数据传输过程中一直保持沉默。</li>
 </ul>
-<h2 id="以太网-IEEE-802-3"><a href="#以太网-IEEE-802-3" class="headerlink" title="以太网 (IEEE 802.3)"></a>以太网 (IEEE 802.3)</h2><p><strong>经典以太网</strong>：使用上述技术解决多路访问问题。<br>以太网的原始形式，运行速度从 3~10 Mbps 不等。</p>
+<h2><span id="以太网-ieee-8023">以太网 (IEEE 802.3)</span></h2><p><strong>经典以太网</strong>：使用上述技术解决多路访问问题。<br>以太网的原始形式，运行速度从 3~10 Mbps 不等。</p>
 <p><strong>交换式以太网</strong>：使用交换机连接不同的计算机。<br>可以运行在 100、1000 和 10000 Mbps 的高速率，分别以快速以太网、千兆以太网和万兆以太网的形式呈现。</p>
-<h3 id="经典以太网"><a href="#经典以太网" class="headerlink" title="经典以太网"></a>经典以太网</h3><h4 id="帧格式"><a href="#帧格式" class="headerlink" title="帧格式"></a>帧格式</h4><ul>
+<h3><span id="经典以太网">经典以太网</span></h3><h4><span id="帧格式">帧格式</span></h4><ul>
 <li><p><strong>前导码</strong> (Preamble)：8个字节，每个字节包含比特模式 10101010。IEEE 802.3 最后一个字节（帧起始定界符 SOF）的最后2位为11。<br>比特模式是由曼彻斯特编码产生的 10MHz 方波，每个波 6.4 微妙，以便接收方的时钟与发送方同步。</p>
 </li>
 <li><p><strong>目标地址</strong>：6个字节，MAC 地址，第一位是0表示是普通地址；如果是1，则表示组地址，该组中的所有站都要接收；全1的特殊地址用作广播，网络中的所有地址都要接收。</p>
@@ -339,9 +1507,9 @@
 <li><p><strong>校验和</strong>：4个字节，采用 32位CRC。</p>
 </li>
 </ul>
-<h4 id="MAC-子层协议"><a href="#MAC-子层协议" class="headerlink" title="MAC 子层协议"></a>MAC 子层协议</h4><p>采用 1-坚持 CSMA&#x2F;CD 算法，发生冲突时采用 二进制指数后退算法。</p>
-<p><a href="#1-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">1-坚持式 CSMA</a><br><a href="#csmacd">CSMA&#x2F;CD</a><br><a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a></p>
-<h3 id="交换式以太网"><a href="#交换式以太网" class="headerlink" title="交换式以太网"></a>交换式以太网</h3><p>当交换机端口接收到来自某个站的以太网帧，它检查该帧的以太网地址，确定该帧前往的目的地端口。</p>
+<h4><span id="mac-子层协议">MAC 子层协议</span></h4><p>采用 1-坚持 CSMA&#x2F;CD 算法，发生冲突时采用 二进制指数后退算法。</p>
+<p><a href="#1-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">1-坚持式 CSMA</a>，<a href="#csmacd">CSMA&#x2F;CD</a>，<a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a></p>
+<h3><span id="交换式以太网">交换式以太网</span></h3><p>当交换机端口接收到来自某个站的以太网帧，它检查该帧的以太网地址，确定该帧前往的目的地端口。</p>
 <ul>
 <li>在集线器中，所有站位于同一个<strong>冲突域</strong>（不同站点同时发送数据可能产生碰撞的最大网段），必须使用 CSMA&#x2F;CD 算法。</li>
 <li>在交换机中，每个端口有独立的冲突域。  <ul>
@@ -350,7 +1518,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="快速以太网-Fast-Ethernet"><a href="#快速以太网-Fast-Ethernet" class="headerlink" title="快速以太网 (Fast Ethernet)"></a>快速以太网 (Fast Ethernet)</h4><p>IEEE 802.3u 工作组规范 (1995, 6)。</p>
+<h4><span id="快速以太网-fast-ethernet">快速以太网 (Fast Ethernet)</span></h4><p>IEEE 802.3u 工作组规范 (1995, 6)。</p>
 <p>特点：</p>
 <ul>
 <li>采用 CSMA&#x2F;CD 媒体访问控制方式和 802.3 帧格式；</li>
@@ -358,15 +1526,15 @@
 <li>100 BASE-T4 采用四对3类双绞线；</li>
 <li>网络最大长度 250m (10 Mbps 的经典以太网是 2500m)。</li>
 </ul>
-<h4 id="千兆以太网-Gigabit-Ethernet"><a href="#千兆以太网-Gigabit-Ethernet" class="headerlink" title="千兆以太网 (Gigabit Ethernet)"></a>千兆以太网 (Gigabit Ethernet)</h4><p>IEEE 802.3z (1998) 和 802.3ab 工作组规范。</p>
+<h4><span id="千兆以太网-gigabit-ethernet">千兆以太网 (Gigabit Ethernet)</span></h4><p>IEEE 802.3z (1998) 和 802.3ab 工作组规范。</p>
 <p>特性：</p>
 <ul>
 <li><strong>载波扩充</strong>：让硬件在普通的帧后面增加一些填充位，将帧的长度扩充到 512 字节，使网络最大距离延长到 200m。</li>
 <li><strong>帧突发</strong>：允许发送方将多个待发送帧级联在一起，一次传输出去。最大突发长度为 8192 字节。如果级联起来的整个突发仍然小于 512 个字节，则硬件会再次对它进行填充。</li>
 <li>全双工。</li>
 </ul>
-<h2 id="无线局域网-802-11"><a href="#无线局域网-802-11" class="headerlink" title="无线局域网 (802.11)"></a>无线局域网 (802.11)</h2><p><strong>WLAN</strong>：无线局域网，是计算机网络和无线通信技术相结合的产物，是有线网络的无线化延伸。<br><strong>Wi-Fi</strong>：是一个创建于 IEEE 802.11 标准上的无线局域网技术，可等同于 802.11 的同义词。<br>无线局域网的主要标准是 802.11。</p>
-<h3 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h3><p><strong>接入点</strong> (AP)：转发该 WLAN 上的所有帧，具备无线至有线的桥接功能。<br><strong>工作站</strong>  (Station)：具备 WLAN 接口，能接入 WLAN 的主机。<br><strong>分布式系统</strong> (DS)：一种有线网络，是 802.11 的逻辑组件，负责连接多个 AP，或将 AP连接至骨干网（如目前已知的以太网）。</p>
+<h2><span id="无线局域网-80211">无线局域网 (802.11)</span></h2><p><strong>WLAN</strong>：无线局域网，是计算机网络和无线通信技术相结合的产物，是有线网络的无线化延伸。<br><strong>Wi-Fi</strong>：是一个创建于 IEEE 802.11 标准上的无线局域网技术，可等同于 802.11 的同义词。<br>无线局域网的主要标准是 802.11。</p>
+<h3><span id="体系结构">体系结构</span></h3><p><strong>接入点</strong> (AP)：转发该 WLAN 上的所有帧，具备无线至有线的桥接功能。<br><strong>工作站</strong>  (Station)：具备 WLAN 接口，能接入 WLAN 的主机。<br><strong>分布式系统</strong> (DS)：一种有线网络，是 802.11 的逻辑组件，负责连接多个 AP，或将 AP连接至骨干网（如目前已知的以太网）。</p>
 <p><strong>基本服务集</strong> (BSS)</p>
 <ul>
 <li>独立基本服务集 (IBSS, independent BSS)：工作站之间相互可以直接通信（不需要通过 AP 转发）。</li>
@@ -374,9 +1542,9 @@
 <li>每个 BSS 都有一个6字节的识别符 BSSID，相当于 AP 的 MAC 地址。</li>
 </ul>
 <p><strong>扩展服务集</strong> (ESS)：将几个 BSS 连接为 ESS。</p>
-<h3 id="MAC-子层协议-1"><a href="#MAC-子层协议-1" class="headerlink" title="MAC 子层协议"></a>MAC 子层协议</h3><p>带有物理侦听和虚拟侦听的 CSMA&#x2F;CA 是 802.11 协议的核心。</p>
+<h3><span id="mac-子层协议">MAC 子层协议</span></h3><p>带有物理侦听和虚拟侦听的 CSMA&#x2F;CA 是 802.11 协议的核心。</p>
 <p>802.11 允许把帧拆分为更小的单元<strong>段</strong> (fragment)，每个段有自己的校验和。</p>
-<h4 id="带冲突避免的-CSMA"><a href="#带冲突避免的-CSMA" class="headerlink" title="带冲突避免的 CSMA"></a>带冲突避免的 CSMA</h4><p>802.11 支持两种操作模式</p>
+<h4><span id="带冲突避免的-csma">带冲突避免的 CSMA</span></h4><p>802.11 支持两种操作模式</p>
 <ul>
 <li><p><strong>点协调功能</strong> (PCF)：由 AP 周期性地（每秒10~100次）广播一个信标帧，邀请站点申请服务，集中控制。</p>
 </li>
@@ -390,7 +1558,7 @@
 <li>早期的后退有助于避免冲突；</li>
 <li>利用确认来推断是否发生冲突，因为冲突无法被检测出来。</li>
 </ul>
-<h4 id="物理侦听-虚拟侦听"><a href="#物理侦听-虚拟侦听" class="headerlink" title="物理侦听&#x2F;虚拟侦听"></a>物理侦听&#x2F;虚拟侦听</h4><p>由于 WLAN 中各个站点发出的信号范围有限，使用 CSMA 时存在两个问题：</p>
+<h4><span id="物理侦听x2f虚拟侦听">物理侦听&#x2F;虚拟侦听</span></h4><p>由于 WLAN 中各个站点发出的信号范围有限，使用 CSMA 时存在两个问题：</p>
 <ul>
 <li><strong>隐藏终端问题</strong>：由于竞争者距离太远而导致站无法检测到潜在的竞争者，误以为可以发送数据。</li>
 <li><strong>暴露终端问题</strong>：站点侦听到信道上有帧在传送，错误地认为自己不能发送数据。</li>
@@ -403,7 +1571,7 @@
 <p><strong>网络分配向量</strong> (NAV)：每个帧携带一个 NAV 字段，说明这个帧所属的一系列数据将传输多长时间。<br>当一个站检测到正在信道中传输的 MAC 帧首部的 NAV 字段时，就调整自己的 NAV。</p>
 </li>
 </ul>
-<h4 id="可选的-RTS-CTS-机制"><a href="#可选的-RTS-CTS-机制" class="headerlink" title="可选的 RTS&#x2F;CTS 机制"></a>可选的 RTS&#x2F;CTS 机制</h4><p>使用 NAV 来防止隐藏终端在同一时间发送，与 <a href="#%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE-maca">MACA</a> 类似。<br>不同之处：</p>
+<h4><span id="可选的-rtsx2fcts-机制">可选的 RTS&#x2F;CTS 机制</span></h4><p>使用 NAV 来防止隐藏终端在同一时间发送，与 <a href="#%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE-maca">MACA</a> 类似。<br>不同之处：</p>
 <ul>
 <li>A 发送数据帧时启动一个 ACK 计时器；</li>
 <li>当正确的数据帧到达后，B 用一个 ACK 帧回复 A，完成此次交流；</li>
@@ -411,7 +1579,7 @@
 <li>听到 RTS&#x2F;CTS 的站会更新自己的 NAV 记录表示信道正忙。</li>
 </ul>
 <p>RTS&#x2F;CTS 的引入带来了延时和信道资源的消耗，因此该机制只用于预约长数据帧的信道。实际中，每个无线站点可设置一个 RTS 门限，仅当数据长度超过门限时才使用该机制。</p>
-<h4 id="时间间隔"><a href="#时间间隔" class="headerlink" title="时间间隔"></a>时间间隔</h4><p>一帧发送出去后，需要保持一段特定时间的空闲以便检查信道不在被用，然后任何站才可以发送帧。</p>
+<h4><span id="时间间隔">时间间隔</span></h4><p>一帧发送出去后，需要保持一段特定时间的空闲以便检查信道不在被用，然后任何站才可以发送帧。</p>
 <ul>
 <li><p><strong>短帧间间隔</strong> (SIFS)：最短的间隔；允许一次对话的各方具有优先抓住信道的机会，可以发送控制帧（如 ACK、RTS、CTS）或下一个段。</p>
 </li>
@@ -428,7 +1596,7 @@
 </li>
 </ul>
 <p>时间间隔长度与媒介有关，速率高的物理层会使用较短的间隔；同样，不同的物理层帧间间隔也有所不同。</p>
-<h3 id="帧格式-1"><a href="#帧格式-1" class="headerlink" title="帧格式"></a>帧格式</h3><ul>
+<h3><span id="帧格式">帧格式</span></h3><ul>
 <li><p><strong>帧控制</strong> (Frame Control):2 个字节，包含 11 个子字段。</p>
 <ul>
 <li><strong>协议版本</strong> (Protocol Version)：2 比特，00。</li>
@@ -462,14 +1630,14 @@
 </li>
 </ul>
 <p><strong>RTS</strong> 共20字节：帧控制、持续时间、目的地址、源地址和检错字段。<br><strong>CTS</strong> 和 <strong>ACK</strong>共14字节：帧控制、数据长度、目的地址和检错字段。</p>
-<h2 id="局域网互联设备"><a href="#局域网互联设备" class="headerlink" title="局域网互联设备"></a>局域网互联设备</h2><h3 id="网桥"><a href="#网桥" class="headerlink" title="网桥"></a>网桥</h3><ul>
+<h2><span id="局域网互联设备">局域网互联设备</span></h2><h3><span id="网桥">网桥</span></h3><ul>
 <li>用于连接局域网的互连设备。</li>
 <li>工作在数据链路层，通过检查数据链路层地址（MAC 地址）来转发帧，必要时进行帧格式转换。</li>
 <li>能隔离以太网中的碰撞域，但不能隔离广播域。</li>
 <li>丢弃出错帧。</li>
 <li>包括透明网桥和源路由选择网桥，以下两种都是透明网桥。</li>
 </ul>
-<h4 id="学习网桥"><a href="#学习网桥" class="headerlink" title="学习网桥"></a>学习网桥</h4><p>为每个网桥配备一个大的哈希表，该表列出每个可能的目的地以及它们隶属的输出端口。</p>
+<h4><span id="学习网桥">学习网桥</span></h4><p>为每个网桥配备一个大的哈希表，该表列出每个可能的目的地以及它们隶属的输出端口。</p>
 <p>当网桥第一次接入网络时，所有哈希表都是空的，采用<strong>泛洪算法</strong>：<br>对于每个发向未知目标地址的入境帧，网桥将它输出到所有端口，除了它来的输入端口。</p>
 <p>采用<strong>后向学习法</strong>：<br>通过检查每个端口发送的帧的源地址，网桥可以知道通过该端口可以访问到哪些机器，于是在哈希表上构造相应的一对地址和端口。</p>
 <p>为了处理动态的拓扑结构：<br>构造出哈希表后，帧的到达时间也被记录在相应的表项中。<br>当一帧到达时，如果它的源地址已经在表中，那么对应表项中的时间值被更新为当前时间。<br>网桥中存在一个进程定期扫描哈希表，将时间值在几分钟之前的表项都清除掉。</p>
@@ -480,7 +1648,7 @@
 <li>如果目标端口未知，则使用泛洪算法，将该帧转发到所有端口，除了它入境的哪一个。</li>
 </ul>
 <p>网桥可看作链路层设备，一个具有 k 个端口的网桥将有 k 个 MAC 和物理层实例。</p>
-<h4 id="生成树网桥"><a href="#生成树网桥" class="headerlink" title="生成树网桥"></a>生成树网桥</h4><p>为了提高可靠性，在网桥之间使用冗余链路，如在一对网桥之间并行设置两条链路。</p>
+<h4><span id="生成树网桥">生成树网桥</span></h4><p>为了提高可靠性，在网桥之间使用冗余链路，如在一对网桥之间并行设置两条链路。</p>
 <p>为了解决拓扑环路问题：<br>让网桥之间相互通信，用一棵可以到达每个网桥的生成树覆盖实际的拓扑结构。  </p>
 <ul>
 <li>选择具有最低标识符的网桥为生成树的根。</li>
@@ -488,7 +1656,7 @@
 <li>网桥在被指消息中包括与根的距离，每个网桥记住它找到的到根的最短路径。</li>
 <li>网桥关闭不属于最短路径一部分的端口。</li>
 </ul>
-<h4 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h4><p>在连接不同类型的局域网（如 802.3 和 802.11）时，网桥的转发存在以下主要问题。</p>
+<h4><span id="存在的问题">存在的问题</span></h4><p>在连接不同类型的局域网（如 802.3 和 802.11）时，网桥的转发存在以下主要问题。</p>
 <ul>
 <li><p>帧格式不同。<br>需要重新组帧，某些域（如 802.11 帧的持续时间）需要丢弃或产生，还需要重新生成校验和。</p>
 </li>
@@ -501,11 +1669,11 @@
 <li><p>服务质量问题。<br>802.11 采用 PCF 可以支持 QoS，802.3 不支持。</p>
 </li>
 </ul>
-<h3 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h3><p><strong>交换机</strong>源自于多端口网桥，采用存储-转发方式在各端口之间进行数据帧的交换。</p>
+<h3><span id="交换机">交换机</span></h3><p><strong>交换机</strong>源自于多端口网桥，采用存储-转发方式在各端口之间进行数据帧的交换。</p>
 <p>交换机检测每个到达数据帧的帧头，根据数据帧的目的地址查找输出端口。<br>如果地址查找表中没有该表项，交换机就向所有端口（除了接收端口）转发。<br>地址查找表是通过帧的源地址与到达端口的对应关系建立的。</p>
 <p>工作在数据链路层，能隔离碰撞域。</p>
 <p><strong>交换式局域网</strong>：采用星型拓扑结构，用交换机连接主机。</p>
-<h3 id="不同设备对比"><a href="#不同设备对比" class="headerlink" title="不同设备对比"></a>不同设备对比</h3><p><strong>帧</strong>（由数据链路层构造）包含：</p>
+<h3><span id="不同设备对比">不同设备对比</span></h3><p><strong>帧</strong>（由数据链路层构造）包含：</p>
 <ul>
 <li>帧头</li>
 <li>数据包头</li>
@@ -524,13 +1692,13 @@
 <tr>
 <th>工作层次</th>
 <th>设备</th>
-<th>作用</th>
+<th>功能</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>物理层</td>
 <td>中继器</td>
-<td>模拟设备，将一个线缆上出现的信号清理、放大、再放到另一个线缆上。</td>
+<td>模拟设备，在物理层透明地复制比特流，以补偿信号的衰减。</td>
 </tr>
 <tr>
 <td>物理层</td>
@@ -540,22 +1708,22 @@
 <tr>
 <td>数据链路层</td>
 <td>网桥，交换机</td>
-<td>可以隔离碰撞域；可以连接不同的局域网，但存在很多透明性问题。</td>
+<td>可以隔离碰撞域，不能隔离广播域；在不同的 LAN 间存储转发帧，必要时进行链路层的协议转换。</td>
 </tr>
 <tr>
 <td>网络层</td>
 <td>路由器</td>
-<td>当帧到达时，帧头帧尾被剥掉，只有有效载荷字段的数据包被传给路由软件，路由软件根据数据包的头信息来选择输出线路。可以隔离碰撞域。可连接不同类型的网络。</td>
+<td>在不同的网络间存储转发分组，必要时进行网络层的协议转换。可以隔离碰撞域和广播域。可连接不同类型的网络。</td>
 </tr>
 <tr>
 <td>传输层</td>
 <td>传输网关</td>
-<td>将两台使用了不同面向连接传输协议的计算机连接起来。传输网关将数据包从一个连接复制到另一个连接上，并根据需要对数据包重新进行格式化。</td>
+<td>对高层协议进行转换。将两台使用了不同面向连接传输协议的计算机连接起来。传输网关将数据包从一个连接复制到另一个连接上，并根据需要对数据包重新进行格式化。</td>
 </tr>
 <tr>
 <td>应用层</td>
 <td>应用网关</td>
-<td>理解数据的格式和内容，将消息从一种格式转换为另一种格式。</td>
+<td>对高层协议进行转换。理解数据的格式和内容，将消息从一种格式转换为另一种格式。</td>
 </tr>
 </tbody></table>
 
@@ -618,12 +1786,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%89%EF%BC%89/">计算机网络（三）</a>
+      <a class="article-title" href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%89%EF%BC%89/">计算机网络（三）</a>
     </h1>
   
 
         
-        <a href="/2023/12/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
+        <a href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
   	<time datetime="2023-12-12T08:18:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-12</time>
 </a>
         
@@ -631,8 +1799,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第3章-数据链路层"><a href="#第3章-数据链路层" class="headerlink" title="第3章 数据链路层"></a>第3章 数据链路层</h1><ul>
-<li><a href="#%E7%AC%AC3%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82">第3章 数据链路层</a><ul>
+        <h1><span id="第3章-数据链路层">第3章 数据链路层</span></h1><!-- toc -->
+
+<ul>
 <li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%8A%9F%E8%83%BD">基本概念与功能</a><ul>
 <li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></li>
 <li><a href="#%E5%8A%9F%E8%83%BD">功能</a></li>
@@ -653,7 +1822,7 @@
 <li><a href="#%E6%A3%80%E9%94%99%E7%A0%81">检错码</a><ul>
 <li><a href="#%E5%A5%87%E5%81%B6">奇偶</a></li>
 <li><a href="#%E6%A0%A1%E9%AA%8C%E5%92%8C">校验和</a></li>
-<li><a href="#%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A0%A1%E9%AA%8C%E7%A0%81crc--%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%BC%96%E7%A0%81">循环冗余校验码(CRC) &#x2F; 多项式编码</a></li>
+<li><a href="#%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A0%A1%E9%AA%8C%E7%A0%81crc-%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%BC%96%E7%A0%81">循环冗余校验码(CRC) &#x2F; 多项式编码</a></li>
 </ul>
 </li>
 </ul>
@@ -682,9 +1851,9 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h2 id="基本概念与功能"><a href="#基本概念与功能" class="headerlink" title="基本概念与功能"></a>基本概念与功能</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><strong>链路</strong>：连接相邻节点的通信信道，中间没有任何其他的交换节点。</p>
+<!-- tocstop -->
+
+<h2><span id="基本概念与功能">基本概念与功能</span></h2><h3><span id="基本概念">基本概念</span></h3><p><strong>链路</strong>：连接相邻节点的通信信道，中间没有任何其他的交换节点。</p>
 <ul>
 <li><strong>点对点链路</strong>：链路的两端都只有一个节点，一个节点发送，另一个节点接收，带宽独占。</li>
 <li><strong>点对多点链路（广播链路，共享链路）</strong>：链路上有多个节点，带宽共享，需要媒体访问控制(MAC)机制来控制多个用户对信道的访问。</li>
@@ -695,14 +1864,14 @@
 <li><strong>半双工通信</strong>：指数据可以沿两个方向传送，但同一时刻一个信道只允许单方向传送。</li>
 <li><strong>全双工通信</strong>：指在通信的任意时刻，两个节点间可以同时双向传输信号。<br>TDD(时分双工)是移动通信中上下行在同一频段上按照时间分配交叉进行传输。<br>FDD(频分双工)是指上下行在不同频段同时进行传输。</li>
 </ul>
-<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>数据链路层使用物理层提供的服务在通信信道上发送和接收比特。  </p>
+<h3><span id="功能">功能</span></h3><p>数据链路层使用物理层提供的服务在通信信道上发送和接收比特。  </p>
 <ol>
 <li>向网络层提供一个定义良好的服务接口。  </li>
 <li>将物理层的比特流编成帧。</li>
 <li>处理传输错误。（差错控制）  </li>
 <li>调节数据流，确保慢速的接收方不会被快速的发送方淹没。（流量控制）</li>
 </ol>
-<h3 id="提供给网络层的服务"><a href="#提供给网络层的服务" class="headerlink" title="提供给网络层的服务"></a>提供给网络层的服务</h3><ul>
+<h3><span id="提供给网络层的服务">提供给网络层的服务</span></h3><ul>
 <li><p><strong>无确认的无连接服务</strong><br>源机器向目标机器发送独立的帧，目标机器并不对这些帧进行确认。eg. 以太网<br>适用于错误率很低的场合及实时通信。</p>
 </li>
 <li><p><strong>有确认的无连接服务</strong><br>数据链路层仍然没有使用逻辑连接，但发送的每一帧都需要单独确认。eg. 802.11<br>适用于不可靠信道，如无线系统。  </p>
@@ -710,7 +1879,7 @@
 <li><p><strong>有确认的有连接服务</strong><br>数据传输经过三个阶段。(1)建立连接，双方初始化各种变量和计数器；(2)传输一个或多个数据帧，每一个帧都被编号，保证传送的帧被对方收到，且只收到一次；(3)释放连接。<br>常用于广域网，如帧中继等。</p>
 </li>
 </ul>
-<h3 id="成帧"><a href="#成帧" class="headerlink" title="成帧"></a>成帧</h3><p>将比特流拆分成多个离散的帧，为每个帧计算一个校验和，并将该校验和放在帧中一起传输。</p>
+<h3><span id="成帧">成帧</span></h3><p>将比特流拆分成多个离散的帧，为每个帧计算一个校验和，并将该校验和放在帧中一起传输。</p>
 <ul>
 <li><p><strong>字节计数法</strong>  </p>
 <p>利用头部中的一个字段来标识该帧中的字符数。    </p>
@@ -730,47 +1899,52 @@
 <p>在物理层用1.5或2个物理位表示一个数据位来表示帧的起始与结尾。</p>
 </li>
 </ul>
-<h3 id="差错控制"><a href="#差错控制" class="headerlink" title="差错控制"></a>差错控制</h3><p>要求接收方发回特殊的控制帧，在控制帧中对它所接收到的帧进行肯定或否定的确认。</p>
+<h3><span id="差错控制">差错控制</span></h3><p>要求接收方发回特殊的控制帧，在控制帧中对它所接收到的帧进行肯定或否定的确认。</p>
 <p>当发送方发出一帧时，启动一个计时器。该计时器的超时值设置得足够长，保证在正常情况下该帧能够到达接收方，并且在接收方进行处理后再将确认返回到发送方。计时器超时后，发送方重新发送该帧。</p>
 <p>发送方给发出去的帧分配序号，以便接收方根据序号来有效区分原始帧和重传帧。</p>
-<h3 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h3><ul>
+<h3><span id="流量控制">流量控制</span></h3><ul>
 <li><strong>基于反馈的流量控制</strong>：接收方给发送方返回信息。  </li>
 <li><strong>基于速率的流量控制</strong>：存在内置的机制，能限制发送方传输数据的速率，无需反馈信息。</li>
 </ul>
-<h2 id="差错检测和纠正"><a href="#差错检测和纠正" class="headerlink" title="差错检测和纠正"></a>差错检测和纠正</h2><h3 id="纠错码"><a href="#纠错码" class="headerlink" title="纠错码"></a>纠错码</h3><p>一帧由m个数据位（信息）和r个冗余位（校验）组成。<br><strong>块码</strong>：r个校验位由与之相关的m个数据为的函数计算获得。<br><strong>系统码</strong>：直接发送m个数据位，然后发出r个校验位。<br><strong>线性码</strong>：r个校验位时作为m个数据位的线性函数被计算出来的。  </p>
+<h2><span id="差错检测和纠正">差错检测和纠正</span></h2><h3><span id="纠错码">纠错码</span></h3><p>一帧由m个数据位（信息）和r个冗余位（校验）组成。<br><strong>块码</strong>：r个校验位由与之相关的m个数据为的函数计算获得。<br><strong>系统码</strong>：直接发送m个数据位，然后发出r个校验位。<br><strong>线性码</strong>：r个校验位时作为m个数据位的线性函数被计算出来的。  </p>
 <p>令数据块的总长度为n，即n&#x3D;m+r。<br><strong>n位码字</strong>：一个包含了数据位和校验位的n位单元。<br><strong>码率</strong>：码字中不包含冗余部分所占的比例，即m&#x2F;n。</p>
-<h4 id="海明码"><a href="#海明码" class="headerlink" title="海明码"></a>海明码</h4><p><strong>海明距离</strong>：两个码字中不相同的位的个数。  </p>
+<h4><span id="海明码">海明码</span></h4><p><strong>海明距离</strong>：两个码字中不相同的位的个数。  </p>
 <p>如果两个码字的海明距离位d，则需要d个一位错误才能将一个码字转变成另一个。<br>为了可靠地检测d个错误，需要一个距离为d+1的编码方案（相邻码字的距离为d+1）。<br>为了纠正d个错误，需要一个距离为2d+1的编码方案。  </p>
 <p>在给定m的情况下，纠正单个错误所需要的校验位数下界：<br>$$(m + r + 1) \leq 2^r$$  </p>
 <p>以传输1000001为例：</p>
 <ol>
 <li><p>海明码中，所有位从左到右由1开始依次编号，其中2的幂次方位是校验位，其余为数据位。<br>故发送的码字应有11位，其中1&#x2F;2&#x2F;4&#x2F;8为校验位，其余位依次填充1000001。<br>即：$x_1 x_2 1_3 x_4 0_5 0_6 0_7 x_8 0_9 0_{10} 1_{11}$（下标表示位数）</p>
 </li>
-<li><p>将数据k位改写成2的幂次之和，以确定校验位覆盖了哪些数据位。<br>3&#x3D;1+2；5&#x3D;1+4；6&#x3D;2+4；7&#x3D;1+2+4；9&#x3D;1+8；10&#x3D;2+8；11&#x3D;1+2+8。<br>可以得到校验位如下（运算规则为异或）（偶校验）：<br>1(3, 5, 7, 9, 11): 1+0+0+0+1&#x3D;0 ;<br>2(3, 6, 7, 10, 11): 1+0+0+0+1&#x3D;0 ;<br>4(5, 6, 7): 0+0+0&#x3D;0 ;<br>8(9, 10, 11): 0+0+1&#x3D;1 。 </p>
+<li><p>将数据k位改写成2的幂次之和，以确定校验位覆盖了哪些数据位。<br>3&#x3D;1+2；5&#x3D;1+4；6&#x3D;2+4；7&#x3D;1+2+4；9&#x3D;1+8；10&#x3D;2+8；11&#x3D;1+2+8。<br>可以得到校验位如下（偶校验）：<br>1(3, 5, 7, 9, 11): $1 \oplus 0 \oplus 0 \oplus 0 \oplus 1 &#x3D; 0$ ;<br>2(3, 6, 7, 10, 11): $1 \oplus 0 \oplus 0 \oplus 0 \oplus 1 &#x3D; 0$ ;<br>4(5, 6, 7): $0 \oplus 0 \oplus 0&#x3D;0$ ;<br>8(9, 10, 11): $0 \oplus 0 \oplus 1 &#x3D; 1$ 。 </p>
 </li>
 <li><p>故发送的码字为00100001001。  </p>
 </li>
-<li><p>假设传输过程中发送错误，收到的码字为$0_1 0_2 1_3 0_4 1_5 0_6 0_7 1_8 0_9 0_{10} 1_{11}$。<br>接收方收到码字后重新计算校验位。<br>1: 1+1+0+0+1&#x3D;1 ;<br>2: 1+0+0+0+1&#x3D;0 ;<br>4: 1+0+0&#x3D;1 ;<br>8: 0+0+1&#x3D;1 。  </p>
+<li><p>假设传输过程中发送错误，收到的码字为$0_1 0_2 1_3 0_4 1_5 0_6 0_7 1_8 0_9 0_{10} 1_{11}$。<br>接收方收到码字后重新计算校验位。<br>1: $1 \oplus 1 \oplus 0 \oplus 0 \oplus 1 &#x3D; 1$ ;<br>2: $1 \oplus 0 \oplus 0 \oplus 0 \oplus 1 &#x3D; 0$ ;<br>4: $1 \oplus 0 \oplus 0 &#x3D; 1$ ;<br>8: $0 \oplus 0 \oplus 1 &#x3D; 1$ 。  </p>
 </li>
 <li><p>将重新计算的校验位与收到的校验位比较（由高位到低位进行按位异或）。<br>得到结果为0101，即第5位发生了传输错误。将不正确的位取反即可获得正确信息00100001001。</p>
 </li>
 </ol>
-<h4 id="卷积码"><a href="#卷积码" class="headerlink" title="卷积码"></a>卷积码</h4><p>编码器有内存，处理一个输入位序列并生成一个输出位序列。<br><strong>约束长度</strong>：决定当前输出的以前输入位数。<br>卷积码由它们的速率和约束长度来标识。  </p>
-<h4 id="里德所罗门码"><a href="#里德所罗门码" class="headerlink" title="里德所罗门码"></a>里德所罗门码</h4><p>线性块码，往往也是系统码。</p>
+<p>from zy：  </p>
+<ul>
+<li>海明码的编码距离为 3</li>
+<li>海明码可以检测出所有$\leq 2$比特的错误，且可以纠正 1 比特错误。</li>
+</ul>
+<h4><span id="卷积码">卷积码</span></h4><p>编码器有内存，处理一个输入位序列并生成一个输出位序列。<br><strong>约束长度</strong>：决定当前输出的以前输入位数。<br>卷积码由它们的速率和约束长度来标识。  </p>
+<h4><span id="里德所罗门码">里德所罗门码</span></h4><p>线性块码，往往也是系统码。</p>
 <p>基于m位符号（1位错误和m位突发错误都只作为一个出错的符号处理）。<br>加入2t个冗余符号后，能够纠正传输符号中的任意t个错误。</p>
-<h4 id="低密度奇偶校验码-LDPC"><a href="#低密度奇偶校验码-LDPC" class="headerlink" title="低密度奇偶校验码(LDPC)"></a>低密度奇偶校验码(LDPC)</h4><p>线性块码。</p>
+<h4><span id="低密度奇偶校验码ldpc">低密度奇偶校验码(LDPC)</span></h4><p>线性块码。</p>
 <p>每个输出位由一小部分的输入位形成。接收到的码字通过一个近似算法解码获得。</p>
 <p>eg. 数字视频广播&#x2F;万兆以太网&#x2F;电力线网络&#x2F;802.11 标准</p>
-<h3 id="检错码"><a href="#检错码" class="headerlink" title="检错码"></a>检错码</h3><p>以下检错码均为线性的系统块码。</p>
-<h4 id="奇偶"><a href="#奇偶" class="headerlink" title="奇偶"></a>奇偶</h4><p>奇校验&#x2F;偶校验：使码字中比特1的数目位奇数&#x2F;偶数。<br>可以检出1位错误。</p>
+<h3><span id="检错码">检错码</span></h3><p>以下检错码均为线性的系统块码。</p>
+<h4><span id="奇偶">奇偶</span></h4><p>奇校验&#x2F;偶校验：使码字中比特1的数目位奇数&#x2F;偶数。<br>可以检出1位错误。</p>
 <p>plus版：将发送的每个数据块作为一个n位宽和k位高的长方形矩阵来处理。<br>交错检验：以不同于数据位发送的次序来计算校验位。<br>为n列中的每列计算校验位，按k行发送全部的数据位，发送次序是从上到下发送每一行，行内数据位通常按从左到右的次序发送，在最后一行发送n个校验位。  </p>
 <p>这种方法对于nk长度的数据块使用了n个校验位，可以检出一个长度小于等于n的突发错误。</p>
-<h4 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h4><p>通常指与信息相关的一组校验位。</p>
+<h4><span id="校验和">校验和</span></h4><p>通常指与信息相关的一组校验位。</p>
 <ol>
 <li>Internet校验和<br>按16位字计算（补码运算）得出的消息位总和。<br>缺点：检测不到0数据的增加或删除；检测不出消息中被替换的部分；对两个数据包拼接起来的消息只有弱保护作用。  </li>
 <li>Fletcher校验和<br>包括一个位置组件，将数据和其位置的乘积添加到总和中。</li>
 </ol>
-<h4 id="循环冗余校验码-CRC-多项式编码"><a href="#循环冗余校验码-CRC-多项式编码" class="headerlink" title="循环冗余校验码(CRC) &#x2F; 多项式编码"></a>循环冗余校验码(CRC) &#x2F; 多项式编码</h4><p>将位串看作系数是0或1的多项式。一个k位帧看作是一个k-1次多项式，从$x^{k-1}$到$x^0$。</p>
+<h4><span id="循环冗余校验码crc-x2f-多项式编码">循环冗余校验码(CRC) &#x2F; 多项式编码</span></h4><p>将位串看作系数是0或1的多项式。一个k位帧看作是一个k-1次多项式，从$x^{k-1}$到$x^0$。</p>
 <p>运算规则：加法和减法都等同于异或。</p>
 <p>假设一帧有m位，对应于多项式$M(x)$<br><strong>生成多项式</strong>：$G(x)$  </p>
 <p>计算CRC的算法：   </p>
@@ -782,7 +1956,7 @@
 <p>如果收到的多项式可以除尽生成多项式，则证明传输正确。  </p>
 <p>带r个校验位的多项式编码可以检测到所有长度小于等于r的突发错误。<br>当突发错误的长度为r+1时，通过检测的概率是$\dfrac{1}{2^{r-1}}$。<br>当突发错误的长度大于r+1或者几个短突发错误发生时，通过检测的概率为$\dfrac{1}{2^r}$。</p>
 <p>eg. 几乎所有的局域网（以太网&#x2F;802.11）和点到点链接（SONET上的数据包）。</p>
-<h2 id="基本数据链路层协议"><a href="#基本数据链路层协议" class="headerlink" title="基本数据链路层协议"></a>基本数据链路层协议</h2><h3 id="无限制的单工协议"><a href="#无限制的单工协议" class="headerlink" title="无限制的单工协议"></a>无限制的单工协议</h3><p><strong>理想条件</strong>：  </p>
+<h2><span id="基本数据链路层协议">基本数据链路层协议</span></h2><h3><span id="无限制的单工协议">无限制的单工协议</span></h3><p><strong>理想条件</strong>：  </p>
 <ol>
 <li>数据单向传输，收发双方的网络层一直处于就绪状态。  </li>
 <li>处理时间可忽略不计，接收缓冲空间无限大（无需任何流量控制）。  </li>
@@ -800,14 +1974,14 @@
 <li>帧到达后，将新到达的帧从硬件缓冲区中删除，并放到一个变量中。  </li>
 <li>将该帧的数据部分传递到网络层。</li>
 </ol>
-<h3 id="无错信道上的单工停-等式协议"><a href="#无错信道上的单工停-等式协议" class="headerlink" title="无错信道上的单工停-等式协议"></a>无错信道上的单工停-等式协议</h3><p><strong>停-等式协议</strong>：发送方发送一帧，等待对方确认到达后才能继续发送。  </p>
+<h3><span id="无错信道上的单工停-等式协议">无错信道上的单工停-等式协议</span></h3><p><strong>停-等式协议</strong>：发送方发送一帧，等待对方确认到达后才能继续发送。  </p>
 <p><strong>条件</strong>：与理想条件不同的是，接收端需要一定的接收处理时间，接收缓冲只能存放一个帧。  </p>
 <ul>
 <li>为了防止发送快于接收而造成数据丢失，发送端发送一帧后必须停止发送，等待接收端发回的反馈确认。  </li>
 <li>接收端在收到一个帧并发送网络层后，需向发送端发一反馈确认短帧，表示可发新帧。  </li>
 <li>由于需要反馈，且帧的发送和反馈是严格交替进行的，所以相当于采用半双工信道。</li>
 </ul>
-<h3 id="有错信道上的单工停-等式协议"><a href="#有错信道上的单工停-等式协议" class="headerlink" title="有错信道上的单工停-等式协议"></a>有错信道上的单工停-等式协议</h3><p>**自动重复请求(ARQ) &#x2F; 带有重传的肯定确认(PAR)**：发送方在前移到下一个数据之前必须等待一个肯定确认的协议。</p>
+<h3><span id="有错信道上的单工停-等式协议">有错信道上的单工停-等式协议</span></h3><p>**自动重复请求(ARQ) &#x2F; 带有重传的肯定确认(PAR)**：发送方在前移到下一个数据之前必须等待一个肯定确认的协议。</p>
 <p><strong>条件</strong>：与无错信道上的条件不同的是，通信信道可能会出错，帧可能被损坏，也可能完全被丢失。  </p>
 <ul>
 <li>增加一个计时器。<br>应保证超时值足够长，确保帧到达接收方，按照最坏的情形被接收方所处理，然后确认帧被返回发送方所需要的全部操作时间。</li>
@@ -827,7 +2001,7 @@
 <li>如果不是重复数据包，则接收该数据包并传给网络层，然后生成一个确认帧。  </li>
 <li>如果是重复帧或受损帧，则不传递给网络层，且重复发送最后一个正确接收到的数据帧的确认。</li>
 </ol>
-<h2 id="滑动窗口协议"><a href="#滑动窗口协议" class="headerlink" title="滑动窗口协议"></a>滑动窗口协议</h2><p>允许发送站连续发送多个帧而不需等待确认的做法称作<strong>管道化</strong>，属于一种<strong>窗口机制</strong>。<br><strong>捎带确认</strong>：暂时延缓确认以便将确认信息搭载在下一个出境数据帧上的技术。</p>
+<h2><span id="滑动窗口协议">滑动窗口协议</span></h2><p>允许发送站连续发送多个帧而不需等待确认的做法称作<strong>管道化</strong>，属于一种<strong>窗口机制</strong>。<br><strong>捎带确认</strong>：暂时延缓确认以便将确认信息搭载在下一个出境数据帧上的技术。</p>
 <p><strong>发送窗口尺寸</strong>：允许连续发送的帧的数量。<br>如果最大窗口为n，则发送方需要n个缓冲区来存放未被确认的帧，以满足可能的重传需要。</p>
 <p><strong>发送窗口</strong>：发送端允许不等确认而连续发送的帧的序号表。<br>当发送端收到发送窗口下沿帧的肯定确认时，将发送窗口整体向前滑动一个序号，并从输出缓冲区中将相应的数据帧副本删除。</p>
 <p><strong>接收窗口</strong>：接收端允许接收的帧的序号表。  </p>
@@ -839,20 +2013,20 @@
 <p>发送窗口和接收窗口不必有相同的上下界，也不必有相同的大小。  </p>
 <p><strong>带宽-延迟乘积</strong>：$BD &#x3D; 单向延迟 \times 带宽$<br>单项延迟的单位为s，带宽单位为bps，将乘积拆分成一帧的比特数，BD的单位为帧数。  </p>
 <p>假设发射窗口为w：<br>$$<br>链路利用率 \leq \dfrac{w}{2BD + 1}<br>$$  </p>
-<h3 id="回退N协议-出错全部重发协议"><a href="#回退N协议-出错全部重发协议" class="headerlink" title="回退N协议(出错全部重发协议)"></a>回退N协议(出错全部重发协议)</h3><p>发送窗口的尺寸大于1，接收窗口的尺寸等于1。<br>发送端需要为每个待确认的帧都各自设置一个定时计数器。</p>
+<h3><span id="回退n协议出错全部重发协议">回退N协议(出错全部重发协议)</span></h3><p>发送窗口的尺寸大于1，接收窗口的尺寸等于1。<br>发送端需要为每个待确认的帧都各自设置一个定时计数器。</p>
 <p>接收端只能按顺序接受数据帧，一旦某个帧出错或丢失，丢弃该帧及其所有的后续帧。发送端超时后需重发出错或丢失的帧及其后续所有的帧。</p>
 <p>发送窗口尺寸$MAX_SEQ \leq 2^n - 1$，即存在$MAX_SEQ + 1$个不同的序号。否则会造成接收端无法分辨新旧数据帧。  </p>
 <p>出错全部重发协议只要求发送端保持一定数量的缓存来保存没有确认的数据帧，对接收端没有缓存的要求。但在误码率高的情况下，会大大降低信道的利用率。  </p>
 <p><strong>累计确认</strong>：当n号帧的确认到达，n-1号帧&#x2F;n-2号帧等都会被自动确认。</p>
-<h3 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h3><p>发送和接收窗口的尺寸都大于1。  </p>
+<h3><span id="选择重传协议">选择重传协议</span></h3><p>发送和接收窗口的尺寸都大于1。  </p>
 <p>非顺序接收。接收端可存储坏帧之后的其它数据帧（落在接收窗口），接收端对错帧发否定确认帧，因此发送端只需重发出错的帧，而不需重发其后的所有后续帧。接收端正确收到重发的帧后，可对其后连续的已接收的正确帧作一次总体确认（最大序号的确认），并交送网络层。  </p>
 <p>接收窗口的尺寸不能超过$2^{n-1}$，即序号空间的一半，否则可能造成帧的重叠。<br>发送窗口的尺寸一般和接收窗口的尺寸相同（两者相加小于等于$2^n$）。  </p>
 <p>接收方所需缓冲区的数量等于窗口的大小。假设有n号缓冲区，当第i号帧到达时，它被放到(i mod n)号缓冲区中。<br>发送端为每一个输出缓存区设置一个定时计数器，定时器一旦超时，相应输出缓存区中的帧就被重发。</p>
 <p>当一个按正常次序发送的数据帧到达接收方后，接收方启动一个辅助计时器。如果在计时器超时前，没有出现需要发送的反向流量，则发送一个单独的确认帧。<br>辅助计时器的超时间隔应明显短于与数据帧关联的计时器间隔。</p>
-<h2 id="数据链路层协议实例"><a href="#数据链路层协议实例" class="headerlink" title="数据链路层协议实例"></a>数据链路层协议实例</h2><h3 id="高级数据链路控制-HDLC"><a href="#高级数据链路控制-HDLC" class="headerlink" title="高级数据链路控制(HDLC)"></a>高级数据链路控制(HDLC)</h3><p>是由国际标准化组织制定的面向位的有序链路层协议。  </p>
+<h2><span id="数据链路层协议实例">数据链路层协议实例</span></h2><h3><span id="高级数据链路控制hdlc">高级数据链路控制(HDLC)</span></h3><p>是由国际标准化组织制定的面向位的有序链路层协议。  </p>
 <p>是为非平衡的链路级操作而研制的，采用主从结构，链路上一个主站控制多个从站，主站向从站发命令，从站向主站返回响应。  </p>
 <p>只有一个地址域，即从站的地址，在命令帧中，它是目的地址，在响应帧中，它是源地址。  </p>
-<h4 id="帧格式"><a href="#帧格式" class="headerlink" title="帧格式"></a>帧格式</h4><ul>
+<h4><span id="帧格式">帧格式</span></h4><ul>
 <li><p><strong>帧标志序列</strong>：01111110，作为起始和结束标志，在数据位有5个连续的1出现时，就插入1个0（位填充）。  </p>
 </li>
 <li><p><strong>地址段</strong>：只有一个地址域，即从站的地址；在命令帧中表示目的地址，在响应帧中表示源地址；全1为广播地址，全0为测试地址。 </p>
@@ -864,12 +2038,12 @@
 <p>Seq：发送端发送序列编号，这里是3比特，采用模8循环编号。(3-bit)<br>Next：表示发送端准备接收的序列号，也采用模8循环编号。(3-bit)<br>Type：表示监控功能的类型。(2-bit)<br>Modifier：附加的修改功能。(3-bit)<br>P&#x2F;F：在命令帧中作为询问比特，在响应帧中作为终止比特。(1-bit)</p>
 </li>
 </ul>
-<h3 id="点到点协议-PPP"><a href="#点到点协议-PPP" class="headerlink" title="点到点协议(PPP)"></a>点到点协议(PPP)</h3><ul>
+<h3><span id="点到点协议ppp">点到点协议(PPP)</span></h3><ul>
 <li>成帧方法，串形链路上的数据报封装方法。  </li>
 <li><strong>链路控制协议</strong>(LCP)，用于启动线路&#x2F;测试线路&#x2F;协商参数&#x2F;当线路不再需要时温和地关闭线路。  </li>
 <li>协商网络层选项，针对每一种支持的网络层有一个<strong>网络控制协议</strong>(NCP)。</li>
 </ul>
-<h4 id="帧格式-1"><a href="#帧格式-1" class="headerlink" title="帧格式"></a>帧格式</h4><p> <strong>Flag</strong>：以标准的HDLC标志字节0x7E开始。  </p>
+<h4><span id="帧格式">帧格式</span></h4><p> <strong>Flag</strong>：以标准的HDLC标志字节0x7E开始。  </p>
 <p>标志字节如果出现在Payload字段，则用转义字符0x7D填充，然后将紧跟在后面的那个字节与0x20进行异或操作（使第6位比特反转）。两个帧之间只需要一个标志字节，当链路上没有帧在发送时，可以用多个标志字节填充。  </p>
 <p> <strong>Address</strong>(地址)：总是被设置为0xFF，表示所有站点都接受该帧。  </p>
 <p> <strong>Control</strong>(控制)：默认值是00000011，表示一个无编号帧。  </p>
@@ -877,7 +2051,7 @@
 <p> <strong>Protocol</strong>(协议)：通告Payload字段中包含的数据包类型。<br>以0开始的编码定义为IPv4&#x2F;IPv6及其他可能用到的网络层协议。<br>以1开始的编码被用于PPP配置协议，包括LCP和针对每个网络层协议而设置的不同NCP。<br>默认大小为2字节，可以通过LCP协商减小到1字节。  </p>
 <p> <strong>Payload</strong>(有效荷载)：可变长度，最高可达某个协商的最大值。如果在链路建立时没有通过LCP进行协商，则采用默认长度1500字节。  </p>
 <p> <strong>Checksum</strong>(校验和)：通常占2个字节，可以协商使用4个字节。采用CRC。  </p>
-<h4 id="与HDLC比较"><a href="#与HDLC比较" class="headerlink" title="与HDLC比较"></a>与HDLC比较</h4><ol>
+<h4><span id="与hdlc比较">与HDLC比较</span></h4><ol>
 <li>PPP是面向字节的；HDLC是面向比特的，允许帧的长度不是字节的倍数。  </li>
 <li>HDLC提供可靠的数据传输，PPP采用“无编号模式”来提供无连接无确认的服务（也可以提供可靠传输）。</li>
 </ol>
@@ -941,12 +2115,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%8C%EF%BC%89/">计算机网络（二）</a>
+      <a class="article-title" href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%8C%EF%BC%89/">计算机网络（二）</a>
     </h1>
   
 
         
-        <a href="/2023/12/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
+        <a href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
   	<time datetime="2023-12-12T08:17:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-12</time>
 </a>
         
@@ -954,8 +2128,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第2章-物理层"><a href="#第2章-物理层" class="headerlink" title="第2章 物理层"></a>第2章 物理层</h1><ul>
-<li><a href="#%E7%AC%AC2%E7%AB%A0-%E7%89%A9%E7%90%86%E5%B1%82">第2章 物理层</a><ul>
+        <h1><span id="第2章-物理层">第2章 物理层</span></h1><!-- toc -->
+
+<ul>
 <li><a href="#%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80">理论基础</a><ul>
 <li><a href="#%E5%A5%88%E5%A5%8E%E6%96%AF%E7%89%B9%E5%AE%9A%E7%90%86">奈奎斯特定理</a></li>
 <li><a href="#%E9%A6%99%E5%86%9C%E5%AE%9A%E7%90%86">香农定理</a></li>
@@ -1006,16 +2181,16 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h2 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h2><p><strong>带宽</strong>：通过频率的宽度，这段频率在传输过程中振幅不会明显减弱。<br>模拟带宽的单位为赫兹 (Hz)，数字带宽的单位为比特&#x2F;秒 (bps)。</p>
+<!-- tocstop -->
+
+<h2><span id="理论基础">理论基础</span></h2><p><strong>带宽</strong>：通过频率的宽度，这段频率在传输过程中振幅不会明显减弱。<br>模拟带宽的单位为赫兹 (Hz)，数字带宽的单位为比特&#x2F;秒 (bps)。</p>
 <p><strong>基带信号</strong>：从0到某个最大频率的信号。<br><strong>通带信号</strong>：被搬移并占用某个更大频率范围的信号。  </p>
 <p><strong>信噪比</strong>：信号功率与噪声功率的比值。<br>将信号功率记作 S，噪声功率记作 N，将该比率表示成对数形式 $10 \log_{10} (S&#x2F;N)$，对数的取值单位为分贝 (dB)。</p>
-<h3 id="奈奎斯特定理"><a href="#奈奎斯特定理" class="headerlink" title="奈奎斯特定理"></a>奈奎斯特定理</h3><p>如果一个任意信号通过了一个带宽为 B 的低通滤波器，那么只要进行每秒 2B 次（确切）采样，就可以完全重构出被过滤的信号。  </p>
+<h3><span id="奈奎斯特定理">奈奎斯特定理</span></h3><p>如果一个任意信号通过了一个带宽为 B 的低通滤波器，那么只要进行每秒 2B 次（确切）采样，就可以完全重构出被过滤的信号。  </p>
 <p>对一个带宽为 B Hz的无噪声信道，如果信号包含了 V 个离散等级，则：<br>$$最大数据速率 &#x3D; 2B \log_2 V\ (bps)$$  </p>
-<h3 id="香农定理"><a href="#香农定理" class="headerlink" title="香农定理"></a>香农定理</h3><p>对于一条带宽为 B Hz，信噪比为 S&#x2F;N 的有噪声信道，其最大数据速率或者容量为：<br>$$最大比特率 &#x3D; B \log_2 (1 + S&#x2F;N)$$  </p>
+<h3><span id="香农定理">香农定理</span></h3><p>对于一条带宽为 B Hz，信噪比为 S&#x2F;N 的有噪声信道，其最大数据速率或者容量为：<br>$$最大比特率 &#x3D; B \log_2 (1 + S&#x2F;N)$$  </p>
 <p>注意：由香农定理求出的最大数据速率应与由奈奎斯特定理求出的相比较，取更小的那个。</p>
-<h2 id="传输介质"><a href="#传输介质" class="headerlink" title="传输介质"></a>传输介质</h2><h3 id="引导性传输介质（有线）"><a href="#引导性传输介质（有线）" class="headerlink" title="引导性传输介质（有线）"></a>引导性传输介质（有线）</h3><h4 id="铜线"><a href="#铜线" class="headerlink" title="铜线"></a>铜线</h4><ul>
+<h2><span id="传输介质">传输介质</span></h2><h3><span id="引导性传输介质有线">引导性传输介质（有线）</span></h3><h4><span id="铜线">铜线</span></h4><ul>
 <li><p><strong>双绞线</strong><br>到第6类为止，所有的双绞线都称为非屏蔽双绞线 (UTP)；7类双绞线有屏蔽层，能够减弱外部干扰和来自附近线缆的串扰。</p>
 </li>
 <li><p><strong>同轴电缆</strong><br>比非屏蔽双绞线具有更好的屏蔽特性和更大的带宽。<br>常用的有：基带同轴电缆 ($50\Omega$)，用于数字传输；宽带同轴电缆 ($75\Omega$)，用于模拟传输和有线电视传输。</p>
@@ -1023,7 +2198,7 @@
 <li><p><strong>电力线</strong></p>
 </li>
 </ul>
-<h4 id="光纤"><a href="#光纤" class="headerlink" title="光纤"></a>光纤</h4><p>由光源，传输介质和探测器构成。  </p>
+<h4><span id="光纤">光纤</span></h4><p>由光源，传输介质和探测器构成。  </p>
 <p>一个光脉冲表示比特1，没有光脉冲表示比特0；传输介质为超薄玻璃纤维；光探测器探测到光时产生一个电脉冲。  </p>
 <p>连接方式：  </p>
 <ol>
@@ -1049,33 +2224,33 @@
 <li>双向通信要求使用两根光纤，或在一根光纤上划分两个频段；</li>
 <li>光纤接口成本远远高于电子接口。</li>
 </ol>
-<h3 id="非引导性介质（无线）"><a href="#非引导性介质（无线）" class="headerlink" title="非引导性介质（无线）"></a>非引导性介质（无线）</h3><h4 id="无线电传输"><a href="#无线电传输" class="headerlink" title="无线电传输"></a>无线电传输</h4><p><strong>路径损耗</strong>：信号能量稀疏地分布在大面积表面，在空中传播时信号能量至少以 $1&#x2F;r^2$ 的速度衰减。  </p>
+<h3><span id="非引导性介质无线">非引导性介质（无线）</span></h3><h4><span id="无线电传输">无线电传输</span></h4><p><strong>路径损耗</strong>：信号能量稀疏地分布在大面积表面，在空中传播时信号能量至少以 $1&#x2F;r^2$ 的速度衰减。  </p>
 <p>低频部分，无线电波能很好地穿透障碍物；高频部分，无线电波倾向于以直线传播，遇到障碍物会反弹，且更容易被雨水和其他障碍物吸收。在所有频率上，无线电波都会受到马达和其他电气设备的干扰。</p>
-<h4 id="微波传输"><a href="#微波传输" class="headerlink" title="微波传输"></a>微波传输</h4><p>微波按直线传播，因此每隔一段距离都需要中继器。</p>
+<h4><span id="微波传输">微波传输</span></h4><p>微波按直线传播，因此每隔一段距离都需要中继器。</p>
 <p><strong>多径衰落</strong>：延迟抵达的微波可能与直接传送的微波不同相，因而信号会相互抵消。</p>
-<h4 id="红外传输"><a href="#红外传输" class="headerlink" title="红外传输"></a>红外传输</h4><p>红外线的传播具有方向性，便宜且易于制造，不能穿过固体物体。</p>
+<h4><span id="红外传输">红外传输</span></h4><p>红外线的传播具有方向性，便宜且易于制造，不能穿过固体物体。</p>
 <p>被广泛用于短程通信。</p>
-<h4 id="光通信"><a href="#光通信" class="headerlink" title="光通信"></a>光通信</h4><p>激光通信：波束窄，需要对准，受天气（风和温度）干扰大。</p>
+<h4><span id="光通信">光通信</span></h4><p>激光通信：波束窄，需要对准，受天气（风和温度）干扰大。</p>
 <p>LED可见光通信：给 LED灯泡装上驱动芯片，控制它每秒数百万次闪烁，亮了表示1，灭了代表0。</p>
-<h4 id="卫星通信"><a href="#卫星通信" class="headerlink" title="卫星通信"></a>卫星通信</h4><p>包括地球同步卫星，中地球轨道卫星，低地球轨道卫星等。</p>
-<h2 id="数字调制与多路复用"><a href="#数字调制与多路复用" class="headerlink" title="数字调制与多路复用"></a>数字调制与多路复用</h2><p><strong>数字调制</strong>：把要发送的数字信号转换到适合于传输的通带模拟信号的过程。<br><strong>多路复用</strong>：信道被多个信道共享。</p>
+<h4><span id="卫星通信">卫星通信</span></h4><p>包括地球同步卫星，中地球轨道卫星，低地球轨道卫星等。</p>
+<h2><span id="数字调制与多路复用">数字调制与多路复用</span></h2><p><strong>数字调制</strong>：把要发送的数字信号转换到适合于传输的通带模拟信号的过程。<br><strong>多路复用</strong>：信道被多个信道共享。</p>
 <p><strong>波特率</strong>：符号率，指信号改变的速率。<br>比特率是波特率与每个符号的比特数的乘积。</p>
 <p><strong>平衡信号</strong>：在很短的时间内正电压与负电压一样多的信号。<br><strong>双极编码</strong>：用于构造平衡码。使用两个电压级别来表示逻辑 1 (+1V 和 -1V)，而用 0V 表示逻辑 0；发送 1 时，发射器在 +1V 和 -1V 之间选择，使它们总是达到信号平衡。</p>
-<h3 id="基带传输"><a href="#基带传输" class="headerlink" title="基带传输"></a>基带传输</h3><p>把数据比特直接转换成信号。信号的传输占有传输介质上从零到最大值之间的全部频率。常用于有线介质。</p>
-<h4 id="不归零-NRZ"><a href="#不归零-NRZ" class="headerlink" title="不归零 (NRZ)"></a>不归零 (NRZ)</h4><p>用正电压表示 1，负电压表示 0。</p>
-<h4 id="不归零逆转-NRZI"><a href="#不归零逆转-NRZI" class="headerlink" title="不归零逆转 (NRZI)"></a>不归零逆转 (NRZI)</h4><p>1 定义为信号有跳变，反之 0 定义为信号无转变。  </p>
-<h4 id="曼彻斯特"><a href="#曼彻斯特" class="headerlink" title="曼彻斯特"></a>曼彻斯特</h4><p>时钟信号与比特流的异或。即 1 定义为由高电平跳变到低电平，反之 0 定义为由低电平跳变为高电平。</p>
-<h3 id="通带传输"><a href="#通带传输" class="headerlink" title="通带传输"></a>通带传输</h3><p>通过调节载波信号的幅值，相位或频率来运载比特。信号占据了以载波信号频率为中心的一段频带。常用于无线和光纤信道。</p>
-<h4 id="幅移键控-ASK"><a href="#幅移键控-ASK" class="headerlink" title="幅移键控 (ASK)"></a>幅移键控 (ASK)</h4><p>通过两个不同的振幅分别表示 0 和 1。两个或更多的幅值等级可用来表示更多符号。</p>
-<h4 id="频移键控-FSK"><a href="#频移键控-FSK" class="headerlink" title="频移键控 (FSK)"></a>频移键控 (FSK)</h4><p>和幅移键控类似，将改变振幅变为改变频率。</p>
-<h4 id="相移键控-PSK"><a href="#相移键控-PSK" class="headerlink" title="相移键控 (PSK)"></a>相移键控 (PSK)</h4><p>**二进制相移键控 (BPSK)**：在每个符号的周期中，系统把载波波形偏移 0° 或 180°。<br>**正交相移键控 (QPSK)**：使用四个偏移，如 45°&#x2F;135°&#x2F;225°&#x2F;315°。  </p>
+<h3><span id="基带传输">基带传输</span></h3><p>把数据比特直接转换成信号。信号的传输占有传输介质上从零到最大值之间的全部频率。常用于有线介质。</p>
+<h4><span id="不归零-nrz">不归零 (NRZ)</span></h4><p>用正电压表示 1，负电压表示 0。</p>
+<h4><span id="不归零逆转-nrzi">不归零逆转 (NRZI)</span></h4><p>1 定义为信号有跳变，反之 0 定义为信号无转变。  </p>
+<h4><span id="曼彻斯特">曼彻斯特</span></h4><p>时钟信号与比特流的异或。即 1 定义为由高电平跳变到低电平，反之 0 定义为由低电平跳变为高电平。</p>
+<h3><span id="通带传输">通带传输</span></h3><p>通过调节载波信号的幅值，相位或频率来运载比特。信号占据了以载波信号频率为中心的一段频带。常用于无线和光纤信道。</p>
+<h4><span id="幅移键控-ask">幅移键控 (ASK)</span></h4><p>通过两个不同的振幅分别表示 0 和 1。两个或更多的幅值等级可用来表示更多符号。</p>
+<h4><span id="频移键控-fsk">频移键控 (FSK)</span></h4><p>和幅移键控类似，将改变振幅变为改变频率。</p>
+<h4><span id="相移键控-psk">相移键控 (PSK)</span></h4><p>**二进制相移键控 (BPSK)**：在每个符号的周期中，系统把载波波形偏移 0° 或 180°。<br>**正交相移键控 (QPSK)**：使用四个偏移，如 45°&#x2F;135°&#x2F;225°&#x2F;315°。  </p>
 <p>一次只能调节频率和相位中的一个。通常情况下，振幅和相位可以结合起来一起调制。</p>
 <p><strong>星座图</strong>：一个点的相位由以它为起点到原点的线与 x 正轴之间的角度表示，振幅则是该点到原点的距离。  </p>
-<h3 id="频分复用-FDM"><a href="#频分复用-FDM" class="headerlink" title="频分复用 (FDM)"></a>频分复用 (FDM)</h3><p>给不同的逻辑信道分配不同的频率，每个频率工作在频谱中的一部分，并且相邻信道之间的频谱间隔足够大，以便防止干扰。</p>
+<h3><span id="频分复用-fdm">频分复用 (FDM)</span></h3><p>给不同的逻辑信道分配不同的频率，每个频率工作在频谱中的一部分，并且相邻信道之间的频谱间隔足够大，以便防止干扰。</p>
 <p><strong>正交频分多路复用 (OFDM)</strong> ：信道带宽被分成许多独立发送数据的子载波；子载波在频域中被包裹在一起，从每个子载波中发出的信号能扩散到相邻子载波；但每个子载波的频率响应被设计成在相邻子载波的中心为零。</p>
-<h3 id="时分复用-TDM"><a href="#时分复用-TDM" class="headerlink" title="时分复用 (TDM)"></a>时分复用 (TDM)</h3><p>每个用户周期性地获得整个带宽非常短的一个时间。每个输入流的比特从一个固定的时间槽中取出并输出到混合流。该混合流以各个流速率的总和速度发送。</p>
-<h3 id="波分复用-WDM"><a href="#波分复用-WDM" class="headerlink" title="波分复用 (WDM)"></a>波分复用 (WDM)</h3><p>在极高频率上的频分多路复用。多条光纤汇合到一个光纤组合器中，每条光纤的能量位于不同的波长处。</p>
-<h3 id="码分复用-CDM"><a href="#码分复用-CDM" class="headerlink" title="码分复用 (CDM)"></a>码分复用 (CDM)</h3><p>是扩展频谱通信的一种形式，把一个窄带信号扩展到一个很宽的频带上。<br>允许来自不同用户的多个信号共享相同的信号，称为**码分多址 (CDMA)**。</p>
+<h3><span id="时分复用-tdm">时分复用 (TDM)</span></h3><p>每个用户周期性地获得整个带宽非常短的一个时间。每个输入流的比特从一个固定的时间槽中取出并输出到混合流。该混合流以各个流速率的总和速度发送。</p>
+<h3><span id="波分复用-wdm">波分复用 (WDM)</span></h3><p>在极高频率上的频分多路复用。多条光纤汇合到一个光纤组合器中，每条光纤的能量位于不同的波长处。</p>
+<h3><span id="码分复用-cdm">码分复用 (CDM)</span></h3><p>是扩展频谱通信的一种形式，把一个窄带信号扩展到一个很宽的频带上。<br>允许来自不同用户的多个信号共享相同的信号，称为**码分多址 (CDMA)**。</p>
 <ol>
 <li><p>每个比特时间被细分为 m 个更短的时间间隔，每个时间间隔称为<strong>码片</strong>，每个码片可以是 +1 或 -1。每个站被分配得到唯一的 m 位码，称为<strong>码片序列</strong>。  </p>
 </li>
@@ -1088,11 +2263,11 @@
 <li><p>接收方计算收到的码片序列与该站的码片序列的归一化乘积（码片序列的每一位相乘后再相加，结果除以 m），所得结果为 1 说明发送逻辑 1，结果为 -1 说明发送逻辑 0，结果为 0 说明未发送信息。</p>
 </li>
 </ol>
-<h2 id="交换"><a href="#交换" class="headerlink" title="交换"></a>交换</h2><h3 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h3><p>采用 TDM 或 FDM。</p>
+<h2><span id="交换">交换</span></h2><h3><span id="电路交换">电路交换</span></h3><p>采用 TDM 或 FDM。</p>
 <p>在通信对端之间建立物理连接（预留物理信道），该通路在通信期间一直维持且为该通信双方专用。</p>
 <p>优点：传输可靠，迅速，不丢失且保序。</p>
-<h3 id="存储交换"><a href="#存储交换" class="headerlink" title="存储交换"></a>存储交换</h3><h4 id="报文交换"><a href="#报文交换" class="headerlink" title="报文交换"></a>报文交换</h4><p>数据传输以报文的整体为单位，即端点系统一次性发送数据块，长度不限且可变。</p>
-<h4 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h4><p>将报文划分成若干个可以存放在内存中的分组来进行传送。  </p>
+<h3><span id="存储交换">存储交换</span></h3><h4><span id="报文交换">报文交换</span></h4><p>数据传输以报文的整体为单位，即端点系统一次性发送数据块，长度不限且可变。</p>
+<h4><span id="分组交换">分组交换</span></h4><p>将报文划分成若干个可以存放在内存中的分组来进行传送。  </p>
 <p><strong>数据报交换</strong>：每个分组头中都包含目的节点的地址。<br><strong>虚电路交换</strong>：在源节点和目的节点间建立一条逻辑通路。  </p>
 <p>与电路交换比较：  </p>
 <ol>
@@ -1175,12 +2350,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/">计算机网络（一）</a>
+      <a class="article-title" href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/">计算机网络（一）</a>
     </h1>
   
 
         
-        <a href="/2023/12/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
+        <a href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
   	<time datetime="2023-12-12T08:15:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-12</time>
 </a>
         
@@ -1188,8 +2363,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第1章-引言"><a href="#第1章-引言" class="headerlink" title="第1章 引言"></a>第1章 引言</h1><ul>
-<li><a href="#%E7%AC%AC1%E7%AB%A0-%E5%BC%95%E8%A8%80">第1章 引言</a><ul>
+        <h1><span id="第1章-引言">第1章 引言</span></h1><!-- toc -->
+
+<ul>
 <li><a href="#%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">协议层次结构</a><ul>
 <li><a href="#%E5%A4%9A%E5%B1%82%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B">多层通信过程</a></li>
 </ul>
@@ -1205,28 +2381,28 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h2 id="协议层次结构"><a href="#协议层次结构" class="headerlink" title="协议层次结构"></a>协议层次结构</h2><p>绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。</p>
+<!-- tocstop -->
+
+<h2><span id="协议层次结构">协议层次结构</span></h2><p>绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。</p>
 <p><strong>协议</strong>：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层协议。</p>
 <p><strong>协议栈</strong>：一个特定的系统所使用的一组协议。</p>
 <p><strong>对等体</strong>：不同机器上构成相应层次的实体称为对等体。</p>
 <p><strong>接口</strong>：定义了下层向上层提供哪些原语操作和服务。</p>
 <p><strong>网络体系结构</strong>：层和协议的集合。</p>
-<h3 id="多层通信过程"><a href="#多层通信过程" class="headerlink" title="多层通信过程"></a>多层通信过程</h3><ol>
+<h3><span id="多层通信过程">多层通信过程</span></h3><ol>
 <li>在输出端的机器上，上层向下层传递消息时，下层在消息前加上一个头，用来标识该信息，并把结果传递给再下一层。该头包含一些控制信息。  </li>
 <li>在限制消息大小的层（几乎所有的第3层协议），把入境消息分割成较小的单元，即数据包或包，并在每个数据包前面加上该层的头。每个数据包单独传输。  </li>
 <li>第2层给每个信息加上一个头和一个尾，然后将结果传送给第1层进行物理传输。  </li>
 <li>在接收端的机器上，消息自底向上逐层传递，在传递过程中各个头被逐层剥离。没有一个第n层以下的头会被传递到第n层。</li>
 </ol>
-<h2 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h2><h3 id="面向连接的服务"><a href="#面向连接的服务" class="headerlink" title="面向连接的服务"></a>面向连接的服务</h3><p>首先在信源和信宿之间建立连接，然后在此连接上通信，最后拆除连接。</p>
+<h2><span id="服务">服务</span></h2><h3><span id="面向连接的服务">面向连接的服务</span></h3><p>首先在信源和信宿之间建立连接，然后在此连接上通信，最后拆除连接。</p>
 <p>特点：占用一定资源，可靠，按序传送。</p>
 <p>可靠服务：接收方向发送方确认收到的每个报文。确认过程本身要引入额外的开销和延迟。</p>
 <p>可靠的面向连接服务可分为可靠的报文流和可靠的字节流。前者保持报文的边界，而后者没有。此外还有不可靠的连接，及不进行确认。  </p>
-<h3 id="无连接服务"><a href="#无连接服务" class="headerlink" title="无连接服务"></a>无连接服务</h3><p>传送数据前不需要建立连接，即有即送。每个报文都携带了完整的目标地址。</p>
+<h3><span id="无连接服务">无连接服务</span></h3><p>传送数据前不需要建立连接，即有即送。每个报文都携带了完整的目标地址。</p>
 <p>特点：每个数据包独自寻路（重复劳动），同一数据流的包可能经过不同的路径到达目的地，到达的顺序也可能颠倒。</p>
 <p>可分为不可靠的无连接服务（数据报服务），有确认的数据报服务，请求-应答服务（发送方传输一个包含了某个请求的数据报，接受方以一个包含了请求结果的应答数据报作为反馈）。</p>
-<h2 id="参考模型"><a href="#参考模型" class="headerlink" title="参考模型"></a>参考模型</h2><h3 id="OSI参考模型"><a href="#OSI参考模型" class="headerlink" title="OSI参考模型"></a>OSI参考模型</h3><table>
+<h2><span id="参考模型">参考模型</span></h2><h3><span id="osi参考模型">OSI参考模型</span></h3><table>
 <thead>
 <tr>
 <th>名字</th>
@@ -1262,7 +2438,7 @@
 <td>处理应用进程之间所发送和接收的数据中包含的信息内容，包含各种协议。</td>
 </tr>
 </tbody></table>
-<h3 id="TCP-IP参考模型"><a href="#TCP-IP参考模型" class="headerlink" title="TCP&#x2F;IP参考模型"></a>TCP&#x2F;IP参考模型</h3><table>
+<h3><span id="tcpx2fip参考模型">TCP&#x2F;IP参考模型</span></h3><table>
 <thead>
 <tr>
 <th>名字</th>
@@ -1346,12 +2522,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/29/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89/">电子系统设计（五）</a>
+      <a class="article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89/">电子系统设计（五）</a>
     </h1>
   
 
         
-        <a href="/2023/11/29/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89/" class="archive-article-date">
+        <a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89/" class="archive-article-date">
   	<time datetime="2023-11-29T02:39:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-29</time>
 </a>
         
@@ -1379,7 +2555,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="Verilog-语言"><a href="#Verilog-语言" class="headerlink" title="Verilog 语言"></a>Verilog 语言</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<h1><span id="verilog-语言">Verilog 语言</span></h1><h2><span id="定义">定义</span></h2><ul>
 <li><p>赋值语句</p>
 <ul>
 <li><p>过程赋值语句：always, initial<br>敏感信号列表中的任意一个信号有变化，则触发 always 语句执行一遍。<br>initial 一般用在仿真程序中，不可综合。</p>
@@ -1450,27 +2626,27 @@
 </ul>
 </li>
 </ul>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="8-3-编码器"><a href="#8-3-编码器" class="headerlink" title="8-3 编码器"></a>8-3 编码器</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Coder83 (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] D,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] Q</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(D) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">case</span> (D)</span><br><span class="line">    <span class="number">8&#x27;b00000001</span>: Q &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="number">8&#x27;b00000010</span>: Q &lt;= <span class="number">3&#x27;b001</span>;</span><br><span class="line">    <span class="number">8&#x27;b00000100</span>: Q &lt;= <span class="number">3&#x27;b010</span>;</span><br><span class="line">    <span class="number">8&#x27;b00001000</span>: Q &lt;= <span class="number">3&#x27;b011</span>;</span><br><span class="line">    <span class="number">8&#x27;b00010000</span>: Q &lt;= <span class="number">3&#x27;b100</span>;</span><br><span class="line">    <span class="number">8&#x27;b00100000</span>: Q &lt;= <span class="number">3&#x27;b101</span>;</span><br><span class="line">    <span class="number">8&#x27;b01000000</span>: Q &lt;= <span class="number">3&#x27;b110</span>;</span><br><span class="line">    <span class="number">8&#x27;b10000000</span>: Q &lt;= <span class="number">3&#x27;b111</span>;</span><br><span class="line">    <span class="keyword">default</span>: Q &lt;= <span class="number">3&#x27;bxxx</span>;</span><br><span class="line">    <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h2><span id="代码">代码</span></h2><h3><span id="8-3-编码器">8-3 编码器</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Coder83 (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] D,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] Q</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(D) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">case</span> (D)</span><br><span class="line">    <span class="number">8&#x27;b00000001</span>: Q &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">    <span class="number">8&#x27;b00000010</span>: Q &lt;= <span class="number">3&#x27;b001</span>;</span><br><span class="line">    <span class="number">8&#x27;b00000100</span>: Q &lt;= <span class="number">3&#x27;b010</span>;</span><br><span class="line">    <span class="number">8&#x27;b00001000</span>: Q &lt;= <span class="number">3&#x27;b011</span>;</span><br><span class="line">    <span class="number">8&#x27;b00010000</span>: Q &lt;= <span class="number">3&#x27;b100</span>;</span><br><span class="line">    <span class="number">8&#x27;b00100000</span>: Q &lt;= <span class="number">3&#x27;b101</span>;</span><br><span class="line">    <span class="number">8&#x27;b01000000</span>: Q &lt;= <span class="number">3&#x27;b110</span>;</span><br><span class="line">    <span class="number">8&#x27;b10000000</span>: Q &lt;= <span class="number">3&#x27;b111</span>;</span><br><span class="line">    <span class="keyword">default</span>: Q &lt;= <span class="number">3&#x27;bxxx</span>;</span><br><span class="line">    <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="3-8-译码器"><a href="#3-8-译码器" class="headerlink" title="3-8 译码器"></a>3-8 译码器</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Decoder38 (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] Din,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] Dout</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">case</span> (Din)</span><br><span class="line">    <span class="number">3&#x27;b000</span>: Dout &lt;= <span class="number">8&#x27;b00000001</span>;</span><br><span class="line">    <span class="number">3&#x27;b001</span>: Dout &lt;= <span class="number">8&#x27;b00000010</span>;</span><br><span class="line">    <span class="number">3&#x27;b010</span>: Dout &lt;= <span class="number">8&#x27;b00000100</span>;</span><br><span class="line">    <span class="number">3&#x27;b011</span>: Dout &lt;= <span class="number">8&#x27;b00001000</span>;</span><br><span class="line">    <span class="number">3&#x27;b100</span>: Dout &lt;= <span class="number">8&#x27;b00010000</span>;</span><br><span class="line">    <span class="number">3&#x27;b101</span>: Dout &lt;= <span class="number">8&#x27;b00100000</span>;</span><br><span class="line">    <span class="number">3&#x27;b110</span>: Dout &lt;= <span class="number">8&#x27;b01000000</span>;</span><br><span class="line">    <span class="number">3&#x27;b111</span>: Dout &lt;= <span class="number">8&#x27;b10000000</span>;</span><br><span class="line">    <span class="keyword">default</span>: Dout &lt;= <span class="number">8&#x27;b00000000</span>;</span><br><span class="line">    <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="3-8-译码器">3-8 译码器</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Decoder38 (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] Din,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] Dout</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">case</span> (Din)</span><br><span class="line">    <span class="number">3&#x27;b000</span>: Dout &lt;= <span class="number">8&#x27;b00000001</span>;</span><br><span class="line">    <span class="number">3&#x27;b001</span>: Dout &lt;= <span class="number">8&#x27;b00000010</span>;</span><br><span class="line">    <span class="number">3&#x27;b010</span>: Dout &lt;= <span class="number">8&#x27;b00000100</span>;</span><br><span class="line">    <span class="number">3&#x27;b011</span>: Dout &lt;= <span class="number">8&#x27;b00001000</span>;</span><br><span class="line">    <span class="number">3&#x27;b100</span>: Dout &lt;= <span class="number">8&#x27;b00010000</span>;</span><br><span class="line">    <span class="number">3&#x27;b101</span>: Dout &lt;= <span class="number">8&#x27;b00100000</span>;</span><br><span class="line">    <span class="number">3&#x27;b110</span>: Dout &lt;= <span class="number">8&#x27;b01000000</span>;</span><br><span class="line">    <span class="number">3&#x27;b111</span>: Dout &lt;= <span class="number">8&#x27;b10000000</span>;</span><br><span class="line">    <span class="keyword">default</span>: Dout &lt;= <span class="number">8&#x27;b00000000</span>;</span><br><span class="line">    <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="七段数码管"><a href="#七段数码管" class="headerlink" title="七段数码管"></a>七段数码管</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Seg7Led (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] data,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> A, B, C, D, E, F, G </span><br><span class="line">);</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">6</span>:<span class="number">0</span>] ATOG;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(data) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">case</span> (data)</span><br><span class="line">        <span class="number">4&#x27;b0000</span>: ATOG = <span class="number">7&#x27;b0000001</span>;</span><br><span class="line">        <span class="number">4&#x27;b0001</span>: ATOG = <span class="number">7&#x27;b1001111</span>;</span><br><span class="line">        <span class="number">4&#x27;b0010</span>: ATOG = <span class="number">7&#x27;b0010010</span>;</span><br><span class="line">        <span class="number">4&#x27;b0011</span>: ATOG = <span class="number">7&#x27;b0000110</span>;</span><br><span class="line">        <span class="number">4&#x27;b0100</span>: ATOG = <span class="number">7&#x27;b1001100</span>;</span><br><span class="line">        <span class="number">4&#x27;b0101</span>: ATOG = <span class="number">7&#x27;b0100100</span>;</span><br><span class="line">        <span class="number">4&#x27;b0110</span>: ATOG = <span class="number">7&#x27;b0100000</span>;</span><br><span class="line">        <span class="number">4&#x27;b0111</span>: ATOG = <span class="number">7&#x27;b0001111</span>;</span><br><span class="line">        <span class="number">4&#x27;b1000</span>: ATOG = <span class="number">7&#x27;b0000000</span>;</span><br><span class="line">        <span class="number">4&#x27;b1001</span>: ATOG = <span class="number">7&#x27;b0000100</span>;</span><br><span class="line">        <span class="number">4&#x27;b1010</span>: ATOG = <span class="number">7&#x27;b0001000</span>;</span><br><span class="line">        <span class="number">4&#x27;b1011</span>: ATOG = <span class="number">7&#x27;b1100000</span>;</span><br><span class="line">        <span class="number">4&#x27;b1100</span>: ATOG = <span class="number">7&#x27;b0110001</span>;</span><br><span class="line">        <span class="number">4&#x27;b1101</span>: ATOG = <span class="number">7&#x27;b1000010</span>;</span><br><span class="line">        <span class="number">4&#x27;b1110</span>: ATOG = <span class="number">7&#x27;b0110000</span>;</span><br><span class="line">        <span class="number">4&#x27;b1111</span>: ATOG = <span class="number">7&#x27;b0111000</span>; </span><br><span class="line">        <span class="keyword">default</span>: ATOG = <span class="number">7&#x27;b1111111</span>;</span><br><span class="line">    <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//ATOG的7位对应七段数码管，为0的位对应的数码管亮</span></span><br><span class="line"><span class="keyword">assign</span> A = ATOG[<span class="number">6</span>];</span><br><span class="line"><span class="keyword">assign</span> B = ATOG[<span class="number">5</span>];</span><br><span class="line"><span class="keyword">assign</span> C = ATOG[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">assign</span> D = ATOG[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">assign</span> E = ATOG[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">assign</span> F = ATOG[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">assign</span> G = ATOG[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="七段数码管">七段数码管</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Seg7Led (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] data,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> A, B, C, D, E, F, G </span><br><span class="line">);</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">6</span>:<span class="number">0</span>] ATOG;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(data) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">case</span> (data)</span><br><span class="line">        <span class="number">4&#x27;b0000</span>: ATOG = <span class="number">7&#x27;b0000001</span>;</span><br><span class="line">        <span class="number">4&#x27;b0001</span>: ATOG = <span class="number">7&#x27;b1001111</span>;</span><br><span class="line">        <span class="number">4&#x27;b0010</span>: ATOG = <span class="number">7&#x27;b0010010</span>;</span><br><span class="line">        <span class="number">4&#x27;b0011</span>: ATOG = <span class="number">7&#x27;b0000110</span>;</span><br><span class="line">        <span class="number">4&#x27;b0100</span>: ATOG = <span class="number">7&#x27;b1001100</span>;</span><br><span class="line">        <span class="number">4&#x27;b0101</span>: ATOG = <span class="number">7&#x27;b0100100</span>;</span><br><span class="line">        <span class="number">4&#x27;b0110</span>: ATOG = <span class="number">7&#x27;b0100000</span>;</span><br><span class="line">        <span class="number">4&#x27;b0111</span>: ATOG = <span class="number">7&#x27;b0001111</span>;</span><br><span class="line">        <span class="number">4&#x27;b1000</span>: ATOG = <span class="number">7&#x27;b0000000</span>;</span><br><span class="line">        <span class="number">4&#x27;b1001</span>: ATOG = <span class="number">7&#x27;b0000100</span>;</span><br><span class="line">        <span class="number">4&#x27;b1010</span>: ATOG = <span class="number">7&#x27;b0001000</span>;</span><br><span class="line">        <span class="number">4&#x27;b1011</span>: ATOG = <span class="number">7&#x27;b1100000</span>;</span><br><span class="line">        <span class="number">4&#x27;b1100</span>: ATOG = <span class="number">7&#x27;b0110001</span>;</span><br><span class="line">        <span class="number">4&#x27;b1101</span>: ATOG = <span class="number">7&#x27;b1000010</span>;</span><br><span class="line">        <span class="number">4&#x27;b1110</span>: ATOG = <span class="number">7&#x27;b0110000</span>;</span><br><span class="line">        <span class="number">4&#x27;b1111</span>: ATOG = <span class="number">7&#x27;b0111000</span>; </span><br><span class="line">        <span class="keyword">default</span>: ATOG = <span class="number">7&#x27;b1111111</span>;</span><br><span class="line">    <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//ATOG的7位对应七段数码管，为0的位对应的数码管亮</span></span><br><span class="line"><span class="keyword">assign</span> A = ATOG[<span class="number">6</span>];</span><br><span class="line"><span class="keyword">assign</span> B = ATOG[<span class="number">5</span>];</span><br><span class="line"><span class="keyword">assign</span> C = ATOG[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">assign</span> D = ATOG[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">assign</span> E = ATOG[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">assign</span> F = ATOG[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">assign</span> G = ATOG[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="8选1选择器"><a href="#8选1选择器" class="headerlink" title="8选1选择器"></a>8选1选择器</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> choose1_8 (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] cs_led,</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] q0, q1, q2, q3, q4, q5, q6, q7,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] out</span><br><span class="line">);</span><br><span class="line"><span class="keyword">always</span> @(cs_led) <span class="keyword">begin</span></span><br><span class="line">    out = <span class="number">4&#x27;b0000</span>;</span><br><span class="line">    <span class="keyword">case</span> (cs_led)</span><br><span class="line">        <span class="number">3&#x27;b000</span>: out = q0;</span><br><span class="line">        <span class="number">3&#x27;b001</span>: out = q1; </span><br><span class="line">        <span class="number">3&#x27;b010</span>: out = q2;</span><br><span class="line">        <span class="number">3&#x27;b011</span>: out = q3;</span><br><span class="line">        <span class="number">3&#x27;b100</span>: out = q4;</span><br><span class="line">        <span class="number">3&#x27;b101</span>: out = q5;</span><br><span class="line">        <span class="number">3&#x27;b110</span>: out = q6;</span><br><span class="line">        <span class="number">3&#x27;b111</span>: out = q7;</span><br><span class="line">        <span class="keyword">default</span>: out = <span class="number">4&#x27;b0000</span>;</span><br><span class="line">    <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="8选1选择器">8选1选择器</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> choose1_8 (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] cs_led,</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] q0, q1, q2, q3, q4, q5, q6, q7,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] out</span><br><span class="line">);</span><br><span class="line"><span class="keyword">always</span> @(cs_led) <span class="keyword">begin</span></span><br><span class="line">    out = <span class="number">4&#x27;b0000</span>;</span><br><span class="line">    <span class="keyword">case</span> (cs_led)</span><br><span class="line">        <span class="number">3&#x27;b000</span>: out = q0;</span><br><span class="line">        <span class="number">3&#x27;b001</span>: out = q1; </span><br><span class="line">        <span class="number">3&#x27;b010</span>: out = q2;</span><br><span class="line">        <span class="number">3&#x27;b011</span>: out = q3;</span><br><span class="line">        <span class="number">3&#x27;b100</span>: out = q4;</span><br><span class="line">        <span class="number">3&#x27;b101</span>: out = q5;</span><br><span class="line">        <span class="number">3&#x27;b110</span>: out = q6;</span><br><span class="line">        <span class="number">3&#x27;b111</span>: out = q7;</span><br><span class="line">        <span class="keyword">default</span>: out = <span class="number">4&#x27;b0000</span>;</span><br><span class="line">    <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="比较器"><a href="#比较器" class="headerlink" title="比较器"></a>比较器</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Comp (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] a, b,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] q</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(a, b) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (a == b) <span class="keyword">begin</span></span><br><span class="line">        q &lt;= <span class="number">3&#x27;b010</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (a &gt; b) <span class="keyword">begin</span></span><br><span class="line">        q &lt;= <span class="number">3&#x27;b100</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        q &lt;= <span class="number">3&#x27;b001</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="比较器">比较器</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Comp (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] a, b,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] q</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(a, b) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (a == b) <span class="keyword">begin</span></span><br><span class="line">        q &lt;= <span class="number">3&#x27;b010</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (a &gt; b) <span class="keyword">begin</span></span><br><span class="line">        q &lt;= <span class="number">3&#x27;b100</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        q &lt;= <span class="number">3&#x27;b001</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="两位全加器"><a href="#两位全加器" class="headerlink" title="两位全加器"></a>两位全加器</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> FullAdd2 (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] a, b,</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> cin,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] q,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> cout</span><br><span class="line">);</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] sum;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> sum = a + b + cin;</span><br><span class="line"><span class="keyword">assign</span> q = sum[<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">assign</span> cout = sum[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="两位全加器">两位全加器</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> FullAdd2 (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] a, b,</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> cin,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] q,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> cout</span><br><span class="line">);</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">2</span>:<span class="number">0</span>] sum;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> sum = a + b + cin;</span><br><span class="line"><span class="keyword">assign</span> q = sum[<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">assign</span> cout = sum[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="两位乘法器"><a href="#两位乘法器" class="headerlink" title="两位乘法器"></a>两位乘法器</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> MUL2_2 (</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] M, N,</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>] R</span><br><span class="line">);</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] T3;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] T1, T2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(M, N) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (N[<span class="number">0</span>]) <span class="keyword">begin</span></span><br><span class="line">        T1 = M;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        T1 = <span class="number">2&#x27;b00</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (N[<span class="number">1</span>]) <span class="keyword">begin</span></span><br><span class="line">        T2 = M;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        T2 = <span class="number">2&#x27;b00</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> R[<span class="number">0</span>] = T1[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">assign</span> T3 = &#123;<span class="number">0</span>, T1[<span class="number">1</span>]&#125;;</span><br><span class="line"></span><br><span class="line">FullAdd2 U1(T2, T3, <span class="number">1&#x27;b0</span>, R[<span class="number">2</span>:<span class="number">1</span>], R[<span class="number">3</span>]);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="两位乘法器">两位乘法器</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> MUL2_2 (</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] M, N,</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">3</span>:<span class="number">0</span>] R</span><br><span class="line">);</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] T3;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] T1, T2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(M, N) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (N[<span class="number">0</span>]) <span class="keyword">begin</span></span><br><span class="line">        T1 = M;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        T1 = <span class="number">2&#x27;b00</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (N[<span class="number">1</span>]) <span class="keyword">begin</span></span><br><span class="line">        T2 = M;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        T2 = <span class="number">2&#x27;b00</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> R[<span class="number">0</span>] = T1[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">assign</span> T3 = &#123;<span class="number">0</span>, T1[<span class="number">1</span>]&#125;;</span><br><span class="line"></span><br><span class="line">FullAdd2 U1(T2, T3, <span class="number">1&#x27;b0</span>, R[<span class="number">2</span>:<span class="number">1</span>], R[<span class="number">3</span>]);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="四位寄存器"><a href="#四位寄存器" class="headerlink" title="四位寄存器"></a>四位寄存器</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> bit_Latch_4 (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] D,</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> en, cs,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] Q</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> Q[<span class="number">3</span>:<span class="number">0</span>]=( cs &amp;&amp; en )?D[<span class="number">3</span>:<span class="number">0</span>]:Q[<span class="number">3</span>:<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="四位寄存器">四位寄存器</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> bit_Latch_4 (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] D,</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> en, cs,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">3</span>:<span class="number">0</span>] Q</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> Q[<span class="number">3</span>:<span class="number">0</span>]=( cs &amp;&amp; en )?D[<span class="number">3</span>:<span class="number">0</span>]:Q[<span class="number">3</span>:<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> counter_8 (</span><br><span class="line">    clk, rstn, Q</span><br><span class="line">);</span><br><span class="line">    <span class="keyword">input</span>  clk, rstn;</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">2</span> : <span class="number">0</span>] Q;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span> : <span class="number">0</span>] Q;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rstn) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span> (!rstn) <span class="keyword">begin</span></span><br><span class="line">            Q &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            Q &lt;= Q + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="计数器">计数器</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> counter_8 (</span><br><span class="line">    clk, rstn, Q</span><br><span class="line">);</span><br><span class="line">    <span class="keyword">input</span>  clk, rstn;</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">2</span> : <span class="number">0</span>] Q;</span><br><span class="line">    <span class="keyword">reg</span> [<span class="number">2</span> : <span class="number">0</span>] Q;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rstn) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span> (!rstn) <span class="keyword">begin</span></span><br><span class="line">            Q &lt;= <span class="number">3&#x27;b000</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            Q &lt;= Q + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="分频器"><a href="#分频器" class="headerlink" title="分频器"></a>分频器</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Div_F (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> clk0,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> clk</span><br><span class="line">);</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] d;</span><br><span class="line"></span><br><span class="line"><span class="keyword">initial</span> clk = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">initial</span> d = <span class="number">4&#x27;b0000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk0) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (d == <span class="number">4&#x27;b1111</span>) <span class="keyword">begin</span></span><br><span class="line">        d &lt;= <span class="number">4&#x27;b0000</span>;</span><br><span class="line">        clk = ~clk;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        d &lt;= d + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="分频器">分频器</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Div_F (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> clk0,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> clk</span><br><span class="line">);</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] d;</span><br><span class="line"></span><br><span class="line"><span class="keyword">initial</span> clk = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">initial</span> d = <span class="number">4&#x27;b0000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk0) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (d == <span class="number">4&#x27;b1111</span>) <span class="keyword">begin</span></span><br><span class="line">        d &lt;= <span class="number">4&#x27;b0000</span>;</span><br><span class="line">        clk = ~clk;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        d &lt;= d + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="有限状态机"><a href="#有限状态机" class="headerlink" title="有限状态机"></a>有限状态机</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> seq_create_y (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> clk, rstn,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> Q</span><br><span class="line">);</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] st;</span><br><span class="line"><span class="keyword">parameter</span> S0=<span class="number">0</span>, S1=<span class="number">1</span>, S2=<span class="number">2</span>, S3=<span class="number">3</span>, S4=<span class="number">4</span>, S5=<span class="number">5</span>, S6=<span class="number">6</span>, S7=<span class="number">7</span>, S8=<span class="number">8</span>;</span><br><span class="line"><span class="keyword">parameter</span> Q0=<span class="number">1</span>, Q1=<span class="number">1</span>, Q2=<span class="number">1</span>, Q3=<span class="number">0</span>, Q4=<span class="number">1</span>, Q5=<span class="number">0</span>, Q6=<span class="number">0</span>, Q7=<span class="number">1</span>, Q8=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rstn) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (!rstn) <span class="keyword">begin</span></span><br><span class="line">        st &lt;= S8;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">case</span> (st)</span><br><span class="line">            S8: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S0;</span><br><span class="line">                Q &lt;= Q0;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S0: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S1;</span><br><span class="line">                Q &lt;= Q1;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S1: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S2;</span><br><span class="line">                Q &lt;= Q2;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S2: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S3;</span><br><span class="line">                Q &lt;= Q3;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S3: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S4;</span><br><span class="line">                Q &lt;= Q4;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S4: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S5;</span><br><span class="line">                Q &lt;= Q5;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S5: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S6;</span><br><span class="line">                Q &lt;= Q6;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S6: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S7;</span><br><span class="line">                Q &lt;= Q7;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S7: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S8;</span><br><span class="line">                Q &lt;= Q8;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h3><span id="有限状态机">有限状态机</span></h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> seq_create_y (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">wire</span> clk, rstn,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> Q</span><br><span class="line">);</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">3</span>:<span class="number">0</span>] st;</span><br><span class="line"><span class="keyword">parameter</span> S0=<span class="number">0</span>, S1=<span class="number">1</span>, S2=<span class="number">2</span>, S3=<span class="number">3</span>, S4=<span class="number">4</span>, S5=<span class="number">5</span>, S6=<span class="number">6</span>, S7=<span class="number">7</span>, S8=<span class="number">8</span>;</span><br><span class="line"><span class="keyword">parameter</span> Q0=<span class="number">1</span>, Q1=<span class="number">1</span>, Q2=<span class="number">1</span>, Q3=<span class="number">0</span>, Q4=<span class="number">1</span>, Q5=<span class="number">0</span>, Q6=<span class="number">0</span>, Q7=<span class="number">1</span>, Q8=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rstn) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (!rstn) <span class="keyword">begin</span></span><br><span class="line">        st &lt;= S8;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">case</span> (st)</span><br><span class="line">            S8: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S0;</span><br><span class="line">                Q &lt;= Q0;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S0: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S1;</span><br><span class="line">                Q &lt;= Q1;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S1: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S2;</span><br><span class="line">                Q &lt;= Q2;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S2: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S3;</span><br><span class="line">                Q &lt;= Q3;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S3: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S4;</span><br><span class="line">                Q &lt;= Q4;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S4: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S5;</span><br><span class="line">                Q &lt;= Q5;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S5: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S6;</span><br><span class="line">                Q &lt;= Q6;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S6: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S7;</span><br><span class="line">                Q &lt;= Q7;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            S7: <span class="keyword">begin</span></span><br><span class="line">                st &lt;= S8;</span><br><span class="line">                Q &lt;= Q8;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
       
 
       
@@ -1530,12 +2706,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%9B%9B%EF%BC%89/">电子系统设计（四）</a>
+      <a class="article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%9B%9B%EF%BC%89/">电子系统设计（四）</a>
     </h1>
   
 
         
-        <a href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
+        <a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
   	<time datetime="2023-11-28T14:47:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
 </a>
         
@@ -1543,7 +2719,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第七章-以-FPGA-为核心的系统电路设计"><a href="#第七章-以-FPGA-为核心的系统电路设计" class="headerlink" title="第七章 以 FPGA 为核心的系统电路设计"></a>第七章 以 FPGA 为核心的系统电路设计</h1><ul>
+        <h1><span id="第七章-以-fpga-为核心的系统电路设计">第七章 以 FPGA 为核心的系统电路设计</span></h1><ul>
 <li><p>为什么以微处理器为核心的电子系统被称为智能电子系统？  </p>
 <p> 因为这种系统可以对输入信号&#x2F;环境条件进行感知&#x2F;预测&#x2F;采集&#x2F;处理&#x2F;判断，进而可以对外界条件&#x2F;外界设备做出响应和控制。这种自适应和自学习的能力是智能控制的重要特点。</p>
 </li>
@@ -1874,12 +3050,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/">电子系统设计（三）</a>
+      <a class="article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/">电子系统设计（三）</a>
     </h1>
   
 
         
-        <a href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
+        <a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
   	<time datetime="2023-11-28T14:46:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
 </a>
         
@@ -1887,7 +3063,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第三章-可编程元器件的工作原理"><a href="#第三章-可编程元器件的工作原理" class="headerlink" title="第三章 可编程元器件的工作原理"></a>第三章 可编程元器件的工作原理</h1><ul>
+        <h1><span id="第三章-可编程元器件的工作原理">第三章 可编程元器件的工作原理</span></h1><ul>
 <li><p>什么叫做现场可编程性？  </p>
 <p> 指用户任何时候都可以通过电路板上的下载电缆或硬件编程器来修改FPGA&#x2F;CPLD的配置，以达到修改逻辑功能的目的。也就是说用户可以在实际系统的现场对PLD进行内部结构修改。</p>
 </li>
@@ -2032,12 +3208,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/">电子系统设计（二）</a>
+      <a class="article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/">电子系统设计（二）</a>
     </h1>
   
 
         
-        <a href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
+        <a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
   	<time datetime="2023-11-28T13:51:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
 </a>
         
@@ -2045,7 +3221,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第二章-现代电子系统设计方法"><a href="#第二章-现代电子系统设计方法" class="headerlink" title="第二章 现代电子系统设计方法"></a>第二章 现代电子系统设计方法</h1><ul>
+        <h1><span id="第二章-现代电子系统设计方法">第二章 现代电子系统设计方法</span></h1><ul>
 <li><p>系统级建模和仿真有什么样的重要性？  </p>
 <ul>
 <li>对于复杂的系统，可以提供简单有效的求解方法。</li>
@@ -2261,12 +3437,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/">电子系统设计（一）</a>
+      <a class="article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/">电子系统设计（一）</a>
     </h1>
   
 
         
-        <a href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
+        <a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
   	<time datetime="2023-11-28T10:14:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
 </a>
         
@@ -2274,7 +3450,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第一章-绪论"><a href="#第一章-绪论" class="headerlink" title="第一章 绪论"></a>第一章 绪论</h1><ul>
+        <h1><span id="第一章-绪论">第一章 绪论</span></h1><ul>
 <li><p>说明什么是电子系统。  </p>
 <p>电子系统是指由一组电子元器件或基本的电子单元电路相互连接&#x2F;相互作用而形成的电路整体，它能按特定的控制信号去完成所设想的功能。</p>
 </li>
@@ -2402,7 +3578,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2023 TG
+    		&copy; 2024 TG
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

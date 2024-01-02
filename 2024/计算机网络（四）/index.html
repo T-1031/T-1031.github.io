@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://T-1031.github.io">
-  <title>电子系统设计（一） | TG仓库</title>
+  <title>计算机网络（四） | TG仓库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一章 绪论 说明什么是电子系统。   电子系统是指由一组电子元器件或基本的电子单元电路相互连接&#x2F;相互作用而形成的电路整体，它能按特定的控制信号去完成所设想的功能。  从处理的信号类型来看，电子系统一般包括哪些子系统？    模拟子系统：传感器，放大器，系统电源，驱动电路； 数字字系统：存储器，通信接口，人机接口； 模&#x2F;数混合子系统：ADC，DAC； 处理机子系统：微处理器，引">
+  <meta name="description" content="第4章 MAC 子层   传统 LAN 基本概念 多路访问协议 信道分配 静态信道分配 动态信道分配   ALOHA 协议 纯 ALOHA 分槽 ALOHA   CSMA 协议 1-坚持式 CSMA 非坚持式 CSMA p-坚持式 CSMA CSMA&#x2F;CD CSMA&#x2F;CA 二进制指数后退   冲突避免多路访问 (MACA)   以太网 (IEEE 802.3) 经典以太网 帧格">
 <meta property="og:type" content="article">
-<meta property="og:title" content="电子系统设计（一）">
-<meta property="og:url" content="http://t-1031.github.io/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:title" content="计算机网络（四）">
+<meta property="og:url" content="http://t-1031.github.io/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/index.html">
 <meta property="og:site_name" content="TG仓库">
-<meta property="og:description" content="第一章 绪论 说明什么是电子系统。   电子系统是指由一组电子元器件或基本的电子单元电路相互连接&#x2F;相互作用而形成的电路整体，它能按特定的控制信号去完成所设想的功能。  从处理的信号类型来看，电子系统一般包括哪些子系统？    模拟子系统：传感器，放大器，系统电源，驱动电路； 数字字系统：存储器，通信接口，人机接口； 模&#x2F;数混合子系统：ADC，DAC； 处理机子系统：微处理器，引">
+<meta property="og:description" content="第4章 MAC 子层   传统 LAN 基本概念 多路访问协议 信道分配 静态信道分配 动态信道分配   ALOHA 协议 纯 ALOHA 分槽 ALOHA   CSMA 协议 1-坚持式 CSMA 非坚持式 CSMA p-坚持式 CSMA CSMA&#x2F;CD CSMA&#x2F;CA 二进制指数后退   冲突避免多路访问 (MACA)   以太网 (IEEE 802.3) 经典以太网 帧格">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-28T10:14:40.000Z">
-<meta property="article:modified_time" content="2023-11-30T11:08:13.497Z">
+<meta property="article:published_time" content="2024-01-02T14:06:25.000Z">
+<meta property="article:modified_time" content="2024-01-02T14:07:05.808Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -144,91 +144,421 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-电子系统设计（一）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-计算机网络（四）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      电子系统设计（一）
+      计算机网络（四）
     </h1>
   
 
         
-        <a href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-11-28T10:14:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
+        <a href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2024-01-02T14:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第一章-绪论"><a href="#第一章-绪论" class="headerlink" title="第一章 绪论"></a>第一章 绪论</h1><ul>
-<li><p>说明什么是电子系统。  </p>
-<p>电子系统是指由一组电子元器件或基本的电子单元电路相互连接&#x2F;相互作用而形成的电路整体，它能按特定的控制信号去完成所设想的功能。</p>
-</li>
-<li><p>从处理的信号类型来看，电子系统一般包括哪些子系统？  </p>
+        <h1><span id="第4章-mac-子层">第4章 MAC 子层</span></h1><!-- toc -->
+
 <ul>
-<li>模拟子系统：传感器，放大器，系统电源，驱动电路；</li>
-<li>数字字系统：存储器，通信接口，人机接口；</li>
-<li>模&#x2F;数混合子系统：ADC，DAC；</li>
-<li>处理机子系统：微处理器，引导存储器，时钟。</li>
+<li><a href="#%E4%BC%A0%E7%BB%9F-lan-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">传统 LAN 基本概念</a></li>
+<li><a href="#%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE">多路访问协议</a><ul>
+<li><a href="#%E4%BF%A1%E9%81%93%E5%88%86%E9%85%8D">信道分配</a><ul>
+<li><a href="#%E9%9D%99%E6%80%81%E4%BF%A1%E9%81%93%E5%88%86%E9%85%8D">静态信道分配</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E4%BF%A1%E9%81%93%E5%88%86%E9%85%8D">动态信道分配</a></li>
 </ul>
 </li>
-<li><p>简述电子元器件的发展对电子系统性能的影响。  </p>
-<p> 电子系统的实现是以电子元器件、单元电路为基础的，因此在电子元器件发展的不同阶段，电子系统也呈现出不同的特征。  </p>
+<li><a href="#aloha-%E5%8D%8F%E8%AE%AE">ALOHA 协议</a><ul>
+<li><a href="#%E7%BA%AF-aloha">纯 ALOHA</a></li>
+<li><a href="#%E5%88%86%E6%A7%BD-aloha">分槽 ALOHA</a></li>
+</ul>
+</li>
+<li><a href="#csma-%E5%8D%8F%E8%AE%AE">CSMA 协议</a><ul>
+<li><a href="#1-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">1-坚持式 CSMA</a></li>
+<li><a href="#%E9%9D%9E%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">非坚持式 CSMA</a></li>
+<li><a href="#p-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">p-坚持式 CSMA</a></li>
+<li><a href="#csmacd">CSMA&#x2F;CD</a></li>
+<li><a href="#csmaca">CSMA&#x2F;CA</a></li>
+<li><a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE-maca">冲突避免多路访问 (MACA)</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%A5%E5%A4%AA%E7%BD%91-ieee-8023">以太网 (IEEE 802.3)</a><ul>
+<li><a href="#%E7%BB%8F%E5%85%B8%E4%BB%A5%E5%A4%AA%E7%BD%91">经典以太网</a><ul>
+<li><a href="#%E5%B8%A7%E6%A0%BC%E5%BC%8F">帧格式</a></li>
+<li><a href="#mac-%E5%AD%90%E5%B1%82%E5%8D%8F%E8%AE%AE">MAC 子层协议</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%A4%E6%8D%A2%E5%BC%8F%E4%BB%A5%E5%A4%AA%E7%BD%91">交换式以太网</a><ul>
+<li><a href="#%E5%BF%AB%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91-fast-ethernet">快速以太网 (Fast Ethernet)</a></li>
+<li><a href="#%E5%8D%83%E5%85%86%E4%BB%A5%E5%A4%AA%E7%BD%91-gigabit-ethernet">千兆以太网 (Gigabit Ethernet)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91-80211">无线局域网 (802.11)</a><ul>
+<li><a href="#%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">体系结构</a></li>
+<li><a href="#mac-%E5%AD%90%E5%B1%82%E5%8D%8F%E8%AE%AE-1">MAC 子层协议</a><ul>
+<li><a href="#%E5%B8%A6%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E7%9A%84-csma">带冲突避免的 CSMA</a></li>
+<li><a href="#%E7%89%A9%E7%90%86%E4%BE%A6%E5%90%AC%E8%99%9A%E6%8B%9F%E4%BE%A6%E5%90%AC">物理侦听&#x2F;虚拟侦听</a></li>
+<li><a href="#%E5%8F%AF%E9%80%89%E7%9A%84-rtscts-%E6%9C%BA%E5%88%B6">可选的 RTS&#x2F;CTS 机制</a></li>
+<li><a href="#%E6%97%B6%E9%97%B4%E9%97%B4%E9%9A%94">时间间隔</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%A7%E6%A0%BC%E5%BC%8F-1">帧格式</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E8%81%94%E8%AE%BE%E5%A4%87">局域网互联设备</a><ul>
+<li><a href="#%E7%BD%91%E6%A1%A5">网桥</a><ul>
+<li><a href="#%E5%AD%A6%E4%B9%A0%E7%BD%91%E6%A1%A5">学习网桥</a></li>
+<li><a href="#%E7%94%9F%E6%88%90%E6%A0%91%E7%BD%91%E6%A1%A5">生成树网桥</a></li>
+<li><a href="#%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98">存在的问题</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA">交换机</a></li>
+<li><a href="#%E4%B8%8D%E5%90%8C%E8%AE%BE%E5%A4%87%E5%AF%B9%E6%AF%94">不同设备对比</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<h2><span id="传统-lan-基本概念">传统 LAN 基本概念</span></h2><p><strong>局域网</strong> (LAN)：在一个小区域范围内对各种数据通信设备提供了互连的信息网。  </p>
+<p>决定局域网特性的主要技术：</p>
 <ul>
-<li>最早的电子系统是以电子管为主要器件构造的，功能简单&#x2F;体积庞大&#x2F;功耗大。</li>
-<li>20世纪50年代诞生了晶体管，使计算速度提升到每秒几十万次，大大减小了计算机体积，降低了功耗和价格。</li>
-<li>20世纪70年代，中小规模集成电路迅速发展，电子系统逐渐过渡到以集成电路为基本的组成器件。</li>
-<li>80年代以后，集成电路规模进一步扩大，出现大规模&#x2F;超大规模集成电路，基于LSI&#x2F;VLSI的电子系统性能进一步提高。</li>
-<li>1979年Intel推出微处理器后，IBM推出了第一台PC机。</li>
+<li>传输媒体： 传输数据</li>
+<li>拓扑结构：连接各种设备</li>
+<li>媒体访问控制方法：共享资源</li>
 </ul>
-</li>
-<li><p>现代电子系统的设计工作主要体现在哪几个方面？各包含什么内容？  </p>
+<p>局域网的数据链路层：</p>
 <ul>
-<li><strong>系统级设计</strong>：是电子系统设计的高层设计，将设计任务转换成可表述和可实现的功能要求和技术指标。包含建立系统模型（将电子系统抽象化，得到描述系统功能和性能的数学模型和算法模型），及对系统模型的相关参数和技术指标进行分析和验证。</li>
-<li><strong>集成电路设计</strong>：也称为芯片设计，是将控制&#x2F;运算&#x2F;数据处理等功能模块集成在半导体芯片上。包括设计ASIC芯片和利用已有的可编程芯片进行新功能的开发（二次开发）。</li>
-<li><strong>电路原理图设计</strong>：对系统进行合理的划分，然后利用成熟的模拟电路&#x2F;数字电路的基本结构及专用芯片作为单元电路进行搭建，或研究新的电路结构&#x2F;元器件加以应用，得到整个系统的电路原理图。</li>
-<li><strong>PCB板设计</strong>：安装实现系统的所有元器件，按照要求将元器件连接成一个可以正常工作的系统，并要求整个系统的硬件满足电磁兼容。</li>
+<li>逻辑链路控制子层 (LLC)</li>
+<li>媒体访问控制子层 (MAC)：用来确定多路访问信道下一个使用者的协议</li>
 </ul>
-</li>
-<li><p>分析“传统设计方法不能满足现代复杂系统的设计需求”的原因（即EDA技术产生的原因）。  </p>
-<p> 随着集成电路技术和计算机技术的不断发展，现在电子系统的复杂度迅速提高，传统的基于人工设计的方法已经不能满足系统设计的需求了，人们逐步利用计算机来完成一些重复性&#x2F;复杂的设计工作。</p>
-</li>
-<li><p>以数字系统为例，说明EDA技术“自顶向下”的设计流程。其中的“顶层”和“底层”各指什么？  </p>
-<p> “顶层”指系统级设计，“底层”指通过PLD来实现或制作成ASIC芯片。  </p>
-<p> 以数字系统为例：  </p>
+<p>LAN 的传输媒体：</p>
 <ul>
-<li>提出系统功能要求；</li>
-<li>进行系统级设计和仿真，验证数字系统的可行性和指标；</li>
-<li>采用硬件描述语言对系统进行描述，并进行功能仿真；</li>
-<li>采用逻辑综合工具对HDL的源代码进行综合&#x2F;分析&#x2F;优化&#x2F;映射，得到门级电路；</li>
-<li>对门级电路进行布局&#x2F;布线，提取出物理参数，再进行模拟和验证；</li>
-<li>依据最终产生的配置文件，通过PLD实现或制作成ASIC芯片。</li>
+<li>双绞线</li>
+<li>同轴电缆</li>
+<li>光纤</li>
+<li>无线电波</li>
+<li>红外</li>
 </ul>
-</li>
-<li><p>采用EDA技术进行电子系统设计有哪些优势？  </p>
+<p>LAN 的拓扑结构：</p>
 <ul>
-<li>降低了系统硬件电路的设计难度。</li>
-<li>采用系统设计早期的仿真技术。</li>
-<li>拥有强有力的设计工具HDL语言。</li>
-<li>可以自行设计ASIC芯片，无须受通用元器件的限制。</li>
-<li>主要设计成果是工程文件，资料量小&#x2F;可继承性好&#x2F;阅读方便。</li>
+<li>星型</li>
+<li>环型</li>
+<li>总线型</li>
+<li>树型</li>
 </ul>
-</li>
-<li><p>列举三个全球著名EDA软件供应商。  </p>
+<h2><span id="多路访问协议">多路访问协议</span></h2><h3><span id="信道分配">信道分配</span></h3><p>信道分配问题：如何在竞争用户之间分配单个广播信道。</p>
+<h4><span id="静态信道分配">静态信道分配</span></h4><p>采用多路复用技术，将信道容量拆开分给多个用户使用。<br>如传统的 FDM 或 TDM，对于 N 个用户，将带宽或时间分成 N 份，每个用户静态地占用一个。</p>
+<p>缺点：不能有效地处理突发数据，有些用户停止通信时带宽或时间被浪费。</p>
+<h4><span id="动态信道分配">动态信道分配</span></h4><p>异步时分多路复用。分为以下两种：</p>
 <ul>
-<li>Cadence</li>
-<li>Synopsys</li>
-<li>Mentor Graphics</li>
-</ul>
+<li><p><strong>随机访问</strong>：争用。只要有数据就直接发送，发生冲突后再采取措施解决冲突。<br>适用于负载轻的网络，负载重时效率低</p>
 </li>
-<li><p>什么叫做SoC？  </p>
-<p> System on Chip.<br> 是一种将多个功能模块或组件集成在单一芯片上的技术。</p>
+<li><p><strong>控制访问</strong>：发送站点先获得发送的权利，再发送数据。<br>不会发生冲突，在负载重的网络中可获得很高的信道利用率。<br>主要有轮询和预约两种方式。</p>
 </li>
 </ul>
+<p>动态信道分配的5个关键假设：</p>
+<ul>
+<li><p><strong>流量独立</strong><br>由 N 个独立的站组成，每个站都有一个程序或用户产生要传输的帧。</p>
+</li>
+<li><p><strong>单信道</strong><br>所有用户都共享同一个信道，在该信道上发送&#x2F;接收数据。</p>
+</li>
+<li><p><strong>冲突可观察</strong><br><strong>冲突</strong>：如果多个用户同时发送数据，多路信号在时间上叠加使接收端无法正常解码。<br>所有站都能够检测到冲突事件的发生，冲突的帧必须在以后再次被发送。</p>
+</li>
+<li><p><strong>时间连续或分槽</strong><br>时间连续：任何时刻都可以开始传输帧。<br>时间分槽：将时间分为离散的间隔（称为时间槽），帧的传输只能从某个时间槽的起始点开始。</p>
+</li>
+<li><p><strong>载波侦听或不听</strong><br>载波侦听：发送前先侦听信道，可以知道该信道当前是否正被使用。</p>
+</li>
+</ul>
+<h3><span id="aloha-协议">ALOHA 协议</span></h3><h4><span id="纯-aloha">纯 ALOHA</span></h4><p>当用户有数据需要发送时就传输。</p>
+<p>每个站在给中央计算机发送帧之后，该计算机把该帧重新广播给所有站。<br>发送站侦听来自集线器的广播，以此确定它的帧是否发送成功。</p>
+<p>如果帧被损坏了，则发送方等待一段随机时间后再次发送该帧。</p>
+<h4><span id="分槽-aloha">分槽 ALOHA</span></h4><p>将信道时间分为离散的时间槽，每个时间槽可以用来发送一个帧。<br>一个站点有数据发送时，必须等到下个时间槽的开始才可以发送。</p>
+<p>与纯 ALOHA 相比，信道利用率提高一倍。</p>
+<h3><span id="csma-协议">CSMA 协议</span></h3><p><strong>载波侦听多路访问</strong> (CSMA) 协议：站监听信道，根据信道的状态来采取相应的动作，只有发现信道空闲时才能发送数据。</p>
+<h4><span id="1-坚持式-csma">1-坚持式 CSMA</span></h4><p>当一个站点要发送数据时，先监听信道，若信道忙则坚持监听；一旦发现信道空闲，立即发送数据（发送数据概率为 1）。<br>若发生冲突，等待一随机场时间，再重新开始监听信道。</p>
+<p>两种发生冲突可能：</p>
+<ul>
+<li>信号传输延迟造成冲突</li>
+<li>多个站点在监听到信道空闲时同时发送</li>
+</ul>
+<p>该协议的性能高于 ALOHA 协议。</p>
+<h4><span id="非坚持式-csma">非坚持式 CSMA</span></h4><p>当一个站点要发送数据时，先监听信道，若信道忙，随机等待一段时间后再开始监听信道（非坚持）；一旦发现信道空闲，立即发送数据。</p>
+<p>该协议的信道利用率高于 1-坚持式 CSMA 协议，但网络的延迟增大。</p>
+<h4><span id="p-坚持式-csma">p-坚持式 CSMA</span></h4><p>适用于分时间槽的信道。</p>
+<p>当一个站点要发送数据时，先监听信道，若信道忙，则等到下个时间槽再监听信道；若信道空闲，则按照概率 p 发送数据，而以概率 q&#x3D;1-p 将此次发送推迟到下一个时间槽。若下一个时间槽信道也是空闲的，则它还是以概率 p 发送数据，或者以概率 q 再次推迟发送；重复该过程直到帧被发送出去。</p>
+<p>与前两种 CSMA 协议相比：</p>
+<ul>
+<li>概率 p：降低 1-坚持式协议中多个站点同时发送而造成冲突的概率。</li>
+<li>坚持监听：克服非坚持式协议中造成的时间延迟。</li>
+</ul>
+<p>p 的选择直接关系到协议的性能。</p>
+<h4><span id="csmax2fcd">CSMA&#x2F;CD</span></h4><p><strong>带冲突检测的 CSMA</strong> (CSMA&#x2F;CD)<br>发送过程中仍然监听信道，通过检测回复信号的能量或脉冲宽度并将其与发送的信号作比较，可以判断是否发生冲突。<br>一旦发生冲突，立即取消发送，等待一随机时间后再尝试发送。</p>
+<p>检测冲突的最小时间是将信号从一个站传播到另一个站所需要的时间。</p>
+<h4><span id="csmax2fca">CSMA&#x2F;CA</span></h4><p><strong>带避免冲突的 CSMA</strong>，被 WLAN 采用。</p>
+<ul>
+<li>通过侦听确定在很短的一个时间内（这段时间称为 DIFS）没有信号。</li>
+<li>倒计数空闲时间槽，当有帧在发送时暂停该计数器。</li>
+<li>当计数器递减到0时，该站发送自己的帧。</li>
+<li>如果帧发送成功，目标站立即发送一个短确认。</li>
+<li>如果该站没有收到确认，则说明传输过程中发生了错误，采用<a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a>算法重新发送。</li>
+</ul>
+<h4><span id="二进制指数后退">二进制指数后退</span></h4><p>如果发生冲突，等待一段随机时间后再重试。<br>一般地，在第 i 次冲突之后，从 $0$ ~ $2^i-1$ 之间随机选择一个数，然后等待这么多个时间槽。<br>在达到10次冲突之后，随机数的选择区间被固定在最大值1023，不再增加。<br>在16次冲突之后，控制器放弃努力，并给计算机返回一个失败报告，进一步的恢复工作由高层协议完成。</p>
+<h3><span id="冲突避免多路访问-maca">冲突避免多路访问 (MACA)</span></h3><ul>
+<li>A 向 B 发送一个 RTS (Request To Send) 短帧，包含了随后要发送的数据帧长度。</li>
+<li>B 向 A 回复一个 CTS (Clear To Send) 短帧，包含了从 RTS 中复制的数据帧长度。</li>
+<li>A 收到 CTS 后开始传输。</li>
+<li>如果一个站侦听到了 RTS，则它保持足够长时间的沉默使 A 能在无冲突的情况下收到 CTS。<br>该站如果只侦听到了 RTS 没有侦听到 CTS，则在数据帧传送过程中可以自由发送信息。</li>
+<li>如果一个站侦听到了 CTS，则它依据 CTS 中数据帧的长度，在数据传输过程中一直保持沉默。</li>
+</ul>
+<h2><span id="以太网-ieee-8023">以太网 (IEEE 802.3)</span></h2><p><strong>经典以太网</strong>：使用上述技术解决多路访问问题。<br>以太网的原始形式，运行速度从 3~10 Mbps 不等。</p>
+<p><strong>交换式以太网</strong>：使用交换机连接不同的计算机。<br>可以运行在 100、1000 和 10000 Mbps 的高速率，分别以快速以太网、千兆以太网和万兆以太网的形式呈现。</p>
+<h3><span id="经典以太网">经典以太网</span></h3><h4><span id="帧格式">帧格式</span></h4><ul>
+<li><p><strong>前导码</strong> (Preamble)：8个字节，每个字节包含比特模式 10101010。IEEE 802.3 最后一个字节（帧起始定界符 SOF）的最后2位为11。<br>比特模式是由曼彻斯特编码产生的 10MHz 方波，每个波 6.4 微妙，以便接收方的时钟与发送方同步。</p>
+</li>
+<li><p><strong>目标地址</strong>：6个字节，MAC 地址，第一位是0表示是普通地址；如果是1，则表示组地址，该组中的所有站都要接收；全1的特殊地址用作广播，网络中的所有地址都要接收。</p>
+</li>
+<li><p><strong>源地址</strong>：6个字节，MAC 地址，标识帧的发送方，具有全球唯一性。<br>地址字段的前3个字节用作该站所在的组织唯一标识符 (OUI)，由 IEEE 统一分配，指明了网络设备制造商；后3个字节由制造商负责分配。</p>
+</li>
+<li><p><strong>类型&#x2F;长度</strong> (Type&#x2F;Length)：2个字节。以太网使用类型字段，指定了该把帧送给哪个进程处理。IEEE 802.3 使用长度字段，接收方通过数据内包含的另一个逻辑链路控制 (LLC) 协议头来确定如何处理入境帧。<br>任何值小于或等于 0x600 可解释为长度字段，任何大于 0x600 可解释为类型字段。</p>
+</li>
+<li><p><strong>数据</strong> (Data)：最多可包含 1500 字节。</p>
+</li>
+<li><p><strong>填充</strong> (Pad)：最多 46 字节。以太网要求有效帧必须至少 64 字节长，从目标地址算起直到校验和，包括这两个字段本身在内。如果帧的数据部分小于 46 字节，则使用填充字段来填充该帧，使其达到最小长度要求。</p>
+<p>限制最小帧长的原因：避免当一个短帧还没有到达电缆远端的发送方，该帧的传送就已经结束；这种情况下，当在电缆的远端发生冲突时，发送方的传送在突发噪声到达前就完成传送，发送方误以为刚才一帧已成功发送。</p>
+</li>
+<li><p><strong>校验和</strong>：4个字节，采用 32位CRC。</p>
+</li>
+</ul>
+<h4><span id="mac-子层协议">MAC 子层协议</span></h4><p>采用 1-坚持 CSMA&#x2F;CD 算法，发生冲突时采用 二进制指数后退算法。</p>
+<p><a href="#1-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">1-坚持式 CSMA</a>，<a href="#csmacd">CSMA&#x2F;CD</a>，<a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a></p>
+<h3><span id="交换式以太网">交换式以太网</span></h3><p>当交换机端口接收到来自某个站的以太网帧，它检查该帧的以太网地址，确定该帧前往的目的地端口。</p>
+<ul>
+<li>在集线器中，所有站位于同一个<strong>冲突域</strong>（不同站点同时发送数据可能产生碰撞的最大网段），必须使用 CSMA&#x2F;CD 算法。</li>
+<li>在交换机中，每个端口有独立的冲突域。  <ul>
+<li>对于全双工电缆，冲突不可能发生。</li>
+<li>对于半双工电缆，站和端口以通常的 CSMA&#x2F;CD 方式竞争传输。</li>
+</ul>
+</li>
+</ul>
+<h4><span id="快速以太网-fast-ethernet">快速以太网 (Fast Ethernet)</span></h4><p>IEEE 802.3u 工作组规范 (1995, 6)。</p>
+<p>特点：</p>
+<ul>
+<li>采用 CSMA&#x2F;CD 媒体访问控制方式和 802.3 帧格式；</li>
+<li>100 BASE-TX 采用两对5类双绞线；</li>
+<li>100 BASE-T4 采用四对3类双绞线；</li>
+<li>网络最大长度 250m (10 Mbps 的经典以太网是 2500m)。</li>
+</ul>
+<h4><span id="千兆以太网-gigabit-ethernet">千兆以太网 (Gigabit Ethernet)</span></h4><p>IEEE 802.3z (1998) 和 802.3ab 工作组规范。</p>
+<p>特性：</p>
+<ul>
+<li><strong>载波扩充</strong>：让硬件在普通的帧后面增加一些填充位，将帧的长度扩充到 512 字节，使网络最大距离延长到 200m。</li>
+<li><strong>帧突发</strong>：允许发送方将多个待发送帧级联在一起，一次传输出去。最大突发长度为 8192 字节。如果级联起来的整个突发仍然小于 512 个字节，则硬件会再次对它进行填充。</li>
+<li>全双工。</li>
+</ul>
+<h2><span id="无线局域网-80211">无线局域网 (802.11)</span></h2><p><strong>WLAN</strong>：无线局域网，是计算机网络和无线通信技术相结合的产物，是有线网络的无线化延伸。<br><strong>Wi-Fi</strong>：是一个创建于 IEEE 802.11 标准上的无线局域网技术，可等同于 802.11 的同义词。<br>无线局域网的主要标准是 802.11。</p>
+<h3><span id="体系结构">体系结构</span></h3><p><strong>接入点</strong> (AP)：转发该 WLAN 上的所有帧，具备无线至有线的桥接功能。<br><strong>工作站</strong>  (Station)：具备 WLAN 接口，能接入 WLAN 的主机。<br><strong>分布式系统</strong> (DS)：一种有线网络，是 802.11 的逻辑组件，负责连接多个 AP，或将 AP连接至骨干网（如目前已知的以太网）。</p>
+<p><strong>基本服务集</strong> (BSS)</p>
+<ul>
+<li>独立基本服务集 (IBSS, independent BSS)：工作站之间相互可以直接通信（不需要通过 AP 转发）。</li>
+<li>基础结构型基本服务集 (infrastructure BSS)：工作站需先与接入点建立关联，接入点负责转发工作站之间的通信。</li>
+<li>每个 BSS 都有一个6字节的识别符 BSSID，相当于 AP 的 MAC 地址。</li>
+</ul>
+<p><strong>扩展服务集</strong> (ESS)：将几个 BSS 连接为 ESS。</p>
+<h3><span id="mac-子层协议">MAC 子层协议</span></h3><p>带有物理侦听和虚拟侦听的 CSMA&#x2F;CA 是 802.11 协议的核心。</p>
+<p>802.11 允许把帧拆分为更小的单元<strong>段</strong> (fragment)，每个段有自己的校验和。</p>
+<h4><span id="带冲突避免的-csma">带冲突避免的 CSMA</span></h4><p>802.11 支持两种操作模式</p>
+<ul>
+<li><p><strong>点协调功能</strong> (PCF)：由 AP 周期性地（每秒10~100次）广播一个信标帧，邀请站点申请服务，集中控制。</p>
+</li>
+<li><p><strong>分布式协调功能</strong> (DCF)：分布式控制，采用<strong>带有冲突避免的 CSMA</strong> (<a href="#csmaca">CSMA&#x2F;CA</a>)。  </p>
+</li>
+<li><p>DCF 是必须的，PCF 是可选的。</p>
+</li>
+</ul>
+<p>与以太网相比，CSMA&#x2F;CA 有两个主要区别：</p>
+<ul>
+<li>早期的后退有助于避免冲突；</li>
+<li>利用确认来推断是否发生冲突，因为冲突无法被检测出来。</li>
+</ul>
+<h4><span id="物理侦听x2f虚拟侦听">物理侦听&#x2F;虚拟侦听</span></h4><p>由于 WLAN 中各个站点发出的信号范围有限，使用 CSMA 时存在两个问题：</p>
+<ul>
+<li><strong>隐藏终端问题</strong>：由于竞争者距离太远而导致站无法检测到潜在的竞争者，误以为可以发送数据。</li>
+<li><strong>暴露终端问题</strong>：站点侦听到信道上有帧在传送，错误地认为自己不能发送数据。</li>
+</ul>
+<p>为了解决上述问题，802.11 定义信道侦听包括物理侦听和虚拟侦听两部分。</p>
+<ul>
+<li><p><strong>物理侦听</strong>：检测信道是否存在有效信号。</p>
+</li>
+<li><p><strong>虚拟侦听</strong>：让源站将它要占用信道的时间通知给所有其他站，使其他站不需要侦听就能知道信道何时可能转为空闲。  </p>
+<p><strong>网络分配向量</strong> (NAV)：每个帧携带一个 NAV 字段，说明这个帧所属的一系列数据将传输多长时间。<br>当一个站检测到正在信道中传输的 MAC 帧首部的 NAV 字段时，就调整自己的 NAV。</p>
+</li>
+</ul>
+<h4><span id="可选的-rtsx2fcts-机制">可选的 RTS&#x2F;CTS 机制</span></h4><p>使用 NAV 来防止隐藏终端在同一时间发送，与 <a href="#%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE-maca">MACA</a> 类似。<br>不同之处：</p>
+<ul>
+<li>A 发送数据帧时启动一个 ACK 计时器；</li>
+<li>当正确的数据帧到达后，B 用一个 ACK 帧回复 A，完成此次交流；</li>
+<li>如果 A 的 ACK 计时器超时前，ACK 没有返回，则可视为发生了一个冲突，经过一次后退整个协议重新开始运行；</li>
+<li>听到 RTS&#x2F;CTS 的站会更新自己的 NAV 记录表示信道正忙。</li>
+</ul>
+<p>RTS&#x2F;CTS 的引入带来了延时和信道资源的消耗，因此该机制只用于预约长数据帧的信道。实际中，每个无线站点可设置一个 RTS 门限，仅当数据长度超过门限时才使用该机制。</p>
+<h4><span id="时间间隔">时间间隔</span></h4><p>一帧发送出去后，需要保持一段特定时间的空闲以便检查信道不在被用，然后任何站才可以发送帧。</p>
+<ul>
+<li><p><strong>短帧间间隔</strong> (SIFS)：最短的间隔；允许一次对话的各方具有优先抓住信道的机会，可以发送控制帧（如 ACK、RTS、CTS）或下一个段。</p>
+</li>
+<li><p><strong>DCF 帧间隔</strong> (DIFS)：常规的数据帧之间的间隔；任何站都可以在介质空闲 DIFS 后尝试抓取信道发送一个新帧，采用通常的竞争规则。</p>
+</li>
+<li><p><strong>仲裁帧间空间</strong> (AIFS)：有两个不同的优先级。</p>
+<ul>
+<li>AIFS1：小于 DIFS 但长于 SIFS；被 AP 用来把语音或其他高优先级流量移到行头。</li>
+<li>AIFS4：长于 DIFS；用来发送可以延迟到常规流量之后发送的背景流量。</li>
+<li>完善的服务质量机制定义了四种不同的优先级别，分别具有不同的后退参数和不同的空闲参数。</li>
+</ul>
+</li>
+<li><p><strong>扩展帧间间隔</strong> (EIFS)：最长；仅用于一个站刚刚收到坏帧或未知帧后报告问题。</p>
+</li>
+</ul>
+<p>时间间隔长度与媒介有关，速率高的物理层会使用较短的间隔；同样，不同的物理层帧间间隔也有所不同。</p>
+<h3><span id="帧格式">帧格式</span></h3><ul>
+<li><p><strong>帧控制</strong> (Frame Control):2 个字节，包含 11 个子字段。</p>
+<ul>
+<li><strong>协议版本</strong> (Protocol Version)：2 比特，00。</li>
+<li><strong>类型</strong> (Type)：2 比特，数据帧、控制帧或管理帧。</li>
+<li><strong>子类型</strong> (Subtype)：4 比特，比如 RTS 或 CTS。</li>
+<li><strong>To DS</strong>：1 比特，表明发送到分布式系统。</li>
+<li><strong>From DS</strong>：1 比特，表明来自分布式系统。</li>
+<li><strong>更多段</strong> (More fragment)：1比特，表明后面还有更多的段。</li>
+<li><strong>重传</strong> (Retry)：1比特，表明这是以前发送的某一帧的重传。</li>
+<li><strong>电源管理</strong> (Power management)：1 比特，指明发送方进入节能模式。</li>
+<li><strong>更多数据</strong> (More data)：1 比特，表明发送方还有更多的帧需要发送给接收方。</li>
+<li><strong>受保护的</strong> (Protected Frame)：1 比特，表明该帧的帧体已经被加密。</li>
+<li><strong>顺序</strong> (Order)：1 比特，告诉接收方高层希望严格按照顺序来处理帧序列。</li>
+</ul>
+</li>
+<li><p><strong>持续时间</strong> (Duration)：2个字节。<br>通告本帧和其确认帧将会占用信道多长时间，按微妙计时。<br>该字段会出现在所有帧中，包括控制帧，其他站用该字段来管理各自的 NAV 机制。</p>
+</li>
+<li><p><strong>地址</strong>：共有三个地址字段，每个均有 6 个字节。</p>
+<ul>
+<li>地址1：接收方地址。</li>
+<li>地址2：发送方地址。</li>
+<li>地址3：当帧在一个客户端和网络中的另一点传输时，AP 是一个中继点，地址3指明了这个远程端点。</li>
+<li>当 To DS 和 From DS 都置1时，在序号字段后有 6 个字节的地址4。</li>
+</ul>
+</li>
+<li><p><strong>序号</strong> (Sequence)：2 个字节。<br>帧的编号，用于重组帧片段以及丢弃重复帧。<br>有 4 位段序号和 12 位帧序号。相当于已传帧的计数器，计数器从0计数，每传输一帧序号+1，取 4096 的模数。</p>
+</li>
+<li><p><strong>数据</strong> (Data)：最多可有 2312 个字节。<br>有效荷载中前面部分字节的格式称为<strong>逻辑链路控制</strong> (LLC)，标识有效荷载应该递交给哪个高层协议处理（比如 IP）。</p>
+</li>
+<li><p><strong>帧校验序列</strong> (Frame check sequence)：4 个字节。<br>32 位 CRC。</p>
+</li>
+</ul>
+<p><strong>RTS</strong> 共20字节：帧控制、持续时间、目的地址、源地址和检错字段。<br><strong>CTS</strong> 和 <strong>ACK</strong>共14字节：帧控制、数据长度、目的地址和检错字段。</p>
+<h2><span id="局域网互联设备">局域网互联设备</span></h2><h3><span id="网桥">网桥</span></h3><ul>
+<li>用于连接局域网的互连设备。</li>
+<li>工作在数据链路层，通过检查数据链路层地址（MAC 地址）来转发帧，必要时进行帧格式转换。</li>
+<li>能隔离以太网中的碰撞域，但不能隔离广播域。</li>
+<li>丢弃出错帧。</li>
+<li>包括透明网桥和源路由选择网桥，以下两种都是透明网桥。</li>
+</ul>
+<h4><span id="学习网桥">学习网桥</span></h4><p>为每个网桥配备一个大的哈希表，该表列出每个可能的目的地以及它们隶属的输出端口。</p>
+<p>当网桥第一次接入网络时，所有哈希表都是空的，采用<strong>泛洪算法</strong>：<br>对于每个发向未知目标地址的入境帧，网桥将它输出到所有端口，除了它来的输入端口。</p>
+<p>采用<strong>后向学习法</strong>：<br>通过检查每个端口发送的帧的源地址，网桥可以知道通过该端口可以访问到哪些机器，于是在哈希表上构造相应的一对地址和端口。</p>
+<p>为了处理动态的拓扑结构：<br>构造出哈希表后，帧的到达时间也被记录在相应的表项中。<br>当一帧到达时，如果它的源地址已经在表中，那么对应表项中的时间值被更新为当前时间。<br>网桥中存在一个进程定期扫描哈希表，将时间值在几分钟之前的表项都清除掉。</p>
+<p>对到达网桥的入境帧，整个转发过程如下：  </p>
+<ul>
+<li>如果去往目的地址的端口与源端口相同，则丢弃该帧；</li>
+<li>如果去往目的地址的端口与源端口不同，则转发该帧到目标端口；</li>
+<li>如果目标端口未知，则使用泛洪算法，将该帧转发到所有端口，除了它入境的哪一个。</li>
+</ul>
+<p>网桥可看作链路层设备，一个具有 k 个端口的网桥将有 k 个 MAC 和物理层实例。</p>
+<h4><span id="生成树网桥">生成树网桥</span></h4><p>为了提高可靠性，在网桥之间使用冗余链路，如在一对网桥之间并行设置两条链路。</p>
+<p>为了解决拓扑环路问题：<br>让网桥之间相互通信，用一棵可以到达每个网桥的生成树覆盖实际的拓扑结构。  </p>
+<ul>
+<li>选择具有最低标识符的网桥为生成树的根。</li>
+<li>构造从根到每个网桥的最短路径树，碰到平局时，选择一条经过更低标识符的网桥的路径。</li>
+<li>网桥在被指消息中包括与根的距离，每个网桥记住它找到的到根的最短路径。</li>
+<li>网桥关闭不属于最短路径一部分的端口。</li>
+</ul>
+<h4><span id="存在的问题">存在的问题</span></h4><p>在连接不同类型的局域网（如 802.3 和 802.11）时，网桥的转发存在以下主要问题。</p>
+<ul>
+<li><p>帧格式不同。<br>需要重新组帧，某些域（如 802.11 帧的持续时间）需要丢弃或产生，还需要重新生成校验和。</p>
+</li>
+<li><p>数据速率不同，802.11 速率较低。<br>网桥需要用缓冲区存储来不及传输的帧。</p>
+</li>
+<li><p>最大帧的长度不同。<br>802 标准本身不提供把长帧分片的功能，对于太长的帧只能丢弃。</p>
+</li>
+<li><p>安全性问题。<br>802.11 支持加密，802.3 不支持。</p>
+</li>
+<li><p>服务质量问题。<br>802.11 采用 PCF 可以支持 QoS，802.3 不支持。</p>
+</li>
+</ul>
+<h3><span id="交换机">交换机</span></h3><p><strong>交换机</strong>源自于多端口网桥，采用存储-转发方式在各端口之间进行数据帧的交换。</p>
+<p>交换机检测每个到达数据帧的帧头，根据数据帧的目的地址查找输出端口。<br>如果地址查找表中没有该表项，交换机就向所有端口（除了接收端口）转发。<br>地址查找表是通过帧的源地址与到达端口的对应关系建立的。</p>
+<p>工作在数据链路层，能隔离碰撞域。</p>
+<p><strong>交换式局域网</strong>：采用星型拓扑结构，用交换机连接主机。</p>
+<h3><span id="不同设备对比">不同设备对比</span></h3><p><strong>帧</strong>（由数据链路层构造）包含：</p>
+<ul>
+<li>帧头</li>
+<li>数据包头</li>
+<li>TCP 头</li>
+<li>用户数据</li>
+<li>CRC</li>
+</ul>
+<p><strong>数据包</strong>（由网络层构造）包含其中的：</p>
+<ul>
+<li>数据包头</li>
+<li>TCP 头</li>
+<li>用户数据</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>工作层次</th>
+<th>设备</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>物理层</td>
+<td>中继器</td>
+<td>模拟设备，在物理层透明地复制比特流，以补偿信号的衰减。</td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>集线器</td>
+<td>将多条输入线路连接在一起，不隔离碰撞域，连接到同一个集线器上的所有线路必须以相同的速率运行。</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>网桥，交换机</td>
+<td>可以隔离碰撞域，不能隔离广播域；在不同的 LAN 间存储转发帧，必要时进行链路层的协议转换。</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>路由器</td>
+<td>在不同的网络间存储转发分组，必要时进行网络层的协议转换。可以隔离碰撞域和广播域。可连接不同类型的网络。</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>传输网关</td>
+<td>对高层协议进行转换。将两台使用了不同面向连接传输协议的计算机连接起来。传输网关将数据包从一个连接复制到另一个连接上，并根据需要对数据包重新进行格式化。</td>
+</tr>
+<tr>
+<td>应用层</td>
+<td>应用网关</td>
+<td>对高层协议进行转换。理解数据的格式和内容，将消息从一种格式转换为另一种格式。</td>
+</tr>
+</tbody></table>
 
       
 
@@ -247,7 +577,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/电子系统设计//" class="article-tag-list-link color2">电子系统设计</a>
+        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -302,7 +632,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://t-1031.github.io/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://t-1031.github.io/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -316,15 +646,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/11/28/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%94%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          电子系统设计（二）
+          计算机网络（五）
         
       </div>
     </a>
   
+  
+    <a href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%89%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">计算机网络（三）</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -365,7 +700,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2023 TG
+    		&copy; 2024 TG
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
