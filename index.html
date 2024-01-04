@@ -144,6 +144,1191 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-计算机网络（六）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%85%AD%EF%BC%89/">计算机网络（六）</a>
+    </h1>
+  
+
+        
+        <a href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%85%AD%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2024-01-04T09:16:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="第6章-传输层">第6章 传输层</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1">传输服务</a><ul>
+<li><a href="#berkeley-%E5%A5%97%E6%8E%A5%E5%AD%97">Berkeley 套接字</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%A6%81%E7%B4%A0">传输协议的要素</a><ul>
+<li><a href="#%E5%AF%BB%E5%9D%80">寻址</a><ul>
+<li><a href="#%E5%88%A9%E7%94%A8-tsap-%E4%BC%A0%E8%BE%93%E6%B6%88%E6%81%AF">利用 TSAP 传输消息</a></li>
+<li><a href="#tsap-%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95">TSAP 获取方法</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%9E%E6%8E%A5">连接</a><ul>
+<li><a href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B">建立连接：三次握手</a></li>
+<li><a href="#%E9%87%8A%E6%94%BE%E8%BF%9E%E6%8E%A5">释放连接</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">流量控制 &amp; 拥塞控制</a><ul>
+<li><a href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6">流量控制</a></li>
+<li><a href="#%E7%90%86%E6%83%B3%E5%B8%A6%E5%AE%BD%E5%88%86%E7%B1%BB">理想带宽分类</a></li>
+<li><a href="#%E8%B0%83%E6%95%B4%E5%8F%91%E9%80%81%E9%80%9F%E7%8E%87">调整发送速率</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#internet-%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE">Internet 传输协议</a><ul>
+<li><a href="#udp">UDP</a><ul>
+<li><a href="#%E5%A4%B4%E6%A0%87">头标</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8">应用</a></li>
+</ul>
+</li>
+<li><a href="#tcp">TCP</a><ul>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B">服务模型</a></li>
+<li><a href="#%E7%89%B9%E7%82%B9">特点</a></li>
+<li><a href="#%E5%A4%B4">头</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B">连接建立</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E9%87%8A%E6%94%BE">连接释放</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9E%8B">连接管理模型</a></li>
+<li><a href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">滑动窗口</a></li>
+<li><a href="#%E8%AE%A1%E6%97%B6%E5%99%A8%E7%AE%A1%E7%90%86">计时器管理</a></li>
+<li><a href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">拥塞控制</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<h2><span id="传输服务">传输服务</span></h2><p>传输层所处的地位：</p>
+<ul>
+<li><p>面向信息处理：<br>应用层</p>
+</li>
+<li><p>面向传输：<br>传输层、网络层、数据链路层、物理层</p>
+</li>
+<li><p>用户功能：<br>应用层、传输层</p>
+</li>
+<li><p>网络功能：<br>网络层、数据链路层、物理层</p>
+</li>
+</ul>
+<p>传输层向应用层提供传输服务，属于面向传输部分的最高层。<br>同时传输层也是用户功能中的最低层，为应用层频闭任何与网络有关的操作。<br>传输层协议是端到端的。</p>
+<p>传输层实现在不同主机上的进程之间的通信，每个应用进程都至少与一个传输层地址（端口）相关联。</p>
+<p>向上层提供的服务：面向连接的传输服务和无连接的传输服务。</p>
+<p>传输实体之间发送的消息：<strong>段</strong> (segment) 或<strong>传输协议数据单元</strong> (TPDU)。</p>
+<ul>
+<li><p>段（传输层）被包裹在数据包（网络层）中，而数据包被包含在帧（数据链路层）中。</p>
+</li>
+<li><p>当一帧到达时，数据链路层对帧头进行处理，如果帧目标地址与本地传递地址匹配，则把帧的有效载荷字段中的内容传递给网络实体。<br>网络实体再对数据包头进行类似处理，然后把数据包的有效载荷字段内容向上传递给传输实体。</p>
+</li>
+</ul>
+<h3><span id="berkeley-套接字">Berkeley 套接字</span></h3><p><strong>套接字</strong> (socket)</p>
+<table>
+<thead>
+<tr>
+<th>Socket 原语</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SOCKET</td>
+<td>创建一个新的通信端点</td>
+</tr>
+<tr>
+<td>BIND</td>
+<td>将一个本地地址关联到一个套接字上</td>
+</tr>
+<tr>
+<td>LISTEN</td>
+<td>宣布愿意接收连接，给出队列大小</td>
+</tr>
+<tr>
+<td>ACCEPT</td>
+<td>阻塞调用方，直到有人企图连接上来</td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td>主动尝试建立一个连接</td>
+</tr>
+<tr>
+<td>SEND</td>
+<td>在指定的连接上发送数据</td>
+</tr>
+<tr>
+<td>RECV</td>
+<td>从指定的连接上接收数据</td>
+</tr>
+<tr>
+<td>CLOSE</td>
+<td>释放指定连接</td>
+</tr>
+</tbody></table>
+<ul>
+<li>服务器：依次执行 <code>SOCKET</code>、<code>BIND</code>、<code>LISTEN</code>、<code>ACCEPT</code>。</li>
+<li>客户端：不需要 <code>BIND</code>，依次执行 <code>SOCKET</code>、<code>CONNECT</code>。</li>
+<li>连接建立后，双方都可以使用 <code>SNED</code>、<code>RECV</code> 收发数据。</li>
+<li>数据传输结束后，双方使用 <code>CLOSE</code> 释放连接。</li>
+</ul>
+<h2><span id="传输协议的要素">传输协议的要素</span></h2><h3><span id="寻址">寻址</span></h3><p>当一个应用进程希望与另一个远程应用进程建立连接时，必须指定要连接到哪个应用进程上，即指定对方的<strong>传输服务访问点</strong> (TSAP)。<br>网络层上也有类似端点，称为<strong>网络服务访问点</strong> (NSAP)，而无连接的网络层不需要提供 NSAP。IP 地址是 NSAP 的实例。</p>
+<p>一个全局唯一的传输服务用户由 {主机地址，NSAP，TSAP} 表示，称为端点地址。</p>
+<p>在 TCP&#x2F;IP 中，NSAP 可略去，TSAP 称为端口号。<br>以 {IP 地址，port，协议类型} 唯一标识传输服务的用户。<br>{源&#x2F;目的 IP 地址，源&#x2F;目的端口号，协议类型} 五元组标识一个数据流。</p>
+<h4><span id="利用-tsap-传输消息">利用 TSAP 传输消息</span></h4><ul>
+<li><p>主机 2 上的邮件服务进程将自己关联到 TSAP 1522 上，等待入境连接请求的到来。</p>
+</li>
+<li><p>主机 1 上的应用进程希望发送一个邮件消息，于是把自己关联到 TSAP 1208 上，并发出一个 <code>CONNECT</code> 请求。<br>该请求指定主机 1 上的 TSAP 1208 作为源，主机 2 上的 TSAP 1522 作为目标。<br>这个动作在应用进程和服务器之间建立了一个连接。</p>
+</li>
+<li><p>应用进程发送邮件消息。</p>
+</li>
+<li><p>作为响应，邮件服务器表示它将传递该消息。</p>
+</li>
+<li><p>传输连接被释放。</p>
+</li>
+</ul>
+<h4><span id="tsap-获取方法">TSAP 获取方法</span></h4><ul>
+<li><p>服务进程固定在特定的 TSAP 地址上。  </p>
+<p>只适用于少数永不改变的关键服务。</p>
+</li>
+<li><p>采用端口映射器&#x2F;名字服务器。  </p>
+<p>用户与端口映射器建立一个连接。<br>用户通过这个连接发送一条消息指定它想要的服务名字；端口映射器返回相应的 TSAP 地址。<br>之后用户释放与端口映射器之间的连接，与所需的服务建立一个新连接。</p>
+<p>当一个新的服务被创建时，它必须向端口映射器注册，把它的服务名字与 TSAP 地址告诉端口映射器。端口映射器将该信息记录到它的内部数据库中。</p>
+</li>
+<li><p>采用<strong>初始连接协议</strong>。  </p>
+<p>每台希望向远程用户提供服务的机器有一个特殊的<strong>进程服务器</strong>充当不那么频繁使用的服务的代理。  </p>
+<p>进程服务器在同一时间监听一组端口，等待连接请求的到来。<br>用户发出一个连接请求，并指定所需服务的 TSAP 地址。如果该 TSAP 地址上没有服务器正在等着，则用户得到一条与进程服务器的连接。<br>在获取入境请求后，进程服务器派生出被请求的服务器，允许该服务器继承与用户的现有连接。新服务器完成要求的工作，而进程服务器继续回去监听新的连接要求。</p>
+<p>只适用于服务器可按需创建的场合。</p>
+</li>
+</ul>
+<h3><span id="连接">连接</span></h3><p>对于面向连接的传输服务，首先要和对端的对等实体建立连接。</p>
+<p>传输层连接本质上是在发送端和接收端上为实现可靠船速而维护的一些参数状态。</p>
+<ul>
+<li>发送&#x2F;确认序列号的维护，发送&#x2F;接收窗口的管理，接收端缓存大小等</li>
+<li>各种计时器</li>
+</ul>
+<p>数据传输完毕还需要释放连接，即释放维护连接参数的缓存。</p>
+<h4><span id="建立连接三次握手">建立连接：三次握手</span></h4><p>正常情况：</p>
+<ul>
+<li><p>主机 1 选择一个序号 x，并向主机 2 发送包含该序号的连接请求 <code>CR (seq = x)</code>。</p>
+</li>
+<li><p>主机 2 应答连接确认 <code>ACK (seq = y, ACK = x)</code>，其中包含确认号 x 和序列号 y。</p>
+</li>
+<li><p>主机 1 在其发送的第一个数据中采用序列号为 x，并确认主机 2 的序列号 x，即发送 <code>DATA (seq = x, ACK = y)</code>。</p>
+</li>
+</ul>
+<p>出现旧的重复 <code>CR</code>：</p>
+<ul>
+<li><p>主机 2 收到旧的 <code>CR (seq = x)</code>，而主机 1 并不知情。<br>主机 2 回复 <code>ACK (seq = y, ACK = x)</code>。</p>
+</li>
+<li><p>主机 1 拒绝连接请求，即发送 <code>REJECT (ACK = y)</code>。<br>主机 2 放弃连接。</p>
+</li>
+</ul>
+<p>出现旧的重复 <code>CR</code> 和 <code>ACK</code>：</p>
+<ul>
+<li><p>主机 2 收到旧的 <code>CR (seq = x)</code>，而主机 1 并不知情。<br>主机 2 回复 <code>ACK (seq = y, ACK = x)</code>。</p>
+</li>
+<li><p>主机 2 收到旧的 <code>DATA (seq = x, ACK = z)</code>。<br>主机 2 根据确认是 z 而不是 y 知道这是一个旧确认包，因此不会建立连接。</p>
+</li>
+<li><p>主机 2 收到 主机 1 发送的 <code>REJECT (ACK = y)</code>，于是放弃连接。</p>
+</li>
+</ul>
+<h4><span id="释放连接">释放连接</span></h4><p><strong>非对称释放</strong>：连接的任何一方都可以断开整个连接。</p>
+<p>可能会导致数据的丢失。<br>如：主机 1 发送 DATA，它正确到达主机 2；主机 1 再次发送 DATA，但在到达之前主机 2 发出了 <code>DISCONNECT</code>；因此连接被释放，但数据丢失了。</p>
+<p><strong>对称释放</strong>：把连接看作是由两个单独的单项连接，并要求单独释放每一个单项连接。</p>
+<ul>
+<li><p>正常情况</p>
+<ul>
+<li><p>主机 1 发送释放连接请求 <code>DR</code> 并启动一个计时器，但它不立即拆除连接，而是等待对方确认。</p>
+</li>
+<li><p>主机 2 收到 <code>DR</code> 后也发回一个 <code>DR</code>，并启动一个计时器。</p>
+</li>
+<li><p>当主机 1 收到主机 2 发送的 <code>DR</code> 后，它会返回一个 <code>ACK</code> 段并释放连接。</p>
+</li>
+<li><p>主机 2 收到 <code>ACK</code> 后，它也释放连接。</p>
+</li>
+</ul>
+</li>
+<li><p>最后一个 <code>ACK</code> 丢失</p>
+<p>通过主机 2 的计时器来补救。<br>如果在计时器超时前，主机 2 没有收到 <code>ACK</code>；则计时器超时后，主机 2 无论如何都释放连接；此时主机 1 已经释放了连接。</p>
+</li>
+<li><p>主机 2 发送的 <code>DR</code> 丢失</p>
+<p>通过主机 1 的定时器来补救。<br>如果在定时器超时前，主机 1 没有收到来自主机 2 的 <code>DR</code>；则计时器超时后，主机 1 再次发送 <code>DR</code>。</p>
+</li>
+</ul>
+<h3><span id="流量控制-amp-拥塞控制">流量控制 &amp; 拥塞控制</span></h3><h4><span id="流量控制">流量控制</span></h4><p><strong>流量控制</strong>：根据接收端的缓存容量来动态地调整发送端的窗口大小，避免一个快速的发送端淹没一个慢速的接收端。</p>
+<p>采用滑动窗口协议，但是使用可变大小的动态缓冲区，即一个可变大小的窗口。</p>
+<ul>
+<li>初始时，发送端根据它期望的需求要求一定数量的缓冲区。</li>
+<li>接收端根据它的能力尽可能多的缓冲区。</li>
+<li>每次发送端传输一段，它必须减少分配给它的缓冲区数。</li>
+<li>当分配给发送端的缓冲区数达到 0 时，完全停止发送。</li>
+<li>接收端在逆向流量中捎带上单独的确认和缓冲区数。<ul>
+<li>TCP 采用这种模式，将缓冲区的分配捎带在头的 Windows size 字段。</li>
+</ul>
+</li>
+</ul>
+<p>为了避免控制段丢失造成的死锁，每台主机应该定期地在每个连接上发送控制段，给出确认和缓冲区状态。</p>
+<h4><span id="理想带宽分类">理想带宽分类</span></h4><p><strong>功率</strong>定义：<br>$$<br>功率 &#x3D; \dfrac{负载}{延迟}<br>$$<br>功率最初随着提交负载的上升而上升，延迟仍然很小并且基本保持不变；<br>但随着延迟快速增长，功率达到最大，然后开始下降。<br>达到最大功率的负载表示了传输实体放置在网络上的有效负载。</p>
+<p><strong>最大-最小公平</strong>：如果分配给一个流的带宽在不减少分配给另一个流带宽的前提下无法得到进一步增长，那么就不给这个流更多带宽。</p>
+<p><strong>拥塞控制</strong>：根据网络的承载容量来动态地调整发送端的窗口大小，避免发送端发送的数据超过了网络容量。<br>拥塞控制时网络层和传输层的共同责任。<br>一个良好的拥塞控制算法，应迅速收敛到理想的操作点，并跟踪这随时变化的操作点。</p>
+<h4><span id="调整发送速率">调整发送速率</span></h4><p>发送速率可能受到两个方面因素的限制：</p>
+<ul>
+<li>在接收端没有足够缓冲区的情况下，进行流量控制。</li>
+<li>在网络容量不足的情况下，进行拥塞控制。</li>
+</ul>
+<p><strong>显示拥塞协议</strong> (XCP)<br>TCP 采用<strong>显示拥塞通知</strong> (ECN)：<br>路由器在经历拥塞的数据包中设置警告比特来警告发送端放慢速率，但它们不告诉源端该减缓多少。</p>
+<p>增加或减少速率的方式由<strong>控制法则</strong>决定。<br>其中<strong>加法递增乘法递减</strong> (AIMD) 法则是达到有效和公平操作点的适当流量规则：<br>用户加法递增他们的带宽，然后当收到拥塞信号时乘法递减他们的带宽。</p>
+<h2><span id="internet-传输协议">Internet 传输协议</span></h2><h3><span id="udp">UDP</span></h3><p><strong>用户数据报协议</strong> (UDP)：提供无连接的服务。</p>
+<h4><span id="头标">头标</span></h4><p>UDP 传输的段（数据报）由 8 字节的头和有效载荷字段构成。</p>
+<ul>
+<li><p>源端口：2 字节。</p>
+</li>
+<li><p>目标端口：2 字节。</p>
+</li>
+<li><p>UDP 长度：2 字节。</p>
+<p>包含 8 字节的头和数据两部分的总长度。<br>最小长度是 8 字节，刚好覆盖 UDP 头。<br>最大长度是 65515 字节。因为 IP 头的总长度字段为 16 位，最大长度为 65535 字节；而 IP 头最少需要 20 字节。</p>
+</li>
+<li><p>UDP 校验和（可选）：2 字节</p>
+<p>校验 UDP 头、数据和一个概念性的 IP 伪头。</p>
+<p>IPv4 伪头包括：</p>
+<ul>
+<li>4 字节源地址</li>
+<li>4 字节目的地址</li>
+<li>1 字节 0</li>
+<li>1 字节 UDP 的协议号 17</li>
+<li>2 字节 UDP 长度（包括头，以字节为单位）</li>
+</ul>
+<p>与 IP 头中的头校验和算法类似。<br>计算校验和时：</p>
+<ul>
+<li>当数据字段的长度为奇数字节时，则在数据字段填充一个额外的 0 字节（因为要以 16 位为单位计算校验和）。</li>
+<li>当结果为全 0 时，将校验和置为全 1。</li>
+<li>如果发送端没有计算校验和，则将该字段置为 0。<br>验算时的步骤也和 IP 头校验和的验算类似，只是求和范围改成上述 UDP 的校验范围。</li>
+</ul>
+</li>
+</ul>
+<h4><span id="应用">应用</span></h4><ul>
+<li><p>具有简单高效的特点。</p>
+</li>
+<li><p>客户-服务器模式应用，如<strong>域名系统</strong> (DNS)。</p>
+</li>
+<li><p>话音、视频等实时多媒体应用。</p>
+</li>
+</ul>
+<h3><span id="tcp">TCP</span></h3><p><strong>传输控制协议</strong> (TCP)：在不可靠的互联网络上提供可靠的端到端字节流的传输协议。</p>
+<h4><span id="服务模型">服务模型</span></h4><p>TCP 服务由发送端和接收端创建<strong>套接字</strong>来获得。</p>
+<ul>
+<li><p>每个套接字有一个套接字编号（地址），该编号由主机的 IP 地址以及一个本地主机的 16 位数值（端口，TCP 的 TSAP 名字）。</p>
+</li>
+<li><p>一个套接字有可能同时被用于多个连接，即两个或多个连接可能终止于同一个套接字。</p>
+</li>
+<li><p>每个连接可以用两端的套接字标识符来标识，即 <code>(soket1, soket2)</code>。</p>
+</li>
+</ul>
+<p><strong>知名端口</strong>：1024 以下的端口号被保留，只能用作由特权用户启动的标准服务。</p>
+<table>
+<thead>
+<tr>
+<th>端口</th>
+<th>协议</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>20、21</td>
+<td>FTP</td>
+<td>文件传输</td>
+</tr>
+<tr>
+<td>22</td>
+<td>SSH</td>
+<td>远程登录</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Talnet</td>
+<td>远程登录</td>
+</tr>
+<tr>
+<td>25</td>
+<td>SMTP</td>
+<td>电子邮件</td>
+</tr>
+<tr>
+<td>80</td>
+<td>HTTP</td>
+<td>万维网</td>
+</tr>
+</tbody></table>
+<h4><span id="特点">特点</span></h4><ul>
+<li><p>字节流传输，端到端之间不保留消息的边界。</p>
+</li>
+<li><p>TCP 连接上的每个字节都有独有的 32 位序号，起始编号随机。</p>
+</li>
+<li><p>全双工，一个连接上传输两个方向的 TCP 数据，各自的编号是独立的。</p>
+</li>
+<li><p>点到点，不支持组播或广播传输模式。</p>
+</li>
+<li><p>发送端和接收端的 TCP 实体以段的形式交换数据。<br>TCP 段由一个固定的 20 字节的头（加上可选的部分）以及随后的 0 个或多个数据字节构成。<br>有两个因素限制了段的长度：</p>
+<ul>
+<li>包括 TCP 头在被的每个段，必须适合 IP 的 65515 个字节有效载荷。</li>
+<li>每个网络有最大传输单元 (MTU)。</li>
+</ul>
+</li>
+<li><p>使用具有动态窗口大小的滑动窗口协议。<br>发送端每次发送的数据量由发送窗口大小决定，而不是以应用层递交的消息为单位；<br>接收端每次向上层递交的数据量由落在接收窗口中并且有序的数据决定。</p>
+</li>
+<li><p>可靠，具有流量控制和拥塞控制。</p>
+<ul>
+<li>发送端：超时重传。</li>
+<li>接收端：发送确认，缓存处理乱序。</li>
+</ul>
+</li>
+</ul>
+<h4><span id="头">头</span></h4><p>每个段的起始部分是一个固定格式的 20 字节头。<br>固定的头部之后可能有头的选项。<br>选项之后是最多可达 $65535 - 20 - 20 &#x3D; 65495$ 个字节的数据。（其中第一个 20 指 IP 头，第二个 20 指 TCP 头。</p>
+<p>没有任何数据的 TCP 段也是合法的，通常被用作确认和控制消息。</p>
+<ul>
+<li><p><strong>源端口</strong> (Source port)：16 位</p>
+</li>
+<li><p><strong>目的端口</strong> (Destination port)：16 位</p>
+</li>
+<li><p><strong>序号</strong> (Sequence number)：32 位<br>标识本报文段的第一个字节在数据流中的位置。</p>
+</li>
+<li><p><strong>确认号</strong> (Acknowledgment number)：32 位<br>标识本段报文段的发送方下一个期待接收的字节编号。<br>是累计确认，用一个数字概括了接收到的所有数据。</p>
+</li>
+<li><p><strong>TCP 头长度</strong> (TCP header length)：4 位<br>指明 TCP 头的长度，以 32 位字为单位。</p>
+</li>
+<li><p><strong>保留</strong> (Reserved)：4 位<br>置 0。</p>
+</li>
+<li><p><strong>标志位</strong>：共 8 位，每个标志位 1 位  </p>
+<ul>
+<li><p><strong>CWR &amp; ECE</strong>：用于显示拥塞通知。<br>当 TCP 接收端收到了来自网络的拥塞指示后，就设置 ECE 以便给 TCP 发送端发 ENC-Echo 信号，告诉发送端放慢发送速率。<br>TCP 发送端设置 CWR，给接收端发 CWR 信号，告诉接收端已放慢发送速率，无需继续发送 ENC-Echo 信号。</p>
+</li>
+<li><p><strong>URG</strong>：置 1 时，紧急指针有效。  </p>
+</li>
+<li><p><strong>ACK</strong>：置 1 时，指示确认段有效。</p>
+</li>
+<li><p><strong>PSH</strong>：置 1时，指出这是被推送的数据。<br>请求接收端一旦收到数据后立即将数据递交给应用程序。</p>
+</li>
+<li><p><strong>RST</strong>：连接复位。<br>用于拒绝不存在的端口连接请求、中止异常连接等。</p>
+</li>
+<li><p><strong>SYN</strong>：用于建立连接过程。<br>在连接请求中，<code>(SYN = 1, ACK = 0)</code>，表明该段没有使用捎带确认字段。<br>在连接应答中，捎带了一个确认，因此 <code>(SYN = 1, ACK = 1)</code>。</p>
+</li>
+<li><p><strong>FIN</strong>：用于释放连接。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>窗口大小</strong> (Window size)：16 位。<br>指定在已确认的字节之后还可以接收的字节数。<br>窗口大小为 0 标识希望对端不再发送数据，用于流量控制。</p>
+</li>
+<li><p><strong>校验和</strong> (Checksum)：16 位。<br>与UDP 的校验和类似，只是 IP 伪头中的协议号为 TCP 的协议号 6。</p>
+</li>
+<li><p><strong>紧急指针</strong> (Urgent pointer)：16 位<br>指向紧急数据的结束位置（相对于序列号的偏移量）。</p>
+</li>
+<li><p><strong>选项</strong> (Options)：0 或 32 位的倍数，不足部分用 0 填充<br>对于最长的 TCP 头，选项可以扩展到 40 个字节。</p>
+</li>
+</ul>
+<h4><span id="连接建立">连接建立</span></h4><p>使用<a href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B">三次握手法</a>来建立连接。<br>通过三次握手，主机 1 和主机 2 之间完成初始序列、窗口大小（扩大因子）、最大数据段尺寸等参数的协商，并且分配连接所需要端点资源。</p>
+<p>正常情况：</p>
+<ul>
+<li><p>主机 1 请求连接数据段（SYN 数据段）：<br>SYN 标志置 1，ACK 标志置 0，选择初始序列号 <code>SEQ = x</code>。<br>即发送 <code>SYN (SEQ = x)</code>。<br>SYN 数据段不携带任何数据，但要消耗一个字节的序号。</p>
+</li>
+<li><p>主机 2 响应连接确认数据段（SYN+ACK 数据段）：<br>SYN 标志置 1，ACK 标志置 1，选择初始序列号 <code>SEQ = y</code>；并对 x 进行确认，设置 <code>ACK = x + 1</code>。<br>即发送 <code>SYN (SEQ = y, ACK = x +1)</code>。<br>SNY+ACK 数据段也不携带数据，但消耗一个字节的序号。</p>
+</li>
+<li><p>主机 1 响应连接确认数据段：<br>ACK 标志置 1，序列号 <code>SEQ = x + 1</code>；并对 y 进行确认，设置 <code>ACK = y + 1</code>。<br>即发送 <code>(SEQ = x + 1, ACK = y + 1)</code>。<br>ACK 数据段如果不携带数据就不消耗序号。</p>
+</li>
+</ul>
+<p>两端同时建立连接：</p>
+<ul>
+<li><p>主机 1 发送 <code>SYN (SEQ = x)</code>，同时主机 2 发送 <code>SYN (SEQ = y)</code>。</p>
+</li>
+<li><p>主机 2 收到消息后发送 <code>SYN (SEQ = y, ACK = x + 1)</code>，主机 1 收到消息后发送 <code>SYN (SEQ = x, ACK = y + 1)</code>。</p>
+</li>
+<li><p>实际上只建立了一个连接，并不是两个。</p>
+</li>
+</ul>
+<p>连接建立失败：</p>
+<ul>
+<li><p>主机 1 请求连接数据段（SYN 数据段）</p>
+</li>
+<li><p>主机 2 的 TCP 实体检查是否有进程已经在目标端口字段指定的端口上执行了 LISTEN。<br>如果没有，则它发送一个设置了 RST 的应答报文，拒绝主机 1 的连接请求。</p>
+</li>
+</ul>
+<h4><span id="连接释放">连接释放</span></h4><p>TCP 的全双工连接可以看成一个双单工的连接，每个单工连接都独立地释放。</p>
+<p>通常情况下，释放一个连接需要 4 个 TCP 段：<br>通信双方都必须向对方发送 <code>FIN = 1</code> 的 TCP 段并得到对方的应答，即每个方向上一个 <code>FIN</code> 和一个 <code>ACK</code>。<br>然而，第一个 <code>ACK</code> 和第二个 <code>FIN</code> 有可能被组合在同一个段中，从而将所需段总数降低到 3 个。<br>主机发送 <code>FIN</code> 数据段后，就不再向对方发送数据。</p>
+<p>为防止半连接，必须使用定时器计时，对 <code>FIN</code> 数据段的应答在两个最大分组生命期内未到达，则发送端释放连接，对方也会因为超时释放。</p>
+<h4><span id="连接管理模型">连接管理模型</span></h4><p>建立连接和释放连接所需的步骤可以用一个具有 11 个状态的有限状态机来表示。<br>每一种状态中，都存在特定的合法事件。当一个合法事件发生时，可能需要采取某个动作；当发生其他事件时，则报告一个错误。</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CLOSED</td>
+<td>没有活跃的连接或者挂起</td>
+</tr>
+<tr>
+<td>LISTEN</td>
+<td>服务器等待入境呼叫</td>
+</tr>
+<tr>
+<td>SYN RCVD</td>
+<td>到达一个连接请求，等待 <code>ACK</code></td>
+</tr>
+<tr>
+<td>SYN SENT</td>
+<td>应用已经启动了打开一个连接</td>
+</tr>
+<tr>
+<td>ESTABLISHED</td>
+<td>正常的数据传输状态</td>
+</tr>
+<tr>
+<td>FIN WAIT1</td>
+<td>应用没有数据要发了</td>
+</tr>
+<tr>
+<td>FIN WAIT2</td>
+<td>另一端同意释放连接</td>
+</tr>
+<tr>
+<td>TIME WAIT</td>
+<td>等待所有数据包寿终正寝</td>
+</tr>
+<tr>
+<td>CLOSING</td>
+<td>两端同时试图关闭连接</td>
+</tr>
+<tr>
+<td>CLOSE WAIT</td>
+<td>另一端已经发起关闭连接</td>
+</tr>
+<tr>
+<td>LAST ACK</td>
+<td>等待所有数据包寿终正寝</td>
+</tr>
+</tbody></table>
+<p><strong>建立连接过程</strong>：</p>
+<ul>
+<li><p>客户端和服务器都是从 <code>CLOSED</code> 状态开始。</p>
+</li>
+<li><p>客户端：应用程序发出 CONNECT 请求，本地的 TCP 实体创建一条连接记录，并将它标记为 <code>SYN SENT</code> 状态，然后发送一个 SYN 段。</p>
+<ul>
+<li>在 <code>SYN SENT</code> 状态中，客户端等待服务器的 SYN+ACK 字段</li>
+</ul>
+</li>
+<li><p>服务器：收到来自客户端的 SYN 后，创建一条连接记录，将其标记为 <code>SYN RCVD</code> 状态，然后发送一个确认（即 SYN+ACK 段）。</p>
+<ul>
+<li>在 <code>SYN RCVD</code> 状态中，服务器等待来自客户端的最后一个 ACK。</li>
+</ul>
+</li>
+<li><p>客户端：收到来自服务器的 SYN+ACK 段后，发出三次握手中的最后一个 ACK 段，然后切换到 <code>ESTABLISHED</code> 状态。</p>
+<ul>
+<li>在 <code>ESTABLISHED</code> 状态中，连接已建立，双方可以进行数据传输。</li>
+</ul>
+</li>
+<li><p>服务器：收到来自客户端的 ACK 段后，进入 <code>ESTABLISHED</code> 状态，连接建立完成。</p>
+</li>
+</ul>
+<p><strong>释放连接过程</strong>：</p>
+<ul>
+<li><p>客户端和服务器都是从 <code>ESTABLISHED</code> 状态开始。</p>
+</li>
+<li><p>客户端：应用结束，执行 CLOSE 原语。本地的 TCP 实体发送一个 FIN 段，将当前状态设置为 <code>FIN WAIT1</code>，等待对应的 ACK。</p>
+<ul>
+<li>在 <code>FIN WAIT1</code> 状态下，客户端等待服务器的 ACK 和 FIN。</li>
+</ul>
+</li>
+<li><p>服务器：收到客户端的 FIN 段，发送 ACK 段，并进入 <code>CLOSE WAIT</code> 状态。</p>
+<ul>
+<li>在 <code>CLOSE WAIT</code> 状态下，服务器等待应用程序的 <code>CLOSE</code> 操作，同时允许继续接收来自客户端的数据。</li>
+</ul>
+</li>
+<li><p>客户端：收到 ACK，状态迁移到 <code>FIN WAIT2</code>，并且连接的一个方向被关闭。</p>
+<ul>
+<li>在 <code>FIN WAIT2</code> 状态下，客户端等待来自服务器的 FIN。</li>
+</ul>
+</li>
+<li><p>服务器：执行 <code>CLOSE</code>，TCP 实体向客户端发送一个 FIN 段，并进入到 <code>LAST ACK</code> 状态。</p>
+<ul>
+<li>在 <code>LAST ACK</code> 状态下，服务器等待来自客户端的 ACK。</li>
+</ul>
+</li>
+<li><p>客户端：收到来自服务器的 FIN 段，发送 ACK 段，进入 <code>TIME WAIT</code> 状态。</p>
+<ul>
+<li>在<code>TIME WAIT</code> 状态下，TCP 要等待一段长度为最大数据包生存期两倍的时间。<br>以便确保在该阶段收到所有可能延迟或重复的数据包，并正确处理，避免对后续连接产生干扰。  </li>
+<li>计时器超时后，TCP 删除该连接记录，并进入 <code>CLOSED</code> 状态。</li>
+</ul>
+</li>
+<li><p>服务器：收到来自客户端的 ACK 段，同样等待长度为最大数据包生存期两倍的时间后，释放该连接并删除相应的连接记录，进入 <code>CLOSED</code> 状态。</p>
+</li>
+</ul>
+<h4><span id="滑动窗口">滑动窗口</span></h4><p>TCP 采用可变大小的动态缓冲区，缓冲区的大小由数据包头中的 Window size 指定。</p>
+<p>特点：</p>
+<ul>
+<li><p>可靠有序的传输：使用发送缓存和接收缓存，只有被确认窗口才滑动。</p>
+</li>
+<li><p>流量控制：接收端根据可用剩余缓冲区来指定窗口大小。</p>
+</li>
+<li><p>采用<strong>延迟确认</strong>：将确认和窗口更新消息延迟发送，希望通过捎带技术节约带宽。</p>
+</li>
+</ul>
+<p>eg. 假设接收端有一个 4096 字节的缓冲区。</p>
+<ul>
+<li><p>发送端传送一个 2048 字节的数据段，<code>SEQ = 0</code>。</p>
+</li>
+<li><p>接收端缓冲区还剩下 2048 字节，发送确认并指定窗口大小，即发送 <code>ACK = 2048, WIN = 2048</code>。</p>
+</li>
+<li><p>发送端再次传输另一个 2048 字节的数据段，<code>SEQ = 2048</code>。</p>
+</li>
+<li><p>接收端发回确认并宣告窗口大小变为 0，即发送 <code>ACK = 4096, WIN = 0</code>。  </p>
+<ul>
+<li>此时发送端被阻塞，停止发送数据。</li>
+<li>但是紧急数据仍可以发送。</li>
+<li>发送端可以发送一个 1 字节的段，以便接收端重新宣告下一个期望字节和窗口大小，称为<strong>窗口探测</strong>。</li>
+</ul>
+</li>
+</ul>
+<p><strong>低窗口综合征&#x2F;傻瓜窗口症状</strong>：  </p>
+<ul>
+<li><p>当数据以大块形式被传递给发送端 TCP 实体，但接收端的交互式应用每次仅读取 1 个字节。<br>于是当接收端缓冲区满时，接收端的应用进程每读取一个字节，发送窗口大小为 1 字节的修正信息。<br>发送方发送 1 字节数据，窗口很快又满了。</p>
+</li>
+<li><p>解决方案：</p>
+<ul>
+<li>禁止接收方发送 1 个字节大小的窗口修正信息，而是等到有了一定数量的可用空间后再通知对方。</li>
+<li>发送方不发送太小的数据段。</li>
+</ul>
+</li>
+</ul>
+<h4><span id="计时器管理">计时器管理</span></h4><p>TCP 维护多个定时器：包括建立、释放连接，确认、重传，滑动窗口三个方面。</p>
+<p><a href="#%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B">连接建立</a>，<a href="#%E8%BF%9E%E6%8E%A5%E9%87%8A%E6%94%BE">连接释放</a>：</p>
+<ul>
+<li><p><strong>连接建立定时器</strong> (Connection Establishment Timer)  </p>
+<p>当 SYN 数据段发出时，建立连接计时器就开始计时，如果在一定时间内未收到响应，则连接建立失败。</p>
+</li>
+<li><p><strong>保持存活定时器</strong> (Keep-Alive Timer)</p>
+<p>当一个连接长时间闲置时，该定时器会超时，从而使一方去检测另一方是否存在。<br>如果它没有得到响应，则种植终止该连接。</p>
+</li>
+<li><p><strong>闲置定时器</strong> (Quiet Timer)</p>
+<p>设置该定时器以防止刚刚断开连接的端口号被立即重新使用。<br>即 <code>TIME WAIT</code> 阶段所使用的定时器。</p>
+</li>
+</ul>
+<p>确认、重传：</p>
+<ul>
+<li><p><strong>重传定时器</strong> (RTO)</p>
+<p>当 TCP 实体发送一个段时，它同时启动一个重传计时器。<br>如果在该计时器超时前该段被确认，则计时器被停止；如果在确认到来前计时器超时，则该段被重传，并且该计时器被重新启动。</p>
+<p>使用一个动态算法，根据网络性能的连续测量情况，不断地调整超时间隔。</p>
+<ul>
+<li><p><strong>RTT</strong>（往返时间）：代表到达接收方往返时间的当前最佳估计值。  </p>
+<p>发送一个段后，如果在计时器超时前确认返回，则 TCP 测量这次确认所花的时间 R。  </p>
+<p>第一次测量时：$RTT &#x3D; R$。</p>
+<p>之后每次测量：根据以下<strong>指数加权移动平均</strong>公式更新 RTT 的值。<br>$$<br>RTT &#x3D; \alpha RTT + (1 + \alpha) R<br>$$<br>其中 $\alpha$ 是平滑因子，一般为 $\dfrac{7}{8}$</p>
+</li>
+<li><p><strong>RTTVAR</strong>（往返时间变化）</p>
+<p>同样的，发送一个段后，如果在计时器超时前确认返回，则 TCP 测量这次确认所花的时间 R。</p>
+<p>第一次测量时：$RTTVAR &#x3D; R &#x2F; 2$。</p>
+<p>之后每次测量，根据以下公式更新：<br>$$<br>RTTVAR &#x3D; \beta RTTVAR + (1 - \beta) |RTT - R|<br>$$<br>其中 $\beta$ 一般为 $\dfrac{3}{4}$</p>
+</li>
+<li><p><strong>RTO</strong>（重传超时值）<br>$$<br>RTO &#x3D; RTT + 4 \times RTTVAR<br>$$</p>
+</li>
+</ul>
+<p><strong>Karn 算法</strong>：对已经重传的数据段无需修改 RTT 和 RTTVAR，而是在每次传输失败时将超时时间 RTO 加倍，直到该数据段被成功传输。<br>因为发送端无法区分 ACK 是对哪次发送的 TCP 数据段的确认，所以重发数据段后收到的 ACK 不会更新 RTT 值。</p>
+</li>
+<li><p><strong>ACK 延时定时器</strong> (Delayed ACK Timer)</p>
+<p>当 TCP 实体收到数据段时，它启动 ACK 延时定时器。<br>在定时器超时前如果有数据段要发送，则在数据段中携带确认信息，并暂停该定时器。<br>如果定时器超时时还没有数据段要发送，则单独发送一条确认消息。</p>
+</li>
+</ul>
+<p><a href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">滑动窗口</a>：</p>
+<ul>
+<li><p><strong>持续定时器</strong> (The Persistence Timer)</p>
+<p>防止死锁情况：<br>为了让发送端暂停发送数据，接收端发送一个窗口大小为 0 的确认。之后，接收端又发送了更新了窗口大小的数据段。<br>如果该数据段丢失，则双方均处于等待。</p>
+<p>发送端在收到接收端发来一个窗口大小为 0 的数据段时，启动持续定时器。<br>如果定时器超时时还没有收到对方修改篡改看大小的数据段，则发送端发送一个 1 字节的探测数据段。<br>对该探测数据段的响应包含了窗口大小，如果仍为 0，则定时器清零，重新开始计时；否则则可以发送数据。</p>
+</li>
+</ul>
+<h4><span id="拥塞控制">拥塞控制</span></h4><p>每个 TCP 连接需要维护两个窗口：</p>
+<ul>
+<li><p><strong>接收窗口</strong> (rwnd)：接收端根据目前可用接收缓存大小所许诺的最新窗口值。<br>在<a href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">滑动窗口</a>中有所涉及。</p>
+</li>
+<li><p><strong>拥塞窗口</strong> (cwnd)：发送端根据自己估计的网络拥塞程度而设置的窗口值。<br>窗口大小时任何时候发送端可以向网络发送的字节数。<br>TCP 根据</p>
+</li>
+</ul>
+<p>发送端发送窗口的上限值应该去接收窗口和拥塞窗口中的较小值。</p>
+<p>TCP 拥塞控制算法过程：</p>
+<ul>
+<li><p><strong>慢速启动</strong></p>
+<ul>
+<li><p>当一个连接初始化时，将拥塞窗口置为一个<strong>最大数据段长度</strong> (MSS)，并设置慢启动阈值 (ssthresh)。</p>
+</li>
+<li><p>发送端的发送窗口不能超过 rwnd 和 cwnd 中的最小值，在这里假定接收端不进行流量控制。</p>
+</li>
+<li><p>发送端收到一个确定，就将拥塞窗口加 1 (MSS)。<br>即每经过一个 RTT，拥塞窗口就增加为前一个 RTT 时的两倍，即拥塞窗口从 1 开始按指数规律增长。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>加法递增乘法递减</strong> (AIMD)</p>
+<ul>
+<li><p>当拥塞窗口增长到 ssthresh 时，TCP 就从慢速启动切换到加法递增。<br>即每轮将拥塞窗口加 1，使拥塞窗口按线性规律增大。</p>
+</li>
+<li><p>如果出现数据包丢失（RTO 超时），就将当前拥塞窗口值减半，作为新的 ssthresh（乘法递减），同时将拥塞串口变为 1。</p>
+</li>
+<li><p>TCP 重新开始慢速启动过程。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>快速重传</strong></p>
+<ul>
+<li><p>发送端只要连续收到三个重复的 ACK 即可断定有数据包丢失。<br>因为丢失数据包后续的数据包触发接收端返回的确认携带相同的确认号（期望收到的数据包没变）。</p>
+</li>
+<li><p>上述情况下立即重传丢失的数据包而不必等待 RTO 超时。<br>同时像超时情况下一样处理拥塞窗口（乘法递减）。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>快速恢复</strong> (Reno 算法，是 TCP 推荐算法，不是必须)</p>
+<ul>
+<li><p>当发送端收到连续三个重复 ACK 时，重新设置 ssthresh 为当前拥塞窗口的一半。<br>但拥塞窗口不是设置为 1，而是设置成 ssthresh + 3。</p>
+</li>
+<li><p>如果收到了重复的 ACK（说明又有丢失数据包之后的数据包到达了接收端，网络里的数据包减少了一个），则每收到一个重复 ACK，就将拥塞窗口加 1。</p>
+</li>
+<li><p>若收到了重传数据包的 ACK（新的 ACK），则将拥塞窗口设置到 ssthresh，再次执行 AIMD。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>TCP 的传输速率：</p>
+<ul>
+<li>设 TCP 的发送窗口为 w，往返时间为 RTT，则 TCP 瞬时最大发送速率为 $\dfrac{w}{RTT}$。</li>
+<li>由于 w 是变化的，设丢包或收到三个重复 ACK 时的窗口为 W 且 W 不变，则 w 在 W&#x2F;2 到 W 之间变化。<br>忽略慢速启动阶段，则一条连接的平均吞吐量为 $0.75 \times \dfrac{W}{RTT}$。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-计算机网络（四）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/">计算机网络（四）</a>
+    </h1>
+  
+
+        
+        <a href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2024-01-02T14:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="第4章-mac-子层">第4章 MAC 子层</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#%E4%BC%A0%E7%BB%9F-lan-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">传统 LAN 基本概念</a></li>
+<li><a href="#%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE">多路访问协议</a><ul>
+<li><a href="#%E4%BF%A1%E9%81%93%E5%88%86%E9%85%8D">信道分配</a><ul>
+<li><a href="#%E9%9D%99%E6%80%81%E4%BF%A1%E9%81%93%E5%88%86%E9%85%8D">静态信道分配</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E4%BF%A1%E9%81%93%E5%88%86%E9%85%8D">动态信道分配</a></li>
+</ul>
+</li>
+<li><a href="#aloha-%E5%8D%8F%E8%AE%AE">ALOHA 协议</a><ul>
+<li><a href="#%E7%BA%AF-aloha">纯 ALOHA</a></li>
+<li><a href="#%E5%88%86%E6%A7%BD-aloha">分槽 ALOHA</a></li>
+</ul>
+</li>
+<li><a href="#csma-%E5%8D%8F%E8%AE%AE">CSMA 协议</a><ul>
+<li><a href="#1-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">1-坚持式 CSMA</a></li>
+<li><a href="#%E9%9D%9E%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">非坚持式 CSMA</a></li>
+<li><a href="#p-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">p-坚持式 CSMA</a></li>
+<li><a href="#csmacd">CSMA&#x2F;CD</a></li>
+<li><a href="#csmaca">CSMA&#x2F;CA</a></li>
+<li><a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE-maca">冲突避免多路访问 (MACA)</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%A5%E5%A4%AA%E7%BD%91-ieee-8023">以太网 (IEEE 802.3)</a><ul>
+<li><a href="#%E7%BB%8F%E5%85%B8%E4%BB%A5%E5%A4%AA%E7%BD%91">经典以太网</a><ul>
+<li><a href="#%E5%B8%A7%E6%A0%BC%E5%BC%8F">帧格式</a></li>
+<li><a href="#mac-%E5%AD%90%E5%B1%82%E5%8D%8F%E8%AE%AE">MAC 子层协议</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%A4%E6%8D%A2%E5%BC%8F%E4%BB%A5%E5%A4%AA%E7%BD%91">交换式以太网</a><ul>
+<li><a href="#%E5%BF%AB%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91-fast-ethernet">快速以太网 (Fast Ethernet)</a></li>
+<li><a href="#%E5%8D%83%E5%85%86%E4%BB%A5%E5%A4%AA%E7%BD%91-gigabit-ethernet">千兆以太网 (Gigabit Ethernet)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91-80211">无线局域网 (802.11)</a><ul>
+<li><a href="#%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">体系结构</a></li>
+<li><a href="#mac-%E5%AD%90%E5%B1%82%E5%8D%8F%E8%AE%AE-1">MAC 子层协议</a><ul>
+<li><a href="#%E5%B8%A6%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E7%9A%84-csma">带冲突避免的 CSMA</a></li>
+<li><a href="#%E7%89%A9%E7%90%86%E4%BE%A6%E5%90%AC%E8%99%9A%E6%8B%9F%E4%BE%A6%E5%90%AC">物理侦听&#x2F;虚拟侦听</a></li>
+<li><a href="#%E5%8F%AF%E9%80%89%E7%9A%84-rtscts-%E6%9C%BA%E5%88%B6">可选的 RTS&#x2F;CTS 机制</a></li>
+<li><a href="#%E6%97%B6%E9%97%B4%E9%97%B4%E9%9A%94">时间间隔</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%A7%E6%A0%BC%E5%BC%8F-1">帧格式</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E8%81%94%E8%AE%BE%E5%A4%87">局域网互联设备</a><ul>
+<li><a href="#%E7%BD%91%E6%A1%A5">网桥</a><ul>
+<li><a href="#%E5%AD%A6%E4%B9%A0%E7%BD%91%E6%A1%A5">学习网桥</a></li>
+<li><a href="#%E7%94%9F%E6%88%90%E6%A0%91%E7%BD%91%E6%A1%A5">生成树网桥</a></li>
+<li><a href="#%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98">存在的问题</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA">交换机</a></li>
+<li><a href="#%E4%B8%8D%E5%90%8C%E8%AE%BE%E5%A4%87%E5%AF%B9%E6%AF%94">不同设备对比</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<h2><span id="传统-lan-基本概念">传统 LAN 基本概念</span></h2><p><strong>局域网</strong> (LAN)：在一个小区域范围内对各种数据通信设备提供了互连的信息网。  </p>
+<p>决定局域网特性的主要技术：</p>
+<ul>
+<li>传输媒体： 传输数据</li>
+<li>拓扑结构：连接各种设备</li>
+<li>媒体访问控制方法：共享资源</li>
+</ul>
+<p>局域网的数据链路层：</p>
+<ul>
+<li>逻辑链路控制子层 (LLC)</li>
+<li>媒体访问控制子层 (MAC)：用来确定多路访问信道下一个使用者的协议</li>
+</ul>
+<p>LAN 的传输媒体：</p>
+<ul>
+<li>双绞线</li>
+<li>同轴电缆</li>
+<li>光纤</li>
+<li>无线电波</li>
+<li>红外</li>
+</ul>
+<p>LAN 的拓扑结构：</p>
+<ul>
+<li>星型</li>
+<li>环型</li>
+<li>总线型</li>
+<li>树型</li>
+</ul>
+<h2><span id="多路访问协议">多路访问协议</span></h2><h3><span id="信道分配">信道分配</span></h3><p>信道分配问题：如何在竞争用户之间分配单个广播信道。</p>
+<h4><span id="静态信道分配">静态信道分配</span></h4><p>采用多路复用技术，将信道容量拆开分给多个用户使用。<br>如传统的 FDM 或 TDM，对于 N 个用户，将带宽或时间分成 N 份，每个用户静态地占用一个。</p>
+<p>缺点：不能有效地处理突发数据，有些用户停止通信时带宽或时间被浪费。</p>
+<h4><span id="动态信道分配">动态信道分配</span></h4><p>异步时分多路复用。分为以下两种：</p>
+<ul>
+<li><p><strong>随机访问</strong>：争用。只要有数据就直接发送，发生冲突后再采取措施解决冲突。<br>适用于负载轻的网络，负载重时效率低</p>
+</li>
+<li><p><strong>控制访问</strong>：发送站点先获得发送的权利，再发送数据。<br>不会发生冲突，在负载重的网络中可获得很高的信道利用率。<br>主要有轮询和预约两种方式。</p>
+</li>
+</ul>
+<p>动态信道分配的5个关键假设：</p>
+<ul>
+<li><p><strong>流量独立</strong><br>由 N 个独立的站组成，每个站都有一个程序或用户产生要传输的帧。</p>
+</li>
+<li><p><strong>单信道</strong><br>所有用户都共享同一个信道，在该信道上发送&#x2F;接收数据。</p>
+</li>
+<li><p><strong>冲突可观察</strong><br><strong>冲突</strong>：如果多个用户同时发送数据，多路信号在时间上叠加使接收端无法正常解码。<br>所有站都能够检测到冲突事件的发生，冲突的帧必须在以后再次被发送。</p>
+</li>
+<li><p><strong>时间连续或分槽</strong><br>时间连续：任何时刻都可以开始传输帧。<br>时间分槽：将时间分为离散的间隔（称为时间槽），帧的传输只能从某个时间槽的起始点开始。</p>
+</li>
+<li><p><strong>载波侦听或不听</strong><br>载波侦听：发送前先侦听信道，可以知道该信道当前是否正被使用。</p>
+</li>
+</ul>
+<h3><span id="aloha-协议">ALOHA 协议</span></h3><h4><span id="纯-aloha">纯 ALOHA</span></h4><p>当用户有数据需要发送时就传输。</p>
+<p>每个站在给中央计算机发送帧之后，该计算机把该帧重新广播给所有站。<br>发送站侦听来自集线器的广播，以此确定它的帧是否发送成功。</p>
+<p>如果帧被损坏了，则发送方等待一段随机时间后再次发送该帧。</p>
+<h4><span id="分槽-aloha">分槽 ALOHA</span></h4><p>将信道时间分为离散的时间槽，每个时间槽可以用来发送一个帧。<br>一个站点有数据发送时，必须等到下个时间槽的开始才可以发送。</p>
+<p>与纯 ALOHA 相比，信道利用率提高一倍。</p>
+<h3><span id="csma-协议">CSMA 协议</span></h3><p><strong>载波侦听多路访问</strong> (CSMA) 协议：站监听信道，根据信道的状态来采取相应的动作，只有发现信道空闲时才能发送数据。</p>
+<h4><span id="1-坚持式-csma">1-坚持式 CSMA</span></h4><p>当一个站点要发送数据时，先监听信道，若信道忙则坚持监听；一旦发现信道空闲，立即发送数据（发送数据概率为 1）。<br>若发生冲突，等待一随机场时间，再重新开始监听信道。</p>
+<p>两种发生冲突可能：</p>
+<ul>
+<li>信号传输延迟造成冲突</li>
+<li>多个站点在监听到信道空闲时同时发送</li>
+</ul>
+<p>该协议的性能高于 ALOHA 协议。</p>
+<h4><span id="非坚持式-csma">非坚持式 CSMA</span></h4><p>当一个站点要发送数据时，先监听信道，若信道忙，随机等待一段时间后再开始监听信道（非坚持）；一旦发现信道空闲，立即发送数据。</p>
+<p>该协议的信道利用率高于 1-坚持式 CSMA 协议，但网络的延迟增大。</p>
+<h4><span id="p-坚持式-csma">p-坚持式 CSMA</span></h4><p>适用于分时间槽的信道。</p>
+<p>当一个站点要发送数据时，先监听信道，若信道忙，则等到下个时间槽再监听信道；若信道空闲，则按照概率 p 发送数据，而以概率 q&#x3D;1-p 将此次发送推迟到下一个时间槽。若下一个时间槽信道也是空闲的，则它还是以概率 p 发送数据，或者以概率 q 再次推迟发送；重复该过程直到帧被发送出去。</p>
+<p>与前两种 CSMA 协议相比：</p>
+<ul>
+<li>概率 p：降低 1-坚持式协议中多个站点同时发送而造成冲突的概率。</li>
+<li>坚持监听：克服非坚持式协议中造成的时间延迟。</li>
+</ul>
+<p>p 的选择直接关系到协议的性能。</p>
+<h4><span id="csmax2fcd">CSMA&#x2F;CD</span></h4><p><strong>带冲突检测的 CSMA</strong> (CSMA&#x2F;CD)<br>发送过程中仍然监听信道，通过检测回复信号的能量或脉冲宽度并将其与发送的信号作比较，可以判断是否发生冲突。<br>一旦发生冲突，立即取消发送，等待一随机时间后再尝试发送。</p>
+<p>检测冲突的最小时间是将信号从一个站传播到另一个站所需要的时间。</p>
+<h4><span id="csmax2fca">CSMA&#x2F;CA</span></h4><p><strong>带避免冲突的 CSMA</strong>，被 WLAN 采用。</p>
+<ul>
+<li>通过侦听确定在很短的一个时间内（这段时间称为 DIFS）没有信号。</li>
+<li>倒计数空闲时间槽，当有帧在发送时暂停该计数器。</li>
+<li>当计数器递减到0时，该站发送自己的帧。</li>
+<li>如果帧发送成功，目标站立即发送一个短确认。</li>
+<li>如果该站没有收到确认，则说明传输过程中发生了错误，采用<a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a>算法重新发送。</li>
+</ul>
+<h4><span id="二进制指数后退">二进制指数后退</span></h4><p>如果发生冲突，等待一段随机时间后再重试。<br>一般地，在第 i 次冲突之后，从 $0$ ~ $2^i-1$ 之间随机选择一个数，然后等待这么多个时间槽。<br>在达到10次冲突之后，随机数的选择区间被固定在最大值1023，不再增加。<br>在16次冲突之后，控制器放弃努力，并给计算机返回一个失败报告，进一步的恢复工作由高层协议完成。</p>
+<h3><span id="冲突避免多路访问-maca">冲突避免多路访问 (MACA)</span></h3><ul>
+<li>A 向 B 发送一个 RTS (Request To Send) 短帧，包含了随后要发送的数据帧长度。</li>
+<li>B 向 A 回复一个 CTS (Clear To Send) 短帧，包含了从 RTS 中复制的数据帧长度。</li>
+<li>A 收到 CTS 后开始传输。</li>
+<li>如果一个站侦听到了 RTS，则它保持足够长时间的沉默使 A 能在无冲突的情况下收到 CTS。<br>该站如果只侦听到了 RTS 没有侦听到 CTS，则在数据帧传送过程中可以自由发送信息。</li>
+<li>如果一个站侦听到了 CTS，则它依据 CTS 中数据帧的长度，在数据传输过程中一直保持沉默。</li>
+</ul>
+<h2><span id="以太网-ieee-8023">以太网 (IEEE 802.3)</span></h2><p><strong>经典以太网</strong>：使用上述技术解决多路访问问题。<br>以太网的原始形式，运行速度从 3~10 Mbps 不等。</p>
+<p><strong>交换式以太网</strong>：使用交换机连接不同的计算机。<br>可以运行在 100、1000 和 10000 Mbps 的高速率，分别以快速以太网、千兆以太网和万兆以太网的形式呈现。</p>
+<h3><span id="经典以太网">经典以太网</span></h3><h4><span id="帧格式">帧格式</span></h4><ul>
+<li><p><strong>前导码</strong> (Preamble)：8个字节，每个字节包含比特模式 10101010。IEEE 802.3 最后一个字节（帧起始定界符 SOF）的最后2位为11。<br>比特模式是由曼彻斯特编码产生的 10MHz 方波，每个波 6.4 微妙，以便接收方的时钟与发送方同步。</p>
+</li>
+<li><p><strong>目标地址</strong>：6个字节，MAC 地址，第一位是0表示是普通地址；如果是1，则表示组地址，该组中的所有站都要接收；全1的特殊地址用作广播，网络中的所有地址都要接收。</p>
+</li>
+<li><p><strong>源地址</strong>：6个字节，MAC 地址，标识帧的发送方，具有全球唯一性。<br>地址字段的前3个字节用作该站所在的组织唯一标识符 (OUI)，由 IEEE 统一分配，指明了网络设备制造商；后3个字节由制造商负责分配。</p>
+</li>
+<li><p><strong>类型&#x2F;长度</strong> (Type&#x2F;Length)：2个字节。以太网使用类型字段，指定了该把帧送给哪个进程处理。IEEE 802.3 使用长度字段，接收方通过数据内包含的另一个逻辑链路控制 (LLC) 协议头来确定如何处理入境帧。<br>任何值小于或等于 0x600 可解释为长度字段，任何大于 0x600 可解释为类型字段。</p>
+</li>
+<li><p><strong>数据</strong> (Data)：最多可包含 1500 字节。</p>
+</li>
+<li><p><strong>填充</strong> (Pad)：最多 46 字节。以太网要求有效帧必须至少 64 字节长，从目标地址算起直到校验和，包括这两个字段本身在内。如果帧的数据部分小于 46 字节，则使用填充字段来填充该帧，使其达到最小长度要求。</p>
+<p>限制最小帧长的原因：避免当一个短帧还没有到达电缆远端的发送方，该帧的传送就已经结束；这种情况下，当在电缆的远端发生冲突时，发送方的传送在突发噪声到达前就完成传送，发送方误以为刚才一帧已成功发送。</p>
+</li>
+<li><p><strong>校验和</strong>：4个字节，采用 32位CRC。</p>
+</li>
+</ul>
+<h4><span id="mac-子层协议">MAC 子层协议</span></h4><p>采用 1-坚持 CSMA&#x2F;CD 算法，发生冲突时采用 二进制指数后退算法。</p>
+<p><a href="#1-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">1-坚持式 CSMA</a>，<a href="#csmacd">CSMA&#x2F;CD</a>，<a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a></p>
+<h3><span id="交换式以太网">交换式以太网</span></h3><p>当交换机端口接收到来自某个站的以太网帧，它检查该帧的以太网地址，确定该帧前往的目的地端口。</p>
+<ul>
+<li>在集线器中，所有站位于同一个<strong>冲突域</strong>（不同站点同时发送数据可能产生碰撞的最大网段），必须使用 CSMA&#x2F;CD 算法。</li>
+<li>在交换机中，每个端口有独立的冲突域。  <ul>
+<li>对于全双工电缆，冲突不可能发生。</li>
+<li>对于半双工电缆，站和端口以通常的 CSMA&#x2F;CD 方式竞争传输。</li>
+</ul>
+</li>
+</ul>
+<h4><span id="快速以太网-fast-ethernet">快速以太网 (Fast Ethernet)</span></h4><p>IEEE 802.3u 工作组规范 (1995, 6)。</p>
+<p>特点：</p>
+<ul>
+<li>采用 CSMA&#x2F;CD 媒体访问控制方式和 802.3 帧格式；</li>
+<li>100 BASE-TX 采用两对5类双绞线；</li>
+<li>100 BASE-T4 采用四对3类双绞线；</li>
+<li>网络最大长度 250m (10 Mbps 的经典以太网是 2500m)。</li>
+</ul>
+<h4><span id="千兆以太网-gigabit-ethernet">千兆以太网 (Gigabit Ethernet)</span></h4><p>IEEE 802.3z (1998) 和 802.3ab 工作组规范。</p>
+<p>特性：</p>
+<ul>
+<li><strong>载波扩充</strong>：让硬件在普通的帧后面增加一些填充位，将帧的长度扩充到 512 字节，使网络最大距离延长到 200m。</li>
+<li><strong>帧突发</strong>：允许发送方将多个待发送帧级联在一起，一次传输出去。最大突发长度为 8192 字节。如果级联起来的整个突发仍然小于 512 个字节，则硬件会再次对它进行填充。</li>
+<li>全双工。</li>
+</ul>
+<h2><span id="无线局域网-80211">无线局域网 (802.11)</span></h2><p><strong>WLAN</strong>：无线局域网，是计算机网络和无线通信技术相结合的产物，是有线网络的无线化延伸。<br><strong>Wi-Fi</strong>：是一个创建于 IEEE 802.11 标准上的无线局域网技术，可等同于 802.11 的同义词。<br>无线局域网的主要标准是 802.11。</p>
+<h3><span id="体系结构">体系结构</span></h3><p><strong>接入点</strong> (AP)：转发该 WLAN 上的所有帧，具备无线至有线的桥接功能。<br><strong>工作站</strong>  (Station)：具备 WLAN 接口，能接入 WLAN 的主机。<br><strong>分布式系统</strong> (DS)：一种有线网络，是 802.11 的逻辑组件，负责连接多个 AP，或将 AP连接至骨干网（如目前已知的以太网）。</p>
+<p><strong>基本服务集</strong> (BSS)</p>
+<ul>
+<li>独立基本服务集 (IBSS, independent BSS)：工作站之间相互可以直接通信（不需要通过 AP 转发）。</li>
+<li>基础结构型基本服务集 (infrastructure BSS)：工作站需先与接入点建立关联，接入点负责转发工作站之间的通信。</li>
+<li>每个 BSS 都有一个6字节的识别符 BSSID，相当于 AP 的 MAC 地址。</li>
+</ul>
+<p><strong>扩展服务集</strong> (ESS)：将几个 BSS 连接为 ESS。</p>
+<h3><span id="mac-子层协议">MAC 子层协议</span></h3><p>带有物理侦听和虚拟侦听的 CSMA&#x2F;CA 是 802.11 协议的核心。</p>
+<p>802.11 允许把帧拆分为更小的单元<strong>段</strong> (fragment)，每个段有自己的校验和。</p>
+<h4><span id="带冲突避免的-csma">带冲突避免的 CSMA</span></h4><p>802.11 支持两种操作模式</p>
+<ul>
+<li><p><strong>点协调功能</strong> (PCF)：由 AP 周期性地（每秒10~100次）广播一个信标帧，邀请站点申请服务，集中控制。</p>
+</li>
+<li><p><strong>分布式协调功能</strong> (DCF)：分布式控制，采用<strong>带有冲突避免的 CSMA</strong> (<a href="#csmaca">CSMA&#x2F;CA</a>)。  </p>
+</li>
+<li><p>DCF 是必须的，PCF 是可选的。</p>
+</li>
+</ul>
+<p>与以太网相比，CSMA&#x2F;CA 有两个主要区别：</p>
+<ul>
+<li>早期的后退有助于避免冲突；</li>
+<li>利用确认来推断是否发生冲突，因为冲突无法被检测出来。</li>
+</ul>
+<h4><span id="物理侦听x2f虚拟侦听">物理侦听&#x2F;虚拟侦听</span></h4><p>由于 WLAN 中各个站点发出的信号范围有限，使用 CSMA 时存在两个问题：</p>
+<ul>
+<li><strong>隐藏终端问题</strong>：由于竞争者距离太远而导致站无法检测到潜在的竞争者，误以为可以发送数据。</li>
+<li><strong>暴露终端问题</strong>：站点侦听到信道上有帧在传送，错误地认为自己不能发送数据。</li>
+</ul>
+<p>为了解决上述问题，802.11 定义信道侦听包括物理侦听和虚拟侦听两部分。</p>
+<ul>
+<li><p><strong>物理侦听</strong>：检测信道是否存在有效信号。</p>
+</li>
+<li><p><strong>虚拟侦听</strong>：让源站将它要占用信道的时间通知给所有其他站，使其他站不需要侦听就能知道信道何时可能转为空闲。  </p>
+<p><strong>网络分配向量</strong> (NAV)：每个帧携带一个 NAV 字段，说明这个帧所属的一系列数据将传输多长时间。<br>当一个站检测到正在信道中传输的 MAC 帧首部的 NAV 字段时，就调整自己的 NAV。</p>
+</li>
+</ul>
+<h4><span id="可选的-rtsx2fcts-机制">可选的 RTS&#x2F;CTS 机制</span></h4><p>使用 NAV 来防止隐藏终端在同一时间发送，与 <a href="#%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE-maca">MACA</a> 类似。<br>不同之处：</p>
+<ul>
+<li>A 发送数据帧时启动一个 ACK 计时器；</li>
+<li>当正确的数据帧到达后，B 用一个 ACK 帧回复 A，完成此次交流；</li>
+<li>如果 A 的 ACK 计时器超时前，ACK 没有返回，则可视为发生了一个冲突，经过一次后退整个协议重新开始运行；</li>
+<li>听到 RTS&#x2F;CTS 的站会更新自己的 NAV 记录表示信道正忙。</li>
+</ul>
+<p>RTS&#x2F;CTS 的引入带来了延时和信道资源的消耗，因此该机制只用于预约长数据帧的信道。实际中，每个无线站点可设置一个 RTS 门限，仅当数据长度超过门限时才使用该机制。</p>
+<h4><span id="时间间隔">时间间隔</span></h4><p>一帧发送出去后，需要保持一段特定时间的空闲以便检查信道不在被用，然后任何站才可以发送帧。</p>
+<ul>
+<li><p><strong>短帧间间隔</strong> (SIFS)：最短的间隔；允许一次对话的各方具有优先抓住信道的机会，可以发送控制帧（如 ACK、RTS、CTS）或下一个段。</p>
+</li>
+<li><p><strong>DCF 帧间隔</strong> (DIFS)：常规的数据帧之间的间隔；任何站都可以在介质空闲 DIFS 后尝试抓取信道发送一个新帧，采用通常的竞争规则。</p>
+</li>
+<li><p><strong>仲裁帧间空间</strong> (AIFS)：有两个不同的优先级。</p>
+<ul>
+<li>AIFS1：小于 DIFS 但长于 SIFS；被 AP 用来把语音或其他高优先级流量移到行头。</li>
+<li>AIFS4：长于 DIFS；用来发送可以延迟到常规流量之后发送的背景流量。</li>
+<li>完善的服务质量机制定义了四种不同的优先级别，分别具有不同的后退参数和不同的空闲参数。</li>
+</ul>
+</li>
+<li><p><strong>扩展帧间间隔</strong> (EIFS)：最长；仅用于一个站刚刚收到坏帧或未知帧后报告问题。</p>
+</li>
+</ul>
+<p>时间间隔长度与媒介有关，速率高的物理层会使用较短的间隔；同样，不同的物理层帧间间隔也有所不同。</p>
+<h3><span id="帧格式">帧格式</span></h3><ul>
+<li><p><strong>帧控制</strong> (Frame Control):2 个字节，包含 11 个子字段。</p>
+<ul>
+<li><strong>协议版本</strong> (Protocol Version)：2 比特，00。</li>
+<li><strong>类型</strong> (Type)：2 比特，数据帧、控制帧或管理帧。</li>
+<li><strong>子类型</strong> (Subtype)：4 比特，比如 RTS 或 CTS。</li>
+<li><strong>To DS</strong>：1 比特，表明发送到分布式系统。</li>
+<li><strong>From DS</strong>：1 比特，表明来自分布式系统。</li>
+<li><strong>更多段</strong> (More fragment)：1比特，表明后面还有更多的段。</li>
+<li><strong>重传</strong> (Retry)：1比特，表明这是以前发送的某一帧的重传。</li>
+<li><strong>电源管理</strong> (Power management)：1 比特，指明发送方进入节能模式。</li>
+<li><strong>更多数据</strong> (More data)：1 比特，表明发送方还有更多的帧需要发送给接收方。</li>
+<li><strong>受保护的</strong> (Protected Frame)：1 比特，表明该帧的帧体已经被加密。</li>
+<li><strong>顺序</strong> (Order)：1 比特，告诉接收方高层希望严格按照顺序来处理帧序列。</li>
+</ul>
+</li>
+<li><p><strong>持续时间</strong> (Duration)：2个字节。<br>通告本帧和其确认帧将会占用信道多长时间，按微妙计时。<br>该字段会出现在所有帧中，包括控制帧，其他站用该字段来管理各自的 NAV 机制。</p>
+</li>
+<li><p><strong>地址</strong>：共有三个地址字段，每个均有 6 个字节。</p>
+<ul>
+<li>地址1：接收方地址。</li>
+<li>地址2：发送方地址。</li>
+<li>地址3：当帧在一个客户端和网络中的另一点传输时，AP 是一个中继点，地址3指明了这个远程端点。</li>
+<li>当 To DS 和 From DS 都置1时，在序号字段后有 6 个字节的地址4。</li>
+</ul>
+</li>
+<li><p><strong>序号</strong> (Sequence)：2 个字节。<br>帧的编号，用于重组帧片段以及丢弃重复帧。<br>有 4 位段序号和 12 位帧序号。相当于已传帧的计数器，计数器从0计数，每传输一帧序号+1，取 4096 的模数。</p>
+</li>
+<li><p><strong>数据</strong> (Data)：最多可有 2312 个字节。<br>有效荷载中前面部分字节的格式称为<strong>逻辑链路控制</strong> (LLC)，标识有效荷载应该递交给哪个高层协议处理（比如 IP）。</p>
+</li>
+<li><p><strong>帧校验序列</strong> (Frame check sequence)：4 个字节。<br>32 位 CRC。</p>
+</li>
+</ul>
+<p><strong>RTS</strong> 共20字节：帧控制、持续时间、目的地址、源地址和检错字段。<br><strong>CTS</strong> 和 <strong>ACK</strong>共14字节：帧控制、数据长度、目的地址和检错字段。</p>
+<h2><span id="局域网互联设备">局域网互联设备</span></h2><h3><span id="网桥">网桥</span></h3><ul>
+<li>用于连接局域网的互连设备。</li>
+<li>工作在数据链路层，通过检查数据链路层地址（MAC 地址）来转发帧，必要时进行帧格式转换。</li>
+<li>能隔离以太网中的碰撞域，但不能隔离广播域。</li>
+<li>丢弃出错帧。</li>
+<li>包括透明网桥和源路由选择网桥，以下两种都是透明网桥。</li>
+</ul>
+<h4><span id="学习网桥">学习网桥</span></h4><p>为每个网桥配备一个大的哈希表，该表列出每个可能的目的地以及它们隶属的输出端口。</p>
+<p>当网桥第一次接入网络时，所有哈希表都是空的，采用<strong>泛洪算法</strong>：<br>对于每个发向未知目标地址的入境帧，网桥将它输出到所有端口，除了它来的输入端口。</p>
+<p>采用<strong>后向学习法</strong>：<br>通过检查每个端口发送的帧的源地址，网桥可以知道通过该端口可以访问到哪些机器，于是在哈希表上构造相应的一对地址和端口。</p>
+<p>为了处理动态的拓扑结构：<br>构造出哈希表后，帧的到达时间也被记录在相应的表项中。<br>当一帧到达时，如果它的源地址已经在表中，那么对应表项中的时间值被更新为当前时间。<br>网桥中存在一个进程定期扫描哈希表，将时间值在几分钟之前的表项都清除掉。</p>
+<p>对到达网桥的入境帧，整个转发过程如下：  </p>
+<ul>
+<li>如果去往目的地址的端口与源端口相同，则丢弃该帧；</li>
+<li>如果去往目的地址的端口与源端口不同，则转发该帧到目标端口；</li>
+<li>如果目标端口未知，则使用泛洪算法，将该帧转发到所有端口，除了它入境的哪一个。</li>
+</ul>
+<p>网桥可看作链路层设备，一个具有 k 个端口的网桥将有 k 个 MAC 和物理层实例。</p>
+<h4><span id="生成树网桥">生成树网桥</span></h4><p>为了提高可靠性，在网桥之间使用冗余链路，如在一对网桥之间并行设置两条链路。</p>
+<p>为了解决拓扑环路问题：<br>让网桥之间相互通信，用一棵可以到达每个网桥的生成树覆盖实际的拓扑结构。  </p>
+<ul>
+<li>选择具有最低标识符的网桥为生成树的根。</li>
+<li>构造从根到每个网桥的最短路径树，碰到平局时，选择一条经过更低标识符的网桥的路径。</li>
+<li>网桥在被指消息中包括与根的距离，每个网桥记住它找到的到根的最短路径。</li>
+<li>网桥关闭不属于最短路径一部分的端口。</li>
+</ul>
+<h4><span id="存在的问题">存在的问题</span></h4><p>在连接不同类型的局域网（如 802.3 和 802.11）时，网桥的转发存在以下主要问题。</p>
+<ul>
+<li><p>帧格式不同。<br>需要重新组帧，某些域（如 802.11 帧的持续时间）需要丢弃或产生，还需要重新生成校验和。</p>
+</li>
+<li><p>数据速率不同，802.11 速率较低。<br>网桥需要用缓冲区存储来不及传输的帧。</p>
+</li>
+<li><p>最大帧的长度不同。<br>802 标准本身不提供把长帧分片的功能，对于太长的帧只能丢弃。</p>
+</li>
+<li><p>安全性问题。<br>802.11 支持加密，802.3 不支持。</p>
+</li>
+<li><p>服务质量问题。<br>802.11 采用 PCF 可以支持 QoS，802.3 不支持。</p>
+</li>
+</ul>
+<h3><span id="交换机">交换机</span></h3><p><strong>交换机</strong>源自于多端口网桥，采用存储-转发方式在各端口之间进行数据帧的交换。</p>
+<p>交换机检测每个到达数据帧的帧头，根据数据帧的目的地址查找输出端口。<br>如果地址查找表中没有该表项，交换机就向所有端口（除了接收端口）转发。<br>地址查找表是通过帧的源地址与到达端口的对应关系建立的。</p>
+<p>工作在数据链路层，能隔离碰撞域。</p>
+<p><strong>交换式局域网</strong>：采用星型拓扑结构，用交换机连接主机。</p>
+<h3><span id="不同设备对比">不同设备对比</span></h3><p><strong>帧</strong>（由数据链路层构造）包含：</p>
+<ul>
+<li>帧头</li>
+<li>数据包头</li>
+<li>TCP 头</li>
+<li>用户数据</li>
+<li>CRC</li>
+</ul>
+<p><strong>数据包</strong>（由网络层构造）包含其中的：</p>
+<ul>
+<li>数据包头</li>
+<li>TCP 头</li>
+<li>用户数据</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>工作层次</th>
+<th>设备</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>物理层</td>
+<td>中继器</td>
+<td>模拟设备，在物理层透明地复制比特流，以补偿信号的衰减。</td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>集线器</td>
+<td>将多条输入线路连接在一起，不隔离碰撞域，连接到同一个集线器上的所有线路必须以相同的速率运行。</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>网桥，交换机</td>
+<td>可以隔离碰撞域，不能隔离广播域；在不同的 LAN 间存储转发帧，必要时进行链路层的协议转换。</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>路由器</td>
+<td>在不同的网络间存储转发分组，必要时进行网络层的协议转换。可以隔离碰撞域和广播域。可连接不同类型的网络。</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>传输网关</td>
+<td>对高层协议进行转换。将两台使用了不同面向连接传输协议的计算机连接起来。传输网关将数据包从一个连接复制到另一个连接上，并根据需要对数据包重新进行格式化。</td>
+</tr>
+<tr>
+<td>应用层</td>
+<td>应用网关</td>
+<td>对高层协议进行转换。理解数据的格式和内容，将消息从一种格式转换为另一种格式。</td>
+</tr>
+</tbody></table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-计算机网络（五）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1258,474 +2443,6 @@
 </ul>
 </li>
 </ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-计算机网络（四）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/">计算机网络（四）</a>
-    </h1>
-  
-
-        
-        <a href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2024-01-02T14:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><span id="第4章-mac-子层">第4章 MAC 子层</span></h1><!-- toc -->
-
-<ul>
-<li><a href="#%E4%BC%A0%E7%BB%9F-lan-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">传统 LAN 基本概念</a></li>
-<li><a href="#%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE">多路访问协议</a><ul>
-<li><a href="#%E4%BF%A1%E9%81%93%E5%88%86%E9%85%8D">信道分配</a><ul>
-<li><a href="#%E9%9D%99%E6%80%81%E4%BF%A1%E9%81%93%E5%88%86%E9%85%8D">静态信道分配</a></li>
-<li><a href="#%E5%8A%A8%E6%80%81%E4%BF%A1%E9%81%93%E5%88%86%E9%85%8D">动态信道分配</a></li>
-</ul>
-</li>
-<li><a href="#aloha-%E5%8D%8F%E8%AE%AE">ALOHA 协议</a><ul>
-<li><a href="#%E7%BA%AF-aloha">纯 ALOHA</a></li>
-<li><a href="#%E5%88%86%E6%A7%BD-aloha">分槽 ALOHA</a></li>
-</ul>
-</li>
-<li><a href="#csma-%E5%8D%8F%E8%AE%AE">CSMA 协议</a><ul>
-<li><a href="#1-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">1-坚持式 CSMA</a></li>
-<li><a href="#%E9%9D%9E%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">非坚持式 CSMA</a></li>
-<li><a href="#p-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">p-坚持式 CSMA</a></li>
-<li><a href="#csmacd">CSMA&#x2F;CD</a></li>
-<li><a href="#csmaca">CSMA&#x2F;CA</a></li>
-<li><a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a></li>
-</ul>
-</li>
-<li><a href="#%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE-maca">冲突避免多路访问 (MACA)</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BB%A5%E5%A4%AA%E7%BD%91-ieee-8023">以太网 (IEEE 802.3)</a><ul>
-<li><a href="#%E7%BB%8F%E5%85%B8%E4%BB%A5%E5%A4%AA%E7%BD%91">经典以太网</a><ul>
-<li><a href="#%E5%B8%A7%E6%A0%BC%E5%BC%8F">帧格式</a></li>
-<li><a href="#mac-%E5%AD%90%E5%B1%82%E5%8D%8F%E8%AE%AE">MAC 子层协议</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BA%A4%E6%8D%A2%E5%BC%8F%E4%BB%A5%E5%A4%AA%E7%BD%91">交换式以太网</a><ul>
-<li><a href="#%E5%BF%AB%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91-fast-ethernet">快速以太网 (Fast Ethernet)</a></li>
-<li><a href="#%E5%8D%83%E5%85%86%E4%BB%A5%E5%A4%AA%E7%BD%91-gigabit-ethernet">千兆以太网 (Gigabit Ethernet)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91-80211">无线局域网 (802.11)</a><ul>
-<li><a href="#%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">体系结构</a></li>
-<li><a href="#mac-%E5%AD%90%E5%B1%82%E5%8D%8F%E8%AE%AE-1">MAC 子层协议</a><ul>
-<li><a href="#%E5%B8%A6%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E7%9A%84-csma">带冲突避免的 CSMA</a></li>
-<li><a href="#%E7%89%A9%E7%90%86%E4%BE%A6%E5%90%AC%E8%99%9A%E6%8B%9F%E4%BE%A6%E5%90%AC">物理侦听&#x2F;虚拟侦听</a></li>
-<li><a href="#%E5%8F%AF%E9%80%89%E7%9A%84-rtscts-%E6%9C%BA%E5%88%B6">可选的 RTS&#x2F;CTS 机制</a></li>
-<li><a href="#%E6%97%B6%E9%97%B4%E9%97%B4%E9%9A%94">时间间隔</a></li>
-</ul>
-</li>
-<li><a href="#%E5%B8%A7%E6%A0%BC%E5%BC%8F-1">帧格式</a></li>
-</ul>
-</li>
-<li><a href="#%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BA%92%E8%81%94%E8%AE%BE%E5%A4%87">局域网互联设备</a><ul>
-<li><a href="#%E7%BD%91%E6%A1%A5">网桥</a><ul>
-<li><a href="#%E5%AD%A6%E4%B9%A0%E7%BD%91%E6%A1%A5">学习网桥</a></li>
-<li><a href="#%E7%94%9F%E6%88%90%E6%A0%91%E7%BD%91%E6%A1%A5">生成树网桥</a></li>
-<li><a href="#%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98">存在的问题</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA">交换机</a></li>
-<li><a href="#%E4%B8%8D%E5%90%8C%E8%AE%BE%E5%A4%87%E5%AF%B9%E6%AF%94">不同设备对比</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-<h2><span id="传统-lan-基本概念">传统 LAN 基本概念</span></h2><p><strong>局域网</strong> (LAN)：在一个小区域范围内对各种数据通信设备提供了互连的信息网。  </p>
-<p>决定局域网特性的主要技术：</p>
-<ul>
-<li>传输媒体： 传输数据</li>
-<li>拓扑结构：连接各种设备</li>
-<li>媒体访问控制方法：共享资源</li>
-</ul>
-<p>局域网的数据链路层：</p>
-<ul>
-<li>逻辑链路控制子层 (LLC)</li>
-<li>媒体访问控制子层 (MAC)：用来确定多路访问信道下一个使用者的协议</li>
-</ul>
-<p>LAN 的传输媒体：</p>
-<ul>
-<li>双绞线</li>
-<li>同轴电缆</li>
-<li>光纤</li>
-<li>无线电波</li>
-<li>红外</li>
-</ul>
-<p>LAN 的拓扑结构：</p>
-<ul>
-<li>星型</li>
-<li>环型</li>
-<li>总线型</li>
-<li>树型</li>
-</ul>
-<h2><span id="多路访问协议">多路访问协议</span></h2><h3><span id="信道分配">信道分配</span></h3><p>信道分配问题：如何在竞争用户之间分配单个广播信道。</p>
-<h4><span id="静态信道分配">静态信道分配</span></h4><p>采用多路复用技术，将信道容量拆开分给多个用户使用。<br>如传统的 FDM 或 TDM，对于 N 个用户，将带宽或时间分成 N 份，每个用户静态地占用一个。</p>
-<p>缺点：不能有效地处理突发数据，有些用户停止通信时带宽或时间被浪费。</p>
-<h4><span id="动态信道分配">动态信道分配</span></h4><p>异步时分多路复用。分为以下两种：</p>
-<ul>
-<li><p><strong>随机访问</strong>：争用。只要有数据就直接发送，发生冲突后再采取措施解决冲突。<br>适用于负载轻的网络，负载重时效率低</p>
-</li>
-<li><p><strong>控制访问</strong>：发送站点先获得发送的权利，再发送数据。<br>不会发生冲突，在负载重的网络中可获得很高的信道利用率。<br>主要有轮询和预约两种方式。</p>
-</li>
-</ul>
-<p>动态信道分配的5个关键假设：</p>
-<ul>
-<li><p><strong>流量独立</strong><br>由 N 个独立的站组成，每个站都有一个程序或用户产生要传输的帧。</p>
-</li>
-<li><p><strong>单信道</strong><br>所有用户都共享同一个信道，在该信道上发送&#x2F;接收数据。</p>
-</li>
-<li><p><strong>冲突可观察</strong><br><strong>冲突</strong>：如果多个用户同时发送数据，多路信号在时间上叠加使接收端无法正常解码。<br>所有站都能够检测到冲突事件的发生，冲突的帧必须在以后再次被发送。</p>
-</li>
-<li><p><strong>时间连续或分槽</strong><br>时间连续：任何时刻都可以开始传输帧。<br>时间分槽：将时间分为离散的间隔（称为时间槽），帧的传输只能从某个时间槽的起始点开始。</p>
-</li>
-<li><p><strong>载波侦听或不听</strong><br>载波侦听：发送前先侦听信道，可以知道该信道当前是否正被使用。</p>
-</li>
-</ul>
-<h3><span id="aloha-协议">ALOHA 协议</span></h3><h4><span id="纯-aloha">纯 ALOHA</span></h4><p>当用户有数据需要发送时就传输。</p>
-<p>每个站在给中央计算机发送帧之后，该计算机把该帧重新广播给所有站。<br>发送站侦听来自集线器的广播，以此确定它的帧是否发送成功。</p>
-<p>如果帧被损坏了，则发送方等待一段随机时间后再次发送该帧。</p>
-<h4><span id="分槽-aloha">分槽 ALOHA</span></h4><p>将信道时间分为离散的时间槽，每个时间槽可以用来发送一个帧。<br>一个站点有数据发送时，必须等到下个时间槽的开始才可以发送。</p>
-<p>与纯 ALOHA 相比，信道利用率提高一倍。</p>
-<h3><span id="csma-协议">CSMA 协议</span></h3><p><strong>载波侦听多路访问</strong> (CSMA) 协议：站监听信道，根据信道的状态来采取相应的动作，只有发现信道空闲时才能发送数据。</p>
-<h4><span id="1-坚持式-csma">1-坚持式 CSMA</span></h4><p>当一个站点要发送数据时，先监听信道，若信道忙则坚持监听；一旦发现信道空闲，立即发送数据（发送数据概率为 1）。<br>若发生冲突，等待一随机场时间，再重新开始监听信道。</p>
-<p>两种发生冲突可能：</p>
-<ul>
-<li>信号传输延迟造成冲突</li>
-<li>多个站点在监听到信道空闲时同时发送</li>
-</ul>
-<p>该协议的性能高于 ALOHA 协议。</p>
-<h4><span id="非坚持式-csma">非坚持式 CSMA</span></h4><p>当一个站点要发送数据时，先监听信道，若信道忙，随机等待一段时间后再开始监听信道（非坚持）；一旦发现信道空闲，立即发送数据。</p>
-<p>该协议的信道利用率高于 1-坚持式 CSMA 协议，但网络的延迟增大。</p>
-<h4><span id="p-坚持式-csma">p-坚持式 CSMA</span></h4><p>适用于分时间槽的信道。</p>
-<p>当一个站点要发送数据时，先监听信道，若信道忙，则等到下个时间槽再监听信道；若信道空闲，则按照概率 p 发送数据，而以概率 q&#x3D;1-p 将此次发送推迟到下一个时间槽。若下一个时间槽信道也是空闲的，则它还是以概率 p 发送数据，或者以概率 q 再次推迟发送；重复该过程直到帧被发送出去。</p>
-<p>与前两种 CSMA 协议相比：</p>
-<ul>
-<li>概率 p：降低 1-坚持式协议中多个站点同时发送而造成冲突的概率。</li>
-<li>坚持监听：克服非坚持式协议中造成的时间延迟。</li>
-</ul>
-<p>p 的选择直接关系到协议的性能。</p>
-<h4><span id="csmax2fcd">CSMA&#x2F;CD</span></h4><p><strong>带冲突检测的 CSMA</strong> (CSMA&#x2F;CD)<br>发送过程中仍然监听信道，通过检测回复信号的能量或脉冲宽度并将其与发送的信号作比较，可以判断是否发生冲突。<br>一旦发生冲突，立即取消发送，等待一随机时间后再尝试发送。</p>
-<p>检测冲突的最小时间是将信号从一个站传播到另一个站所需要的时间。</p>
-<h4><span id="csmax2fca">CSMA&#x2F;CA</span></h4><p><strong>带避免冲突的 CSMA</strong>，被 WLAN 采用。</p>
-<ul>
-<li>通过侦听确定在很短的一个时间内（这段时间称为 DIFS）没有信号。</li>
-<li>倒计数空闲时间槽，当有帧在发送时暂停该计数器。</li>
-<li>当计数器递减到0时，该站发送自己的帧。</li>
-<li>如果帧发送成功，目标站立即发送一个短确认。</li>
-<li>如果该站没有收到确认，则说明传输过程中发生了错误，采用<a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a>算法重新发送。</li>
-</ul>
-<h4><span id="二进制指数后退">二进制指数后退</span></h4><p>如果发生冲突，等待一段随机时间后再重试。<br>一般地，在第 i 次冲突之后，从 $0$ ~ $2^i-1$ 之间随机选择一个数，然后等待这么多个时间槽。<br>在达到10次冲突之后，随机数的选择区间被固定在最大值1023，不再增加。<br>在16次冲突之后，控制器放弃努力，并给计算机返回一个失败报告，进一步的恢复工作由高层协议完成。</p>
-<h3><span id="冲突避免多路访问-maca">冲突避免多路访问 (MACA)</span></h3><ul>
-<li>A 向 B 发送一个 RTS (Request To Send) 短帧，包含了随后要发送的数据帧长度。</li>
-<li>B 向 A 回复一个 CTS (Clear To Send) 短帧，包含了从 RTS 中复制的数据帧长度。</li>
-<li>A 收到 CTS 后开始传输。</li>
-<li>如果一个站侦听到了 RTS，则它保持足够长时间的沉默使 A 能在无冲突的情况下收到 CTS。<br>该站如果只侦听到了 RTS 没有侦听到 CTS，则在数据帧传送过程中可以自由发送信息。</li>
-<li>如果一个站侦听到了 CTS，则它依据 CTS 中数据帧的长度，在数据传输过程中一直保持沉默。</li>
-</ul>
-<h2><span id="以太网-ieee-8023">以太网 (IEEE 802.3)</span></h2><p><strong>经典以太网</strong>：使用上述技术解决多路访问问题。<br>以太网的原始形式，运行速度从 3~10 Mbps 不等。</p>
-<p><strong>交换式以太网</strong>：使用交换机连接不同的计算机。<br>可以运行在 100、1000 和 10000 Mbps 的高速率，分别以快速以太网、千兆以太网和万兆以太网的形式呈现。</p>
-<h3><span id="经典以太网">经典以太网</span></h3><h4><span id="帧格式">帧格式</span></h4><ul>
-<li><p><strong>前导码</strong> (Preamble)：8个字节，每个字节包含比特模式 10101010。IEEE 802.3 最后一个字节（帧起始定界符 SOF）的最后2位为11。<br>比特模式是由曼彻斯特编码产生的 10MHz 方波，每个波 6.4 微妙，以便接收方的时钟与发送方同步。</p>
-</li>
-<li><p><strong>目标地址</strong>：6个字节，MAC 地址，第一位是0表示是普通地址；如果是1，则表示组地址，该组中的所有站都要接收；全1的特殊地址用作广播，网络中的所有地址都要接收。</p>
-</li>
-<li><p><strong>源地址</strong>：6个字节，MAC 地址，标识帧的发送方，具有全球唯一性。<br>地址字段的前3个字节用作该站所在的组织唯一标识符 (OUI)，由 IEEE 统一分配，指明了网络设备制造商；后3个字节由制造商负责分配。</p>
-</li>
-<li><p><strong>类型&#x2F;长度</strong> (Type&#x2F;Length)：2个字节。以太网使用类型字段，指定了该把帧送给哪个进程处理。IEEE 802.3 使用长度字段，接收方通过数据内包含的另一个逻辑链路控制 (LLC) 协议头来确定如何处理入境帧。<br>任何值小于或等于 0x600 可解释为长度字段，任何大于 0x600 可解释为类型字段。</p>
-</li>
-<li><p><strong>数据</strong> (Data)：最多可包含 1500 字节。</p>
-</li>
-<li><p><strong>填充</strong> (Pad)：最多 46 字节。以太网要求有效帧必须至少 64 字节长，从目标地址算起直到校验和，包括这两个字段本身在内。如果帧的数据部分小于 46 字节，则使用填充字段来填充该帧，使其达到最小长度要求。</p>
-<p>限制最小帧长的原因：避免当一个短帧还没有到达电缆远端的发送方，该帧的传送就已经结束；这种情况下，当在电缆的远端发生冲突时，发送方的传送在突发噪声到达前就完成传送，发送方误以为刚才一帧已成功发送。</p>
-</li>
-<li><p><strong>校验和</strong>：4个字节，采用 32位CRC。</p>
-</li>
-</ul>
-<h4><span id="mac-子层协议">MAC 子层协议</span></h4><p>采用 1-坚持 CSMA&#x2F;CD 算法，发生冲突时采用 二进制指数后退算法。</p>
-<p><a href="#1-%E5%9D%9A%E6%8C%81%E5%BC%8F-csma">1-坚持式 CSMA</a>，<a href="#csmacd">CSMA&#x2F;CD</a>，<a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E5%90%8E%E9%80%80">二进制指数后退</a></p>
-<h3><span id="交换式以太网">交换式以太网</span></h3><p>当交换机端口接收到来自某个站的以太网帧，它检查该帧的以太网地址，确定该帧前往的目的地端口。</p>
-<ul>
-<li>在集线器中，所有站位于同一个<strong>冲突域</strong>（不同站点同时发送数据可能产生碰撞的最大网段），必须使用 CSMA&#x2F;CD 算法。</li>
-<li>在交换机中，每个端口有独立的冲突域。  <ul>
-<li>对于全双工电缆，冲突不可能发生。</li>
-<li>对于半双工电缆，站和端口以通常的 CSMA&#x2F;CD 方式竞争传输。</li>
-</ul>
-</li>
-</ul>
-<h4><span id="快速以太网-fast-ethernet">快速以太网 (Fast Ethernet)</span></h4><p>IEEE 802.3u 工作组规范 (1995, 6)。</p>
-<p>特点：</p>
-<ul>
-<li>采用 CSMA&#x2F;CD 媒体访问控制方式和 802.3 帧格式；</li>
-<li>100 BASE-TX 采用两对5类双绞线；</li>
-<li>100 BASE-T4 采用四对3类双绞线；</li>
-<li>网络最大长度 250m (10 Mbps 的经典以太网是 2500m)。</li>
-</ul>
-<h4><span id="千兆以太网-gigabit-ethernet">千兆以太网 (Gigabit Ethernet)</span></h4><p>IEEE 802.3z (1998) 和 802.3ab 工作组规范。</p>
-<p>特性：</p>
-<ul>
-<li><strong>载波扩充</strong>：让硬件在普通的帧后面增加一些填充位，将帧的长度扩充到 512 字节，使网络最大距离延长到 200m。</li>
-<li><strong>帧突发</strong>：允许发送方将多个待发送帧级联在一起，一次传输出去。最大突发长度为 8192 字节。如果级联起来的整个突发仍然小于 512 个字节，则硬件会再次对它进行填充。</li>
-<li>全双工。</li>
-</ul>
-<h2><span id="无线局域网-80211">无线局域网 (802.11)</span></h2><p><strong>WLAN</strong>：无线局域网，是计算机网络和无线通信技术相结合的产物，是有线网络的无线化延伸。<br><strong>Wi-Fi</strong>：是一个创建于 IEEE 802.11 标准上的无线局域网技术，可等同于 802.11 的同义词。<br>无线局域网的主要标准是 802.11。</p>
-<h3><span id="体系结构">体系结构</span></h3><p><strong>接入点</strong> (AP)：转发该 WLAN 上的所有帧，具备无线至有线的桥接功能。<br><strong>工作站</strong>  (Station)：具备 WLAN 接口，能接入 WLAN 的主机。<br><strong>分布式系统</strong> (DS)：一种有线网络，是 802.11 的逻辑组件，负责连接多个 AP，或将 AP连接至骨干网（如目前已知的以太网）。</p>
-<p><strong>基本服务集</strong> (BSS)</p>
-<ul>
-<li>独立基本服务集 (IBSS, independent BSS)：工作站之间相互可以直接通信（不需要通过 AP 转发）。</li>
-<li>基础结构型基本服务集 (infrastructure BSS)：工作站需先与接入点建立关联，接入点负责转发工作站之间的通信。</li>
-<li>每个 BSS 都有一个6字节的识别符 BSSID，相当于 AP 的 MAC 地址。</li>
-</ul>
-<p><strong>扩展服务集</strong> (ESS)：将几个 BSS 连接为 ESS。</p>
-<h3><span id="mac-子层协议">MAC 子层协议</span></h3><p>带有物理侦听和虚拟侦听的 CSMA&#x2F;CA 是 802.11 协议的核心。</p>
-<p>802.11 允许把帧拆分为更小的单元<strong>段</strong> (fragment)，每个段有自己的校验和。</p>
-<h4><span id="带冲突避免的-csma">带冲突避免的 CSMA</span></h4><p>802.11 支持两种操作模式</p>
-<ul>
-<li><p><strong>点协调功能</strong> (PCF)：由 AP 周期性地（每秒10~100次）广播一个信标帧，邀请站点申请服务，集中控制。</p>
-</li>
-<li><p><strong>分布式协调功能</strong> (DCF)：分布式控制，采用<strong>带有冲突避免的 CSMA</strong> (<a href="#csmaca">CSMA&#x2F;CA</a>)。  </p>
-</li>
-<li><p>DCF 是必须的，PCF 是可选的。</p>
-</li>
-</ul>
-<p>与以太网相比，CSMA&#x2F;CA 有两个主要区别：</p>
-<ul>
-<li>早期的后退有助于避免冲突；</li>
-<li>利用确认来推断是否发生冲突，因为冲突无法被检测出来。</li>
-</ul>
-<h4><span id="物理侦听x2f虚拟侦听">物理侦听&#x2F;虚拟侦听</span></h4><p>由于 WLAN 中各个站点发出的信号范围有限，使用 CSMA 时存在两个问题：</p>
-<ul>
-<li><strong>隐藏终端问题</strong>：由于竞争者距离太远而导致站无法检测到潜在的竞争者，误以为可以发送数据。</li>
-<li><strong>暴露终端问题</strong>：站点侦听到信道上有帧在传送，错误地认为自己不能发送数据。</li>
-</ul>
-<p>为了解决上述问题，802.11 定义信道侦听包括物理侦听和虚拟侦听两部分。</p>
-<ul>
-<li><p><strong>物理侦听</strong>：检测信道是否存在有效信号。</p>
-</li>
-<li><p><strong>虚拟侦听</strong>：让源站将它要占用信道的时间通知给所有其他站，使其他站不需要侦听就能知道信道何时可能转为空闲。  </p>
-<p><strong>网络分配向量</strong> (NAV)：每个帧携带一个 NAV 字段，说明这个帧所属的一系列数据将传输多长时间。<br>当一个站检测到正在信道中传输的 MAC 帧首部的 NAV 字段时，就调整自己的 NAV。</p>
-</li>
-</ul>
-<h4><span id="可选的-rtsx2fcts-机制">可选的 RTS&#x2F;CTS 机制</span></h4><p>使用 NAV 来防止隐藏终端在同一时间发送，与 <a href="#%E5%86%B2%E7%AA%81%E9%81%BF%E5%85%8D%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE-maca">MACA</a> 类似。<br>不同之处：</p>
-<ul>
-<li>A 发送数据帧时启动一个 ACK 计时器；</li>
-<li>当正确的数据帧到达后，B 用一个 ACK 帧回复 A，完成此次交流；</li>
-<li>如果 A 的 ACK 计时器超时前，ACK 没有返回，则可视为发生了一个冲突，经过一次后退整个协议重新开始运行；</li>
-<li>听到 RTS&#x2F;CTS 的站会更新自己的 NAV 记录表示信道正忙。</li>
-</ul>
-<p>RTS&#x2F;CTS 的引入带来了延时和信道资源的消耗，因此该机制只用于预约长数据帧的信道。实际中，每个无线站点可设置一个 RTS 门限，仅当数据长度超过门限时才使用该机制。</p>
-<h4><span id="时间间隔">时间间隔</span></h4><p>一帧发送出去后，需要保持一段特定时间的空闲以便检查信道不在被用，然后任何站才可以发送帧。</p>
-<ul>
-<li><p><strong>短帧间间隔</strong> (SIFS)：最短的间隔；允许一次对话的各方具有优先抓住信道的机会，可以发送控制帧（如 ACK、RTS、CTS）或下一个段。</p>
-</li>
-<li><p><strong>DCF 帧间隔</strong> (DIFS)：常规的数据帧之间的间隔；任何站都可以在介质空闲 DIFS 后尝试抓取信道发送一个新帧，采用通常的竞争规则。</p>
-</li>
-<li><p><strong>仲裁帧间空间</strong> (AIFS)：有两个不同的优先级。</p>
-<ul>
-<li>AIFS1：小于 DIFS 但长于 SIFS；被 AP 用来把语音或其他高优先级流量移到行头。</li>
-<li>AIFS4：长于 DIFS；用来发送可以延迟到常规流量之后发送的背景流量。</li>
-<li>完善的服务质量机制定义了四种不同的优先级别，分别具有不同的后退参数和不同的空闲参数。</li>
-</ul>
-</li>
-<li><p><strong>扩展帧间间隔</strong> (EIFS)：最长；仅用于一个站刚刚收到坏帧或未知帧后报告问题。</p>
-</li>
-</ul>
-<p>时间间隔长度与媒介有关，速率高的物理层会使用较短的间隔；同样，不同的物理层帧间间隔也有所不同。</p>
-<h3><span id="帧格式">帧格式</span></h3><ul>
-<li><p><strong>帧控制</strong> (Frame Control):2 个字节，包含 11 个子字段。</p>
-<ul>
-<li><strong>协议版本</strong> (Protocol Version)：2 比特，00。</li>
-<li><strong>类型</strong> (Type)：2 比特，数据帧、控制帧或管理帧。</li>
-<li><strong>子类型</strong> (Subtype)：4 比特，比如 RTS 或 CTS。</li>
-<li><strong>To DS</strong>：1 比特，表明发送到分布式系统。</li>
-<li><strong>From DS</strong>：1 比特，表明来自分布式系统。</li>
-<li><strong>更多段</strong> (More fragment)：1比特，表明后面还有更多的段。</li>
-<li><strong>重传</strong> (Retry)：1比特，表明这是以前发送的某一帧的重传。</li>
-<li><strong>电源管理</strong> (Power management)：1 比特，指明发送方进入节能模式。</li>
-<li><strong>更多数据</strong> (More data)：1 比特，表明发送方还有更多的帧需要发送给接收方。</li>
-<li><strong>受保护的</strong> (Protected Frame)：1 比特，表明该帧的帧体已经被加密。</li>
-<li><strong>顺序</strong> (Order)：1 比特，告诉接收方高层希望严格按照顺序来处理帧序列。</li>
-</ul>
-</li>
-<li><p><strong>持续时间</strong> (Duration)：2个字节。<br>通告本帧和其确认帧将会占用信道多长时间，按微妙计时。<br>该字段会出现在所有帧中，包括控制帧，其他站用该字段来管理各自的 NAV 机制。</p>
-</li>
-<li><p><strong>地址</strong>：共有三个地址字段，每个均有 6 个字节。</p>
-<ul>
-<li>地址1：接收方地址。</li>
-<li>地址2：发送方地址。</li>
-<li>地址3：当帧在一个客户端和网络中的另一点传输时，AP 是一个中继点，地址3指明了这个远程端点。</li>
-<li>当 To DS 和 From DS 都置1时，在序号字段后有 6 个字节的地址4。</li>
-</ul>
-</li>
-<li><p><strong>序号</strong> (Sequence)：2 个字节。<br>帧的编号，用于重组帧片段以及丢弃重复帧。<br>有 4 位段序号和 12 位帧序号。相当于已传帧的计数器，计数器从0计数，每传输一帧序号+1，取 4096 的模数。</p>
-</li>
-<li><p><strong>数据</strong> (Data)：最多可有 2312 个字节。<br>有效荷载中前面部分字节的格式称为<strong>逻辑链路控制</strong> (LLC)，标识有效荷载应该递交给哪个高层协议处理（比如 IP）。</p>
-</li>
-<li><p><strong>帧校验序列</strong> (Frame check sequence)：4 个字节。<br>32 位 CRC。</p>
-</li>
-</ul>
-<p><strong>RTS</strong> 共20字节：帧控制、持续时间、目的地址、源地址和检错字段。<br><strong>CTS</strong> 和 <strong>ACK</strong>共14字节：帧控制、数据长度、目的地址和检错字段。</p>
-<h2><span id="局域网互联设备">局域网互联设备</span></h2><h3><span id="网桥">网桥</span></h3><ul>
-<li>用于连接局域网的互连设备。</li>
-<li>工作在数据链路层，通过检查数据链路层地址（MAC 地址）来转发帧，必要时进行帧格式转换。</li>
-<li>能隔离以太网中的碰撞域，但不能隔离广播域。</li>
-<li>丢弃出错帧。</li>
-<li>包括透明网桥和源路由选择网桥，以下两种都是透明网桥。</li>
-</ul>
-<h4><span id="学习网桥">学习网桥</span></h4><p>为每个网桥配备一个大的哈希表，该表列出每个可能的目的地以及它们隶属的输出端口。</p>
-<p>当网桥第一次接入网络时，所有哈希表都是空的，采用<strong>泛洪算法</strong>：<br>对于每个发向未知目标地址的入境帧，网桥将它输出到所有端口，除了它来的输入端口。</p>
-<p>采用<strong>后向学习法</strong>：<br>通过检查每个端口发送的帧的源地址，网桥可以知道通过该端口可以访问到哪些机器，于是在哈希表上构造相应的一对地址和端口。</p>
-<p>为了处理动态的拓扑结构：<br>构造出哈希表后，帧的到达时间也被记录在相应的表项中。<br>当一帧到达时，如果它的源地址已经在表中，那么对应表项中的时间值被更新为当前时间。<br>网桥中存在一个进程定期扫描哈希表，将时间值在几分钟之前的表项都清除掉。</p>
-<p>对到达网桥的入境帧，整个转发过程如下：  </p>
-<ul>
-<li>如果去往目的地址的端口与源端口相同，则丢弃该帧；</li>
-<li>如果去往目的地址的端口与源端口不同，则转发该帧到目标端口；</li>
-<li>如果目标端口未知，则使用泛洪算法，将该帧转发到所有端口，除了它入境的哪一个。</li>
-</ul>
-<p>网桥可看作链路层设备，一个具有 k 个端口的网桥将有 k 个 MAC 和物理层实例。</p>
-<h4><span id="生成树网桥">生成树网桥</span></h4><p>为了提高可靠性，在网桥之间使用冗余链路，如在一对网桥之间并行设置两条链路。</p>
-<p>为了解决拓扑环路问题：<br>让网桥之间相互通信，用一棵可以到达每个网桥的生成树覆盖实际的拓扑结构。  </p>
-<ul>
-<li>选择具有最低标识符的网桥为生成树的根。</li>
-<li>构造从根到每个网桥的最短路径树，碰到平局时，选择一条经过更低标识符的网桥的路径。</li>
-<li>网桥在被指消息中包括与根的距离，每个网桥记住它找到的到根的最短路径。</li>
-<li>网桥关闭不属于最短路径一部分的端口。</li>
-</ul>
-<h4><span id="存在的问题">存在的问题</span></h4><p>在连接不同类型的局域网（如 802.3 和 802.11）时，网桥的转发存在以下主要问题。</p>
-<ul>
-<li><p>帧格式不同。<br>需要重新组帧，某些域（如 802.11 帧的持续时间）需要丢弃或产生，还需要重新生成校验和。</p>
-</li>
-<li><p>数据速率不同，802.11 速率较低。<br>网桥需要用缓冲区存储来不及传输的帧。</p>
-</li>
-<li><p>最大帧的长度不同。<br>802 标准本身不提供把长帧分片的功能，对于太长的帧只能丢弃。</p>
-</li>
-<li><p>安全性问题。<br>802.11 支持加密，802.3 不支持。</p>
-</li>
-<li><p>服务质量问题。<br>802.11 采用 PCF 可以支持 QoS，802.3 不支持。</p>
-</li>
-</ul>
-<h3><span id="交换机">交换机</span></h3><p><strong>交换机</strong>源自于多端口网桥，采用存储-转发方式在各端口之间进行数据帧的交换。</p>
-<p>交换机检测每个到达数据帧的帧头，根据数据帧的目的地址查找输出端口。<br>如果地址查找表中没有该表项，交换机就向所有端口（除了接收端口）转发。<br>地址查找表是通过帧的源地址与到达端口的对应关系建立的。</p>
-<p>工作在数据链路层，能隔离碰撞域。</p>
-<p><strong>交换式局域网</strong>：采用星型拓扑结构，用交换机连接主机。</p>
-<h3><span id="不同设备对比">不同设备对比</span></h3><p><strong>帧</strong>（由数据链路层构造）包含：</p>
-<ul>
-<li>帧头</li>
-<li>数据包头</li>
-<li>TCP 头</li>
-<li>用户数据</li>
-<li>CRC</li>
-</ul>
-<p><strong>数据包</strong>（由网络层构造）包含其中的：</p>
-<ul>
-<li>数据包头</li>
-<li>TCP 头</li>
-<li>用户数据</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>工作层次</th>
-<th>设备</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>物理层</td>
-<td>中继器</td>
-<td>模拟设备，在物理层透明地复制比特流，以补偿信号的衰减。</td>
-</tr>
-<tr>
-<td>物理层</td>
-<td>集线器</td>
-<td>将多条输入线路连接在一起，不隔离碰撞域，连接到同一个集线器上的所有线路必须以相同的速率运行。</td>
-</tr>
-<tr>
-<td>数据链路层</td>
-<td>网桥，交换机</td>
-<td>可以隔离碰撞域，不能隔离广播域；在不同的 LAN 间存储转发帧，必要时进行链路层的协议转换。</td>
-</tr>
-<tr>
-<td>网络层</td>
-<td>路由器</td>
-<td>在不同的网络间存储转发分组，必要时进行网络层的协议转换。可以隔离碰撞域和广播域。可连接不同类型的网络。</td>
-</tr>
-<tr>
-<td>传输层</td>
-<td>传输网关</td>
-<td>对高层协议进行转换。将两台使用了不同面向连接传输协议的计算机连接起来。传输网关将数据包从一个连接复制到另一个连接上，并根据需要对数据包重新进行格式化。</td>
-</tr>
-<tr>
-<td>应用层</td>
-<td>应用网关</td>
-<td>对高层协议进行转换。理解数据的格式和内容，将消息从一种格式转换为另一种格式。</td>
-</tr>
-</tbody></table>
 
       
 
@@ -3430,144 +4147,10 @@
 
 
   
-    <article id="post-电子系统设计（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/">电子系统设计（一）</a>
-    </h1>
-  
-
-        
-        <a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-11-28T10:14:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><span id="第一章-绪论">第一章 绪论</span></h1><ul>
-<li><p>说明什么是电子系统。  </p>
-<p>电子系统是指由一组电子元器件或基本的电子单元电路相互连接&#x2F;相互作用而形成的电路整体，它能按特定的控制信号去完成所设想的功能。</p>
-</li>
-<li><p>从处理的信号类型来看，电子系统一般包括哪些子系统？  </p>
-<ul>
-<li>模拟子系统：传感器，放大器，系统电源，驱动电路；</li>
-<li>数字字系统：存储器，通信接口，人机接口；</li>
-<li>模&#x2F;数混合子系统：ADC，DAC；</li>
-<li>处理机子系统：微处理器，引导存储器，时钟。</li>
-</ul>
-</li>
-<li><p>简述电子元器件的发展对电子系统性能的影响。  </p>
-<p> 电子系统的实现是以电子元器件、单元电路为基础的，因此在电子元器件发展的不同阶段，电子系统也呈现出不同的特征。  </p>
-<ul>
-<li>最早的电子系统是以电子管为主要器件构造的，功能简单&#x2F;体积庞大&#x2F;功耗大。</li>
-<li>20世纪50年代诞生了晶体管，使计算速度提升到每秒几十万次，大大减小了计算机体积，降低了功耗和价格。</li>
-<li>20世纪70年代，中小规模集成电路迅速发展，电子系统逐渐过渡到以集成电路为基本的组成器件。</li>
-<li>80年代以后，集成电路规模进一步扩大，出现大规模&#x2F;超大规模集成电路，基于LSI&#x2F;VLSI的电子系统性能进一步提高。</li>
-<li>1979年Intel推出微处理器后，IBM推出了第一台PC机。</li>
-</ul>
-</li>
-<li><p>现代电子系统的设计工作主要体现在哪几个方面？各包含什么内容？  </p>
-<ul>
-<li><strong>系统级设计</strong>：是电子系统设计的高层设计，将设计任务转换成可表述和可实现的功能要求和技术指标。包含建立系统模型（将电子系统抽象化，得到描述系统功能和性能的数学模型和算法模型），及对系统模型的相关参数和技术指标进行分析和验证。</li>
-<li><strong>集成电路设计</strong>：也称为芯片设计，是将控制&#x2F;运算&#x2F;数据处理等功能模块集成在半导体芯片上。包括设计ASIC芯片和利用已有的可编程芯片进行新功能的开发（二次开发）。</li>
-<li><strong>电路原理图设计</strong>：对系统进行合理的划分，然后利用成熟的模拟电路&#x2F;数字电路的基本结构及专用芯片作为单元电路进行搭建，或研究新的电路结构&#x2F;元器件加以应用，得到整个系统的电路原理图。</li>
-<li><strong>PCB板设计</strong>：安装实现系统的所有元器件，按照要求将元器件连接成一个可以正常工作的系统，并要求整个系统的硬件满足电磁兼容。</li>
-</ul>
-</li>
-<li><p>分析“传统设计方法不能满足现代复杂系统的设计需求”的原因（即EDA技术产生的原因）。  </p>
-<p> 随着集成电路技术和计算机技术的不断发展，现在电子系统的复杂度迅速提高，传统的基于人工设计的方法已经不能满足系统设计的需求了，人们逐步利用计算机来完成一些重复性&#x2F;复杂的设计工作。</p>
-</li>
-<li><p>以数字系统为例，说明EDA技术“自顶向下”的设计流程。其中的“顶层”和“底层”各指什么？  </p>
-<p> “顶层”指系统级设计，“底层”指通过PLD来实现或制作成ASIC芯片。  </p>
-<p> 以数字系统为例：  </p>
-<ul>
-<li>提出系统功能要求；</li>
-<li>进行系统级设计和仿真，验证数字系统的可行性和指标；</li>
-<li>采用硬件描述语言对系统进行描述，并进行功能仿真；</li>
-<li>采用逻辑综合工具对HDL的源代码进行综合&#x2F;分析&#x2F;优化&#x2F;映射，得到门级电路；</li>
-<li>对门级电路进行布局&#x2F;布线，提取出物理参数，再进行模拟和验证；</li>
-<li>依据最终产生的配置文件，通过PLD实现或制作成ASIC芯片。</li>
-</ul>
-</li>
-<li><p>采用EDA技术进行电子系统设计有哪些优势？  </p>
-<ul>
-<li>降低了系统硬件电路的设计难度。</li>
-<li>采用系统设计早期的仿真技术。</li>
-<li>拥有强有力的设计工具HDL语言。</li>
-<li>可以自行设计ASIC芯片，无须受通用元器件的限制。</li>
-<li>主要设计成果是工程文件，资料量小&#x2F;可继承性好&#x2F;阅读方便。</li>
-</ul>
-</li>
-<li><p>列举三个全球著名EDA软件供应商。  </p>
-<ul>
-<li>Cadence</li>
-<li>Synopsys</li>
-<li>Mentor Graphics</li>
-</ul>
-</li>
-<li><p>什么叫做SoC？  </p>
-<p> System on Chip.<br> 是一种将多个功能模块或组件集成在单一芯片上的技术。</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/电子系统设计//" class="article-tag-list-link color2">电子系统设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
