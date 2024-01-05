@@ -168,7 +168,10 @@
 
 <ul>
 <li><a href="#%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1">传输服务</a><ul>
-<li><a href="#berkeley-%E5%A5%97%E6%8E%A5%E5%AD%97">Berkeley 套接字</a></li>
+<li><a href="#berkeley-%E5%A5%97%E6%8E%A5%E5%AD%97">Berkeley 套接字</a><ul>
+<li><a href="#tcp-udp-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0">TCP &amp; UDP 套接字编程实现</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%A6%81%E7%B4%A0">传输协议的要素</a><ul>
@@ -280,6 +283,55 @@
 <li>客户端：不需要 <code>BIND</code>，依次执行 <code>SOCKET</code>、<code>CONNECT</code>。</li>
 <li>连接建立后，双方都可以使用 <code>SNED</code>、<code>RECV</code> 收发数据。</li>
 <li>数据传输结束后，双方使用 <code>CLOSE</code> 释放连接。</li>
+</ul>
+<h4><span id="tcp-amp-udp-套接字编程实现">TCP &amp; UDP 套接字编程实现</span></h4><p>TCP:</p>
+<ul>
+<li><p>服务器依次执行</p>
+<ul>
+<li><code>socket</code></li>
+<li><code>bind</code></li>
+<li><code>listen</code></li>
+<li><code>accept</code><ul>
+<li>此时可以接收客户端发来的连接请求</li>
+</ul>
+</li>
+<li><code>recv</code>、<code>send</code></li>
+<li><code>closesocket</code></li>
+</ul>
+</li>
+<li><p>客户端依次执行</p>
+<ul>
+<li><code>socket</code></li>
+<li><code>connect</code><ul>
+<li>在服务器执行 <code>accept</code> 之后</li>
+</ul>
+</li>
+<li><code>send</code>、<code>recv</code></li>
+<li><code>closesocket</code></li>
+</ul>
+</li>
+</ul>
+<p>UDP:</p>
+<ul>
+<li><p>服务器依次执行</p>
+<ul>
+<li><code>socket</code></li>
+<li><code>bind</code></li>
+<li><code>recvfrom</code>、<code>sendto</code><ul>
+<li>在 <code>recvfrom</code> 调用后，服务器保持等待，直到从客户端收到数据报。</li>
+<li>由于没有事先 <code>connect</code>，故每次收发数据都需要附上接收&#x2F;发送地址。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>客户端依次执行</p>
+<ul>
+<li><code>socket</code></li>
+<li><code>bind</code></li>
+<li><code>sendto</code>、<code>recvfrom</code></li>
+<li><code>closesocket</code></li>
+</ul>
+</li>
 </ul>
 <h2><span id="传输协议的要素">传输协议的要素</span></h2><h3><span id="寻址">寻址</span></h3><p>当一个应用进程希望与另一个远程应用进程建立连接时，必须指定要连接到哪个应用进程上，即指定对方的<strong>传输服务访问点</strong> (TSAP)。<br>网络层上也有类似端点，称为<strong>网络服务访问点</strong> (NSAP)，而无连接的网络层不需要提供 NSAP。IP 地址是 NSAP 的实例。</p>
 <p>一个全局唯一的传输服务用户由 {主机地址，NSAP，TSAP} 表示，称为端点地址。</p>

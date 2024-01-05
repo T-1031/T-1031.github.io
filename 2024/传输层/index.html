@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://T-1031.github.io">
   <title>传输层 | TG仓库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第6章 传输层   传输服务 Berkeley 套接字   传输协议的要素 寻址 利用 TSAP 传输消息 TSAP 获取方法   连接 建立连接：三次握手 释放连接   流量控制 &amp; 拥塞控制 流量控制 理想带宽分类 调整发送速率     Internet 传输协议 UDP 头标 应用   TCP 服务模型 特点 头 连接建立 连接释放 连接管理模型 滑动窗口 计时器管理 拥塞控制">
+  <meta name="description" content="第6章 传输层   传输服务 Berkeley 套接字 TCP &amp; UDP 套接字编程实现     传输协议的要素 寻址 利用 TSAP 传输消息 TSAP 获取方法   连接 建立连接：三次握手 释放连接   流量控制 &amp; 拥塞控制 流量控制 理想带宽分类 调整发送速率     Internet 传输协议 UDP 头标 应用   TCP 服务模型 特点 头 连接建立 连接释放 连">
 <meta property="og:type" content="article">
 <meta property="og:title" content="传输层">
 <meta property="og:url" content="http://t-1031.github.io/2024/%E4%BC%A0%E8%BE%93%E5%B1%82/index.html">
 <meta property="og:site_name" content="TG仓库">
-<meta property="og:description" content="第6章 传输层   传输服务 Berkeley 套接字   传输协议的要素 寻址 利用 TSAP 传输消息 TSAP 获取方法   连接 建立连接：三次握手 释放连接   流量控制 &amp; 拥塞控制 流量控制 理想带宽分类 调整发送速率     Internet 传输协议 UDP 头标 应用   TCP 服务模型 特点 头 连接建立 连接释放 连接管理模型 滑动窗口 计时器管理 拥塞控制">
+<meta property="og:description" content="第6章 传输层   传输服务 Berkeley 套接字 TCP &amp; UDP 套接字编程实现     传输协议的要素 寻址 利用 TSAP 传输消息 TSAP 获取方法   连接 建立连接：三次握手 释放连接   流量控制 &amp; 拥塞控制 流量控制 理想带宽分类 调整发送速率     Internet 传输协议 UDP 头标 应用   TCP 服务模型 特点 头 连接建立 连接释放 连">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-04T09:16:25.000Z">
-<meta property="article:modified_time" content="2024-01-05T12:46:12.597Z">
+<meta property="article:modified_time" content="2024-01-05T15:13:25.193Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -168,7 +168,10 @@
 
 <ul>
 <li><a href="#%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1">传输服务</a><ul>
-<li><a href="#berkeley-%E5%A5%97%E6%8E%A5%E5%AD%97">Berkeley 套接字</a></li>
+<li><a href="#berkeley-%E5%A5%97%E6%8E%A5%E5%AD%97">Berkeley 套接字</a><ul>
+<li><a href="#tcp-udp-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0">TCP &amp; UDP 套接字编程实现</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%A6%81%E7%B4%A0">传输协议的要素</a><ul>
@@ -280,6 +283,55 @@
 <li>客户端：不需要 <code>BIND</code>，依次执行 <code>SOCKET</code>、<code>CONNECT</code>。</li>
 <li>连接建立后，双方都可以使用 <code>SNED</code>、<code>RECV</code> 收发数据。</li>
 <li>数据传输结束后，双方使用 <code>CLOSE</code> 释放连接。</li>
+</ul>
+<h4><span id="tcp-amp-udp-套接字编程实现">TCP &amp; UDP 套接字编程实现</span></h4><p>TCP:</p>
+<ul>
+<li><p>服务器依次执行</p>
+<ul>
+<li><code>socket</code></li>
+<li><code>bind</code></li>
+<li><code>listen</code></li>
+<li><code>accept</code><ul>
+<li>此时可以接收客户端发来的连接请求</li>
+</ul>
+</li>
+<li><code>recv</code>、<code>send</code></li>
+<li><code>closesocket</code></li>
+</ul>
+</li>
+<li><p>客户端依次执行</p>
+<ul>
+<li><code>socket</code></li>
+<li><code>connect</code><ul>
+<li>在服务器执行 <code>accept</code> 之后</li>
+</ul>
+</li>
+<li><code>send</code>、<code>recv</code></li>
+<li><code>closesocket</code></li>
+</ul>
+</li>
+</ul>
+<p>UDP:</p>
+<ul>
+<li><p>服务器依次执行</p>
+<ul>
+<li><code>socket</code></li>
+<li><code>bind</code></li>
+<li><code>recvfrom</code>、<code>sendto</code><ul>
+<li>在 <code>recvfrom</code> 调用后，服务器保持等待，直到从客户端收到数据报。</li>
+<li>由于没有事先 <code>connect</code>，故每次收发数据都需要附上接收&#x2F;发送地址。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>客户端依次执行</p>
+<ul>
+<li><code>socket</code></li>
+<li><code>bind</code></li>
+<li><code>sendto</code>、<code>recvfrom</code></li>
+<li><code>closesocket</code></li>
+</ul>
+</li>
 </ul>
 <h2><span id="传输协议的要素">传输协议的要素</span></h2><h3><span id="寻址">寻址</span></h3><p>当一个应用进程希望与另一个远程应用进程建立连接时，必须指定要连接到哪个应用进程上，即指定对方的<strong>传输服务访问点</strong> (TSAP)。<br>网络层上也有类似端点，称为<strong>网络服务访问点</strong> (NSAP)，而无连接的网络层不需要提供 NSAP。IP 地址是 NSAP 的实例。</p>
 <p>一个全局唯一的传输服务用户由 {主机地址，NSAP，TSAP} 表示，称为端点地址。</p>
@@ -924,7 +976,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">第6章 传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">传输服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">Berkeley 套接字</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">传输协议的要素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">寻址</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">利用 TSAP 传输消息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">TSAP 获取方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">建立连接：三次握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">释放连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.3.</span> <span class="toc-text">流量控制 &amp; 拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">流量控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">理想带宽分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">调整发送速率</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">Internet 传输协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text">UDP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">头标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.2.</span> <span class="toc-text">TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">服务模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">头</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">连接建立</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">连接释放</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.6.</span> <span class="toc-text">连接管理模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.7.</span> <span class="toc-text">滑动窗口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.8.</span> <span class="toc-text">计时器管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.9.</span> <span class="toc-text">拥塞控制</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">第6章 传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">传输服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">Berkeley 套接字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">TCP &amp; UDP 套接字编程实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">传输协议的要素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">寻址</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">利用 TSAP 传输消息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">TSAP 获取方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">建立连接：三次握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">释放连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.3.</span> <span class="toc-text">流量控制 &amp; 拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">流量控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">理想带宽分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">调整发送速率</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">Internet 传输协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text">UDP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">头标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.2.</span> <span class="toc-text">TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">服务模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">头</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">连接建立</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">连接释放</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.6.</span> <span class="toc-text">连接管理模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.7.</span> <span class="toc-text">滑动窗口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.8.</span> <span class="toc-text">计时器管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.9.</span> <span class="toc-text">拥塞控制</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
