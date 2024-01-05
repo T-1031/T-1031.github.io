@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://T-1031.github.io">
-  <title>计算机网络（六） | TG仓库</title>
+  <title>网络层 | TG仓库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第6章 传输层   传输服务 Berkeley 套接字   传输协议的要素 寻址 利用 TSAP 传输消息 TSAP 获取方法   连接 建立连接：三次握手 释放连接   流量控制 &amp; 拥塞控制 流量控制 理想带宽分类 调整发送速率     Internet 传输协议 UDP 头标 应用   TCP 服务模型 特点 头 连接建立 连接释放 连接管理模型 滑动窗口 计时器管理 拥塞控制">
+  <meta name="description" content="第5章 网络层   向传输层提供的服务 无连接服务&#x2F;面向连接服务的实现 数据报网络 虚电路网络 二者对比   路由算法 优化原则 最短路径算法 (Dijkstra) 泛洪算法 距离矢量 (Distance Vector) 路由算法 存在问腿   链路状态 (Link State) 路由算法 与距离矢量算法比较   层次路由 (Hierarchical Routing)   拥塞控制算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机网络（六）">
-<meta property="og:url" content="http://t-1031.github.io/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%85%AD%EF%BC%89/index.html">
+<meta property="og:title" content="网络层">
+<meta property="og:url" content="http://t-1031.github.io/2024/%E7%BD%91%E7%BB%9C%E5%B1%82/index.html">
 <meta property="og:site_name" content="TG仓库">
-<meta property="og:description" content="第6章 传输层   传输服务 Berkeley 套接字   传输协议的要素 寻址 利用 TSAP 传输消息 TSAP 获取方法   连接 建立连接：三次握手 释放连接   流量控制 &amp; 拥塞控制 流量控制 理想带宽分类 调整发送速率     Internet 传输协议 UDP 头标 应用   TCP 服务模型 特点 头 连接建立 连接释放 连接管理模型 滑动窗口 计时器管理 拥塞控制">
+<meta property="og:description" content="第5章 网络层   向传输层提供的服务 无连接服务&#x2F;面向连接服务的实现 数据报网络 虚电路网络 二者对比   路由算法 优化原则 最短路径算法 (Dijkstra) 泛洪算法 距离矢量 (Distance Vector) 路由算法 存在问腿   链路状态 (Link State) 路由算法 与距离矢量算法比较   层次路由 (Hierarchical Routing)   拥塞控制算法">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-01-04T09:16:25.000Z">
-<meta property="article:modified_time" content="2024-01-04T09:16:28.301Z">
+<meta property="article:published_time" content="2024-01-02T14:06:25.000Z">
+<meta property="article:modified_time" content="2024-01-05T12:45:47.742Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -144,68 +144,113 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-计算机网络（六）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-网络层" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      计算机网络（六）
+      网络层
     </h1>
   
 
         
-        <a href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%85%AD%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2024-01-04T09:16:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-04</time>
+        <a href="/2024/%E7%BD%91%E7%BB%9C%E5%B1%82/" class="archive-article-date">
+  	<time datetime="2024-01-02T14:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="第6章-传输层">第6章 传输层</span></h1><!-- toc -->
+        <h1><span id="第5章-网络层">第5章 网络层</span></h1><!-- toc -->
 
 <ul>
-<li><a href="#%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1">传输服务</a><ul>
-<li><a href="#berkeley-%E5%A5%97%E6%8E%A5%E5%AD%97">Berkeley 套接字</a></li>
+<li><a href="#%E5%90%91%E4%BC%A0%E8%BE%93%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1">向传输层提供的服务</a></li>
+<li><a href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0">无连接服务&#x2F;面向连接服务的实现</a><ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%BD%91%E7%BB%9C">数据报网络</a></li>
+<li><a href="#%E8%99%9A%E7%94%B5%E8%B7%AF%E7%BD%91%E7%BB%9C">虚电路网络</a></li>
+<li><a href="#%E4%BA%8C%E8%80%85%E5%AF%B9%E6%AF%94">二者对比</a></li>
 </ul>
 </li>
-<li><a href="#%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%A6%81%E7%B4%A0">传输协议的要素</a><ul>
-<li><a href="#%E5%AF%BB%E5%9D%80">寻址</a><ul>
-<li><a href="#%E5%88%A9%E7%94%A8-tsap-%E4%BC%A0%E8%BE%93%E6%B6%88%E6%81%AF">利用 TSAP 传输消息</a></li>
-<li><a href="#tsap-%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95">TSAP 获取方法</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95">路由算法</a><ul>
+<li><a href="#%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99">优化原则</a></li>
+<li><a href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95-dijkstra">最短路径算法 (Dijkstra)</a></li>
+<li><a href="#%E6%B3%9B%E6%B4%AA%E7%AE%97%E6%B3%95">泛洪算法</a></li>
+<li><a href="#%E8%B7%9D%E7%A6%BB%E7%9F%A2%E9%87%8F-distance-vector-%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95">距离矢量 (Distance Vector) 路由算法</a><ul>
+<li><a href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E8%85%BF">存在问腿</a></li>
 </ul>
 </li>
-<li><a href="#%E8%BF%9E%E6%8E%A5">连接</a><ul>
-<li><a href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B">建立连接：三次握手</a></li>
-<li><a href="#%E9%87%8A%E6%94%BE%E8%BF%9E%E6%8E%A5">释放连接</a></li>
+<li><a href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81-link-state-%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95">链路状态 (Link State) 路由算法</a><ul>
+<li><a href="#%E4%B8%8E%E8%B7%9D%E7%A6%BB%E7%9F%A2%E9%87%8F%E7%AE%97%E6%B3%95%E6%AF%94%E8%BE%83">与距离矢量算法比较</a></li>
 </ul>
 </li>
-<li><a href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">流量控制 &amp; 拥塞控制</a><ul>
-<li><a href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6">流量控制</a></li>
-<li><a href="#%E7%90%86%E6%83%B3%E5%B8%A6%E5%AE%BD%E5%88%86%E7%B1%BB">理想带宽分类</a></li>
-<li><a href="#%E8%B0%83%E6%95%B4%E5%8F%91%E9%80%81%E9%80%9F%E7%8E%87">调整发送速率</a></li>
+<li><a href="#%E5%B1%82%E6%AC%A1%E8%B7%AF%E7%94%B1-hierarchical-routing">层次路由 (Hierarchical Routing)</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95">拥塞控制算法</a><ul>
+<li><a href="#%E5%BC%80%E7%8E%AF%E6%8E%A7%E5%88%B6">开环控制</a><ul>
+<li><a href="#%E6%BC%8F%E6%A1%B6%E7%AE%97%E6%B3%95">漏桶算法</a></li>
+<li><a href="#%E4%BB%A4%E7%89%8C%E6%A1%B6%E7%AE%97%E6%B3%95">令牌桶算法</a></li>
+</ul>
+</li>
+<li><a href="#%E9%97%AD%E7%8E%AF%E6%8E%A7%E5%88%B6">闭环控制</a><ul>
+<li><a href="#%E8%99%9A%E7%94%B5%E8%B7%AF%E4%B8%AD%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">虚电路中的拥塞控制</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E4%B8%AD%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">数据报中的拥塞控制</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#internet-%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE">Internet 传输协议</a><ul>
-<li><a href="#udp">UDP</a><ul>
-<li><a href="#%E5%A4%B4%E6%A0%87">头标</a></li>
-<li><a href="#%E5%BA%94%E7%94%A8">应用</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E4%BA%92%E8%BF%9E">网络互连</a><ul>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%A6%82%E4%BD%95%E4%B8%8D%E5%90%8C">网络如何不同</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%A6%82%E4%BD%95%E8%BF%9E%E6%8E%A5">网络如何连接</a></li>
+<li><a href="#%E4%BA%92%E8%81%94%E7%BD%91%E8%B7%AF%E7%94%B1">互联网路由</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%AE%B5">数据包分段</a><ul>
+<li><a href="#%E9%80%8F%E6%98%8E%E5%88%86%E6%AE%B5">透明分段</a></li>
+<li><a href="#%E4%B8%8D%E9%80%8F%E6%98%8E%E5%88%86%E6%AE%B5">不透明分段</a></li>
+<li><a href="#%E8%B7%AF%E5%BE%84-mtu-%E5%8F%91%E7%8E%B0">路径 MTU 发现</a></li>
 </ul>
 </li>
-<li><a href="#tcp">TCP</a><ul>
-<li><a href="#%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B">服务模型</a></li>
-<li><a href="#%E7%89%B9%E7%82%B9">特点</a></li>
-<li><a href="#%E5%A4%B4">头</a></li>
-<li><a href="#%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B">连接建立</a></li>
-<li><a href="#%E8%BF%9E%E6%8E%A5%E9%87%8A%E6%94%BE">连接释放</a></li>
-<li><a href="#%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9E%8B">连接管理模型</a></li>
-<li><a href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">滑动窗口</a></li>
-<li><a href="#%E8%AE%A1%E6%97%B6%E5%99%A8%E7%AE%A1%E7%90%86">计时器管理</a></li>
-<li><a href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">拥塞控制</a></li>
+</ul>
+</li>
+<li><a href="#internet-%E7%9A%84%E7%BD%91%E7%BB%9C%E5%B1%82">Internet 的网络层</a><ul>
+<li><a href="#ipv4-%E5%8D%8F%E8%AE%AE">IPv4 协议</a></li>
+<li><a href="#ipv4-%E5%9C%B0%E5%9D%80">IPv4 地址</a><ul>
+<li><a href="#%E5%89%8D%E7%BC%80%E5%AD%90%E7%BD%91">前缀&#x2F;子网</a></li>
+<li><a href="#ip-%E5%9C%B0%E5%9D%80%E5%92%8C-mac-%E5%9C%B0%E5%9D%80">IP 地址和 MAC 地址</a></li>
+</ul>
+</li>
+<li><a href="#ip-%E5%AF%BB%E5%9D%80">IP 寻址</a><ul>
+<li><a href="#%E8%B7%AF%E7%94%B1%E8%A1%A8%E4%B8%8E%E8%BD%AC%E5%8F%91%E8%A1%A8">路由表与转发表</a></li>
+<li><a href="#%E6%97%A0%E7%B1%BB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1-cidr">无类域间路由 (CIDR)</a></li>
+<li><a href="#%E5%88%86%E7%B1%BB%E5%92%8C%E7%89%B9%E6%AE%8A%E5%AF%BB%E5%9D%80">分类和特殊寻址</a></li>
+<li><a href="#nat">NAT</a></li>
+</ul>
+</li>
+<li><a href="#ipv6-%E5%8D%8F%E8%AE%AE">IPv6 协议</a><ul>
+<li><a href="#%E6%89%A9%E5%B1%95%E5%A4%B4">扩展头</a></li>
+</ul>
+</li>
+<li><a href="#ipv6-%E5%9C%B0%E5%9D%80">IPv6 地址</a><ul>
+<li><a href="#%E5%88%86%E7%B1%BB">分类</a></li>
+</ul>
+</li>
+<li><a href="#internet-%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE">Internet 控制协议</a><ul>
+<li><a href="#icmp">ICMP</a></li>
+<li><a href="#arp">ARP</a></li>
+<li><a href="#dhcp">DHCP</a></li>
+</ul>
+</li>
+<li><a href="#internet-%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE">Internet 路由协议</a><ul>
+<li><a href="#rip">RIP</a></li>
+<li><a href="#ospf">OSPF</a></li>
+<li><a href="#bgp">BGP</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE%E5%88%86%E7%B1%BB%E4%B8%8E%E5%8D%8F%E8%AE%AE%E6%A0%88">路由协议分类与协议栈</a></li>
+</ul>
+</li>
+<li><a href="#internet-%E7%BB%84%E6%92%AD">Internet 组播</a><ul>
+<li><a href="#%E7%BB%84%E6%92%AD%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE">组播路由协议</a></li>
 </ul>
 </li>
 </ul>
@@ -213,600 +258,1005 @@
 </ul>
 <!-- tocstop -->
 
-<h2><span id="传输服务">传输服务</span></h2><p>传输层所处的地位：</p>
+<h2><span id="向传输层提供的服务">向传输层提供的服务</span></h2><p>网路层的必要性：  </p>
 <ul>
-<li><p>面向信息处理：<br>应用层</p>
-</li>
-<li><p>面向传输：<br>传输层、网络层、数据链路层、物理层</p>
-</li>
-<li><p>用户功能：<br>应用层、传输层</p>
-</li>
-<li><p>网络功能：<br>网络层、数据链路层、物理层</p>
-</li>
+<li>相距较远的局域网之间的互联互通需要有结构化的统一的地址编排，而 MAC 地址是硬件地址，与位置无关，无法用来路由。</li>
+<li>二层交换机不隔离广播域，网络规模较大时易形成广播风暴。</li>
 </ul>
-<p>传输层向应用层提供传输服务，属于面向传输部分的最高层。<br>同时传输层也是用户功能中的最低层，为应用层频闭任何与网络有关的操作。<br>传输层协议是端到端的。</p>
-<p>传输层实现在不同主机上的进程之间的通信，每个应用进程都至少与一个传输层地址（端口）相关联。</p>
-<p>向上层提供的服务：面向连接的传输服务和无连接的传输服务。</p>
-<p>传输实体之间发送的消息：<strong>段</strong> (segment) 或<strong>传输协议数据单元</strong> (TPDU)。</p>
+<p>网络层设计目标：</p>
 <ul>
-<li><p>段（传输层）被包裹在数据包（网络层）中，而数据包被包含在帧（数据链路层）中。</p>
-</li>
-<li><p>当一帧到达时，数据链路层对帧头进行处理，如果帧目标地址与本地传递地址匹配，则把帧的有效载荷字段中的内容传递给网络实体。<br>网络实体再对数据包头进行类似处理，然后把数据包的有效载荷字段内容向上传递给传输实体。</p>
-</li>
+<li>向上提供的服务应该独立于路由器技术。</li>
+<li>应该向传输层屏蔽路由器的数量、类型和拓扑关系。</li>
+<li>传输层可用的网络地址应该有一个统一的编址方案，甚至可以跨越 LAN 和 WAN。</li>
 </ul>
-<h3><span id="berkeley-套接字">Berkeley 套接字</span></h3><p><strong>套接字</strong> (socket)</p>
-<table>
+<p>争论：</p>
+<ul>
+<li>网络层提供面向连接的服务还是无连接的服务。</li>
+</ul>
+<h2><span id="无连接服务x2f面向连接服务的实现">无连接服务&#x2F;面向连接服务的实现</span></h2><p>OSI 的网络层提供两种服务</p>
+<ul>
+<li>面向连接：<strong>虚电路</strong></li>
+<li>无连接：<strong>数据报</strong></li>
+</ul>
+<h3><span id="数据报网络">数据报网络</span></h3><p>所有的数据包都被独立地注入到网络中，并且每个数据包独立路由，不需要提前建立任何设置。</p>
+<p>特点：</p>
+<ul>
+<li>如果分组的寻路是独立的，可以合理利用网路资源。</li>
+<li>如果途中一个节点或一条链路发生故障，能给分组重选路由。</li>
+<li>分组头需要包含地址字段，会增加开销。</li>
+<li>各分组途经的路径可能不同，又肯出现先发后到现象。</li>
+<li>分组必须有生存时间限制，当生存期满时，分组则被抛弃；避免在网络内死转。</li>
+</ul>
+<h3><span id="虚电路网络">虚电路网络</span></h3><p>在发送数据包之前，必须首先建立起一条从源路由器到目标路由器之间的路径。<br>每个数据包包含一个标识符，指明了它属于哪一条虚电路。</p>
+<p>特点：</p>
+<ul>
+<li>一条物理链路可以对应多条逻辑信道。</li>
+<li>一条虚电路由各物理链路上的逻辑信道级联而成，占用了节点上的一条逻辑信道实际上就是占用了该节点上缓存器内的一个存储空间。</li>
+<li>分组考逻辑信道号 (LCN) 选择路由；因 LCN 只有局部意义，所以减少了分组头标的开销和处理的复杂度。</li>
+<li>能有效防止拥塞。</li>
+</ul>
+<h3><span id="二者对比">二者对比</span></h3><table>
 <thead>
 <tr>
-<th>Socket 原语</th>
-<th>含义</th>
+<th>问题</th>
+<th>数据报网络</th>
+<th>虚电路网络</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>SOCKET</td>
-<td>创建一个新的通信端点</td>
+<td>连接建立</td>
+<td>不需要</td>
+<td>需要</td>
 </tr>
 <tr>
-<td>BIND</td>
-<td>将一个本地地址关联到一个套接字上</td>
+<td>路由与转发</td>
+<td>每个分组都包含源&#x2F;目的地址，独立路由；路由器根据分组的目的地址进行路由转发</td>
+<td>建立连接时需要路由，一旦建立逻辑通道，后续分组都根据分组头的逻辑通道号转发</td>
 </tr>
 <tr>
-<td>LISTEN</td>
-<td>宣布愿意接收连接，给出队列大小</td>
+<td>路由器状态</td>
+<td>不保留分组路由过的状态信息</td>
+<td>路由器需要保留每个连接的状态信息，一遍后续分组的转发</td>
 </tr>
 <tr>
-<td>ACCEPT</td>
-<td>阻塞调用方，直到有人企图连接上来</td>
+<td>分组路径与到达顺序</td>
+<td>同一流的分组可能沿不同的路径到达目的端，有可能乱序</td>
+<td>同一流的分组沿建立好的虚电路按序到达目的端</td>
 </tr>
 <tr>
-<td>CONNECT</td>
-<td>主动尝试建立一个连接</td>
+<td>路由器故障影响</td>
+<td>通过相邻节点的路由表更新，能迂回故障节点</td>
+<td>故障路由器上所有的连接都将中断</td>
 </tr>
 <tr>
-<td>SEND</td>
-<td>在指定的连接上发送数据</td>
+<td>服务质量</td>
+<td>较难提供</td>
+<td>易于在建立连接时在路径上的各个节点预留资源</td>
 </tr>
 <tr>
-<td>RECV</td>
-<td>从指定的连接上接收数据</td>
-</tr>
-<tr>
-<td>CLOSE</td>
-<td>释放指定连接</td>
+<td>拥塞控制</td>
+<td>较难提供</td>
+<td>在建立连接时，可根据网络的资源选择路径，避免网络拥塞</td>
 </tr>
 </tbody></table>
+<h2><span id="路由算法">路由算法</span></h2><p>网络层的主要功能是根据分组目的地址选择路径。  </p>
+<p><strong>路由算法</strong>是网络层软件的一部分，负责确定一个入境数据包应该被发送到哪一条输出线路上。</p>
 <ul>
-<li>服务器：依次执行 <code>SOCKET</code>、<code>BIND</code>、<code>LISTEN</code>、<code>ACCEPT</code>。</li>
-<li>客户端：不需要 <code>BIND</code>，依次执行 <code>SOCKET</code>、<code>CONNECT</code>。</li>
-<li>连接建立后，双方都可以使用 <code>SNED</code>、<code>RECV</code> 收发数据。</li>
-<li>数据传输结束后，双方使用 <code>CLOSE</code> 释放连接。</li>
+<li>对数据报，路由器针对每一个到达的数据包重新选择路径。</li>
+<li>对虚电路，只有当建立一条新的虚电路时才需要做路由决策。</li>
 </ul>
-<h2><span id="传输协议的要素">传输协议的要素</span></h2><h3><span id="寻址">寻址</span></h3><p>当一个应用进程希望与另一个远程应用进程建立连接时，必须指定要连接到哪个应用进程上，即指定对方的<strong>传输服务访问点</strong> (TSAP)。<br>网络层上也有类似端点，称为<strong>网络服务访问点</strong> (NSAP)，而无连接的网络层不需要提供 NSAP。IP 地址是 NSAP 的实例。</p>
-<p>一个全局唯一的传输服务用户由 {主机地址，NSAP，TSAP} 表示，称为端点地址。</p>
-<p>在 TCP&#x2F;IP 中，NSAP 可略去，TSAP 称为端口号。<br>以 {IP 地址，port，协议类型} 唯一标识传输服务的用户。<br>{源&#x2F;目的 IP 地址，源&#x2F;目的端口号，协议类型} 五元组标识一个数据流。</p>
-<h4><span id="利用-tsap-传输消息">利用 TSAP 传输消息</span></h4><ul>
-<li><p>主机 2 上的邮件服务进程将自己关联到 TSAP 1522 上，等待入境连接请求的到来。</p>
-</li>
-<li><p>主机 1 上的应用进程希望发送一个邮件消息，于是把自己关联到 TSAP 1208 上，并发出一个 <code>CONNECT</code> 请求。<br>该请求指定主机 1 上的 TSAP 1208 作为源，主机 2 上的 TSAP 1522 作为目标。<br>这个动作在应用进程和服务器之间建立了一个连接。</p>
-</li>
-<li><p>应用进程发送邮件消息。</p>
-</li>
-<li><p>作为响应，邮件服务器表示它将传递该消息。</p>
-</li>
-<li><p>传输连接被释放。</p>
-</li>
-</ul>
-<h4><span id="tsap-获取方法">TSAP 获取方法</span></h4><ul>
-<li><p>服务进程固定在特定的 TSAP 地址上。  </p>
-<p>只适用于少数永不改变的关键服务。</p>
-</li>
-<li><p>采用端口映射器&#x2F;名字服务器。  </p>
-<p>用户与端口映射器建立一个连接。<br>用户通过这个连接发送一条消息指定它想要的服务名字；端口映射器返回相应的 TSAP 地址。<br>之后用户释放与端口映射器之间的连接，与所需的服务建立一个新连接。</p>
-<p>当一个新的服务被创建时，它必须向端口映射器注册，把它的服务名字与 TSAP 地址告诉端口映射器。端口映射器将该信息记录到它的内部数据库中。</p>
-</li>
-<li><p>采用<strong>初始连接协议</strong>。  </p>
-<p>每台希望向远程用户提供服务的机器有一个特殊的<strong>进程服务器</strong>充当不那么频繁使用的服务的代理。  </p>
-<p>进程服务器在同一时间监听一组端口，等待连接请求的到来。<br>用户发出一个连接请求，并指定所需服务的 TSAP 地址。如果该 TSAP 地址上没有服务器正在等着，则用户得到一条与进程服务器的连接。<br>在获取入境请求后，进程服务器派生出被请求的服务器，允许该服务器继承与用户的现有连接。新服务器完成要求的工作，而进程服务器继续回去监听新的连接要求。</p>
-<p>只适用于服务器可按需创建的场合。</p>
-</li>
-</ul>
-<h3><span id="连接">连接</span></h3><p>对于面向连接的传输服务，首先要和对端的对等实体建立连接。</p>
-<p>传输层连接本质上是在发送端和接收端上为实现可靠船速而维护的一些参数状态。</p>
+<p>路由算法可以分成两大类：</p>
 <ul>
-<li>发送&#x2F;确认序列号的维护，发送&#x2F;接收窗口的管理，接收端缓存大小等</li>
-<li>各种计时器</li>
+<li><strong>非自适应算法</strong>：<ul>
+<li>不会根据当前测量或者估计的流量和拓扑结构，来调整它们的路由决策。</li>
+<li>路由表固定，也称为<strong>静态路由</strong>。</li>
+<li>简便、可靠、易行，适用于负荷稳定、拓扑结构变化不大的网络。</li>
 </ul>
-<p>数据传输完毕还需要释放连接，即释放维护连接参数的缓存。</p>
-<h4><span id="建立连接三次握手">建立连接：三次握手</span></h4><p>正常情况：</p>
+</li>
+<li><strong>自适应算法</strong>：<ul>
+<li>根据拓扑结构的变化、流量的变化情况改变路由决策。</li>
+<li>路由表定时刷新，也称为<strong>动态路由</strong>。</li>
+<li>算法复杂，会增加网络负担，但能根据网络状态动态调整路由表，改善网络的性能。</li>
+</ul>
+</li>
+</ul>
+<p>路由器上可以同时运行多个路由协议，当有到达同一个目的地址的多条路由时，可以根据优先级的大小，选择其中一个优先级数值最小的作为最优路由。</p>
+<h3><span id="优化原则">优化原则</span></h3><p><strong>最优化原则</strong>：如果路由器 J 在从路由器 I 到路由器 K 的最优路径上，那么从 J 到 K 的最优路径也必定遵循同样的路由。</p>
+<p><strong>汇集树</strong>：从所有的源到一个指定目标的最优路径的集合构成了一棵以目标节点为根的树。</p>
+<p>所有路由算法的目标是为所有路由器找到这样的汇集树，并根据汇集树来转发数据包。</p>
+<h3><span id="最短路径算法-dijkstra">最短路径算法 (Dijkstra)</span></h3><p>在全双工链路连接的网络上，每条链路的每个方向上都有一个与之相关的权值。两个节点之间一条路由的代价是它所经过的链路权值之和。这两个节点间的最佳路由为其所有可能路径中具有最小代价的那条路径。</p>
+<p>标示路径长短的度量可以有：跳数、物理距离、带宽、平均流量、通信成本、平均延迟等。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_NODES 1024 <span class="comment">//最大节点数</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INFINITY 1000000000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//n表示节点数，dist[i][j]表示节点i到节点j的距离</span></span><br><span class="line"><span class="type">int</span> n, dist[MAX_NODES][MAX_NODES]; </span><br><span class="line"></span><br><span class="line"><span class="comment">//寻找节点t到节点s的最短路径</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">shortest_path</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> t, <span class="type">int</span> path[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">state</span>&#123;</span></span><br><span class="line">        <span class="type">int</span> pre; <span class="comment">//前任节点</span></span><br><span class="line">        <span class="type">int</span> length; <span class="comment">//该节点经过路径的长度</span></span><br><span class="line">        <span class="class"><span class="keyword">enum</span> &#123;</span>permanent, tentative&#125; label; <span class="comment">//该节点的标签</span></span><br><span class="line">    &#125;state[MAX_NODES];</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> k, min;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">state</span> *<span class="title">p</span>;</span></span><br><span class="line">    <span class="comment">//初始化</span></span><br><span class="line">    <span class="keyword">for</span> (p = &amp;state[<span class="number">0</span>]; p &lt; &amp;state[n]; p++)</span><br><span class="line">    &#123;</span><br><span class="line">        p-&gt;pre = <span class="number">-1</span>;</span><br><span class="line">        p-&gt;length = INFINITY;</span><br><span class="line">        p-&gt;label = tentative;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    state[t].length = <span class="number">0</span>;</span><br><span class="line">    state[t].label = permanet;</span><br><span class="line">    k = t; <span class="comment">//k表示当前操作的节点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(k != s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//找到k的哪些相邻节点从k走的距离小于原来的距离，更新距离</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++&gt;)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (dist[k][i] != <span class="number">0</span> &amp;&amp; state[i].label == tentative)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (state[k].length + dist[k][i] &lt; state[i].length)</span><br><span class="line">                &#123;</span><br><span class="line">                    state[i].pre = k;</span><br><span class="line">                    state[i].length = state[k].length + dist[k][i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//找到当前length最小的节点</span></span><br><span class="line">        k = <span class="number">0</span>;</span><br><span class="line">        min = INFINITY</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (state[i].label == teneative &amp;&amp; state[i].length &lt; min)</span><br><span class="line">            &#123;</span><br><span class="line">                min = state[i].length;</span><br><span class="line">                k = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        state[k].label == permanent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将路径存到path中</span></span><br><span class="line">    k = s;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; k &gt;= <span class="number">0</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        path[i] = k;</span><br><span class="line">        k = state[k].pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="泛洪算法">泛洪算法</span></h3><p>将每一个数据包发送到除了该数据包到达的那条线路以外的每条出境线路。</p>
+<p>为了抑制数据包泛滥，可以：</p>
 <ul>
-<li><p>主机 1 选择一个序号 x，并向主机 2 发送包含该序号的连接请求 <code>CR (seq = x)</code>。</p>
+<li><p>在每个数据包的头中设置一个跳计数器，每经过一跳该计数器减一，当计数器到达 0 时就丢弃该数据包。<br>理想情况下，跳计数器的初始值应该等于从源端到接收方之间路径的长度。<br>如果发送方不知道该路径有多长，可以将计数器的初始值设置为最坏情况下的长度，即网络的直径。</p>
 </li>
-<li><p>主机 2 应答连接确认 <code>ACK (seq = y, ACK = x)</code>，其中包含确认号 x 和序列号 y。</p>
-</li>
-<li><p>主机 1 在其发送的第一个数据中采用序列号为 x，并确认主机 2 的序列号 x，即发送 <code>DATA (seq = x, ACK = y)</code>。</p>
+<li><p>每个源路由器在接收来自主机的数据包时填上一个序号，每个路由器为每个源路由器准备一张表，记录已经观察到的来自源路由器的序号。如果入境数据包在该表中，它就不能再被泛洪到其他路由器。<br>每个表使用一个计数器 k 作为参考，它表示直到 k 的所有序号都已经观察到了。</p>
 </li>
 </ul>
-<p>出现旧的重复 <code>CR</code>：</p>
+<h3><span id="距离矢量-distance-vector-路由算法">距离矢量 (Distance Vector) 路由算法</span></h3><ul>
+<li>每个路由器维护一张路由表，它以网络每个路由器为索引，并且每个路由器对应一个表项，包含：<ul>
+<li>到达该目标路由器的首选出境线路；</li>
+<li>到达该目标路由器的距离估计值</li>
+</ul>
+</li>
+<li>每个路由节点定期地向它的相邻路由节点交换路由表。</li>
+<li>每个节点根据收到的相邻节点的路由信息更新自己的路由表，最终发现到每个目标的最佳估计值。</li>
+</ul>
+<h4><span id="存在问腿">存在问腿</span></h4><p><strong>收敛</strong>：整个网络最佳路径寻找的过程。</p>
+<p>对于距离矢量路由算法，它总是能收敛到正确的答案，但速度可能非常慢。它对好消息的反应非常迅速，而对于坏消息的反应异常迟缓。</p>
+<p><strong>无穷计算问题</strong>：当路由器 A 停机或 A、B 之间的链路断开时，路由器 B 认为可以从 C 到达 A，但实际上 C 的路线是经过 B 的，无法到达 A。逐渐地，所有的路由器都会趋向无穷大，但是所需的交换次数依赖于代表无穷大的数值。</p>
+<p>解决方案：水平分割算法。<br>防止路由器向邻居返回一个从该邻居获得的最佳路径。</p>
+<h3><span id="链路状态-link-state-路由算法">链路状态 (Link State) 路由算法</span></h3><p>也叫最短路径优先 (SPF) 算法。</p>
 <ul>
-<li><p>主机 2 收到旧的 <code>CR (seq = x)</code>，而主机 1 并不知情。<br>主机 2 回复 <code>ACK (seq = y, ACK = x)</code>。</p>
+<li><p>发现邻居节点，了解其网络地址。</p>
+<p>当一个路由器启动时，在每一条点到点线路上发送一个特殊的 HELLO 数据包。线路另一端的路由器返回一个应答说明自己是谁。<br>对于广播 LAN，可以视作一个新的人造节点，LAN 上的一个指定路由器被选中替代该节点运行路由协议。</p>
 </li>
-<li><p>主机 1 拒绝连接请求，即发送 <code>REJECT (ACK = y)</code>。<br>主机 2 放弃连接。</p>
+<li><p>设置到每个邻居节点的距离或成本度量值。</p>
+<p>常用的选择是使成本与链路带宽成反比。<br>如果网络在地理上分散，链路的延迟可作为成本的组成部分（发送 ECHO 数据包获得延迟估算值）。</p>
+</li>
+<li><p>构造一个包含所有刚刚获知的链路信息包。</p>
+<p>该数据包的内容首先是发送方的标识符，接着使一个序号和年龄，以及一个邻居列表。对于每个邻居，同时要给出到这个邻居的延迟。<br>可以周期性地创建数据包，也可以每当发生某些重要的使其时才创建数据包。</p>
+</li>
+<li><p>将这个包发送给所有其他的路由器，并接收来自所有其他路由器的信息包。</p>
+<p>基本思路是使用<a href="#%E6%B3%9B%E6%B4%AA%E7%AE%97%E6%B3%95">泛洪算法</a>将链路状态数据包分发给所有路由器。<br>每个数据包包含一个序号，序号随着每一个新数据包发出而逐一递增。<br>序号之后包含一个年龄字段，每秒中将年龄减一，为 0 时丢弃该数据包。</p>
+</li>
+<li><p>计算出到每个其他路由器的最短路径。</p>
+<p>在路由器本地运行 Dijkstra 算法。</p>
 </li>
 </ul>
-<p>出现旧的重复 <code>CR</code> 和 <code>ACK</code>：</p>
+<h4><span id="与距离矢量算法比较">与距离矢量算法比较</span></h4><ul>
+<li>需要更多的内存和计算，在大型网络中运行存在问题。</li>
+<li>没有慢收敛问题。</li>
+<li>可扩展性好，可靠。</li>
+</ul>
+<h3><span id="层次路由-hierarchical-routing">层次路由 (Hierarchical Routing)</span></h3><p>路由表项大小与网络规模成正比，当网络规模变大时，路由表也变大，消耗更多的内存、带宽、查找时间。</p>
+<p>采用层次化路由解决问题：</p>
 <ul>
-<li><p>主机 2 收到旧的 <code>CR (seq = x)</code>，而主机 1 并不知情。<br>主机 2 回复 <code>ACK (seq = y, ACK = x)</code>。</p>
-</li>
-<li><p>主机 2 收到旧的 <code>DATA (seq = x, ACK = z)</code>。<br>主机 2 根据确认是 z 而不是 y 知道这是一个旧确认包，因此不会建立连接。</p>
-</li>
-<li><p>主机 2 收到 主机 1 发送的 <code>REJECT (ACK = y)</code>，于是放弃连接。</p>
-</li>
+<li>将网络分区域，区域内的路由器只负责本区域内的分组转发，目的地址不在本区域内的分组都发给指定的区域路由器（边界路由器）去处理。</li>
+<li>路由信息的交换旨在域内进行，路由器内部需存储的路由表项大大减少。</li>
+<li>对于大型网络，可以分成多层次结构，每一层次的边界路由器相互之间交流路由信息。</li>
 </ul>
-<h4><span id="释放连接">释放连接</span></h4><p><strong>非对称释放</strong>：连接的任何一方都可以断开整个连接。</p>
-<p>可能会导致数据的丢失。<br>如：主机 1 发送 DATA，它正确到达主机 2；主机 1 再次发送 DATA，但在到达之前主机 2 发出了 <code>DISCONNECT</code>；因此连接被释放，但数据丢失了。</p>
-<p><strong>对称释放</strong>：把连接看作是由两个单独的单项连接，并要求单独释放每一个单项连接。</p>
+<p>缺点：选择的路由可能不是最佳的，增加了路径长度。</p>
+<p>对于一个包含 N 个路由器的网络，最优的层数是 lnN，每个路由器所需的路由表项是 elnN 个</p>
+<h2><span id="拥塞控制算法">拥塞控制算法</span></h2><p><strong>拥塞</strong>：当大量分组进入通信子网，超出了网络的处理能力时，就会引起网络局部或整体性能下降。</p>
 <ul>
-<li><p>正常情况</p>
+<li>路由器的队列溢出，分组丢失。</li>
+<li>后果：使许多分组重传；导致更多的业务量，直至崩溃。</li>
+<li>原因：路由器的处理速度、存储空间、带宽不匹配，网络负载的不平衡。</li>
+</ul>
+<p><strong>拥塞控制</strong>：</p>
 <ul>
-<li><p>主机 1 发送释放连接请求 <code>DR</code> 并启动一个计时器，但它不立即拆除连接，而是等待对方确认。</p>
-</li>
-<li><p>主机 2 收到 <code>DR</code> 后也发回一个 <code>DR</code>，并启动一个计时器。</p>
-</li>
-<li><p>当主机 1 收到主机 2 发送的 <code>DR</code> 后，它会返回一个 <code>ACK</code> 段并释放连接。</p>
-</li>
-<li><p>主机 2 收到 <code>ACK</code> 后，它也释放连接。</p>
-</li>
+<li>网络负载的不均衡。</li>
+<li>是全局问题，涉及的节点包括主机、路由器。</li>
+<li>由网络层和传输层共同承担。</li>
 </ul>
-</li>
-<li><p>最后一个 <code>ACK</code> 丢失</p>
-<p>通过主机 2 的计时器来补救。<br>如果在计时器超时前，主机 2 没有收到 <code>ACK</code>；则计时器超时后，主机 2 无论如何都释放连接；此时主机 1 已经释放了连接。</p>
-</li>
-<li><p>主机 2 发送的 <code>DR</code> 丢失</p>
-<p>通过主机 1 的定时器来补救。<br>如果在定时器超时前，主机 1 没有收到来自主机 2 的 <code>DR</code>；则计时器超时后，主机 1 再次发送 <code>DR</code>。</p>
-</li>
-</ul>
-<h3><span id="流量控制-amp-拥塞控制">流量控制 &amp; 拥塞控制</span></h3><h4><span id="流量控制">流量控制</span></h4><p><strong>流量控制</strong>：根据接收端的缓存容量来动态地调整发送端的窗口大小，避免一个快速的发送端淹没一个慢速的接收端。</p>
-<p>采用滑动窗口协议，但是使用可变大小的动态缓冲区，即一个可变大小的窗口。</p>
+<p><strong>流量控制</strong>：</p>
 <ul>
-<li>初始时，发送端根据它期望的需求要求一定数量的缓冲区。</li>
-<li>接收端根据它的能力尽可能多的缓冲区。</li>
-<li>每次发送端传输一段，它必须减少分配给它的缓冲区数。</li>
-<li>当分配给发送端的缓冲区数达到 0 时，完全停止发送。</li>
-<li>接收端在逆向流量中捎带上单独的确认和缓冲区数。<ul>
-<li>TCP 采用这种模式，将缓冲区的分配捎带在头的 Windows size 字段。</li>
+<li>接收端或所在网络的接受速度小于发送端的发送速度。</li>
+<li>是局部问题，只涉及收发两端。</li>
 </ul>
-</li>
-</ul>
-<p>为了避免控制段丢失造成的死锁，每台主机应该定期地在每个连接上发送控制段，给出确认和缓冲区状态。</p>
-<h4><span id="理想带宽分类">理想带宽分类</span></h4><p><strong>功率</strong>定义：<br>$$<br>功率 &#x3D; \dfrac{负载}{延迟}<br>$$<br>功率最初随着提交负载的上升而上升，延迟仍然很小并且基本保持不变；<br>但随着延迟快速增长，功率达到最大，然后开始下降。<br>达到最大功率的负载表示了传输实体放置在网络上的有效负载。</p>
-<p><strong>最大-最小公平</strong>：如果分配给一个流的带宽在不减少分配给另一个流带宽的前提下无法得到进一步增长，那么就不给这个流更多带宽。</p>
-<p><strong>拥塞控制</strong>：根据网络的承载容量来动态地调整发送端的窗口大小，避免发送端发送的数据超过了网络容量。<br>拥塞控制时网络层和传输层的共同责任。<br>一个良好的拥塞控制算法，应迅速收敛到理想的操作点，并跟踪这随时变化的操作点。</p>
-<h4><span id="调整发送速率">调整发送速率</span></h4><p>发送速率可能受到两个方面因素的限制：</p>
+<p>指示网络拥塞的参数：</p>
 <ul>
-<li>在接收端没有足够缓冲区的情况下，进行流量控制。</li>
-<li>在网络容量不足的情况下，进行拥塞控制。</li>
+<li>分组丢失率</li>
+<li>平均队列长度</li>
+<li>分组重传率</li>
+<li>评价分组延时</li>
 </ul>
-<p><strong>显示拥塞协议</strong> (XCP)<br>TCP 采用<strong>显示拥塞通知</strong> (ECN)：<br>路由器在经历拥塞的数据包中设置警告比特来警告发送端放慢速率，但它们不告诉源端该减缓多少。</p>
-<p>增加或减少速率的方式由<strong>控制法则</strong>决定。<br>其中<strong>加法递增乘法递减</strong> (AIMD) 法则是达到有效和公平操作点的适当流量规则：<br>用户加法递增他们的带宽，然后当收到拥塞信号时乘法递减他们的带宽。</p>
-<h2><span id="internet-传输协议">Internet 传输协议</span></h2><h3><span id="udp">UDP</span></h3><p><strong>用户数据报协议</strong> (UDP)：提供无连接的服务。</p>
-<h4><span id="头标">头标</span></h4><p>UDP 传输的段（数据报）由 8 字节的头和有效载荷字段构成。</p>
+<h3><span id="开环控制">开环控制</span></h3><p>基于良好的设计，进行业务量整形。</p>
+<h4><span id="漏桶算法">漏桶算法</span></h4><p>无论流入漏桶的水的速率多大，只要漏桶中还有水，那么水流出桶的速率为恒定速率 R；如果桶内没有水，则流出桶的速率降为 0。<br>一旦桶内的水达到桶的容量 B，任何额外进入桶的水都会沿着桶侧分流，最终流失。</p>
+<p>每个主机在连接到网络的接口中包含一个漏桶。为了向网络发送数据包，漏桶必须由空余。<br>如果桶满时有数据包到达，那么该数据包必须排入队列等待漏桶空出来时再接纳，或者被丢弃。</p>
+<h4><span id="令牌桶算法">令牌桶算法</span></h4><p>水龙头向水桶中灌水。水龙头速率为 R，水桶容量为 B。<br>为了发送一个数据包，必须能够从桶内掏出水或令牌。桶内只能积累固定数量的令牌，即 B。<br>如果桶是空的，必须等待更多的令牌到达才能发送另一个数据包。</p>
+<p>最大突发长度：清空令牌桶所需时间。<br>假设突发长度为 S 秒，最大输出率为 M B&#x2F;s，令牌桶的容量为 B 字节，令牌到达率为 R B&#x2F;s。<br>则 $B + RS &#x3D; MS$。</p>
+<h3><span id="闭环控制">闭环控制</span></h3><p>基于反馈概念。</p>
 <ul>
-<li><p>源端口：2 字节。</p>
-</li>
-<li><p>目标端口：2 字节。</p>
-</li>
-<li><p>UDP 长度：2 字节。</p>
-<p>包含 8 字节的头和数据两部分的总长度。<br>最小长度是 8 字节，刚好覆盖 UDP 头。<br>最大长度是 65515 字节。因为 IP 头的总长度字段为 16 位，最大长度为 65535 字节；而 IP 头最少需要 20 字节。</p>
-</li>
-<li><p>UDP 校验和（可选）：2 字节</p>
-<p>校验 UDP 头、数据和一个概念性的 IP 伪头。</p>
-<p>IPv4 伪头包括：</p>
+<li>检测到拥塞时，就发一个分组给源端，或向所有主机广播。</li>
+<li>在每个分组头中保留一个位或域，当拥塞超过一定值时，路由器就在该位或域上填上拥塞信息通知网络节点。</li>
+<li>由主机或路由器发送询问分组查询拥塞情况。</li>
+</ul>
+<h4><span id="虚电路中的拥塞控制">虚电路中的拥塞控制</span></h4><p>采用<strong>准入控制</strong> (Admission Control) 的三种策略：</p>
 <ul>
-<li>4 字节源地址</li>
-<li>4 字节目的地址</li>
-<li>1 字节 0</li>
-<li>1 字节 UDP 的协议号 17</li>
-<li>2 字节 UDP 长度（包括头，以字节为单位）</li>
+<li>一旦出现拥塞的信号，就不再创建任何虚电路，直至拥塞解除。</li>
+<li>允许建立新的虚电路，但要仔细选择路由，以便所有新的虚电路绕过拥塞的区域。</li>
+<li>在虚电路建立时，子网与主机对所需服务质量进行协商。<br>若不能满足主机最低要求，则拒绝建立连接；反之则保留连接所需的多种资源，避免拥塞发生。</li>
 </ul>
-<p>与 IP 头中的头校验和算法类似。<br>计算校验和时：</p>
-<ul>
-<li>当数据字段的长度为奇数字节时，则在数据字段填充一个额外的 0 字节（因为要以 16 位为单位计算校验和）。</li>
-<li>当结果为全 0 时，将校验和置为全 1。</li>
-<li>如果发送端没有计算校验和，则将该字段置为 0。<br>验算时的步骤也和 IP 头校验和的验算类似，只是求和范围改成上述 UDP 的校验范围。</li>
-</ul>
+<h4><span id="数据报中的拥塞控制">数据报中的拥塞控制</span></h4><ul>
+<li><p><strong>抑制分组</strong> (Choke Packet)：<br>每个路由器监视本节点的资源利用情况，若某个方向的资源利用率超过一定的门限，则该路由器向有关源节点发送抑制分组，源节点相应减少发往该方向的数据量，直至该方向的拥塞解除。</p>
+</li>
+<li><p><strong>随机早期检测</strong> (RED)：<br>路由器维护一个运行队列长度的平均值。当某条链路上的平均队列长度超过某个阈值时，该链路就被认为即将拥塞，路由器随机丢弃一小部分数据包。</p>
 </li>
 </ul>
-<h4><span id="应用">应用</span></h4><ul>
-<li><p>具有简单高效的特点。</p>
-</li>
-<li><p>客户-服务器模式应用，如<strong>域名系统</strong> (DNS)。</p>
-</li>
-<li><p>话音、视频等实时多媒体应用。</p>
-</li>
-</ul>
-<h3><span id="tcp">TCP</span></h3><p><strong>传输控制协议</strong> (TCP)：在不可靠的互联网络上提供可靠的端到端字节流的传输协议。</p>
-<h4><span id="服务模型">服务模型</span></h4><p>TCP 服务由发送端和接收端创建<strong>套接字</strong>来获得。</p>
-<ul>
-<li><p>每个套接字有一个套接字编号（地址），该编号由主机的 IP 地址以及一个本地主机的 16 位数值（端口，TCP 的 TSAP 名字）。</p>
-</li>
-<li><p>一个套接字有可能同时被用于多个连接，即两个或多个连接可能终止于同一个套接字。</p>
-</li>
-<li><p>每个连接可以用两端的套接字标识符来标识，即 <code>(soket1, soket2)</code>。</p>
-</li>
-</ul>
-<p><strong>知名端口</strong>：1024 以下的端口号被保留，只能用作由特权用户启动的标准服务。</p>
-<table>
+<h2><span id="网络互连">网络互连</span></h2><h3><span id="网络如何不同">网络如何不同</span></h3><table>
 <thead>
 <tr>
-<th>端口</th>
-<th>协议</th>
-<th>用途</th>
+<th>项目</th>
+<th>不同处</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>20、21</td>
-<td>FTP</td>
-<td>文件传输</td>
+<td>提供的服务</td>
+<td>无连接与面向连接</td>
 </tr>
 <tr>
-<td>22</td>
-<td>SSH</td>
-<td>远程登录</td>
+<td>寻址</td>
+<td>不同大小，扁平或层次</td>
 </tr>
 <tr>
-<td>23</td>
-<td>Talnet</td>
-<td>远程登录</td>
+<td>广播</td>
+<td>提供或缺乏</td>
 </tr>
 <tr>
-<td>25</td>
-<td>SMTP</td>
-<td>电子邮件</td>
+<td>数据包尺寸</td>
+<td>每个网络有自己的最大尺寸</td>
 </tr>
 <tr>
-<td>80</td>
-<td>HTTP</td>
-<td>万维网</td>
+<td>有序性</td>
+<td>有序和无序传递</td>
+</tr>
+<tr>
+<td>服务质量</td>
+<td>提供或缺乏，种类不同</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>丢包的不同级别</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>隐私规则，加密等</td>
+</tr>
+<tr>
+<td>参数</td>
+<td>不同超时值，流规范等</td>
+</tr>
+<tr>
+<td>记账</td>
+<td>按连接时间、包数、字节数或不收费</td>
 </tr>
 </tbody></table>
-<h4><span id="特点">特点</span></h4><ul>
-<li><p>字节流传输，端到端之间不保留消息的边界。</p>
+<h3><span id="网络如何连接">网络如何连接</span></h3><ul>
+<li><p>源端接受来自传输层的数据，并生成一个带有公共网络层的头（IP头）。<br>网络层的头包含了最终的接收方地址，这个地址用来确定数据包应该通过第一个路由器发送。</p>
 </li>
-<li><p>TCP 连接上的每个字节都有独有的 32 位序号，起始编号随机。</p>
+<li><p>数据包被封装在 802.11 帧内，帧的目标地址是第一个路由器的地址。</p>
 </li>
-<li><p>全双工，一个连接上传输两个方向的 TCP 数据，各自的编号是独立的。</p>
+<li><p>在路由器，数据包从帧的数据字段中被提取出来，802.11 帧头被丢弃。<br>路由器检查数据包的 IP 地址，并依此决定将数据包转发给第二个路由器。  </p>
 </li>
-<li><p>点到点，不支持组播或广播传输模式。</p>
+<li><p>第一个路由器建立一条到第二个路由器的 MPLS 虚电路，并且用 MPLS 报头封装该数据包。</p>
 </li>
-<li><p>发送端和接收端的 TCP 实体以段的形式交换数据。<br>TCP 段由一个固定的 20 字节的头（加上可选的部分）以及随后的 0 个或多个数据字节构成。<br>有两个因素限制了段的长度：</p>
+<li><p>在远端，MPLS 头被丢弃，并在此检查 IP 地址以便寻找下一跳网络层。</p>
+</li>
+</ul>
+<h3><span id="互联网路由">互联网路由</span></h3><p>采用两级路由算法。<br>在每个网络中，使用一个<strong>域内</strong>或<strong>内部网关协议</strong>进行路由。<br>为了让数据包跨越构成互联网的网络，需要<strong>域间</strong>或<strong>外部网关协议</strong>。</p>
+<p>网络可能全部使用不同的域内协议，但必须使用相同的域间协议。</p>
+<p>在 Internet 上，域间路由协议称为<strong>边界网关协议</strong> (BGP)。</p>
+<p><strong>自洽系统</strong> (AS)：每个网络都独立于所有其他网络运行。</p>
+<h3><span id="数据包分段">数据包分段</span></h3><p><strong>路径最大传输单元</strong> (MTU)。</p>
+<h4><span id="透明分段">透明分段</span></h4><p>当一个超大的数据包到达 G1，该路由器将它分割成多个段；每个段都发向同样的出口路由器 G2，在这里这些段被重新组合起来。</p>
+<p>问题：</p>
 <ul>
-<li>包括 TCP 头在被的每个段，必须适合 IP 的 65515 个字节有效载荷。</li>
-<li>每个网络有最大传输单元 (MTU)。</li>
+<li>每个分段中必须提供一个计数字段或者一个数据包结束标志位。</li>
+<li>所有数据包必须经过同一个出口路由器才能重组，路由受到限制，损失一些性能。</li>
+<li>路由器需要做大量的工作。</li>
 </ul>
-</li>
-<li><p>使用具有动态窗口大小的滑动窗口协议。<br>发送端每次发送的数据量由发送窗口大小决定，而不是以应用层递交的消息为单位；<br>接收端每次向上层递交的数据量由落在接收窗口中并且有序的数据决定。</p>
-</li>
-<li><p>可靠，具有流量控制和拥塞控制。</p>
+<h4><span id="不透明分段">不透明分段</span></h4><p>IP 采用这种方式工作。<br>给每个段一个数据包序号、一个数据包内的绝对字节偏移量和一个指明是否到达数据包末尾的标志位。段到达目的地后被放置在一个缓冲区中以便重组</p>
+<p>问题：</p>
 <ul>
-<li>发送端：超时重传。</li>
-<li>接收端：发送确认，缓存处理乱序。</li>
+<li>增加头开销。</li>
+<li>数据包的丢失概率增加。</li>
 </ul>
-</li>
-</ul>
-<h4><span id="头">头</span></h4><p>每个段的起始部分是一个固定格式的 20 字节头。<br>固定的头部之后可能有头的选项。<br>选项之后是最多可达 $65535 - 20 - 20 &#x3D; 65495$ 个字节的数据。（其中第一个 20 指 IP 头，第二个 20 指 TCP 头。</p>
-<p>没有任何数据的 TCP 段也是合法的，通常被用作确认和控制消息。</p>
+<h4><span id="路径-mtu-发现">路径 MTU 发现</span></h4><p>每个 IP 数据包发出时在头设置一个比特，指示不允许对该数据包实施分段操作。<br>如果一个路由器接收的数据包太大，它就生成一个报错数据包并发给源端，然后丢弃该数据包。<br>当源端收到报错数据包，它就使用报错数据包携带的信息重新将出错数据包分段，每个段足够小到报错路由器能处理。<br>如果沿路径前进又遇到一个 MTU 更小的路由器，则重复上述过程。</p>
+<h2><span id="internet-的网络层">Internet 的网络层</span></h2><p>Internet 是一个基于 IP 的分组交换网络，根据 IP 协议信息（主要是目的地址）来转发分组。</p>
+<p>IP 提供尽力传送 (best-effort) 服务</p>
 <ul>
-<li><p><strong>源端口</strong> (Source port)：16 位</p>
-</li>
-<li><p><strong>目的端口</strong> (Destination port)：16 位</p>
-</li>
-<li><p><strong>序号</strong> (Sequence number)：32 位<br>标识本报文段的第一个字节在数据流中的位置。</p>
-</li>
-<li><p><strong>确认号</strong> (Acknowledgment number)：32 位<br>标识本段报文段的发送方下一个期待接收的字节编号。<br>是累计确认，用一个数字概括了接收到的所有数据。</p>
-</li>
-<li><p><strong>TCP 头长度</strong> (TCP header length)：4 位<br>指明 TCP 头的长度，以 32 位字为单位。</p>
-</li>
-<li><p><strong>保留</strong> (Reserved)：4 位<br>置 0。</p>
-</li>
-<li><p><strong>标志位</strong>：共 8 位，每个标志位 1 位  </p>
+<li>不可靠：无连接，无确认；不保证分组可靠到达目的地，可能出现分组的丢失。</li>
+<li>乱序：分组可能不是按照发送顺序到达目的地。</li>
+</ul>
+<p>所有接入到 Internet 的节点都必须运行 IP 协议。  </p>
 <ul>
-<li><p><strong>CWR &amp; ECE</strong>：用于显示拥塞通知。<br>当 TCP 接收端收到了来自网络的拥塞指示后，就设置 ECE 以便给 TCP 发送端发 ENC-Echo 信号，告诉发送端放慢发送速率。<br>TCP 发送端设置 CWR，给接收端发 CWR 信号，告诉接收端已放慢发送速率，无需继续发送 ENC-Echo 信号。</p>
-</li>
-<li><p><strong>URG</strong>：置 1 时，紧急指针有效。  </p>
-</li>
-<li><p><strong>ACK</strong>：置 1 时，指示确认段有效。</p>
-</li>
-<li><p><strong>PSH</strong>：置 1时，指出这是被推送的数据。<br>请求接收端一旦收到数据后立即将数据递交给应用程序。</p>
-</li>
-<li><p><strong>RST</strong>：连接复位。<br>用于拒绝不存在的端口连接请求、中止异常连接等。</p>
-</li>
-<li><p><strong>SYN</strong>：用于建立连接过程。<br>在连接请求中，<code>(SYN = 1, ACK = 0)</code>，表明该段没有使用捎带确认字段。<br>在连接应答中，捎带了一个确认，因此 <code>(SYN = 1, ACK = 1)</code>。</p>
-</li>
-<li><p><strong>FIN</strong>：用于释放连接。</p>
-</li>
+<li>向上，可以互联采用各种通信技术的网络；</li>
+<li>向下，可以承载各种类型网络业务。</li>
 </ul>
-</li>
-<li><p><strong>窗口大小</strong> (Window size)：16 位。<br>指定在已确认的字节之后还可以接收的字节数。<br>窗口大小为 0 标识希望对端不再发送数据，用于流量控制。</p>
-</li>
-<li><p><strong>校验和</strong> (Checksum)：16 位。<br>与UDP 的校验和类似，只是 IP 伪头中的协议号为 TCP 的协议号 6。</p>
-</li>
-<li><p><strong>紧急指针</strong> (Urgent pointer)：16 位<br>指向紧急数据的结束位置（相对于序列号的偏移量）。</p>
-</li>
-<li><p><strong>选项</strong> (Options)：0 或 32 位的倍数，不足部分用 0 填充<br>对于最长的 TCP 头，选项可以扩展到 40 个字节。</p>
-</li>
-</ul>
-<h4><span id="连接建立">连接建立</span></h4><p>使用<a href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B">三次握手法</a>来建立连接。<br>通过三次握手，主机 1 和主机 2 之间完成初始序列、窗口大小（扩大因子）、最大数据段尺寸等参数的协商，并且分配连接所需要端点资源。</p>
-<p>正常情况：</p>
+<h3><span id="ipv4-协议">IPv4 协议</span></h3><p>每个 IP 数据报包含两部分，一个头和一个正文（有效净荷）。头由一个20字节的定长部分和一个可选的变长部分组成。</p>
+<p>IP 数据报头依次有：</p>
 <ul>
-<li><p>主机 1 请求连接数据段（SYN 数据段）：<br>SYN 标志置 1，ACK 标志置 0，选择初始序列号 <code>SEQ = x</code>。<br>即发送 <code>SYN (SEQ = x)</code>。<br>SYN 数据段不携带任何数据，但要消耗一个字节的序号。</p>
+<li><p><strong>版本</strong> (Version)：4-bit<br>记录数据报属于协议的哪个版本。<br>IPv4 填 4，IPv6 填 6。</p>
 </li>
-<li><p>主机 2 响应连接确认数据段（SYN+ACK 数据段）：<br>SYN 标志置 1，ACK 标志置 1，选择初始序列号 <code>SEQ = y</code>；并对 x 进行确认，设置 <code>ACK = x + 1</code>。<br>即发送 <code>SYN (SEQ = y, ACK = x +1)</code>。<br>SNY+ACK 数据段也不携带数据，但消耗一个字节的序号。</p>
+<li><p><strong>IHL</strong>：4-bit<br>指明头的长度。<br>IHL 的最小值为 5，表明头没有可选项；最大值为 15，把头的长度限制为最大 60 字节。</p>
 </li>
-<li><p>主机 1 响应连接确认数据段：<br>ACK 标志置 1，序列号 <code>SEQ = x + 1</code>；并对 y 进行确认，设置 <code>ACK = y + 1</code>。<br>即发送 <code>(SEQ = x + 1, ACK = y + 1)</code>。<br>ACK 数据段如果不携带数据就不消耗序号。</p>
-</li>
-</ul>
-<p>两端同时建立连接：</p>
+<li><p><strong>区分服务</strong> (Differentiated services)：8-bit</p>
 <ul>
-<li><p>主机 1 发送 <code>SYN (SEQ = x)</code>，同时主机 2 发送 <code>SYN (SEQ = y)</code>。</p>
-</li>
-<li><p>主机 2 收到消息后发送 <code>SYN (SEQ = y, ACK = x + 1)</code>，主机 1 收到消息后发送 <code>SYN (SEQ = x, ACK = y + 1)</code>。</p>
-</li>
-<li><p>实际上只建立了一个连接，并不是两个。</p>
-</li>
+<li>最初称为<strong>服务类型</strong> (Type of service)，包含 6 位。<br>其中 3 位表示优先级，3 位代表主机最关心的是延迟、吞吐量或可靠性中的哪一种。</li>
+<li>现在，前 6 位用来标记数据包的服务类别，后 2 位用来携带显示拥塞通知信息。</li>
 </ul>
-<p>连接建立失败：</p>
+</li>
+<li><p><strong>总长度</strong> (Total length)：16-bit<br>描述数据报总长度，包括头和数据。<br>最大长度是 65535 个字节。</p>
+</li>
+<li><p><strong>标识</strong> (Indentification)：16-bit<br>用于让目标主机确定一个新到达的分段属于哪一个数据报。<br>同一个数据报的所有段包含相同的标识值。</p>
+</li>
+<li><p>莫名其妙空了 1 位。</p>
+</li>
+<li><p><strong>DF</strong> (Don’t Fragment)：1-bit<br>不分段标志位，不允许路由器分割该数据报。<br>可用于发现路径 MTU 过程中。</p>
+</li>
+<li><p><strong>MF</strong> (More Fragments)：1-bit<br>更多的段标志位，使接收方知道什么时候一个数据报的所有分段都到达了。<br>除了最后一个段以外其他所有段都要设置这一位。</p>
+</li>
+<li><p><strong>分段偏移量</strong> (Fragment offset)：13-bit<br>指明了该段在当前数据报中的位置。<br>除了数据报的最后一个段以外，其他所有段的长度必须是 8 字节的倍数。<br>每个数据报的第一个段的偏移量为 0，后面的段为前面所有段数据总字节数除以 8。<br>由于该字段有 13 位，所以每个数据报最多有 8192 个段。</p>
+</li>
+<li><p><strong>生存期</strong> (TTL)：8-bit<br>用于限制数据包生存期的计数器。<br>单位为秒，故最大生存期为 255 秒。<br>在每一跳上该计数器递减，而且当数据报在一台路由器上排队时间较长时，该计数器必须多倍递减。递减到 0 时，该数据包就被丢弃。</p>
+</li>
+<li><p><strong>协议</strong> (Protocol)：8-bit<br>表示高层协议类型，指明该将数据包交给哪个传输进程（如 TCP、UDP）。<br>协议的编号在整个 Internet 是全球统一的。</p>
+</li>
+<li><p><strong>头校验和</strong> (Header checksum)：16-bit  </p>
 <ul>
-<li><p>主机 1 请求连接数据段（SYN 数据段）</p>
+<li>计算校验和：先将头校验和字段置为 0，然后将整个 IP 头以 16 位为单位相加求和，溢出的部分加回低位，再将结果取反，得到的数据填入头校验和字段。  </li>
+<li>验算：当数据到达时，同样将整个 IP 头以 16 位为单位相加求和，溢出的部分加回低位后取反，得到的结果如果是 0 则通过校验。</li>
+</ul>
 </li>
-<li><p>主机 2 的 TCP 实体检查是否有进程已经在目标端口字段指定的端口上执行了 LISTEN。<br>如果没有，则它发送一个设置了 RST 的应答报文，拒绝主机 1 的连接请求。</p>
+<li><p><strong>源地址</strong> (Source address)：32-bit<br>表示源网络接口的 IP 地址。</p>
+</li>
+<li><p><strong>目标地址</strong> (Destination address)：32-bit<br>表示目标网络接口的 IP 地址。</p>
+</li>
+<li><p><strong>选项</strong> (Options)：具有可变长度，最多为 40 字节。<br>用于包含一些原设计中没有出现的信息，同时也用于将数据报头的长度填充到 4 字节的整数倍。</p>
+<ul>
+<li>安全 (Security)：指明了信息的秘密程度。</li>
+<li>严格源路由 (Strict source routing)：给出了从源到目标的完整路径。<br>形式是一系列 IP 地址。数据报必须严格遵循这条路线向前传输。</li>
+<li>松散源路由 (Loose source routing)：要求数据包穿越所指定的路由器列表。<br>要求按照表中的顺序前进，但是允许在途中经过其他路由器。</li>
+<li>记录路由 (Record route)：使沿途每个路由器附上自己的出口 IP 地址。<br>便于系统管理员跟踪路由算法中的错误。<br>最多只记录 9 个 IP 地址。</li>
+<li>时间戳 (Timestamp)：使沿途每个路由器附上自己的 IP 地址和 32 位时间戳。</li>
+</ul>
 </li>
 </ul>
-<h4><span id="连接释放">连接释放</span></h4><p>TCP 的全双工连接可以看成一个双单工的连接，每个单工连接都独立地释放。</p>
-<p>通常情况下，释放一个连接需要 4 个 TCP 段：<br>通信双方都必须向对方发送 <code>FIN = 1</code> 的 TCP 段并得到对方的应答，即每个方向上一个 <code>FIN</code> 和一个 <code>ACK</code>。<br>然而，第一个 <code>ACK</code> 和第二个 <code>FIN</code> 有可能被组合在同一个段中，从而将所需段总数降低到 3 个。<br>主机发送 <code>FIN</code> 数据段后，就不再向对方发送数据。</p>
-<p>为防止半连接，必须使用定时器计时，对 <code>FIN</code> 数据段的应答在两个最大分组生命期内未到达，则发送端释放连接，对方也会因为超时释放。</p>
-<h4><span id="连接管理模型">连接管理模型</span></h4><p>建立连接和释放连接所需的步骤可以用一个具有 11 个状态的有限状态机来表示。<br>每一种状态中，都存在特定的合法事件。当一个合法事件发生时，可能需要采取某个动作；当发生其他事件时，则报告一个错误。</p>
+<h3><span id="ipv4-地址">IPv4 地址</span></h3><p>Internet 上的 IP 地址由 <strong>IANA</strong> (互联网编号分配机构) 负责分配和管理。</p>
+<p>IP 地址用于标识主机或网络设备（如路由器）的网络层地址，可用在 IP 数据包的 Source address 和 Destination address 字段，路由器根据目的 IP 地址转发分组。<br>注意，一个 IP 地址并不真正指向一台主机，而是指向一个网络接口。如果一台主机在两个网络上，它必须有两个 IP 地址。</p>
+<p>IP 地址具有层次性，每个 32 位地址由高位的可变长网络（前缀）和低位的主机两部分数据组成。</p>
+<p>IP 地址的书写方式是<strong>点分十进制</strong>表示法。<br>按此格式，4个字节中的每个写成十进制，取值范围从 0 到 255。<br>按照惯例，网络地址的书写格式是前缀 IP 地址后跟一个斜线，斜线后是网络部分的位长度。<br>eg. 32位十六进制地址 <code>80D00297</code> 写成 <code>128.208.2.151</code>。假设前缀包含 $2^8$ 个地址，即网络部分包含 $32 - 8 &#x3D; 24$ 位，网络地址写成 <code>128.208.0.0/24</code>。</p>
+<h4><span id="前缀x2f子网">前缀&#x2F;子网</span></h4><p>同一网络上的所有主机的前缀是相同的。</p>
+<ul>
+<li><p>简单地由长度表述。<br>如 24 位前缀表示为 <code>/24</code>。</p>
+</li>
+<li><p>前缀长度相当于网络部分中 1 的二进制掩码，称为<strong>子网掩码</strong>。<br>如 24 位前缀对应的子网掩码为 <code>255.255.255.0</code>。</p>
+</li>
+</ul>
+<p><strong>子网划分</strong>：在内部将一个网络块分成几个部分供多个内部网络，但对外部世界仍然像单个网络一样。<br>分割一个大型网络得到的一系列结果网络，称作<strong>子网</strong>。</p>
+<p>当数据包到达时，路由器会查看该数据包的目标地址，并检查它属于哪个子网。<br>具体操作：路由器把数据包的目标地址与每个子网的掩码进行 AND 操作，看结果是否对应于某个前缀。</p>
+<h4><span id="ip-地址和-mac-地址">IP 地址和 MAC 地址</span></h4><ul>
+<li>IP 地址在整个网络中标识不同的节点，而 MAC 地址在链路或者局域网内标识不同的节点。</li>
+<li>IP 地址包含有网络号（前缀），因此节点配置的 IP 地址与其所在的网络相关；而 MAC 地址与节点位置无关，因此一般事先固化在网络设备中。</li>
+<li>数据帧在链路上传送使用 MAC 地址，源 MAC 地址为发送主机的网络接口的 MAC 地址，而目的 MAC 地址为同一链路上接收主机的网络接口的 MAC 地址。</li>
+<li>IP 分组在 Internet 中传输使用 IP 地址，源 IP 地址为发送 IP 分组主机的 IP 地址，而目的 IP 地址为接收 IP 分组主机的 IP 地址。</li>
+<li>数据帧在不同链路上传输时，源和目的 MAC 地址变化，而源和目的 IP 地址不变。</li>
+</ul>
+<p>区别：</p>
 <table>
 <thead>
 <tr>
-<th>状态</th>
+<th>MAC</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>物理地址（数据链路层地址）</td>
+<td>逻辑地址（网络层地址）</td>
+</tr>
+<tr>
+<td>局部意义</td>
+<td>全局意义</td>
+</tr>
+<tr>
+<td>随机获得</td>
+<td>上级分配</td>
+</tr>
+<tr>
+<td>48位（如 <code>08:00:39:00:2f:c3</code>）</td>
+<td>32位（如 <code>202.38.75.11</code>）</td>
+</tr>
+</tbody></table>
+<h3><span id="ip-寻址">IP 寻址</span></h3><h4><span id="路由表与转发表">路由表与转发表</span></h4><ul>
+<li><p><strong>路由表</strong> (Routing Table)</p>
+<p>路由器根据分组的目的 IP 地址查找路由表，找出分组的下一个中继点。<br>每一个路由器都有一个路由表。</p>
+<p>路由表每个表项至少包含两个内容：</p>
+<ul>
+<li>目的网络（网络号或前缀）&#x2F;目的主机的地址</li>
+<li>下一跳地址</li>
+</ul>
+<p>在路由器上，一般通过路由协议来动态建立和维护路由表。</p>
+</li>
+<li><p><strong>转发表</strong> (Forwarding Table)</p>
+<p>与路由表相比，转发表包含了更多的信息。<br>包括包含目的网络的网络号&#x2F;目的户籍的地址、输出端口，以及一些 MAC 地址等信息。</p>
+<p>每个节点上都有转发表，节点根据转发表来转发分组。<br>主机上的转发表一般是手动或者通过 DHCP 等动态配置。</p>
+</li>
+<li><p>路由表是网络设备（通常是路由器）上的数据结构。<br>转发表是路由表的实际应用，是根据路由表中的信息生成的用于实际数据包转发的表格。</p>
+</li>
+</ul>
+<h4><span id="无类域间路由-cidr">无类域间路由 (CIDR)</span></h4><p><strong>路由聚合</strong>：把多个小前缀的地址块合并成一个大前缀的地址块。<br>由此产生的较大前缀地址块有时称为<strong>超网</strong>。</p>
+<p><strong>无类域间路由</strong>：同样一个 IP 地址，一台路由器把它当成 &#x2F;22 的一部分对待（其中包含 $2^{10}$ 个地址），而另一台路由器把它当作一个更大的 &#x2F;20 的一部分对待（其中包含 $2^{12}$ 个地址）；每个路由器有相应的前缀信息。</p>
+<p>分配地址时：</p>
+<ul>
+<li>$2^n$个地址的块必须位于 $2^n$ 的字节边界上，即地址的后 n 位为 0。</li>
+<li>先分配所需地址更多的地址块。</li>
+<li>确定子网掩码：首地址和末地址的前几位是相同的。<br>分配 $2^n$ 个地址，则子网掩码的长度是 $32 - n$</li>
+<li>全 0 和 全 1 的主机号地址一般不用于标识主机或路由器接口。</li>
+</ul>
+<p>eg.<br>有一块地址从 <code>194.24.0.0</code> 开始，可用的 IP 地址有 $2^{13} &#x3D; 8192$ 个，即该地址块到 <code>194.24.31.255</code>（后 13 位为 1）。<br>假设 A 需要 $2048 &#x3D; 2^{11}$ 个地址，B 需要 $1024 &#x3D; 2^{10}$ 个地址， C 需要 $4096 &#x3D; 2^{12}$ 个地址。</p>
+<table>
+<thead>
+<tr>
+<th>区域</th>
+<th>第一个地址</th>
+<th>最后一个地址</th>
+<th>地址数</th>
+<th>前缀</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C</td>
+<td><code>194.24.0.0</code></td>
+<td><code>194.24.15.255</code></td>
+<td>4096</td>
+<td><code>194.24.0.0/20</code></td>
+</tr>
+<tr>
+<td>A</td>
+<td><code>194.24.16.0</code></td>
+<td><code>194.24.23.255</code></td>
+<td>2048</td>
+<td><code>194.24.16.0/21</code></td>
+</tr>
+<tr>
+<td>B</td>
+<td><code>194.24.24.0</code></td>
+<td><code>194.24.27.255</code></td>
+<td>1024</td>
+<td><code>194.24.24.0/22</code></td>
+</tr>
+<tr>
+<td>空余</td>
+<td><code>194.24.28.0</code></td>
+<td><code>194.24.31.255</code></td>
+<td>1024</td>
+<td><code>194.24.28.0/22</code></td>
+</tr>
+</tbody></table>
+<p>A、B、C 三个网络具有一个聚合前缀 <code>192.24.0.0/19</code>。</p>
+<p>前缀允许重叠，规则是数据包按最具体的路由的方向发送，即具有最少 IP 地址的<strong>最长匹配前缀</strong>。</p>
+<p>CIDR 的工作原理：<br>当一个数据包到达时，路由器扫描路由表以确定目的地是否在前缀的地址块内。<br>有可能多个具有不同前缀的表项得到匹配，在这种情况下，使用具有最长前缀的表项。<br>例如有一个匹配 <code>/20</code> 掩码的表项，同时还有一个匹配 <code>/24</code> 掩码的表项，则使用 <code>/24</code> 表项来查询数据包的出境线路。</p>
+<h4><span id="分类和特殊寻址">分类和特殊寻址</span></h4><p><strong>分类寻址</strong>：IP 地址被分为以下五个类别。</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>位数划分</th>
+<th>主机地址范围</th>
+<th>网络数量</th>
+<th>每个网络可容纳主机数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A 类</td>
+<td>最高位，0；<br>网络号，随后 7 位；<br>主机号，最后 24 位</td>
+<td><code>1.0.0.0</code> 到<br><code>127.255.255.255</code></td>
+<td>$2^7 -2$</td>
+<td>$2^{24} - 2$</td>
+</tr>
+<tr>
+<td>B 类</td>
+<td>最高两位，10；<br>网络号，随后 14 位；<br>主机号，最后 16 位</td>
+<td><code>128.0.0.0</code> 到<br><code>191.255.255.255</code></td>
+<td>$2^{14} -2$</td>
+<td>$2^{16} - 2$</td>
+</tr>
+<tr>
+<td>C 类</td>
+<td>最高三位，110；<br>网络号，随后 21 位；<br>主机号，最后 8 位</td>
+<td><code>192.0.0.0</code> 到<br><code>223.255.255.255</code></td>
+<td>$2^{21} - 2$</td>
+<td>$2^8 -2$</td>
+</tr>
+<tr>
+<td>D 类</td>
+<td>最高四位，1110；<br>是组播地址</td>
+<td><code>224.0.0.0</code> 到<br><code>239.255.255.255</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E 类</td>
+<td>最高四位，1111；<br>是保留地址</td>
+<td><code>240.255.255.255</code> 到<br><code>255.255.255.255</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>具有特殊含义的地址：</p>
+<ul>
+<li><p>IP 地址 <code>0.0.0.0</code> &#x2F; 全 0 的 IP 地址：指当前网络&#x2F;当前主机。<br>这个地址允许机器在不知道网络号的情况下访问自己所在的网络（但它们必须知道子网掩码包括多少个 0）。</p>
+</li>
+<li><p>IP 地址 <code>255.255.255.255</code> &#x2F; 全 1 的 IP 地址：标识指定网络的所有主机。<br>用于广播。</p>
+</li>
+<li><p><code>127.xx.yy.zz</code> 形式的地址：保留给回环测试用。<br>发送到该地址的数据包并没有被真正放在线路上，它们如同入境数据包一样在本地处理。</p>
+</li>
+</ul>
+<h4><span id="nat">NAT</span></h4><p><strong>网路地址转换</strong> (NAT)：实现网络内多个主机共享一个全局的 IP 地址。<br>基本思想：<br>ISP (互联网服务提供商) 为每个家庭或公司分配一个（或少量）IP 地址，用这个 IP 地址来传输 Internet 流量。<br>在客户网络内部，每台计算机有唯一的 IP 地址，该地址主要用来路由内部流量。<br>当一个数据包需要离开客户网络，需要执行一个地址转换，把唯一的内部 IP 地址转换成共享的公共 IP 地址。</p>
+<p>内部网地址有：</p>
+<ul>
+<li><code>10.0.0.0</code> - <code>10.255.255.255</code> </li>
+<li><code>172.16.0.0</code> - <code>172.31.255.255</code> </li>
+<li><code>192.168.0.0</code> - <code>192.168.255.255</code></li>
+</ul>
+<p>NAT 技术可以在路由器、防火墙上实现内外地址的翻译工作。<br>实现方式：</p>
+<ul>
+<li><p><strong>静态 NAT</strong>：<br>内部地址与外部 IP 地址总是一一对应的。<br>如 <code>192.168.32.10</code>（内部地址） 总是翻译成 <code>213.18.123.110</code>（外部地址）。</p>
+</li>
+<li><p><strong>动态 NAT</strong>：<br>一组全局 IP 地址与内部 IP 地址对应。<br>如 <code>192.168.32.10</code> 总是翻译成 <code>213.18.123.100</code> 到 <code>213.18.123.150</code> 范围内第一个可用的 IP 地址。</p>
+</li>
+<li><p><strong>网络地址端口转换</strong> (NAPT)：<br>也是一种动态方式，用一个全局 IP 地址加上端口号实现与内部 IP 地址的翻译。  </p>
+<ul>
+<li><p>内部主机访问互联网：  </p>
+<ul>
+<li>假设公共 IP 地址为 <code>203.0.113.1</code>。</li>
+<li>内部主机 A 要访问一个网站，于是发起一个请求到该网站的服务器。</li>
+<li>NAPT 检测到主机 A 的请求，将主机 A 的内部 IP 地址 <code>192.168.1.1</code> 和一个唯一的端口号 <code>5001</code> 关联起来。</li>
+<li>NAPT 修改主机 A 的请求，将源 IP 地址改为 <code>203.0.113.1</code>，源端口号改为 <code>5001</code>，然后将修改后的请求发送到互联网。</li>
+</ul>
+</li>
+<li><p>互联网服务器响应：</p>
+<ul>
+<li>互联网服务器收到请求后，将响应发送回 203.0.113.1:5001。</li>
+<li>NAPT 根据会话表确定这个响应该被转发给内部主机 A。</li>
+<li>NAPT 修改响应，将目标 IP 地址和端口号还原为主机 A 的内部 IP 地址和端口号，然后将响应发送给主机 A。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="ipv6-协议">IPv6 协议</span></h3><p>IPv6 头依次有：</p>
+<ul>
+<li><p><strong>版本</strong> (Version)：4-bit</p>
+</li>
+<li><p><strong>区分服务</strong> (Differentiated services)：8-bit<br>使用方式与 IPv4 同名字段一样。</p>
+</li>
+<li><p><strong>流标签</strong> (Flow label)：20-bit<br>为源端和接收方提供了一种建立伪连接的方式，即源端和接收方把一组具有同样需求并希望网络同等对待的数据包打赏标记。<br>每个流由源地址、目标地址和流编号来指定。<br>流标签的选取最好随机，便于路由器对它们进行哈希处理。</p>
+</li>
+<li><p><strong>有效荷载长度</strong> (Payload length)：16-bit<br>与 IPv4 中的总长度字段，但是 40 字节的头不作为长度的一部分。</p>
+</li>
+<li><p><strong>下一个头</strong> (Next header)：8-bit<br>指明了当前头之后还有哪种扩展头，如果有的话。<br>如果当前的头是最后一个 IP 头，那么该字段指定了该数据包将被传递给哪个传输协议处理（如 TCP、UDP）。</p>
+</li>
+<li><p><strong>跳数限制</strong> (Hop linit)：8-bit<br>与 IPv4 中的 TTL 字段类似，但不再是以秒为单位。</p>
+</li>
+<li><p><strong>源地址</strong> (Source address)：16 字节  </p>
+</li>
+<li><p><strong>目标地址</strong> (Destnation address)：16 字节</p>
+</li>
+</ul>
+<h4><span id="扩展头">扩展头</span></h4><table>
+<thead>
+<tr>
+<th>头标值</th>
+<th>对应扩展头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>中继点选项 (Hop-by-hop options)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>IP</td>
+</tr>
+<tr>
+<td>6</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>17</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>43</td>
+<td>寻路头标 (Routing)</td>
+</tr>
+<tr>
+<td>44</td>
+<td>报片头标 (Fragment)</td>
+</tr>
+<tr>
+<td>45</td>
+<td>IDRP (互联域路由协议)</td>
+</tr>
+<tr>
+<td>46</td>
+<td>RSVP (网络通信协议，用于在IP网络中为数据流提供服务质量保证)</td>
+</tr>
+<tr>
+<td>50</td>
+<td>封装化安全净荷 (Encryption Security Payload)</td>
+</tr>
+<tr>
+<td>51</td>
+<td>认证头标 (Authentication)</td>
+</tr>
+<tr>
+<td>58</td>
+<td>ICMP (互联网控制报文协议)</td>
+</tr>
+<tr>
+<td>59</td>
+<td>无下一个头标</td>
+</tr>
+<tr>
+<td>60</td>
+<td>信宿选项头标</td>
+</tr>
+</tbody></table>
+<h3><span id="ipv6-地址">IPv6 地址</span></h3><p>16 个字节被分成 8 组来书写，每一组 4 个十六进制数字，组之间用冒号隔开。<br>如 <code>8000:0000:0000:0000:0123:4567:89AB:CDEF</code>  </p>
+<p>优化方式：</p>
+<ul>
+<li>在一个组内可以省略前导 0。</li>
+<li>一组或多组 0 可以用一对冒号来替代。<br>故上述地址可以写成 <code>8000::123:4567:89AB:CDEF</code></li>
+</ul>
+<p>地址前缀表示：IPv6 地址&#x2F;前缀长度</p>
+<p>与 IPv4：</p>
+<ul>
+<li>兼容 IPv4 的 IPv6 地址：<br>IPv4 地址写成一对冒号再加上老式的点分十进制数。<br>如 <code>::192.31.20.46</code>  </li>
+<li>映射 IPv4 的 IPv6 地址：<br>将 80 位 0 和随后的 16 位 1 组成的前缀置于 IPv4 地址之前。<br>如 <code>::FFFF:192.31.20.46</code></li>
+<li>IPv6 默认情况下禁用 IPv4 兼容地址。</li>
+</ul>
+<p>IPv6 地址即插即用。<br>工作原理：自动将 48 位 MAC 地址扩展成 64 位，再组合一个 64 位的 IPv6 网络前缀，组成一个 IPv6 地址。<br>IPv4 的 64 位接口地址可以根据 MAC 地址自动生成，属于 IEEE EUI-64 标准。</p>
+<h4><span id="分类">分类</span></h4><ul>
+<li><p>单播地址  </p>
+<ul>
+<li>可聚类全局地址 <code>2000::/3</code><ul>
+<li>3 位前缀：001</li>
+<li>13 位顶级聚类：TLA</li>
+<li>32 位次级聚类：NLA</li>
+<li>16 位网点级聚类：SLA</li>
+<li>64 位接口标识符：Interface ID</li>
+</ul>
+</li>
+<li>本地（局域）单播地址<ul>
+<li>链路局域地址 <code>FE80::/64</code><br>包含 64 位前缀和之后的 64 位接口标识符。<br>用于本地链路上各个相邻接口之间的发现、IPv6 地址自动配置和通信。<br>包含链路局域地址的分组不会被路由器转发。</li>
+<li>网点局域地址 <code>FEC0::/48</code><br>包含 48 位前缀，16 位子网 ID，64 位接口标识符。<br>只可以再一个网点内使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>未指明地址 <code>0:0:0:0:0:0:0:0</code> 或表示为 <code>::</code><br>只能作为尚未获得正式地址的主机的源地址使用，不能将该地址用作信宿地址。</p>
+</li>
+<li><p>环回地址 <code>0:0:0:0:0:0:0:1</code></p>
+</li>
+<li><p>组播地址<br>前 8 位为 1，4 位标志位（000T，T&#x3D;0 表示永久性组地址），4 位区域位，112 位 Group ID。</p>
+</li>
+<li><p>任播地址：从单薄地址空间中分配<br>前 n 位为子网前缀，后 128-n 位为 0。</p>
+</li>
+</ul>
+<h3><span id="internet-控制协议">Internet 控制协议</span></h3><h4><span id="icmp">ICMP</span></h4><p><strong>Internet 控制消息协议</strong> (ICMP)：当路由器在处理一个数据包的过程中发生了意外，通过 ICMP 向数据包的源端报告有关事件。</p>
+<p>ICMP 定义了两类报文，<strong>差错报文</strong>和<strong>信息报文</strong>：</p>
+<ul>
+<li><p>差错报文</p>
+<ul>
+<li>源抑制 (Source quench)：抑制发送过多分组的主机。</li>
+<li>超时 (Time exceeded)：分组的 TTL 为 0，或被分片的报文在一定时间内没有收齐。</li>
+<li>信宿不可达 (Destination unreachable)：报告子网、主机不能定位的信宿。</li>
+<li>重定向 (Redirect)：数据包看起来被错误地路由。</li>
+<li>参数问题 (Parameter problem)：分组头参数出错。</li>
+</ul>
+</li>
+<li><p>信息报文</p>
+<ul>
+<li>回音请求&#x2F;响应 (Echo request&#x2F;reply)</li>
+<li>地址掩码请求&#x2F;响应 (Address mask request&#x2F;reply)</li>
+<li>路由器发现 (Router discovery)</li>
+</ul>
+</li>
+</ul>
+<p>ICMP 的直接应用：</p>
+<ul>
+<li><p>Ping Progarm<br>用于测试主机的可到达性。<br>Ping 程序采用 ICMP 的回音请求&#x2F;响应报文，通过向信宿发送回音请求，返回响应报文，来测试目的主机的可达性。</p>
+</li>
+<li><p>Traceroute<br>通过发送递增的 TTL 值的回音报文，测试目的主机沿途经过的路由器地址。</p>
+</li>
+</ul>
+<h4><span id="arp">ARP</span></h4><p><strong>地址解析协议</strong> (ARP)：解析 IP 地址与 MAC 地址的关系。</p>
+<ul>
+<li><p>目的 IP 地址所对应的主机和发送主机在同一个网络内。</p>
+<ul>
+<li><p>每个主机都有 <strong>ARP 缓存</strong>，用于存放一些 IP 地址与 MAC 地址的对应关系。<br>通过 ARP 缓存可以减少频繁的 ARP 操作，从而减少网络开销、提高性能。</p>
+</li>
+<li><p>当分组到达时，主机根据分组头上的目的 IP 地址查阅自己的 ARP 缓存；如果没有查到，就向广播地址发送 <strong>ARP 请求</strong>。</p>
+</li>
+<li><p>被请求的 IP 地址所对应的主机返回一个 <strong>ARP 响应</strong>。</p>
+</li>
+<li><p>主机收到响应后，就可发送数据帧，并将该 IP 地址与 MAC 地址对存放在 ARP 缓存中。</p>
+</li>
+</ul>
+</li>
+<li><p>目的 IP 地址所对应的主机和发送主机在两个不同的网络内。</p>
+<ul>
+<li><p>发送主机通过查找转发表得到下一跳节点的 IP 地址（第一跳路由器），对该 IP 地址执行上述 ARP 过程，然后发送数据。</p>
+</li>
+<li><p>发送主机也可以直接用目的 IP 地址执行 ARP，路由器（而不是目的主机）响应该 ARP 请求。<br>这种解决方式叫 <strong>ARP 代理</strong>。</p>
+</li>
+<li><p>第一跳路由器查找转发表得到第二跳路由器的 IP 地址，对该 IP 地址执行 ARP 过程，然后发送数据。<br>$\cdots$<br>目的网络的路由器查找转发表知道目的节点和自己在同一个网络中，对目的 IP 地址执行 ARP 过程，然后将数据发送到目的节点。</p>
+</li>
+<li><p>ARP 过程被限制在同一个网络内，始终是查找转发表得到转发下一跳节点的 IP 地址，然后对该 IP 地址做 ARP。<br>在数据传输频繁时，ARP 缓存表中一般有对应的表项，节点间不需要交互 ARP 过程。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>反向 ARP (RARP)：用于查找物理地址所对应的 IP 地址。</p>
+<p>帧格式为 802.3 帧格式</p>
+<ul>
+<li><p>前导码 (Preamble)：8 字节</p>
+</li>
+<li><p>目标 MAC 地址：6 字节</p>
+</li>
+<li><p>源 MAC 地址：6 字节</p>
+</li>
+<li><p>帧类型 (Type)：2 字节<br>ARP 请求及响应为 0x0806</p>
+</li>
+<li><p>数据：</p>
+<ul>
+<li>硬件类型：2 字节。指发送者的网络接口类型，如以太网为 1。</li>
+<li>上层协议类型：2 字节。指发送者所采用的网络层协议类型，如 IP 协议为 0x0800。</li>
+<li>MAC 地址长度：1 字节</li>
+<li>IP 地址长度：1 字节</li>
+<li>操作类型：2 字节  <ul>
+<li>ARP 请求：1</li>
+<li>ARP 响应：2</li>
+<li>RARP 请求：3</li>
+<li>RARP 响应：4</li>
+</ul>
+</li>
+<li>源 MAC 地址：6 字节</li>
+<li>源 IP 地址：4 字节</li>
+<li>目的 MAC 地址：6 字节</li>
+<li>目的 IP 地址：4 字节</li>
+</ul>
+</li>
+<li><p>填充</p>
+</li>
+<li><p>校验和：4 字节，CRC。</p>
+</li>
+</ul>
+<h4><span id="dhcp">DHCP</span></h4><p>IP 地址的配置方式有：</p>
+<ul>
+<li>手动配置</li>
+<li>拨号用户通过 PPP 协议分配</li>
+<li>基于<strong>动态主机配置协议</strong> (DHCP) 的配置</li>
+</ul>
+<p>DHCP 过程：</p>
+<ul>
+<li><p>客户端广播 <code>DHCPDISCOVER</code> 消息。<br>源 IP 地址为 <code>0.0.0.0</code>，目的 IP 地址为 <code>255.255.255.255</code>。<br>使用 MAC 地址来标识客户端。</p>
+</li>
+<li><p>DHCP 服务器回应 <code>DHCPOFFER</code> 消息给客户端，其中包含分配的 IP 地址、租用期限和其他配置参数。</p>
+</li>
+<li><p>客户端选择一个 DHCP 服务器并在整个网络上广播 <code>DHCPREQUEST</code> 消息，告诉其他 DHCP 服务器它选择哪个服务器提供的 IP 地址。</p>
+</li>
+<li><p>选定的服务器给客户端回应 <code>DHCPACK</code>，其中包含配置参数。</p>
+</li>
+<li><p>客户端接收 <code>DHCPACK</code>，对参数进行最后的检查，然后开始使用分配的 IP 地址。</p>
+</li>
+<li><p>客户端可以通过向 <code>DHCPRELEASE</code> 消息来释放对 IP 地址的租用，其中包含有客户端的 MAC 地址和租用 IP 地址。</p>
+</li>
+</ul>
+<h3><span id="internet-路由协议">Internet 路由协议</span></h3><p><strong>自洽系统</strong> (Autonomous System)：</p>
+<ul>
+<li>内部管理由独立管理机构完成的一组网关和网络，整个网络由一个（或几个）核心网关与 Internet 相连。</li>
+<li>交换路由信息的两个网关如果属于不同的自洽系统，则称这两个网关是<strong>外部相邻</strong>；<br>如果同属于一个自洽系统，则称为<strong>内部相邻</strong>。</li>
+</ul>
+<p><strong>外部网关协议</strong> (EGP)：用于外部相邻的网关之间交换路由信息，也叫<strong>域间路由</strong>。(BGP)<br><strong>内部网关协议</strong> (IGP)：用于内部相邻的网关之间交换路由信息，也叫<strong>域内路由</strong>。(RIP, OSPF)</p>
+<h4><span id="rip">RIP</span></h4><p><strong>路由信息协议</strong> (RIP)：一种内部网关协议。</p>
+<p>特点：</p>
+<ul>
+<li><p>采用<a href="#%E8%B7%9D%E7%A6%BB%E7%9F%A2%E9%87%8F-distance-vector-%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95">距离矢量路由算法</a>。</p>
+</li>
+<li><p>使用跳数 (hop count)，即路由器到目的地的路径中经过的路由器数量，作为衡量路径长度的单位。</p>
+</li>
+<li><p>通过 Split Horizon 机制防止路由环路的产生。<br>即路由器不会将它已经学到的路由信息再发送回相同的接口。</p>
+</li>
+<li><p>路由器周期性地广播它们的整个路由表，以便告知其他路由器当前网络的可达性。<br>该广播过程通过 RIP 更新报文完成。</p>
+</li>
+<li><p>使用 Hold-down Timer 来减少路由表更新引起的不稳定。<br>当路由器检测到某个网络不可达时，它启动 Hold-down Timer，阻止对该网络的更新。</p>
+</li>
+<li><p>使用 UDP 在端口 520 上进行发送和接收路由信息。</p>
+</li>
+</ul>
+<h4><span id="ospf">OSPF</span></h4><p><strong>开放最短路径优先</strong> (OSFP)：一种内部网关协议。<br>借鉴了<strong>中间系统到中间系统</strong> (IS-IS) 协议，该协议已经成为一个 ISO 标准。 </p>
+<p>特点：</p>
+<ul>
+<li><p>是一种链路状态协议，采用<a href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81-link-state-%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95">最短路径优先算法 (SPF)</a>。</p>
+</li>
+<li><p>使用 IP 作为底层传输协议，其中 IP 头的协议字段为 89，表示该数据包用于传输 OSPF 信息。</p>
+</li>
+<li><p>只有当发生改变时才更新路由表.</p>
+</li>
+<li><p>要求从每个 LAN 中选举一台路由器作为<strong>指定路由器</strong> (DR)。<br>指定路由器与本 LAN 上所有其他路由器是邻接的，并且与它们交换信息。<br>有一台备份的指定路由器 (BDR) 总是保持最新的状态数据。</p>
+</li>
+<li><p>使用组播地址来发送 Hello 消息和路由更新。<br>OSPFv2 使用组播地址 <code>224.0.05</code>（所有 OSPF 路由器）和 <code>224.0.06</code>（DR 和 BDR 选举）<br>OSPFv3 使用组播地址 <code>FF02::5</code>（所有 OSPF 路由器）和 <code>FF02::6</code>（DR 和 BDR 选举）</p>
+</li>
+</ul>
+<p>5 种数据包：</p>
+<table>
+<thead>
+<tr>
+<th>消息类型</th>
 <th>描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>CLOSED</td>
-<td>没有活跃的连接或者挂起</td>
+<td>Hello</td>
+<td>用来发现所有的邻居</td>
 </tr>
 <tr>
-<td>LISTEN</td>
-<td>服务器等待入境呼叫</td>
+<td>Link State Update</td>
+<td>提供发送者到其邻居的成本</td>
 </tr>
 <tr>
-<td>SYN RCVD</td>
-<td>到达一个连接请求，等待 <code>ACK</code></td>
+<td>Link State Ack</td>
+<td>对链路状态更新消息的确认</td>
 </tr>
 <tr>
-<td>SYN SENT</td>
-<td>应用已经启动了打开一个连接</td>
+<td>Database Description</td>
+<td>声明发送者的链路状态更新情况</td>
 </tr>
 <tr>
-<td>ESTABLISHED</td>
-<td>正常的数据传输状态</td>
-</tr>
-<tr>
-<td>FIN WAIT1</td>
-<td>应用没有数据要发了</td>
-</tr>
-<tr>
-<td>FIN WAIT2</td>
-<td>另一端同意释放连接</td>
-</tr>
-<tr>
-<td>TIME WAIT</td>
-<td>等待所有数据包寿终正寝</td>
-</tr>
-<tr>
-<td>CLOSING</td>
-<td>两端同时试图关闭连接</td>
-</tr>
-<tr>
-<td>CLOSE WAIT</td>
-<td>另一端已经发起关闭连接</td>
-</tr>
-<tr>
-<td>LAST ACK</td>
-<td>等待所有数据包寿终正寝</td>
+<td>Link State Request</td>
+<td>请求链路状态信息</td>
 </tr>
 </tbody></table>
-<p><strong>建立连接过程</strong>：</p>
-<ul>
-<li><p>客户端和服务器都是从 <code>CLOSED</code> 状态开始。</p>
-</li>
-<li><p>客户端：应用程序发出 CONNECT 请求，本地的 TCP 实体创建一条连接记录，并将它标记为 <code>SYN SENT</code> 状态，然后发送一个 SYN 段。</p>
-<ul>
-<li>在 <code>SYN SENT</code> 状态中，客户端等待服务器的 SYN+ACK 字段</li>
-</ul>
-</li>
-<li><p>服务器：收到来自客户端的 SYN 后，创建一条连接记录，将其标记为 <code>SYN RCVD</code> 状态，然后发送一个确认（即 SYN+ACK 段）。</p>
-<ul>
-<li>在 <code>SYN RCVD</code> 状态中，服务器等待来自客户端的最后一个 ACK。</li>
-</ul>
-</li>
-<li><p>客户端：收到来自服务器的 SYN+ACK 段后，发出三次握手中的最后一个 ACK 段，然后切换到 <code>ESTABLISHED</code> 状态。</p>
-<ul>
-<li>在 <code>ESTABLISHED</code> 状态中，连接已建立，双方可以进行数据传输。</li>
-</ul>
-</li>
-<li><p>服务器：收到来自客户端的 ACK 段后，进入 <code>ESTABLISHED</code> 状态，连接建立完成。</p>
-</li>
-</ul>
-<p><strong>释放连接过程</strong>：</p>
-<ul>
-<li><p>客户端和服务器都是从 <code>ESTABLISHED</code> 状态开始。</p>
-</li>
-<li><p>客户端：应用结束，执行 CLOSE 原语。本地的 TCP 实体发送一个 FIN 段，将当前状态设置为 <code>FIN WAIT1</code>，等待对应的 ACK。</p>
-<ul>
-<li>在 <code>FIN WAIT1</code> 状态下，客户端等待服务器的 ACK 和 FIN。</li>
-</ul>
-</li>
-<li><p>服务器：收到客户端的 FIN 段，发送 ACK 段，并进入 <code>CLOSE WAIT</code> 状态。</p>
-<ul>
-<li>在 <code>CLOSE WAIT</code> 状态下，服务器等待应用程序的 <code>CLOSE</code> 操作，同时允许继续接收来自客户端的数据。</li>
-</ul>
-</li>
-<li><p>客户端：收到 ACK，状态迁移到 <code>FIN WAIT2</code>，并且连接的一个方向被关闭。</p>
-<ul>
-<li>在 <code>FIN WAIT2</code> 状态下，客户端等待来自服务器的 FIN。</li>
-</ul>
-</li>
-<li><p>服务器：执行 <code>CLOSE</code>，TCP 实体向客户端发送一个 FIN 段，并进入到 <code>LAST ACK</code> 状态。</p>
-<ul>
-<li>在 <code>LAST ACK</code> 状态下，服务器等待来自客户端的 ACK。</li>
-</ul>
-</li>
-<li><p>客户端：收到来自服务器的 FIN 段，发送 ACK 段，进入 <code>TIME WAIT</code> 状态。</p>
-<ul>
-<li>在<code>TIME WAIT</code> 状态下，TCP 要等待一段长度为最大数据包生存期两倍的时间。<br>以便确保在该阶段收到所有可能延迟或重复的数据包，并正确处理，避免对后续连接产生干扰。  </li>
-<li>计时器超时后，TCP 删除该连接记录，并进入 <code>CLOSED</code> 状态。</li>
-</ul>
-</li>
-<li><p>服务器：收到来自客户端的 ACK 段，同样等待长度为最大数据包生存期两倍的时间后，释放该连接并删除相应的连接记录，进入 <code>CLOSED</code> 状态。</p>
-</li>
-</ul>
-<h4><span id="滑动窗口">滑动窗口</span></h4><p>TCP 采用可变大小的动态缓冲区，缓冲区的大小由数据包头中的 Window size 指定。</p>
+<h4><span id="bgp">BGP</span></h4><p><strong>边界网关协议</strong> (BGP)：一种外部网关协议。</p>
 <p>特点：</p>
 <ul>
-<li><p>可靠有序的传输：使用发送缓存和接收缓存，只有被确认窗口才滑动。</p>
+<li><p><strong>路径矢量协议</strong> (path vector protocol)<br>升级版距离矢量协议。<br>根据政策而不是最小距离来选择路由。<br>路由器不仅维护到每个目的地的成本，而且跟踪所使用的路径。</p>
 </li>
-<li><p>流量控制：接收端根据可用剩余缓冲区来指定窗口大小。</p>
+<li><p>使用 TCP 协议来保障可靠性，使用端口 179。</p>
 </li>
-<li><p>采用<strong>延迟确认</strong>：将确认和窗口更新消息延迟发送，希望通过捎带技术节约带宽。</p>
+<li><p>使用增量和触发式更新方式。<br>当网络拓扑发生变化时，只有受到触发事件影响的路由信息才会被更新。</p>
 </li>
-</ul>
-<p>eg. 假设接收端有一个 4096 字节的缓冲区。</p>
-<ul>
-<li><p>发送端传送一个 2048 字节的数据段，<code>SEQ = 0</code>。</p>
+<li><p>定期发送保持活动消息以验证 TCP 连接的连通性。</p>
 </li>
-<li><p>接收端缓冲区还剩下 2048 字节，发送确认并指定窗口大小，即发送 <code>ACK = 2048, WIN = 2048</code>。</p>
+<li><p>使用丰富的指标（路径矢量&#x2F;属性）来描述和选择路由。<br>包括 AS 路径、AS 路径长度、下一跳等信息。</p>
 </li>
-<li><p>发送端再次传输另一个 2048 字节的数据段，<code>SEQ = 2048</code>。</p>
-</li>
-<li><p>接收端发回确认并宣告窗口大小变为 0，即发送 <code>ACK = 4096, WIN = 0</code>。  </p>
-<ul>
-<li>此时发送端被阻塞，停止发送数据。</li>
-<li>但是紧急数据仍可以发送。</li>
-<li>发送端可以发送一个 1 字节的段，以便接收端重新宣告下一个期望字节和窗口大小，称为<strong>窗口探测</strong>。</li>
-</ul>
+<li><p>设计用于大规模网络，如 Internet。</p>
 </li>
 </ul>
-<p><strong>低窗口综合征&#x2F;傻瓜窗口症状</strong>：  </p>
+<h4><span id="路由协议分类与协议栈">路由协议分类与协议栈</span></h4><p>路由协议分类：</p>
 <ul>
-<li><p>当数据以大块形式被传递给发送端 TCP 实体，但接收端的交互式应用每次仅读取 1 个字节。<br>于是当接收端缓冲区满时，接收端的应用进程每读取一个字节，发送窗口大小为 1 字节的修正信息。<br>发送方发送 1 字节数据，窗口很快又满了。</p>
+<li><p>基于路由信息流的分类  </p>
+<ul>
+<li>内部网关协议 (IGP) &#x2F; 域内协议<ul>
+<li><a href="#rip">RIP</a></li>
+<li><a href="#ospf">OSPF</a></li>
+<li>IS-IS</li>
+</ul>
 </li>
-<li><p>解决方案：</p>
-<ul>
-<li>禁止接收方发送 1 个字节大小的窗口修正信息，而是等到有了一定数量的可用空间后再通知对方。</li>
-<li>发送方不发送太小的数据段。</li>
+<li>外部网关协议 (EGP) &#x2F; 域间协议<ul>
+<li><a href="#bgp">BGP</a></li>
 </ul>
 </li>
 </ul>
-<h4><span id="计时器管理">计时器管理</span></h4><p>TCP 维护多个定时器：包括建立、释放连接，确认、重传，滑动窗口三个方面。</p>
-<p><a href="#%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B">连接建立</a>，<a href="#%E8%BF%9E%E6%8E%A5%E9%87%8A%E6%94%BE">连接释放</a>：</p>
+</li>
+<li><p>基于确定路由表所使用的信息类型的分类</p>
 <ul>
-<li><p><strong>连接建立定时器</strong> (Connection Establishment Timer)  </p>
-<p>当 SYN 数据段发出时，建立连接计时器就开始计时，如果在一定时间内未收到响应，则连接建立失败。</p>
-</li>
-<li><p><strong>保持存活定时器</strong> (Keep-Alive Timer)</p>
-<p>当一个连接长时间闲置时，该定时器会超时，从而使一方去检测另一方是否存在。<br>如果它没有得到响应，则种植终止该连接。</p>
-</li>
-<li><p><strong>闲置定时器</strong> (Quiet Timer)</p>
-<p>设置该定时器以防止刚刚断开连接的端口号被立即重新使用。<br>即 <code>TIME WAIT</code> 阶段所使用的定时器。</p>
-</li>
-</ul>
-<p>确认、重传：</p>
-<ul>
-<li><p><strong>重传定时器</strong> (RTO)</p>
-<p>当 TCP 实体发送一个段时，它同时启动一个重传计时器。<br>如果在该计时器超时前该段被确认，则计时器被停止；如果在确认到来前计时器超时，则该段被重传，并且该计时器被重新启动。</p>
-<p>使用一个动态算法，根据网络性能的连续测量情况，不断地调整超时间隔。</p>
-<ul>
-<li><p><strong>RTT</strong>（往返时间）：代表到达接收方往返时间的当前最佳估计值。  </p>
-<p>发送一个段后，如果在计时器超时前确认返回，则 TCP 测量这次确认所花的时间 R。  </p>
-<p>第一次测量时：$RTT &#x3D; R$。</p>
-<p>之后每次测量：根据以下<strong>指数加权移动平均</strong>公式更新 RTT 的值。<br>$$<br>RTT &#x3D; \alpha RTT + (1 + \alpha) R<br>$$<br>其中 $\alpha$ 是平滑因子，一般为 $\dfrac{7}{8}$</p>
-</li>
-<li><p><strong>RTTVAR</strong>（往返时间变化）</p>
-<p>同样的，发送一个段后，如果在计时器超时前确认返回，则 TCP 测量这次确认所花的时间 R。</p>
-<p>第一次测量时：$RTTVAR &#x3D; R &#x2F; 2$。</p>
-<p>之后每次测量，根据以下公式更新：<br>$$<br>RTTVAR &#x3D; \beta RTTVAR + (1 - \beta) |RTT - R|<br>$$<br>其中 $\beta$ 一般为 $\dfrac{3}{4}$</p>
-</li>
-<li><p><strong>RTO</strong>（重传超时值）<br>$$<br>RTO &#x3D; RTT + 4 \times RTTVAR<br>$$</p>
-</li>
-</ul>
-<p><strong>Karn 算法</strong>：对已经重传的数据段无需修改 RTT 和 RTTVAR，而是在每次传输失败时将超时时间 RTO 加倍，直到该数据段被成功传输。<br>因为发送端无法区分 ACK 是对哪次发送的 TCP 数据段的确认，所以重发数据段后收到的 ACK 不会更新 RTT 值。</p>
-</li>
-<li><p><strong>ACK 延时定时器</strong> (Delayed ACK Timer)</p>
-<p>当 TCP 实体收到数据段时，它启动 ACK 延时定时器。<br>在定时器超时前如果有数据段要发送，则在数据段中携带确认信息，并暂停该定时器。<br>如果定时器超时时还没有数据段要发送，则单独发送一条确认消息。</p>
-</li>
-</ul>
-<p><a href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">滑动窗口</a>：</p>
-<ul>
-<li><p><strong>持续定时器</strong> (The Persistence Timer)</p>
-<p>防止死锁情况：<br>为了让发送端暂停发送数据，接收端发送一个窗口大小为 0 的确认。之后，接收端又发送了更新了窗口大小的数据段。<br>如果该数据段丢失，则双方均处于等待。</p>
-<p>发送端在收到接收端发来一个窗口大小为 0 的数据段时，启动持续定时器。<br>如果定时器超时时还没有收到对方修改篡改看大小的数据段，则发送端发送一个 1 字节的探测数据段。<br>对该探测数据段的响应包含了窗口大小，如果仍为 0，则定时器清零，重新开始计时；否则则可以发送数据。</p>
-</li>
-</ul>
-<h4><span id="拥塞控制">拥塞控制</span></h4><p>每个 TCP 连接需要维护两个窗口：</p>
-<ul>
-<li><p><strong>接收窗口</strong> (rwnd)：接收端根据目前可用接收缓存大小所许诺的最新窗口值。<br>在<a href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">滑动窗口</a>中有所涉及。</p>
-</li>
-<li><p><strong>拥塞窗口</strong> (cwnd)：发送端根据自己估计的网络拥塞程度而设置的窗口值。<br>窗口大小时任何时候发送端可以向网络发送的字节数。<br>TCP 根据</p>
-</li>
-</ul>
-<p>发送端发送窗口的上限值应该去接收窗口和拥塞窗口中的较小值。</p>
-<p>TCP 拥塞控制算法过程：</p>
-<ul>
-<li><p><strong>慢速启动</strong></p>
-<ul>
-<li><p>当一个连接初始化时，将拥塞窗口置为一个<strong>最大数据段长度</strong> (MSS)，并设置慢启动阈值 (ssthresh)。</p>
-</li>
-<li><p>发送端的发送窗口不能超过 rwnd 和 cwnd 中的最小值，在这里假定接收端不进行流量控制。</p>
-</li>
-<li><p>发送端收到一个确定，就将拥塞窗口加 1 (MSS)。<br>即每经过一个 RTT，拥塞窗口就增加为前一个 RTT 时的两倍，即拥塞窗口从 1 开始按指数规律增长。</p>
-</li>
+<li>距离矢量路由协议<ul>
+<li><a href="#rip">RIP</a></li>
+<li><a href="#bgp">BGP</a></li>
 </ul>
 </li>
-<li><p><strong>加法递增乘法递减</strong> (AIMD)</p>
-<ul>
-<li><p>当拥塞窗口增长到 ssthresh 时，TCP 就从慢速启动切换到加法递增。<br>即每轮将拥塞窗口加 1，使拥塞窗口按线性规律增大。</p>
-</li>
-<li><p>如果出现数据包丢失（RTO 超时），就将当前拥塞窗口值减半，作为新的 ssthresh（乘法递减），同时将拥塞串口变为 1。</p>
-</li>
-<li><p>TCP 重新开始慢速启动过程。</p>
-</li>
+<li>链路状态路由协议<ul>
+<li><a href="#ospf">OSPF</a></li>
+<li>IS-IS</li>
 </ul>
-</li>
-<li><p><strong>快速重传</strong></p>
-<ul>
-<li><p>发送端只要连续收到三个重复的 ACK 即可断定有数据包丢失。<br>因为丢失数据包后续的数据包触发接收端返回的确认携带相同的确认号（期望收到的数据包没变）。</p>
-</li>
-<li><p>上述情况下立即重传丢失的数据包而不必等待 RTO 超时。<br>同时像超时情况下一样处理拥塞窗口（乘法递减）。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>快速恢复</strong> (Reno 算法，是 TCP 推荐算法，不是必须)</p>
-<ul>
-<li><p>当发送端收到连续三个重复 ACK 时，重新设置 ssthresh 为当前拥塞窗口的一半。<br>但拥塞窗口不是设置为 1，而是设置成 ssthresh + 3。</p>
-</li>
-<li><p>如果收到了重复的 ACK（说明又有丢失数据包之后的数据包到达了接收端，网络里的数据包减少了一个），则每收到一个重复 ACK，就将拥塞窗口加 1。</p>
-</li>
-<li><p>若收到了重传数据包的 ACK（新的 ACK），则将拥塞窗口设置到 ssthresh，再次执行 AIMD。</p>
 </li>
 </ul>
 </li>
 </ul>
-<p>TCP 的传输速率：</p>
+<p>协议栈：</p>
+<table>
+<thead>
+<tr>
+<th align="center">层</th>
+<th align="center">协议</th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">应用层</td>
+<td align="center">BGP</td>
+<td align="center">RIP</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">传输层</td>
+<td align="center">TCP</td>
+<td align="center">UDP</td>
+<td align="center">OSPF</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">网络层</td>
+<td align="center">IP</td>
+<td align="center">IP</td>
+<td align="center">IP</td>
+<td align="center">IS-IS</td>
+</tr>
+<tr>
+<td align="center">链路层</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">物理层</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h3><span id="internet-组播">Internet 组播</span></h3><ul>
+<li><p>单播 (unicast)：1 对 1</p>
+</li>
+<li><p>组播 (multicast)：1 对多，多对多</p>
 <ul>
-<li>设 TCP 的发送窗口为 w，往返时间为 RTT，则 TCP 瞬时最大发送速率为 $\dfrac{w}{RTT}$。</li>
-<li>由于 w 是变化的，设丢包或收到三个重复 ACK 时的窗口为 W 且 W 不变，则 w 在 W&#x2F;2 到 W 之间变化。<br>忽略慢速启动阶段，则一条连接的平均吞吐量为 $0.75 \times \dfrac{W}{RTT}$。</li>
+<li><p>IP 采用 D 类地址作为组播地址。<br>每个 D 类地址代表一组主机，共有 28 位可用来标识小组。</p>
+</li>
+<li><p>Internet 支持两类组地址：永久组地址和临时组地址。</p>
+<ul>
+<li><p>永久组地址：</p>
+<p>IP 地址 <code>224.0.0.0/24</code> 范围内的地址保留用作本地网络组播。<br>这种情况下不需要路由协议的支持，带有一个组播地址的数据包被简单广播到局域网上。<br>局域网上的所有主机接收广播数据包，只有属于组成员的主机对该数据包进行处理。</p>
+<ul>
+<li><code>224.0.0.1</code>：LAN 上的全部系统</li>
+<li><code>224.0.0.2</code>：LAN 上全部路由器</li>
+<li><code>224.0.0.5</code>：LAN 上全部 OSPF 路由器</li>
+<li><code>224.0.0.251</code>：LAN 上全部 DNS 服务器</li>
+</ul>
+</li>
+<li><p>临时组地址：</p>
+<p>需要路由协议，组播路由器需了解哪些主机属于某个组。  </p>
+<p><strong>Internet 组管理协议</strong> (IGMP)：</p>
+<ul>
+<li>一个进程要求它的主机加入某个指定的组&#x2F;离开该组。每台主机跟踪记录当前它的进程属于哪些组。当一台主机上的最后一个进程离开一个组时，该主机就不再属于这个组。  </li>
+<li>每个组播路由器定期向它所在 LAN 上的所有主机（使用 <code>224.0.0.1</code>）发送一个查询数据包，要求这些主机报告自己当前属于哪些组。  </li>
+<li>每个主机收到查询消息后，返回一个响应包，包括了自己感兴趣的所有 D 类地址。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>广播 (broadcast)：1 对多</p>
+</li>
+<li><p>任播 (anycast)：1 对多中的一个</p>
+</li>
+</ul>
+<h4><span id="组播路由协议">组播路由协议</span></h4><p>数据包沿着生成树发送，通过修建广播生成树把不通往组成员的链路从树中删掉，得到一棵有效的组播生成树。</p>
+<ul>
+<li><p>基于源的组播协议：以发送方为多播树的根，并且包含了所有的组成员。</p>
+<ul>
+<li><strong>距离矢量组播路由协议</strong> (DVMRP)</li>
+<li><strong>组播 OSPF</strong> (MOSPF)</li>
+</ul>
+</li>
+<li><p>基于共享树的协议：对每个组使用同一颗树。</p>
+<ul>
+<li><strong>基于核心树</strong> (Core Based Trees)</li>
+</ul>
+</li>
+<li><p>混合以上两种方法的协议</p>
+<ul>
+<li><strong>协议独立组播协议</strong> (PIM)<ul>
+<li>密集模式 PIM (PIM-DM)：创建一颗修建的逆向路径转发树。</li>
+<li>稀疏模式 PIM (PIM-SM)：创建的生成树类似于核心树。</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
       
@@ -881,7 +1331,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://t-1031.github.io/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%85%AD%EF%BC%89/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://t-1031.github.io/2024/%E7%BD%91%E7%BB%9C%E5%B1%82/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -895,9 +1345,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2024/MAC%20%E5%AD%90%E5%B1%82/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          MAC 子层
+        
+      </div>
+    </a>
   
-    <a href="/2024/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E5%9B%9B%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">计算机网络（四）</div>
+  
+    <a href="/2023/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据链路层</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://T-1031.github.io">
-  <title>计算机网络（一） | TG仓库</title>
+  <title>物理层 | TG仓库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第1章 引言   协议层次结构 多层通信过程   服务 面向连接的服务 无连接服务   参考模型 OSI参考模型 TCP&#x2F;IP参考模型      协议层次结构绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。 协议：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层协议。 协议栈：一个特定的系统所">
+  <meta name="description" content="第2章 物理层   理论基础 奈奎斯特定理 香农定理   传输介质 引导性传输介质（有线） 铜线 光纤   非引导性介质（无线） 无线电传输 微波传输 红外传输 光通信 卫星通信     数字调制与多路复用 基带传输 不归零 (NRZ) 不归零逆转 (NRZI) 曼彻斯特   通带传输 幅移键控 (ASK) 频移键控 (FSK) 相移键控 (PSK)   频分复用 (FDM) 时分复用 (TDM)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机网络（一）">
-<meta property="og:url" content="http://t-1031.github.io/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:title" content="物理层">
+<meta property="og:url" content="http://t-1031.github.io/2023/%E7%89%A9%E7%90%86%E5%B1%82/index.html">
 <meta property="og:site_name" content="TG仓库">
-<meta property="og:description" content="第1章 引言   协议层次结构 多层通信过程   服务 面向连接的服务 无连接服务   参考模型 OSI参考模型 TCP&#x2F;IP参考模型      协议层次结构绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。 协议：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层协议。 协议栈：一个特定的系统所">
+<meta property="og:description" content="第2章 物理层   理论基础 奈奎斯特定理 香农定理   传输介质 引导性传输介质（有线） 铜线 光纤   非引导性介质（无线） 无线电传输 微波传输 红外传输 光通信 卫星通信     数字调制与多路复用 基带传输 不归零 (NRZ) 不归零逆转 (NRZI) 曼彻斯特   通带传输 幅移键控 (ASK) 频移键控 (FSK) 相移键控 (PSK)   频分复用 (FDM) 时分复用 (TDM)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-12T08:15:10.000Z">
-<meta property="article:modified_time" content="2024-01-02T13:55:40.654Z">
+<meta property="article:published_time" content="2023-12-12T08:17:31.000Z">
+<meta property="article:modified_time" content="2024-01-05T12:45:00.179Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -144,125 +144,188 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-计算机网络（一）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-物理层" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      计算机网络（一）
+      物理层
     </h1>
   
 
         
-        <a href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-12-12T08:15:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-12</time>
+        <a href="/2023/%E7%89%A9%E7%90%86%E5%B1%82/" class="archive-article-date">
+  	<time datetime="2023-12-12T08:17:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="第1章-引言">第1章 引言</span></h1><!-- toc -->
+        <h1><span id="第2章-物理层">第2章 物理层</span></h1><!-- toc -->
 
 <ul>
-<li><a href="#%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">协议层次结构</a><ul>
-<li><a href="#%E5%A4%9A%E5%B1%82%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B">多层通信过程</a></li>
+<li><a href="#%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80">理论基础</a><ul>
+<li><a href="#%E5%A5%88%E5%A5%8E%E6%96%AF%E7%89%B9%E5%AE%9A%E7%90%86">奈奎斯特定理</a></li>
+<li><a href="#%E9%A6%99%E5%86%9C%E5%AE%9A%E7%90%86">香农定理</a></li>
 </ul>
 </li>
-<li><a href="#%E6%9C%8D%E5%8A%A1">服务</a><ul>
-<li><a href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%9C%8D%E5%8A%A1">面向连接的服务</a></li>
-<li><a href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1">无连接服务</a></li>
+<li><a href="#%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8">传输介质</a><ul>
+<li><a href="#%E5%BC%95%E5%AF%BC%E6%80%A7%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8%E6%9C%89%E7%BA%BF">引导性传输介质（有线）</a><ul>
+<li><a href="#%E9%93%9C%E7%BA%BF">铜线</a></li>
+<li><a href="#%E5%85%89%E7%BA%A4">光纤</a></li>
 </ul>
 </li>
-<li><a href="#%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B">参考模型</a><ul>
-<li><a href="#osi%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B">OSI参考模型</a></li>
-<li><a href="#tcpip%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B">TCP&#x2F;IP参考模型</a></li>
+<li><a href="#%E9%9D%9E%E5%BC%95%E5%AF%BC%E6%80%A7%E4%BB%8B%E8%B4%A8%E6%97%A0%E7%BA%BF">非引导性介质（无线）</a><ul>
+<li><a href="#%E6%97%A0%E7%BA%BF%E7%94%B5%E4%BC%A0%E8%BE%93">无线电传输</a></li>
+<li><a href="#%E5%BE%AE%E6%B3%A2%E4%BC%A0%E8%BE%93">微波传输</a></li>
+<li><a href="#%E7%BA%A2%E5%A4%96%E4%BC%A0%E8%BE%93">红外传输</a></li>
+<li><a href="#%E5%85%89%E9%80%9A%E4%BF%A1">光通信</a></li>
+<li><a href="#%E5%8D%AB%E6%98%9F%E9%80%9A%E4%BF%A1">卫星通信</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6%E4%B8%8E%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8">数字调制与多路复用</a><ul>
+<li><a href="#%E5%9F%BA%E5%B8%A6%E4%BC%A0%E8%BE%93">基带传输</a><ul>
+<li><a href="#%E4%B8%8D%E5%BD%92%E9%9B%B6-nrz">不归零 (NRZ)</a></li>
+<li><a href="#%E4%B8%8D%E5%BD%92%E9%9B%B6%E9%80%86%E8%BD%AC-nrzi">不归零逆转 (NRZI)</a></li>
+<li><a href="#%E6%9B%BC%E5%BD%BB%E6%96%AF%E7%89%B9">曼彻斯特</a></li>
+</ul>
+</li>
+<li><a href="#%E9%80%9A%E5%B8%A6%E4%BC%A0%E8%BE%93">通带传输</a><ul>
+<li><a href="#%E5%B9%85%E7%A7%BB%E9%94%AE%E6%8E%A7-ask">幅移键控 (ASK)</a></li>
+<li><a href="#%E9%A2%91%E7%A7%BB%E9%94%AE%E6%8E%A7-fsk">频移键控 (FSK)</a></li>
+<li><a href="#%E7%9B%B8%E7%A7%BB%E9%94%AE%E6%8E%A7-psk">相移键控 (PSK)</a></li>
+</ul>
+</li>
+<li><a href="#%E9%A2%91%E5%88%86%E5%A4%8D%E7%94%A8-fdm">频分复用 (FDM)</a></li>
+<li><a href="#%E6%97%B6%E5%88%86%E5%A4%8D%E7%94%A8-tdm">时分复用 (TDM)</a></li>
+<li><a href="#%E6%B3%A2%E5%88%86%E5%A4%8D%E7%94%A8-wdm">波分复用 (WDM)</a></li>
+<li><a href="#%E7%A0%81%E5%88%86%E5%A4%8D%E7%94%A8-cdm">码分复用 (CDM)</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%A4%E6%8D%A2">交换</a><ul>
+<li><a href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2">电路交换</a></li>
+<li><a href="#%E5%AD%98%E5%82%A8%E4%BA%A4%E6%8D%A2">存储交换</a><ul>
+<li><a href="#%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2">报文交换</a></li>
+<li><a href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2">分组交换</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
 
-<h2><span id="协议层次结构">协议层次结构</span></h2><p>绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。</p>
-<p><strong>协议</strong>：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层协议。</p>
-<p><strong>协议栈</strong>：一个特定的系统所使用的一组协议。</p>
-<p><strong>对等体</strong>：不同机器上构成相应层次的实体称为对等体。</p>
-<p><strong>接口</strong>：定义了下层向上层提供哪些原语操作和服务。</p>
-<p><strong>网络体系结构</strong>：层和协议的集合。</p>
-<h3><span id="多层通信过程">多层通信过程</span></h3><ol>
-<li>在输出端的机器上，上层向下层传递消息时，下层在消息前加上一个头，用来标识该信息，并把结果传递给再下一层。该头包含一些控制信息。  </li>
-<li>在限制消息大小的层（几乎所有的第3层协议），把入境消息分割成较小的单元，即数据包或包，并在每个数据包前面加上该层的头。每个数据包单独传输。  </li>
-<li>第2层给每个信息加上一个头和一个尾，然后将结果传送给第1层进行物理传输。  </li>
-<li>在接收端的机器上，消息自底向上逐层传递，在传递过程中各个头被逐层剥离。没有一个第n层以下的头会被传递到第n层。</li>
+<h2><span id="理论基础">理论基础</span></h2><p><strong>带宽</strong>：通过频率的宽度，这段频率在传输过程中振幅不会明显减弱。<br>模拟带宽的单位为赫兹 (Hz)，数字带宽的单位为比特&#x2F;秒 (bps)。</p>
+<p><strong>基带信号</strong>：从0到某个最大频率的信号。<br><strong>通带信号</strong>：被搬移并占用某个更大频率范围的信号。  </p>
+<p><strong>信噪比</strong>：信号功率与噪声功率的比值。<br>将信号功率记作 S，噪声功率记作 N，将该比率表示成对数形式 $10 \log_{10} (S&#x2F;N)$，对数的取值单位为分贝 (dB)。</p>
+<h3><span id="奈奎斯特定理">奈奎斯特定理</span></h3><p>如果一个任意信号通过了一个带宽为 B 的低通滤波器，那么只要进行每秒 2B 次（确切）采样，就可以完全重构出被过滤的信号。  </p>
+<p>对一个带宽为 B Hz的无噪声信道，如果信号包含了 V 个离散等级，则：<br>$$最大数据速率 &#x3D; 2B \log_2 V\ (bps)$$  </p>
+<h3><span id="香农定理">香农定理</span></h3><p>对于一条带宽为 B Hz，信噪比为 S&#x2F;N 的有噪声信道，其最大数据速率或者容量为：<br>$$最大比特率 &#x3D; B \log_2 (1 + S&#x2F;N)$$  </p>
+<p>注意：由香农定理求出的最大数据速率应与由奈奎斯特定理求出的相比较，取更小的那个。</p>
+<h2><span id="传输介质">传输介质</span></h2><h3><span id="引导性传输介质有线">引导性传输介质（有线）</span></h3><h4><span id="铜线">铜线</span></h4><ul>
+<li><p><strong>双绞线</strong><br>到第6类为止，所有的双绞线都称为非屏蔽双绞线 (UTP)；7类双绞线有屏蔽层，能够减弱外部干扰和来自附近线缆的串扰。</p>
+</li>
+<li><p><strong>同轴电缆</strong><br>比非屏蔽双绞线具有更好的屏蔽特性和更大的带宽。<br>常用的有：基带同轴电缆 ($50\Omega$)，用于数字传输；宽带同轴电缆 ($75\Omega$)，用于模拟传输和有线电视传输。</p>
+</li>
+<li><p><strong>电力线</strong></p>
+</li>
+</ul>
+<h4><span id="光纤">光纤</span></h4><p>由光源，传输介质和探测器构成。  </p>
+<p>一个光脉冲表示比特1，没有光脉冲表示比特0；传输介质为超薄玻璃纤维；光探测器探测到光时产生一个电脉冲。  </p>
+<p>连接方式：  </p>
+<ol>
+<li>用连接器终止一根光纤，然后再把它插入到光纤插座中；  </li>
+<li>通过机械手段拼接；  </li>
+<li>熔结,将两根光纤融合在一起。</li>
 </ol>
-<h2><span id="服务">服务</span></h2><h3><span id="面向连接的服务">面向连接的服务</span></h3><p>首先在信源和信宿之间建立连接，然后在此连接上通信，最后拆除连接。</p>
-<p>特点：占用一定资源，可靠，按序传送。</p>
-<p>可靠服务：接收方向发送方确认收到的每个报文。确认过程本身要引入额外的开销和延迟。</p>
-<p>可靠的面向连接服务可分为可靠的报文流和可靠的字节流。前者保持报文的边界，而后者没有。此外还有不可靠的连接，及不进行确认。  </p>
-<h3><span id="无连接服务">无连接服务</span></h3><p>传送数据前不需要建立连接，即有即送。每个报文都携带了完整的目标地址。</p>
-<p>特点：每个数据包独自寻路（重复劳动），同一数据流的包可能经过不同的路径到达目的地，到达的顺序也可能颠倒。</p>
-<p>可分为不可靠的无连接服务（数据报服务），有确认的数据报服务，请求-应答服务（发送方传输一个包含了某个请求的数据报，接受方以一个包含了请求结果的应答数据报作为反馈）。</p>
-<h2><span id="参考模型">参考模型</span></h2><h3><span id="osi参考模型">OSI参考模型</span></h3><table>
-<thead>
-<tr>
-<th>名字</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>物理层</strong></td>
-<td>主要涉及机械，电子，时序接口，以及物理层之下的物理传输介质等。</td>
-</tr>
-<tr>
-<td><strong>数据链路层</strong></td>
-<td>发送方将输入数据拆分成数据帧，然后顺序发送；错误检测和纠正；流量控制。</td>
-</tr>
-<tr>
-<td><strong>网络层</strong></td>
-<td>寻址和路由数据包，拥塞控制。</td>
-</tr>
-<tr>
-<td><strong>传输层</strong></td>
-<td>接收来自上一层的数据（必要时分割），然后传递给网络层；决定了向会话层（用户）提供的服务类型。</td>
-</tr>
-<tr>
-<td><strong>会话层</strong></td>
-<td>建立（或清除）在两个通信的表示层之间的通信通道；包括交互管理，同步，异常报告。</td>
-</tr>
-<tr>
-<td><strong>表示层</strong></td>
-<td>负责数据的表示语法。</td>
-</tr>
-<tr>
-<td><strong>应用层</strong></td>
-<td>处理应用进程之间所发送和接收的数据中包含的信息内容，包含各种协议。</td>
-</tr>
-</tbody></table>
-<h3><span id="tcpx2fip参考模型">TCP&#x2F;IP参考模型</span></h3><table>
-<thead>
-<tr>
-<th>名字</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>链路层</strong></td>
-<td>主机和传输线路之间的一个接口。</td>
-</tr>
-<tr>
-<td><strong>互联网层</strong></td>
-<td>提供非连接的分组交换功能；定义了官方的数据包格式和协议，因特网协议(IP)及辅助协议，因特网控制报文协议(ICMP)。</td>
-</tr>
-<tr>
-<td><strong>传输层</strong></td>
-<td>定义了两个端到端的传输协议：可靠的，面向连接的传输控制协议(TCP)；不可靠的，无连接的用户数据报协议(UDP)。</td>
-</tr>
-<tr>
-<td><strong>应用层</strong></td>
-<td>包含了所有的高层协议。</td>
-</tr>
-</tbody></table>
+<p>信号源：发光二极管 (LED)，注入型激光二极管 (ILD)。<br>接收端：光电二极管，遇到光照时发出一个电脉冲。</p>
+<p><strong>多模光纤</strong>：许多不同的光束以不同的角度来回反射着向前传播。<br><strong>单模光纤</strong>：光纤的直径减小到只有几个光波波长大小，光只能按直线传播而不会反射。  </p>
+<p><strong>对比铜线的优点与不足</strong>：<br>优点：  </p>
+<ol>
+<li>能够处理更高的带宽；  </li>
+<li>衰减相对较低，所需中继器少；</li>
+<li>不受电源浪涌，电磁干扰或电源故障等影响；</li>
+<li>不受空气中腐蚀性化学物质侵蚀的影响，能被用于恶劣的工业环境；</li>
+<li>细小而重量轻，对管线支撑机械系统需求低；</li>
+<li>不会漏光，不易被接入，安全性高。</li>
+</ol>
+<p>不足：  </p>
+<ol>
+<li>对操作技能要求较高；</li>
+<li>被过度弯曲时容易折断；</li>
+<li>双向通信要求使用两根光纤，或在一根光纤上划分两个频段；</li>
+<li>光纤接口成本远远高于电子接口。</li>
+</ol>
+<h3><span id="非引导性介质无线">非引导性介质（无线）</span></h3><h4><span id="无线电传输">无线电传输</span></h4><p><strong>路径损耗</strong>：信号能量稀疏地分布在大面积表面，在空中传播时信号能量至少以 $1&#x2F;r^2$ 的速度衰减。  </p>
+<p>低频部分，无线电波能很好地穿透障碍物；高频部分，无线电波倾向于以直线传播，遇到障碍物会反弹，且更容易被雨水和其他障碍物吸收。在所有频率上，无线电波都会受到马达和其他电气设备的干扰。</p>
+<h4><span id="微波传输">微波传输</span></h4><p>微波按直线传播，因此每隔一段距离都需要中继器。</p>
+<p><strong>多径衰落</strong>：延迟抵达的微波可能与直接传送的微波不同相，因而信号会相互抵消。</p>
+<h4><span id="红外传输">红外传输</span></h4><p>红外线的传播具有方向性，便宜且易于制造，不能穿过固体物体。</p>
+<p>被广泛用于短程通信。</p>
+<h4><span id="光通信">光通信</span></h4><p>激光通信：波束窄，需要对准，受天气（风和温度）干扰大。</p>
+<p>LED可见光通信：给 LED灯泡装上驱动芯片，控制它每秒数百万次闪烁，亮了表示1，灭了代表0。</p>
+<h4><span id="卫星通信">卫星通信</span></h4><p>包括地球同步卫星，中地球轨道卫星，低地球轨道卫星等。</p>
+<h2><span id="数字调制与多路复用">数字调制与多路复用</span></h2><p><strong>数字调制</strong>：把要发送的数字信号转换到适合于传输的通带模拟信号的过程。<br><strong>多路复用</strong>：信道被多个信道共享。</p>
+<p><strong>波特率</strong>：符号率，指信号改变的速率。<br>比特率是波特率与每个符号的比特数的乘积。</p>
+<p><strong>平衡信号</strong>：在很短的时间内正电压与负电压一样多的信号。<br><strong>双极编码</strong>：用于构造平衡码。使用两个电压级别来表示逻辑 1 (+1V 和 -1V)，而用 0V 表示逻辑 0；发送 1 时，发射器在 +1V 和 -1V 之间选择，使它们总是达到信号平衡。</p>
+<h3><span id="基带传输">基带传输</span></h3><p>把数据比特直接转换成信号。信号的传输占有传输介质上从零到最大值之间的全部频率。常用于有线介质。</p>
+<h4><span id="不归零-nrz">不归零 (NRZ)</span></h4><p>用正电压表示 1，负电压表示 0。</p>
+<h4><span id="不归零逆转-nrzi">不归零逆转 (NRZI)</span></h4><p>1 定义为信号有跳变，反之 0 定义为信号无转变。  </p>
+<h4><span id="曼彻斯特">曼彻斯特</span></h4><p>时钟信号与比特流的异或。即 1 定义为由高电平跳变到低电平，反之 0 定义为由低电平跳变为高电平。</p>
+<h3><span id="通带传输">通带传输</span></h3><p>通过调节载波信号的幅值，相位或频率来运载比特。信号占据了以载波信号频率为中心的一段频带。常用于无线和光纤信道。</p>
+<h4><span id="幅移键控-ask">幅移键控 (ASK)</span></h4><p>通过两个不同的振幅分别表示 0 和 1。两个或更多的幅值等级可用来表示更多符号。</p>
+<h4><span id="频移键控-fsk">频移键控 (FSK)</span></h4><p>和幅移键控类似，将改变振幅变为改变频率。</p>
+<h4><span id="相移键控-psk">相移键控 (PSK)</span></h4><p>**二进制相移键控 (BPSK)**：在每个符号的周期中，系统把载波波形偏移 0° 或 180°。<br>**正交相移键控 (QPSK)**：使用四个偏移，如 45°&#x2F;135°&#x2F;225°&#x2F;315°。  </p>
+<p>一次只能调节频率和相位中的一个。通常情况下，振幅和相位可以结合起来一起调制。</p>
+<p><strong>星座图</strong>：一个点的相位由以它为起点到原点的线与 x 正轴之间的角度表示，振幅则是该点到原点的距离。  </p>
+<h3><span id="频分复用-fdm">频分复用 (FDM)</span></h3><p>给不同的逻辑信道分配不同的频率，每个频率工作在频谱中的一部分，并且相邻信道之间的频谱间隔足够大，以便防止干扰。</p>
+<p><strong>正交频分多路复用 (OFDM)</strong> ：信道带宽被分成许多独立发送数据的子载波；子载波在频域中被包裹在一起，从每个子载波中发出的信号能扩散到相邻子载波；但每个子载波的频率响应被设计成在相邻子载波的中心为零。</p>
+<h3><span id="时分复用-tdm">时分复用 (TDM)</span></h3><p>每个用户周期性地获得整个带宽非常短的一个时间。每个输入流的比特从一个固定的时间槽中取出并输出到混合流。该混合流以各个流速率的总和速度发送。</p>
+<h3><span id="波分复用-wdm">波分复用 (WDM)</span></h3><p>在极高频率上的频分多路复用。多条光纤汇合到一个光纤组合器中，每条光纤的能量位于不同的波长处。</p>
+<h3><span id="码分复用-cdm">码分复用 (CDM)</span></h3><p>是扩展频谱通信的一种形式，把一个窄带信号扩展到一个很宽的频带上。<br>允许来自不同用户的多个信号共享相同的信号，称为**码分多址 (CDMA)**。</p>
+<ol>
+<li><p>每个比特时间被细分为 m 个更短的时间间隔，每个时间间隔称为<strong>码片</strong>，每个码片可以是 +1 或 -1。每个站被分配得到唯一的 m 位码，称为<strong>码片序列</strong>。  </p>
+</li>
+<li><p>若要发送比特 1，则站发送分配给它的码片序列；若要发送比特 0，则发送其码片序列的反码。</p>
+</li>
+<li><p>所有码片序列两两正交，即对两个不同的码片序列 S 和 T， $S \cdot T &#x3D; \dfrac{1}{m} \sum_{i&#x3D;1}^{m} S_i T_i &#x3D; 0$ ；任何码片序列与自身的归一化乘积为 1。  </p>
+</li>
+<li><p>传输过程中，所有站的双极序列线性叠加在一起。</p>
+</li>
+<li><p>接收方计算收到的码片序列与该站的码片序列的归一化乘积（码片序列的每一位相乘后再相加，结果除以 m），所得结果为 1 说明发送逻辑 1，结果为 -1 说明发送逻辑 0，结果为 0 说明未发送信息。</p>
+</li>
+</ol>
+<h2><span id="交换">交换</span></h2><h3><span id="电路交换">电路交换</span></h3><p>采用 TDM 或 FDM。</p>
+<p>在通信对端之间建立物理连接（预留物理信道），该通路在通信期间一直维持且为该通信双方专用。</p>
+<p>优点：传输可靠，迅速，不丢失且保序。</p>
+<h3><span id="存储交换">存储交换</span></h3><h4><span id="报文交换">报文交换</span></h4><p>数据传输以报文的整体为单位，即端点系统一次性发送数据块，长度不限且可变。</p>
+<h4><span id="分组交换">分组交换</span></h4><p>将报文划分成若干个可以存放在内存中的分组来进行传送。  </p>
+<p><strong>数据报交换</strong>：每个分组头中都包含目的节点的地址。<br><strong>虚电路交换</strong>：在源节点和目的节点间建立一条逻辑通路。  </p>
+<p>与电路交换比较：  </p>
+<ol>
+<li>分组交换根据需要动态地获取和释放带宽，不会浪费未用的带宽。  </li>
+<li>电路交换对数据传输是完全透明的，而分组交换要利用分组所携带的参数进行路由转发。  </li>
+<li>分组交换是存储转发的，会增加传输延时。  </li>
+<li>分组交换中可能出现乱序现象。</li>
+<li>分组交换按传输的字节或连接时间计费；电路交换按时间，距离计费。</li>
+</ol>
+<p><strong>延时分析</strong>：  </p>
+<ol>
+<li><p>传播延时 (prop)<br>数据在节点间的传播时间，取决于物理媒体传播速度和传播距离。</p>
+</li>
+<li><p>传输延时 (trans)<br>节点发送（或接受）整个分组所需时间。用 L (bit) 表示分组长度， R (bps) 表示链路速率， 则 L&#x2F;R 为传输延时。</p>
+</li>
+<li><p>处理延时 (pro)<br>检查分组头部，寻路，差错校验等，与 CPU 速度和处理算法有关。</p>
+</li>
+<li><p>排队延时 (queue)<br>在节点上等待处理所需时间，与网络拥塞状况有关，是产生延时抖动（最大延迟与最小延迟的时间差）的主要因素。</p>
+</li>
+</ol>
+<p>n 个分组在路径上的总延时： $D &#x3D; 总d_{prop} + 转发节点数 \cdot (d_{trans} + d_{pro} + d_{queue}) + n \cdot d_{trans}$  </p>
+<p>k 跳路径表示有 k 个线路，故有 k-1 个转发节点。</p>
 
       
 
@@ -336,7 +399,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://t-1031.github.io/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://t-1031.github.io/2023/%E7%89%A9%E7%90%86%E5%B1%82/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -350,18 +413,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%8C%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          计算机网络（二）
+          数据链路层
         
       </div>
     </a>
   
   
-    <a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">电子系统设计（五）</div>
+    <a href="/2023/%E5%BC%95%E8%A8%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">引言</div>
       <i class="icon-circle-right"></i>
     </a>
   
