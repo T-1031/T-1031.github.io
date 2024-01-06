@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://T-1031.github.io">
-  <title>Archives: 2024 | TG仓库</title>
+  <title>网络安全 | TG仓库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="懒狗">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TG仓库">
-<meta property="og:url" content="http://t-1031.github.io/archives/2024/index.html">
+  <meta name="description" content="第8章 网络安全   网络安全服务 密码 对称密码 DES 三重 DES IDEA 对称密码的性能   非对称密码（公私钥密码） RSA     数字签名与认证 数字签名 数据的完整性认证 MAC 散列函数     典型的网络安全威胁 主动攻击与被动攻击 常见攻击分类   网络安全协议 不同层次的安全协议 IPSec 认证 (AH) 头标 加密 (ESP) 头标     防火墙    网络安全服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络安全">
+<meta property="og:url" content="http://t-1031.github.io/2024/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.html">
 <meta property="og:site_name" content="TG仓库">
-<meta property="og:description" content="懒狗">
+<meta property="og:description" content="第8章 网络安全   网络安全服务 密码 对称密码 DES 三重 DES IDEA 对称密码的性能   非对称密码（公私钥密码） RSA     数字签名与认证 数字签名 数据的完整性认证 MAC 散列函数     典型的网络安全威胁 主动攻击与被动攻击 常见攻击分类   网络安全协议 不同层次的安全协议 IPSec 认证 (AH) 头标 加密 (ESP) 头标     防火墙    网络安全服务">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-06T04:39:25.000Z">
+<meta property="article:modified_time" content="2024-01-06T04:39:19.822Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -142,37 +144,291 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-网络安全" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      网络安全
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="archive-article-date">
+
+        
+        <a href="/2024/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="archive-article-date">
   	<time datetime="2024-01-06T04:39:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-06</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="第8章-网络安全">第8章 网络安全</span></h1><!-- toc -->
 
-        <div class="article-info info-on-right">
-          
-          
+<ul>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1">网络安全服务</a></li>
+<li><a href="#%E5%AF%86%E7%A0%81">密码</a><ul>
+<li><a href="#%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%81">对称密码</a><ul>
+<li><a href="#des">DES</a></li>
+<li><a href="#%E4%B8%89%E9%87%8D-des">三重 DES</a></li>
+<li><a href="#idea">IDEA</a></li>
+<li><a href="#%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%81%E7%9A%84%E6%80%A7%E8%83%BD">对称密码的性能</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%81%E5%85%AC%E7%A7%81%E9%92%A5%E5%AF%86%E7%A0%81">非对称密码（公私钥密码）</a><ul>
+<li><a href="#rsa">RSA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E8%AE%A4%E8%AF%81">数字签名与认证</a><ul>
+<li><a href="#%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D">数字签名</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E8%AE%A4%E8%AF%81">数据的完整性认证</a><ul>
+<li><a href="#mac">MAC</a></li>
+<li><a href="#%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0">散列函数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%85%B8%E5%9E%8B%E7%9A%84%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81">典型的网络安全威胁</a><ul>
+<li><a href="#%E4%B8%BB%E5%8A%A8%E6%94%BB%E5%87%BB%E4%B8%8E%E8%A2%AB%E5%8A%A8%E6%94%BB%E5%87%BB">主动攻击与被动攻击</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E5%88%86%E7%B1%BB">常见攻击分类</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE">网络安全协议</a><ul>
+<li><a href="#%E4%B8%8D%E5%90%8C%E5%B1%82%E6%AC%A1%E7%9A%84%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE">不同层次的安全协议</a></li>
+<li><a href="#ipsec">IPSec</a><ul>
+<li><a href="#%E8%AE%A4%E8%AF%81-ah-%E5%A4%B4%E6%A0%87">认证 (AH) 头标</a></li>
+<li><a href="#%E5%8A%A0%E5%AF%86-esp-%E5%A4%B4%E6%A0%87">加密 (ESP) 头标</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">防火墙</a></li>
+</ul>
+<!-- tocstop -->
+
+<h2><span id="网络安全服务">网络安全服务</span></h2><ul>
+<li><strong>认证</strong>：提供某个实体的身份保护。</li>
+<li><strong>访问控制</strong>：保护资源，防止对它的非法使用和操纵。</li>
+<li><strong>数据加密</strong>：保护信息不被泄露。</li>
+<li><strong>数据完整性</strong>：保护信息以防止非法篡改。</li>
+<li><strong>不可否认性</strong>：防止参与通信的一方事后否认。</li>
+</ul>
+<h2><span id="密码">密码</span></h2><p><strong>密钥</strong>：参与明文密文变换的参数。</p>
+<p>按加密模式分类：</p>
+<ul>
+<li><strong>序列密码</strong>：位或字节加密（流密码）。  </li>
+<li><strong>分组密码</strong>：将明文分成固定长度的组，用同一密钥对每一块加密，输出固定长度的密文。</li>
+</ul>
+<p>按发展进程&#x2F;体制分：</p>
+<ul>
+<li><p><strong>古典密码</strong>：基于字符替换的密码。  </p>
+<ul>
+<li>代替密码：简单代替，多表代替，多字母或多码代替</li>
+<li>换位密码：凯撒密码</li>
+</ul>
+</li>
+<li><p><strong>对称密钥体制</strong>：加密密钥和解密密钥相同，也叫单钥密码体制。  </p>
+<ul>
+<li>DES（数据加密标准）</li>
+<li>AES（高级加密标准）</li>
+<li>IDEA（国际数据加密算法）</li>
+</ul>
+</li>
+<li><p><strong>非对称密钥体制</strong>：加密密钥和解密密钥不同，也叫公钥密码体制。  </p>
+<ul>
+<li>RSA</li>
+<li>背包密码</li>
+<li>椭圆曲线</li>
+<li>EIGamal</li>
+<li>D_H</li>
+</ul>
+</li>
+</ul>
+<h3><span id="对称密码">对称密码</span></h3><p>加密速度快，但密钥空间大。</p>
+<h4><span id="des">DES</span></h4><ul>
+<li><p>在一个初始置换后，明文组被分成左半部分和右半部分，每部分 32 位。<br>初始置换和初始逆置换再密码意义上作用不大，他们的作用在于打乱原来输入的 ASCII 码字划分关系，并将原来明文的校验位变成置换输出的一个字节。</p>
+</li>
+<li><p>16 轮迭代的乘积变换，称为函数 f，将数据和密钥结合起来。<br>密钥有 56 位。</p>
+</li>
+<li><p>16 轮之后，左右两部分进行一次交换，再经过一个初始逆置换，算法结束。</p>
+</li>
+</ul>
+<h4><span id="三重-des">三重 DES</span></h4><p>使用三（或两）个不同的密钥对数据块进行三次（或两次）加密。<br>三重 DES 的强度大约和 112 位的密钥相当。    </p>
+<p>有四种模型：</p>
+<ul>
+<li>DES-EEE3：使用三个不同密钥顺序进行三次加密变换。</li>
+<li>DES-EDE3：使用三个不同密钥一次进行加密-解密-加密变换。</li>
+<li>DES-EEE2：密钥 K1&#x3D;K3，顺序进行三次加密变换。</li>
+<li>DES-EDE2：密钥 K1&#x3D;K3，依次进行加密-解密-加密变换。</li>
+</ul>
+<h4><span id="idea">IDEA</span></h4><p>64 位大小的分组加密算法，密钥长度为 128 位，加密成 64 位密文。</p>
+<p>加密密钥和解密密钥不同，但是从一个主密钥派生出来，因此仍是对称的加密体制。</p>
+<h4><span id="对称密码的性能">对称密码的性能</span></h4><ul>
+<li><p>安全性能</p>
+<ul>
+<li>密钥长度：对 n 位的密钥，若密码系统是对称的，则需要计算 $2^{n-1}$ 次。</li>
+<li>分组长度</li>
+<li>轮数</li>
+<li>密钥编排函数</li>
+</ul>
+</li>
+<li><p>实现性能</p>
+<ul>
+<li>计算</li>
+<li>内存利用</li>
+</ul>
+</li>
+</ul>
+<h3><span id="非对称密码公私钥密码">非对称密码（公私钥密码）</span></h3><p>密钥分发简单，需要保存的密钥减少，但加密速度慢。<br>可用于数字签名和密钥分发。</p>
+<h4><span id="rsa">RSA</span></h4><p>计算过程：</p>
+<ul>
+<li><p>密钥的生成</p>
+<ul>
+<li>选择 p、q（p、q 为互异素数）<br>计算 $n &#x3D; p \cdot q,\ m &#x3D; (p-1)(q-1)$</li>
+<li>选择整数 e 与 m 互素，即 $gcd(m, e) &#x3D; 1, 1 &lt; e &lt; m$<br>gcd 表示最大公约数。</li>
+<li>计算 d，使 $(e \cdot d) \mod m &#x3D; 1$<br>公钥 Pk &#x3D; {e, n}，私钥 Sk &#x3D; {d, n}</li>
+</ul>
+</li>
+<li><p>加密（使用 Pk）</p>
+<ul>
+<li>明文是以分组方式加密的，每一个分组的比特数应小于 n 的二进制表示，即每一个分组的长度应小于 $\log_2 n$</li>
+<li>明文 M &lt; n，密文 $C &#x3D; M^e \mod n$</li>
+</ul>
+</li>
+<li><p>解密（使用 Sk）</p>
+<ul>
+<li>密文 C，明文 $M &#x3D; C^d \mod n$</li>
+</ul>
+</li>
+</ul>
+<p>eg.<br>p &#x3D; 3, q &#x3D; 11<br>$n &#x3D; 3 \times 11 &#x3D; 33,\ m &#x3D; 2 \times 10 &#x3D; 20$<br>选 e &#x3D; 3，则 $3d \mod 20 &#x3D; 1$，解得 $d &#x3D; 7$。<br>对明文 M &#x3D; 2，得到密文 $C &#x3D; 2^3 \mod 33 &#x3D; 8$<br>对密文解密可得明文 $M &#x3D; 8^7 \mod 33 &#x3D; 2$</p>
+<p>安全分析：<br>选取的素数 p、q 要足够大，则分解给定乘积 n 再计算上是不可行的。<br>基于短期安全性考虑，n 的长度至少应为 1024 比特；而长期安全性要求 n 的长度这至少为 2048 比特。</p>
+<h2><span id="数字签名与认证">数字签名与认证</span></h2><h3><span id="数字签名">数字签名</span></h3><p>利用私钥生成签名，用公钥验证签名。<br>一个数字签名方案是由签名算法和验证算法组成。</p>
+<ul>
+<li><p>签名算法利用私钥生成签名。<br>称消息 m 的签名为 sig(m)，然后将 (m, sig(m)) 发给接收方。</p>
+</li>
+<li><p>由于无法识别数字签名与其拷贝之间的差异，所有在数字签名前应加上时间戳。</p>
+</li>
+<li><p>验证算法利用签名者的公钥对 sig(m) 进行解密，如果解密输出与 m 一致，则为合法数据。</p>
+</li>
+</ul>
+<p>数字签名的目标：</p>
+<ul>
+<li>接收方可以验证发送方声称的身份。</li>
+<li>发送方不能否认该消息的内容。</li>
+<li>接收方不可能自己编造这样的信息。</li>
+</ul>
+<h3><span id="数据的完整性认证">数据的完整性认证</span></h3><p>可用于做认证的函数：</p>
+<ul>
+<li>加密函数<ul>
+<li>用对称密钥加密，信息的完整作为对信息的认证；</li>
+<li>用公钥密码中的私钥加密（即签名），但加密速度太慢。</li>
+</ul>
+</li>
+<li><strong>消息认证码</strong> (MAC)<br>对信源消息的一个编码函数。</li>
+<li>散列函数<br>将任意长的信息映射成一个固定长度的信息。</li>
+</ul>
+<h4><span id="mac">MAC</span></h4><ul>
+<li><p>利用函数 f 和密钥 k，将要发送的明文 x 或密文 y 变换成 r bit 的消息认证码 f(k, x)（或 f(k, y)）。</p>
+</li>
+<li><p>将其称为认证符附加在 x（或 y）之后发出。</p>
+</li>
+<li><p>接收者收到发送的消息序列后，按发送方同样的方法对接收的数据（或解密后）进行计算，得到相应的 r bit 数据。</p>
+</li>
+</ul>
+<h4><span id="散列函数">散列函数</span></h4><p>单向散列函数 (hash) 是 MAC 的一种变形，从一段很长的报文中计算出一个固定长度的比特串，用于消息的完整性验证。</p>
+<p>单向散列函数有以下特征：</p>
+<ul>
+<li>给定任意长度的 P，易于计算处固定长度的 H(p)。</li>
+<li>只给出 H(p)，几乎无法找出 P。</li>
+<li>对于任意给定的 X，找到满足 H(Y) &#x3D; H(X) 的 Y($\neq x$) 在计算上是不可行的（抗弱碰撞）。</li>
+<li>找到满足 H(Y) &#x3D; H(X) 的任意一对 (X, Y) 在计算上是不可行的（抗强碰撞）。</li>
+</ul>
+<p>认证方法：</p>
+<ul>
+<li>消息：X，任意比特</li>
+<li>消息摘要：Z &#x3D; H(X)，160 比特</li>
+<li>签名摘要：$Y &#x3D; sig_k (Z)$</li>
+</ul>
+<p>标准：MD5（128比特），SHA-1（160比特）等。</p>
+<h2><span id="典型的网络安全威胁">典型的网络安全威胁</span></h2><h3><span id="主动攻击与被动攻击">主动攻击与被动攻击</span></h3><p><strong>主动攻击</strong>更改数据流，或伪造假的数据流。<br>有以下四种形式：</p>
+<ul>
+<li>伪装：即冒名顶替。一般而言，伪装攻击的同时往往还伴随着其他形式的主动攻击。</li>
+<li>重放：先被动地窃取通信数据，然后再有目的地重新发送。</li>
+<li>篡改：即修改报文的内容。或者对截获的报文延迟、重新排序。</li>
+<li>拒绝服务：阻止或占据对通信设是的正常使用或管理。针对特定目标或某个网络区域。</li>
+</ul>
+<p><strong>被动攻击</strong>对传输进行偷听与监视，获得传输信息。<br>有以下两种形式：</p>
+<ul>
+<li>报文分析：窃听和分析所传输的报文内容。</li>
+<li>流量分析：分析通信主机的位置、通信的频繁程度、报文长度等信息。</li>
+</ul>
+<h3><span id="常见攻击分类">常见攻击分类</span></h3><ul>
+<li><strong>社会工程</strong>：攻击者可通过各种社交渠道获得有关目标的结构、使用情况、安全防范措施等有用信息从而提高攻击成功率。</li>
+<li><strong>口令破解</strong>：攻击者可通过获取口令文件，然后运用口令破解工具获得口令，也可通过猜测或窃听等方式获取口令。</li>
+<li><strong>连接盗用</strong>：在合法的通信连接建立后，攻击者可通过阻塞或摧毁通信的一方来接管已经过认证建立起来的连接，从而 假冒被接管方与对方通信。</li>
+<li><strong>网络窃听</strong>：网络的开放性使攻击者可通过直接或间接窃听获取所需信息。</li>
+<li><strong>数据篡改</strong>：攻击者可通过截获并修改数据或重放数据等方式破坏数据的完整性。</li>
+<li><strong>地址欺骗</strong>：攻击者可通过伪装成被信任的IP 地址等方式来骗取目标的信任。</li>
+<li><strong>恶意扫描</strong>：攻击者可编制或使用现有扫描工具发现目标的漏洞，进而发起攻击。</li>
+<li><strong>基础设置破坏</strong>：攻击者可通过破坏 DNS 或路由信息等基础设施，使目标陷于孤立。</li>
+<li><strong>数据驱动攻击</strong>：攻击者可通过施放病毒、特洛伊木马、数据炸弹等方式破坏或遥控目标。</li>
+<li><strong>服务拒绝</strong>：攻击者可直接发动攻击，也可通过控制其它主机发起攻击，使目标瘫痪。如发送大量的数据洪流阻塞目标。</li>
+</ul>
+<h2><span id="网络安全协议">网络安全协议</span></h2><h3><span id="不同层次的安全协议">不同层次的安全协议</span></h3><ul>
+<li>链路层：链路隧道协议、加密技术</li>
+<li>网络层：IPSec 协议</li>
+<li>传输层：SSL 协议<br>在 TCP 协议之上为两个端实体之间提供安全通道的协议。</li>
+<li>应用层：SHTTP、PGP、S&#x2F;MIME</li>
+</ul>
+<h3><span id="ipsec">IPSec</span></h3><ul>
+<li>传输模式：用来保护某个 IP 净荷的上层协议。</li>
+<li>隧道模式：在两个网关之间保护整个 IP 分组。<br>会更换新的 IP 头标 (?)</li>
+</ul>
+<h4><span id="认证-ah-头标">认证 (AH) 头标</span></h4><p>提供数据完整性保护，抗重播攻击。</p>
+<p><strong>安全组合</strong> (SA)：为使通信双方的认证&#x2F;加密算法一致，相互间建立的联系。</p>
+<p>IP 头标 + AH 头标 + TCP&#x2F;UDP 头标 + 用户数据<br>认证范围包括上述全部。</p>
+<p>AH 头标包含：</p>
+<ul>
+<li>下一个头：8 bit</li>
+<li>净荷长度：8 bit  </li>
+<li>保留：16 bit</li>
+<li><strong>安全参数索引</strong> (SPI)：32 bit<br>将目的 IP 地址和 SPI 组合即可确定 SA。</li>
+<li>序列号：<br>利用该域抵抗重播攻击。</li>
+<li>认证数据：长度可变，为 32 bit 的整数倍<br>具体格式因认证算法而异。</li>
+</ul>
+<h4><span id="加密-esp-头标">加密 (ESP) 头标</span></h4><p>提供数据机密性、完整性保护，抗重播攻击。</p>
+<p>IP 头标 + ESP 头标 + TCP&#x2F;UDP 头标 + 用户数据 + ESP 尾标 + ESP（认证数据）</p>
+<ul>
+<li>认证范围：ESP 头标到 ESP 尾标。</li>
+<li>加密范围：TCP&#x2F;UDP 头标到 ESP 尾标。</li>
+<li>ESP 净荷：TCP&#x2F;UDP 头标 + 用户数据</li>
+</ul>
+<h2><span id="防火墙">防火墙</span></h2><p>防火墙是在两个网络之间强制实行访问控制策略的由软硬件构成的系统。</p>
+<p>功能：</p>
+<ul>
+<li>过滤不安全的服务和禁止非法访问。</li>
+<li>控制对特殊站点的访问，可以允许受保护网络的一部分主机被外部访问，而其它部分则禁止。</li>
+<li>提供访问记录和审计等功能。</li>
+</ul>
+<p>分类：</p>
+<ul>
+<li><strong>包过滤防火墙</strong>：仅根据分组中的信息（地址、端口号、协议）执行相应的过滤规则，每个分组的处理都是独立的。</li>
+<li><strong>状态检测防火墙</strong>：不仅根据分组中的信息，而且还根据记录的连接状态、分组传出请求等来进行过滤。<br>TCP：为建立连接的SYN分组建立状态，只允许对该SYN的应答分组进入。连接建立后，允许该连接的分组进入。</li>
+<li><strong>代理型防火墙</strong>：通过对网络服务的代理，检查进出网络的各种服务。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -189,185 +445,117 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://t-1031.github.io/2024/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/%E5%BA%94%E7%94%A8%E5%B1%82/" class="archive-article-date">
-  	<time datetime="2024-01-06T02:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-06</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2024/%E5%BA%94%E7%94%A8%E5%B1%82/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">应用层</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">第8章 网络安全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">网络安全服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">密码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">对称密码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">DES</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">三重 DES</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">IDEA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">对称密码的性能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">非对称密码（公私钥密码）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">RSA</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">数字签名与认证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text">数字签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.2.</span> <span class="toc-text">数据的完整性认证</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">MAC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">散列函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">典型的网络安全威胁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.1.</span> <span class="toc-text">主动攻击与被动攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.2.</span> <span class="toc-text">常见攻击分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.5.</span> <span class="toc-text">网络安全协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.5.1.</span> <span class="toc-text">不同层次的安全协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.5.2.</span> <span class="toc-text">IPSec</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">认证 (AH) 头标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">加密 (ESP) 头标</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.6.</span> <span class="toc-text">防火墙</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/%E4%BC%A0%E8%BE%93%E5%B1%82/" class="archive-article-date">
-  	<time datetime="2024-01-04T09:16:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/%E4%BC%A0%E8%BE%93%E5%B1%82/">传输层</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/MAC%20%E5%AD%90%E5%B1%82/" class="archive-article-date">
-  	<time datetime="2024-01-02T14:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-02</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/MAC%20%E5%AD%90%E5%B1%82/">MAC 子层</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/%E7%BD%91%E7%BB%9C%E5%B1%82/" class="archive-article-date">
-  	<time datetime="2024-01-02T14:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -390,8 +578,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

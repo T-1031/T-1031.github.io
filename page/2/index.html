@@ -144,6 +144,393 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-电子系统设计（三）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/">电子系统设计（三）</a>
+    </h1>
+  
+
+        
+        <a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2023-11-28T14:46:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="第三章-可编程元器件的工作原理">第三章 可编程元器件的工作原理</span></h1><ul>
+<li><p>什么叫做现场可编程性？  </p>
+<p> 指用户任何时候都可以通过电路板上的下载电缆或硬件编程器来修改FPGA&#x2F;CPLD的配置，以达到修改逻辑功能的目的。也就是说用户可以在实际系统的现场对PLD进行内部结构修改。</p>
+</li>
+<li><p>可编程逻辑器件有什么优点？  </p>
+<ul>
+<li>体系、结构和逻辑单元灵活</li>
+<li>集成度高</li>
+<li>使用范围宽</li>
+<li>设计开发周期短、成本低</li>
+<li>开发工具先进</li>
+<li>标准产品无需测试、质量稳定，可实时在线检验</li>
+</ul>
+</li>
+<li><p>了解基于乘积项和基于查找表实现组合逻辑的原理。  </p>
+<ul>
+<li><strong>基于乘积项</strong>：任何一个组合逻辑都可以表示为乘积项之和的形式，每个乘积项是输入变量的一个组合，通过逻辑门将这些乘积项组合起来形成输出。</li>
+<li><strong>基于查找表</strong>：将逻辑函数的真值表的每一行作为查找表的一项存储在内存中，形成地址和数据的映射，输入的组合用于查找表中的地址，得到相应的输出。</li>
+</ul>
+</li>
+<li><p>FPGA和CPLD是如何实现时序逻辑的？  </p>
+<p> FPGA 和 CPLD 都通过时钟信号和时序元件（如触发器）来实现时序逻辑。  </p>
+<ul>
+<li>CPLD 的逻辑阵列块（LAB）的宏单元中包含逻辑阵列&#x2F;乘积项选择矩阵&#x2F;可编程触发器三个功能块。其中，乘积项选择矩阵可以分配一些乘积项信号作为触发器的控制信号，对触发器进行清除、预置、提供时钟和时钟使能等控制操作；可编程触发器可以单独编程设计成D&#x2F;T&#x2F;JK&#x2F;RS触发器工作模式，并有可编程的时钟控制信号。</li>
+<li>FPGA 的可配置逻辑块（CLB）中包含函数发生器&#x2F;进位逻辑&#x2F;存储单元。其中，存储单元可以被配置成边沿触发的D触发器，也可以被配置成电平触发的锁存器。同时 FPGA 还集成了大量的可选择存储块，每一个存储块是完全的双端口 RAM，两个端口是具有独立时钟信号和控制信号的同步端口，功能相同。可编程的输入&#x2F;输出块（IOB）中包含的寄存器也可以配置成边沿触发的D触发器或电平触发的锁存器。</li>
+</ul>
+</li>
+<li><p>Xilinx公司的XC3000系列FPGA结构中包括哪几个主要部分？各部分的功能是什么？  </p>
+<ul>
+<li><strong>可配置存储器（SRAM阵列）</strong>：是静态存储器，主要作用是装载配置文件，控制 CLB、IOB 和 PI 的连接，可重复使用。</li>
+<li><strong>可编程逻辑块（CLB）</strong>：编程实现逻辑功能。</li>
+<li><strong>可编程输入输出模块（IOB）</strong>：依据可配置存储器单元控制输入和输出。</li>
+<li><strong>可编程内部连线（PI）</strong>：实现 FPGA 芯片内部 CLB 之间、IOB 之间、IOB 与 CLB 之间的连接。</li>
+</ul>
+</li>
+<li><p>ALTERA的FLEX10K系列器件结构中包括哪几个主要部分？各部分的功能是什么？  </p>
+<ul>
+<li><strong>嵌入式阵列（EAB）</strong>：实现逻辑功能和存储功能。</li>
+<li><strong>逻辑阵列块（LAB）</strong>：实现逻辑功能。</li>
+<li><strong>快速通道</strong>：连接逻辑单元（IE）和器件I&#x2F;O引脚，可以驱动I&#x2F;O引脚或馈送到器件中的其他LAB。</li>
+<li><strong>I&#x2F;O单元</strong>：作为输入&#x2F;输出或双向引脚</li>
+</ul>
+</li>
+<li><p>FPGA和CPLD在结构上有什么不同点？由此产生的性能的不同点有哪些？  </p>
+<p> <strong>结构上</strong>  </p>
+<ul>
+<li>FPGA 逻辑单元的粒度比 CPLD 小。</li>
+<li>FPGA 芯片的逻辑门密度比 CPLD 芯片高。</li>
+<li>CPLD 的内连线采用 PIA 结构，内连率很高；FPGA 采用有限的布线线段连接内部各部件。</li>
+<li>CPLD 中采用 EPROM&#x2F;E^2PROM 和 Flash 等存储器来保存编程信息，FPGA 大多采用 SRAM 来存储配置信息。</li>
+<li>CPLD 的 LAB 采用宏单元结构。</li>
+</ul>
+<p> <strong>性能上</strong></p>
+<ul>
+<li>FPGA 设计更为灵活。</li>
+<li>FPGA 内部连线长度会产生积累，需要人工布局布线来优化速度和面积。</li>
+<li>在输入设计不变的情况下，每次布局布线后，CPLD 的布线延时是一定的，而 FPGA 的延时是不一样的。</li>
+<li>CPLD 更适合完成各类算法和组合逻辑；FPGA 具有更丰富的触发器资源，更适合完成时序较多的逻辑电路。</li>
+<li>CPLD 是非易失性的 PLD，FPGA 大多是易失性的 PLD。</li>
+<li>CPLD 的功耗比 FPGA 高，集成度越高越明显。</li>
+</ul>
+</li>
+<li><p>简述FPGA&#x2F;CPLD的设计流程。  </p>
+<ul>
+<li>设计输入</li>
+<li>前仿真</li>
+<li>设计输入编译（综合）</li>
+<li>设计输入的优化</li>
+<li>布局布线</li>
+<li>后仿真</li>
+<li>芯片配置</li>
+</ul>
+</li>
+<li><p>Cyclone V SoC的硬件结构中除了可编程逻辑之外，还有哪些主要部分？  </p>
+<ul>
+<li>精度可调的 DSP 模块<br> 主要包括输入寄存器组、预加器、内部系数表、乘法器、加法器、累加器&#x2F;链式输出加法器、脉动寄存器、双累加寄存器和输出寄存器等。</li>
+<li>嵌入式存储器</li>
+<li>时钟网络</li>
+<li>I&#x2F;O 单元</li>
+<li>外部存储器接口</li>
+<li>低功耗串行收发器</li>
+<li>硬核处理器系统</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/课程复习/电子系统设计//" class="article-tag-list-link color2">电子系统设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-电子系统设计（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/">电子系统设计（二）</a>
+    </h1>
+  
+
+        
+        <a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2023-11-28T13:51:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="第二章-现代电子系统设计方法">第二章 现代电子系统设计方法</span></h1><ul>
+<li><p>系统级建模和仿真有什么样的重要性？  </p>
+<ul>
+<li>对于复杂的系统，可以提供简单有效的求解方法。</li>
+<li>在实际系统建立之前，可以对系统的性能进行研究，优化系统架构和参数的设计，提高设计质量。</li>
+<li>可以避免某些实际系统实验的危险性，操作更方便安全。</li>
+<li>仿真可以重复进行，无需物理耗材，可以降低设计成本，提高设计效率，缩短设计周期。</li>
+<li>对系统操作人员而言，是学习系统原理和实际操作方法的良好训练方式。</li>
+</ul>
+</li>
+<li><p>计算机仿真的三个基本要素是什么？它们之间有什么样的关系？  </p>
+<p> 系统，数学模型，算法模型。  </p>
+<p> 通过对系统某些信息的抽象得到系统的数学模型，对数学模型进行二次综合得到算法模型，通过算法模型的仿真实验对系统进行性能研究。</p>
+</li>
+<li><p>什么叫做用户全定制IC设计、用户半定制IC设计？它们各有什么特点？  </p>
+<ul>
+<li><p><strong>用户全定制IC设计</strong>是指用户要求厂家专门定做芯片。这种芯片不具有通用性，是一种特殊用途的集成电路。<br> 优点：芯片在集成度&#x2F;速度&#x2F;大批量成本&#x2F;面积优化等方面性能突出。<br> 缺点：复杂系统的初期投资风险大，小批量生产成本高，要与半导体厂家合作，设计和测试周期较长。  </p>
+</li>
+<li><p><strong>用户半定制IC设计</strong>是指设计和生产过程中的某些部分可以“预先加工”或“预先制作”，形成标准单元，并可为所有用户选用。<br> 与全定制相比，半定制缩短了试制周期，但芯片尺寸较大，且仍需要制造厂家来协助完成工艺&#x2F;封装等工作。</p>
+</li>
+</ul>
+</li>
+<li><p>简述数字系统设计的抽象层次。  </p>
+<p> 由高到低：  </p>
+<ul>
+<li>系统</li>
+<li>功能模块</li>
+<li>逻辑门</li>
+<li>晶体管电路</li>
+<li>版图</li>
+</ul>
+</li>
+<li><p>在数字IC的设计流程中，前端设计和后端设计一般是如何划分的？前端设计分为哪几个层次？每一个层次的功能是什么？  </p>
+<p> 一般来说，前端设计与实现技术无关，而后端设计与系统的实现技术密切相关，因而需要有半导体厂家的参与。  </p>
+<p> 前端设计主要包含三个层次，从高到低为  </p>
+<ul>
+<li><strong>系统级描述</strong>：对整个芯片内部的系统的数学模型的描述，决定系统做什么及性能如何。</li>
+<li><strong>寄存器传输级描述（RTL）</strong>：利用硬件描述语言编程来描述系统硬件的行为&#x2F;功能&#x2F;结构，导出系统的逻辑表达式。</li>
+<li><strong>逻辑综合</strong>：利用逻辑综合工具将RTL级描述程序转换成用基本逻辑元件表示的文件（门级网表文件）。</li>
+</ul>
+</li>
+<li><p>数字IC的后端设计包括哪些内容？  </p>
+<p> 后端设计的目的是完成最终的硬件实现，需要用相应的EDA软件工具进行：  </p>
+<ul>
+<li>布局&#x2F;布线</li>
+<li>参数提取</li>
+<li>时序仿真</li>
+</ul>
+</li>
+<li><p>数字系统最终的硬件实现有几种方式？它们各有什么特点？  </p>
+<p> 两种方式。  </p>
+<ul>
+<li><p>利用可编程逻辑器件FPGA或CPLD来实现硬件结构。<br>特点：集成度高，速度快，开发周期短，设计灵活方便；前期投资风险低，用户可自定义功能，器件可重复编程；但当产品产量增大时，造价相对较高。</p>
+</li>
+<li><p>由自动布线器将网表文件转换成相应的专用集成电路版图，做出ASIC或SoC芯片。<br>特点：可以达到更高的速度和更大的集成度，结构和性能上可以更加优化；生产大批量的产品时，造价更低；但前期设计成本较高，需要半导体厂家的合作。</p>
+</li>
+</ul>
+</li>
+<li><p>采用HDL语言对系统进行描述有那几种描述风格？各有什么特点？  </p>
+<ul>
+<li><strong>行为描述</strong>：逻辑关系描述清楚，但不一定能综合，适用于系统建模或复杂的电路。</li>
+<li><strong>数据流描述</strong>：布尔函数定义明白，但难以获得逻辑方程，适用于小门数设计。</li>
+<li><strong>结构化描述</strong>：连接关系清晰，电路模块化清晰，但繁琐复杂，适用于层次化设计。</li>
+</ul>
+</li>
+<li><p>简述ASIC电路的特点。  </p>
+<ul>
+<li>降低了产品的综合成本。</li>
+<li>提高了产品的可靠性。</li>
+<li>提高了产品的保密程度和竞争能力。</li>
+<li>降低了电子产品的功耗。</li>
+<li>提高了电子产品的工作速度。</li>
+<li>大大减少了电子产品的体积和重量。</li>
+<li>ASIC的前端设计不涉及非常专业的布局布线知识和经验，使非微电子领域的设计人员也普遍能接受这种技术，参与到芯片设计的工作中来。</li>
+</ul>
+</li>
+<li><p>什么是IP模块？IP模块有哪三种形式？它们各有什么特点？  </p>
+<p>  IP模块指可以通过知识产权贸易在各设计公司流通的完成特定功能的电路模块。  </p>
+<p>  IP模块的形式有：  </p>
+<ul>
+<li><strong>软IP</strong>：指以硬件描述语言来描述的功能模块；灵活性和适应性强，设计时间短，成本不高；但对面积&#x2F;时序&#x2F;功耗的可预测性差，性能上不可能得到全面优化。</li>
+<li><strong>固IP</strong>：指完成了综合的功能模块，在结构上已经有了一定的布局和优化，以网表文件的形式呈现。与软IP相比，固IP具有可综合性和物理实现效率。</li>
+<li><strong>硬IP</strong>：指已经对性能&#x2F;尺寸&#x2F;功耗进行了优化，并映射到一个特定的工艺技术，其物理掩膜布局已经得到验证的电路模块，以版图的形式呈现。硬IP需要较少的反复，不要求设计者具有丰富的电路知识；与软IP相比价值更高，但灵活性小，不易修改。</li>
+</ul>
+</li>
+<li><p>IP复用方法有什么重要性？  </p>
+<p>  现代ASIC或SoC的规模越来越大，复杂程度越来越高，更新程度也越来越快。IP复用方法可以充分利用已有的成功设计，大大减小设计难度，缩短设计时间。</p>
+</li>
+<li><p>简述模拟IC芯片的设计流程。  </p>
+<ul>
+<li>设计指标</li>
+<li>电路拓扑结构及参数确定</li>
+<li>电路特性仿真</li>
+<li>版图设计</li>
+<li>DRC LVS检查（DRC：版图设计规则检查 &#x2F; LVS：电学连接关系检查）</li>
+<li>布线参数提取</li>
+<li>电路特性后仿真</li>
+<li>记带（GDS II）</li>
+<li>芯片制造&#x2F;测试&#x2F;分析</li>
+<li>设计总结</li>
+</ul>
+<p>  其中，最关键的部分是确定电路的拓扑结构和各种元器件的初始尺寸。  
+ </p>
+</li>
+<li><p>在模拟IC的设计中，电路分析有什么样的作用？  </p>
+<p>  电路分析是电路设计的前提和基础。模拟集成电路工程师必须具备良好的电路分析能力，了解各种拓扑结构的优势和缺点，这样才能更好地选择电路结构，并在各种设计指标之间进行权衡，确定各元器件的参数。</p>
+</li>
+<li><p>模拟IC设计比较困难的原因有哪些？  </p>
+<ul>
+<li>模拟信号是在时间和幅度上都连续的信号，信息量丰富，因此对模拟电路的处理精度要求高。</li>
+<li>模拟电路除了关注速度和功耗外，还需要关注增益&#x2F;线性度&#x2F;精度&#x2F;电源电压等很多指标，是一个多维的设计空间，模拟电路设计必须在这种多维的空间中进行优化。</li>
+<li>模拟电路对噪声&#x2F;串扰&#x2F;其他电路引入的干扰更加敏感，设计中必须将外围环境的影响考虑在内。</li>
+<li>模拟电路的性能会收到元器件二阶效应的影响。</li>
+<li>模拟电路的建模和仿真还不够成熟，复杂系统的建模存在很大困难，仿真时间长，没有成熟的EDA软件帮助工程师进行模拟电路综合。</li>
+<li>现代工艺对模拟电路的支持和优化力度远不如数字电路。</li>
+</ul>
+</li>
+<li><p>系统电路的主要设计内容是哪两部分？  </p>
+<ul>
+<li>电路原理图设计</li>
+<li>印刷电路板设计</li>
+</ul>
+</li>
+<li><p>模拟电路模块的级间耦合有哪几种方式？  </p>
+<ul>
+<li>直接耦合</li>
+<li>电容耦合</li>
+<li>光电耦合</li>
+<li>变压器耦合</li>
+</ul>
+</li>
+<li><p>系统电路有几种“地”？在包含数字电路和模拟电路的系统中，应如何设计接地方式？  </p>
+<p>  两种。  </p>
+<ul>
+<li><strong>工作地</strong>：电路中的零电位点，即电子系统信号参考点。</li>
+<li><strong>安全地</strong>：将电子设备的外壳通过一个低阻抗电路接到大地。</li>
+</ul>
+<p>  在有高频信号的模数混合系统中，模拟电路的“地”要接在一起，形成“模拟地”；数字电路的“地”接在一起，形成“数字地”；最后，“模拟地”和“数字地”采用星型连接到工作地和安全地。</p>
+</li>
+<li><p>印刷电路板的布局、布线设计中有哪些应遵循的基本规则？  </p>
+<p>  <strong>布局</strong>：  </p>
+<ul>
+<li>选择合适的印刷电路板；</li>
+<li>合理安排不同类型的电路模块；</li>
+<li>合理排列各类元器件；</li>
+<li>合理安排电源和地线的分布。</li>
+</ul>
+<p>  <strong>布线</strong>：  </p>
+<ul>
+<li>首先设计地线和电源线；</li>
+<li>在设计信号导线时，一般按信号的传输走向，顺序设计各个电路模块的导线；</li>
+<li>导线的宽度和线距应尽量做到整齐均匀，长度尽量短，在导线转弯处尽量避免锐角；</li>
+<li>在双面板上，同一层面上的导线方向应尽量保持一致，两个层面上的导线必须通过过孔连接。</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/课程复习/电子系统设计//" class="article-tag-list-link color2">电子系统设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-电子系统设计（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
