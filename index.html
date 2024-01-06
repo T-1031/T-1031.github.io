@@ -212,7 +212,7 @@
 </ul>
 <!-- tocstop -->
 
-<h1><span id="杂七杂八">杂七杂八</span></h1><h2><span id="卷积">卷积</span></h2><p>$$<br>x(n) * h(n) &#x3D; \sum\limits_{k &#x3D; -\infin}^{\infin} x(k)h(n-k)<br>$$</p>
+<h1><span id="杂七杂八">杂七杂八</span></h1><h2><span id="卷积">卷积</span></h2><p>$$<br>x(n) * h(n) &#x3D; \sum\limits_{k &#x3D; -\infty}^{\infty} x(k)h(n-k)<br>$$</p>
 <ul>
 <li><strong>恒等性</strong>：$x(n)*\delta(n) &#x3D; x(n)$</li>
 <li><strong>位移性</strong>：$x(n)*\delta(n-k) &#x3D; x(n-k)$</li>
@@ -222,7 +222,7 @@
 </ul>
 <h2><span id="模拟信号采样">模拟信号采样</span></h2><p>$$<br>x(n) &#x3D; x_a(nT)<br>$$</p>
 <ul>
-<li><p>模拟信号频率：$-\infin &lt; F &lt; \infin,\ -\infin &lt; \Omega &lt; \infin$  </p>
+<li><p>模拟信号频率：$-\infty &lt; F &lt; \infty,\ -\infty &lt; \Omega &lt; \infty$  </p>
 </li>
 <li><p>采样周期：$T$  </p>
 </li>
@@ -250,7 +250,7 @@
 </thead>
 <tbody><tr>
 <td align="center">逆变换</td>
-<td align="center">$x(t) &#x3D; \sum\limits_{k &#x3D; -\infin}^{\infin} c_k e^{j 2\pi k F_0 t}$</td>
+<td align="center">$x(t) &#x3D; \sum\limits_{k &#x3D; -\infty}^{\infty} c_k e^{j 2\pi k F_0 t}$</td>
 </tr>
 <tr>
 <td align="center">正变换</td>
@@ -260,7 +260,7 @@
 </center>
 
 <p>其中，$T_p &#x3D; \dfrac{1}{F_0}$ 为信号 $x(t)$ 的基本周期。</p>
-<p>一个周期信号具有无限能量，但具有一个有限的平均功率。<br><strong>功率信号的帕塞瓦关系式</strong>：<br>$$<br>P_x &#x3D; \dfrac{1}{T_p} \displaystyle \int_{T_p} |x(t)|^2 dt &#x3D; \sum\limits_{k &#x3D; -\infin}^{\infin} |c_k|^2<br>$$</p>
+<p>一个周期信号具有无限能量，但具有一个有限的平均功率。<br><strong>功率信号的帕塞瓦关系式</strong>：<br>$$<br>P_x &#x3D; \dfrac{1}{T_p} \displaystyle \int_{T_p} |x(t)|^2 dt &#x3D; \sum\limits_{k &#x3D; -\infty}^{\infty} |c_k|^2<br>$$</p>
 <p>功率密度谱：以频率 $F &#x3D; kF_0$ 为横轴，$|c_k|^2$ 为纵轴，偶对称。</p>
 <p>$c_k$ 幅度谱偶对称，相位谱奇对称。</p>
 <h4><span id="cft">CFT</span></h4><p>连续时间非周期信号的傅里叶变换。</p>
@@ -277,19 +277,19 @@
 </thead>
 <tbody><tr>
 <td align="center">逆变换</td>
-<td align="center">$x(t) &#x3D; \displaystyle \int_{-\infin}^{\infin} X(F) e^{j 2\pi F t} dF$</td>
-<td align="center">$x(t) &#x3D; \dfrac{1}{2\pi} \displaystyle\int_{-\infin}^{\infin} X(\Omega) e^{j \Omega t} d\Omega$</td>
+<td align="center">$x(t) &#x3D; \displaystyle \int_{-\infty}^{\infty} X(F) e^{j 2\pi F t} dF$</td>
+<td align="center">$x(t) &#x3D; \dfrac{1}{2\pi} \displaystyle\int_{-\infty}^{\infty} X(\Omega) e^{j \Omega t} d\Omega$</td>
 </tr>
 <tr>
 <td align="center">正变换</td>
-<td align="center">$X(F) &#x3D; \displaystyle \int_{-\infin}^{\infin} x(t) e^{-j 2\pi F t} dt$</td>
-<td align="center">$X(\Omega) &#x3D; \displaystyle\int_{-\infin}^{\infin} x(t) e^{-j \Omega t} dt$</td>
+<td align="center">$X(F) &#x3D; \displaystyle \int_{-\infty}^{\infty} x(t) e^{-j 2\pi F t} dt$</td>
+<td align="center">$X(\Omega) &#x3D; \displaystyle\int_{-\infty}^{\infty} x(t) e^{-j \Omega t} dt$</td>
 </tr>
 </tbody></table>
 </center>
 
 <p>如果是有限时长的信号，修改积分上下限即可。</p>
-<p><strong>非周期有限能量信号的帕塞瓦关系式</strong>：<br>$$<br>E_x &#x3D; \displaystyle \int_{-\infin}^{\infin} |x(t)|^2 dt &#x3D; \displaystyle \int_{-\infin}^{\infin} |X(F)|^2 dF<br>$$</p>
+<p><strong>非周期有限能量信号的帕塞瓦关系式</strong>：<br>$$<br>E_x &#x3D; \displaystyle \int_{-\infty}^{\infty} |x(t)|^2 dt &#x3D; \displaystyle \int_{-\infty}^{\infty} |X(F)|^2 dF<br>$$</p>
 <p>能量密度谱：以频率 $F$ 为横轴，$S_{xx} &#x3D; |X(F)|^2$ 为纵轴。<br>实信号的能量密度谱偶对称，频域幅度谱偶对称，相位谱奇对称。</p>
 <h3><span id="离散时间">离散时间</span></h3><h4><span id="dtfs">DTFS</span></h4><p>离散时间周期信号的傅里叶极数。</p>
 <p>对周期为 $N$ 的序列 $x(n)$：</p>
@@ -333,13 +333,13 @@
 </tr>
 <tr>
 <td align="center">正变换</td>
-<td align="center">$X(\omega) &#x3D; \sum\limits_{n &#x3D; -\infin}^{\infin} x(n) e^{-j \omega n}$</td>
+<td align="center">$X(\omega) &#x3D; \sum\limits_{n &#x3D; -\infty}^{\infty} x(n) e^{-j \omega n}$</td>
 </tr>
 </tbody></table>
 </center>
 
 <p>记 $X_N(\omega) &#x3D; \sum\limits_{n &#x3D; -N}^{N} x(n) e^{-j \omega n}$<br><strong>Gibbs 现象</strong>：在 $X(\omega)$ 的一个不连续点处，$X_N{\omega}$ 逼近 $X(\omega)$ 的振荡行为。</p>
-<p><strong>有限能量的离散时间非周期信号的帕塞瓦关系式</strong>：<br>$$<br>E_x &#x3D; \sum\limits_{n &#x3D; -\infin}^{\infin} |x(n)|^2 &#x3D; \dfrac{1}{2\pi} \displaystyle\int_{-\pi}^{\pi} |X(\Omega)|^2<br>$$</p>
+<p><strong>有限能量的离散时间非周期信号的帕塞瓦关系式</strong>：<br>$$<br>E_x &#x3D; \sum\limits_{n &#x3D; -\infty}^{\infty} |x(n)|^2 &#x3D; \dfrac{1}{2\pi} \displaystyle\int_{-\pi}^{\pi} |X(\Omega)|^2<br>$$</p>
 <p>记 $S_{xx} &#x3D; |X(\omega)|^2$，能量密度谱。<br>对于实信号，频域幅度谱偶对称，相位谱奇对称，能量密度谱偶对称。</p>
 <h3><span id="特点">特点</span></h3><ul>
 <li>连续时间信号具有非周期频谱。</li>
@@ -347,7 +347,7 @@
 <li>周期信号具有离散频谱。</li>
 <li>非周期有限能量信号具有连续频谱。</li>
 </ul>
-<h2><span id="z-变换">z 变换</span></h2><h3><span id="双边">双边</span></h3><h4><span id="定义">定义</span></h4><p>$$<br>X(z) &#x3D; \sum\limits_{n &#x3D; -\infin}^{\infin} x(n) z^{-n}<br>$$</p>
+<h2><span id="z-变换">z 变换</span></h2><h3><span id="双边">双边</span></h3><h4><span id="定义">定义</span></h4><p>$$<br>X(z) &#x3D; \sum\limits_{n &#x3D; -\infty}^{\infty} x(n) z^{-n}<br>$$</p>
 <p>收敛域：</p>
 <ul>
 <li>因果序列：$|z| &gt; r_2$</li>
@@ -528,7 +528,7 @@
 <li><p><strong>围线积分法</strong><br>$$<br>x(n) &#x3D; \sum\limits_{z_i}\left[X(z)z^{n-1} 在 z&#x3D;z_i 的留数\right]<br>$$</p>
 <p>对于 m 阶极点 a，f(z) 的留数为：<br>$$<br>\dfrac{1}{(m-1)!} \lim\limits_{z \rightarrow a}\left[(z - a)^m f(z)\right]^{(m-1)}<br>$$</p>
 </li>
-<li><p><strong>幂级数展开法</strong><br>$$<br>X(z) &#x3D; \sum\limits_{n&#x3D;-\infin}^{\infin} c_n z^{-n} \rightarrow x(n) &#x3D; c_n<br>$$</p>
+<li><p><strong>幂级数展开法</strong><br>$$<br>X(z) &#x3D; \sum\limits_{n&#x3D;-\infty}^{\infty} c_n z^{-n} \rightarrow x(n) &#x3D; c_n<br>$$</p>
 <p>采用长除法。</p>
 <ul>
 <li>因果序列：高次幂在前</li>
@@ -542,7 +542,7 @@
 </ul>
 </li>
 </ul>
-<h3><span id="单边">单边</span></h3><p>$$<br>X^+(z) &#x3D; \sum\limits_{n&#x3D;0}^{\infin} x(n)z^{-n}<br>$$</p>
+<h3><span id="单边">单边</span></h3><p>$$<br>X^+(z) &#x3D; \sum\limits_{n&#x3D;0}^{\infty} x(n)z^{-n}<br>$$</p>
 <center>
 
 <table>
@@ -565,14 +565,14 @@
 </tr>
 <tr>
 <td align="center">终值定理</td>
-<td align="center">$\lim\limits_{n \rightarrow \infin} x(n)$</td>
+<td align="center">$\lim\limits_{n \rightarrow \infty} x(n)$</td>
 <td align="center">$\lim\limits_{z \rightarrow 1} (z-1)X^+(z)$</td>
 </tr>
 </tbody></table>
 </center>
 
 
-<h3><span id="与傅里叶变换的关系">与傅里叶变换的关系</span></h3><p>$$<br>X(z) |<em>{z&#x3D;e^{j\omega}} &#x3D; X(\omega) &#x3D; \sum\limits</em>{n &#x3D; -\infin}^{\infin} x(n) e^{-j\omega n}<br>$$</p>
+<h3><span id="与傅里叶变换的关系">与傅里叶变换的关系</span></h3><p>$$<br>X(z) |<em>{z&#x3D;e^{j\omega}} &#x3D; X(\omega) &#x3D; \sum\limits</em>{n &#x3D; -\infty}^{\infty} x(n) e^{-j\omega n}<br>$$</p>
 <h2><span id="dft-amp-fft">DFT &amp; FFT</span></h2><h1><span id="lti-系统">LTI 系统</span></h1><h1><span id="滤波器设计">滤波器设计</span></h1><h2><span id="fir-滤波器">FIR 滤波器</span></h2><h2><span id="iir-滤波器">IIR 滤波器</span></h2>
       
 
@@ -1071,7 +1071,7 @@
 <li><strong>多用途 Internet 邮件扩展</strong> (MIME)</li>
 </ul>
 <h3><span id="邮件发送过程">邮件发送过程</span></h3><ul>
-<li><p>发信人调用用户代理来编辑要发送到 <a href="mailto:&#114;&#101;&#99;&#x65;&#x69;&#112;&#116;&#x40;&#97;&#98;&#99;&#x2e;&#x63;&#x6f;&#x6d;">&#114;&#101;&#99;&#x65;&#x69;&#112;&#116;&#x40;&#97;&#98;&#99;&#x2e;&#x63;&#x6f;&#x6d;</a> 的邮件。<br>用户代理用 SMTP 把邮件传送给预先设置的发送邮件服务器。</p>
+<li><p>发信人调用用户代理来编辑要发送到 <a href="mailto:&#114;&#101;&#99;&#x65;&#105;&#112;&#x74;&#x40;&#x61;&#x62;&#99;&#46;&#99;&#111;&#x6d;">&#114;&#101;&#99;&#x65;&#105;&#112;&#x74;&#x40;&#x61;&#x62;&#99;&#46;&#99;&#111;&#x6d;</a> 的邮件。<br>用户代理用 SMTP 把邮件传送给预先设置的发送邮件服务器。</p>
 </li>
 <li><p>发送邮件服务器将邮件放入邮件缓存队列中，等待发送。</p>
 </li>
