@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://T-1031.github.io">
   <title>数字信号处理 | TG仓库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="杂七杂八 卷积 模拟信号采样 数学不好   信号变换 傅里叶变换 连续时间 CFS CFT   离散时间 DTFS DTFT   特点   z 变换 双边 定义 常见 z 变换对 性质 逆变换   单边 与傅里叶变换的关系   DFT &amp; FFT   LTI 系统 滤波器设计 FIR 滤波器 IIR 滤波器      杂七杂八卷积$$x(n) * h(n) &#x3D; \sum\l">
+  <meta name="description" content="杂七杂八  卷积  线性卷积 圆周卷积  模拟信号采样 数学不好  信号变换  傅里叶变换  连续时间  CFS CFT  离散时间  DTFS DTFT  特点  z 变换  双边  定义 常见 z 变换对 性质 逆变换  单边 与傅里叶变换的关系   DFT &amp; FFT  DFT &amp; ID">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数字信号处理">
 <meta property="og:url" content="http://t-1031.github.io/2024/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="TG仓库">
-<meta property="og:description" content="杂七杂八 卷积 模拟信号采样 数学不好   信号变换 傅里叶变换 连续时间 CFS CFT   离散时间 DTFS DTFT   特点   z 变换 双边 定义 常见 z 变换对 性质 逆变换   单边 与傅里叶变换的关系   DFT &amp; FFT   LTI 系统 滤波器设计 FIR 滤波器 IIR 滤波器      杂七杂八卷积$$x(n) * h(n) &#x3D; \sum\l">
+<meta property="og:description" content="杂七杂八  卷积  线性卷积 圆周卷积  模拟信号采样 数学不好  信号变换  傅里叶变换  连续时间  CFS CFT  离散时间  DTFS DTFT  特点  z 变换  双边  定义 常见 z 变换对 性质 逆变换  单边 与傅里叶变换的关系   DFT &amp; FFT  DFT &amp; ID">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-06T08:57:27.000Z">
-<meta property="article:modified_time" content="2024-01-06T13:55:49.478Z">
+<meta property="article:modified_time" content="2024-01-08T16:52:13.052Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -165,415 +165,1132 @@
     <div class="article-entry" itemprop="articleBody">
       
         <!-- toc -->
-
 <ul>
-<li><a href="#%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB">杂七杂八</a><ul>
-<li><a href="#%E5%8D%B7%E7%A7%AF">卷积</a></li>
-<li><a href="#%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E9%87%87%E6%A0%B7">模拟信号采样</a></li>
-<li><a href="#%E6%95%B0%E5%AD%A6%E4%B8%8D%E5%A5%BD">数学不好</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BF%A1%E5%8F%B7%E5%8F%98%E6%8D%A2">信号变换</a><ul>
-<li><a href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2">傅里叶变换</a><ul>
-<li><a href="#%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4">连续时间</a><ul>
+<li><a href="#杂七杂八">杂七杂八</a>
+<ul>
+<li><a href="#卷积">卷积</a>
+<ul>
+<li><a href="#线性卷积">线性卷积</a></li>
+<li><a href="#圆周卷积">圆周卷积</a></li>
+</ul></li>
+<li><a href="#模拟信号采样">模拟信号采样</a></li>
+<li><a href="#数学不好">数学不好</a></li>
+</ul></li>
+<li><a href="#信号变换">信号变换</a>
+<ul>
+<li><a href="#傅里叶变换">傅里叶变换</a>
+<ul>
+<li><a href="#连续时间">连续时间</a>
+<ul>
 <li><a href="#cfs">CFS</a></li>
 <li><a href="#cft">CFT</a></li>
-</ul>
-</li>
-<li><a href="#%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4">离散时间</a><ul>
+</ul></li>
+<li><a href="#离散时间">离散时间</a>
+<ul>
 <li><a href="#dtfs">DTFS</a></li>
 <li><a href="#dtft">DTFT</a></li>
-</ul>
-</li>
-<li><a href="#%E7%89%B9%E7%82%B9">特点</a></li>
-</ul>
-</li>
-<li><a href="#z-%E5%8F%98%E6%8D%A2">z 变换</a><ul>
-<li><a href="#%E5%8F%8C%E8%BE%B9">双边</a><ul>
-<li><a href="#%E5%AE%9A%E4%B9%89">定义</a></li>
-<li><a href="#%E5%B8%B8%E8%A7%81-z-%E5%8F%98%E6%8D%A2%E5%AF%B9">常见 z 变换对</a></li>
-<li><a href="#%E6%80%A7%E8%B4%A8">性质</a></li>
-<li><a href="#%E9%80%86%E5%8F%98%E6%8D%A2">逆变换</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8D%95%E8%BE%B9">单边</a></li>
-<li><a href="#%E4%B8%8E%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E7%9A%84%E5%85%B3%E7%B3%BB">与傅里叶变换的关系</a></li>
-</ul>
-</li>
-<li><a href="#dft-fft">DFT &amp; FFT</a></li>
-</ul>
-</li>
-<li><a href="#lti-%E7%B3%BB%E7%BB%9F">LTI 系统</a></li>
-<li><a href="#%E6%BB%A4%E6%B3%A2%E5%99%A8%E8%AE%BE%E8%AE%A1">滤波器设计</a><ul>
-<li><a href="#fir-%E6%BB%A4%E6%B3%A2%E5%99%A8">FIR 滤波器</a></li>
-<li><a href="#iir-%E6%BB%A4%E6%B3%A2%E5%99%A8">IIR 滤波器</a></li>
-</ul>
-</li>
+</ul></li>
+<li><a href="#特点">特点</a></li>
+</ul></li>
+<li><a href="#z-变换">z 变换</a>
+<ul>
+<li><a href="#双边">双边</a>
+<ul>
+<li><a href="#定义">定义</a></li>
+<li><a href="#常见-z-变换对">常见 z 变换对</a></li>
+<li><a href="#性质">性质</a></li>
+<li><a href="#逆变换">逆变换</a></li>
+</ul></li>
+<li><a href="#单边">单边</a></li>
+<li><a href="#与傅里叶变换的关系">与傅里叶变换的关系</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#dft-fft">DFT &amp; FFT</a>
+<ul>
+<li><a href="#dft-idft-的计算">DFT &amp; IDFT 的计算</a></li>
+<li><a href="#基2-fft-算法">基2 FFT 算法</a>
+<ul>
+<li><a href="#按时间抽取">按时间抽取</a>
+<ul>
+<li><a href="#蝶形运算">蝶形运算</a></li>
+</ul></li>
+<li><a href="#按频率抽取">按频率抽取</a></li>
+</ul></li>
+<li><a href="#基4-fft-算法">基4 FFT 算法</a></li>
+<li><a href="#n-为复合数的-fft-算法">N 为复合数的 FFT 算法</a></li>
+<li><a href="#调频-z-变换算法">调频 z 变换算法</a></li>
+</ul></li>
+<li><a href="#离散时间系统">离散时间系统</a>
+<ul>
+<li><a href="#系统函数">系统函数</a></li>
+<li><a href="#fir-系统">FIR 系统</a>
+<ul>
+<li><a href="#直接型结构">直接型结构</a></li>
+<li><a href="#级联型结构">级联型结构</a></li>
+</ul></li>
+<li><a href="#iir-系统">IIR 系统</a>
+<ul>
+<li><a href="#直接型结构-1">直接型结构</a>
+<ul>
+<li><a href="#直接-i-型">直接 I 型</a></li>
+<li><a href="#直接-ii-型">直接 II 型</a></li>
+</ul></li>
+<li><a href="#级联型结构-1">级联型结构</a></li>
+<li><a href="#并联型结构">并联型结构</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#滤波器设计">滤波器设计</a>
+<ul>
+<li><a href="#数字滤波器">数字滤波器</a>
+<ul>
+<li><a href="#技术指标">技术指标</a></li>
+<li><a href="#频率响应">频率响应</a></li>
+</ul></li>
+<li><a href="#iir-滤波器">IIR 滤波器</a>
+<ul>
+<li><a href="#模拟滤波器">模拟滤波器</a>
+<ul>
+<li><a href="#巴特沃斯低通滤波器">巴特沃斯低通滤波器</a></li>
+<li><a href="#切比雪夫-i-型低通滤波器">切比雪夫 I 型低通滤波器</a></li>
+<li><a href="#模拟频域频带变换">模拟频域频带变换</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#fir-滤波器">FIR 滤波器</a></li>
+</ul></li>
 </ul>
 <!-- tocstop -->
-
-<h1><span id="杂七杂八">杂七杂八</span></h1><h2><span id="卷积">卷积</span></h2><p>$$<br>x(n) * h(n) &#x3D; \sum\limits_{k &#x3D; -\infty}^{\infty} x(k)h(n-k)<br>$$</p>
+<h1><span id="杂七杂八">杂七杂八</span></h1>
+<h2><span id="卷积">卷积</span></h2>
+<h3><span id="线性卷积">线性卷积</span></h3>
+<p><span class="math display">\[
+x(n) * h(n) = \sum\limits_{k = -\infty}^{\infty} x(k)h(n-k)
+\]</span></p>
 <ul>
-<li><strong>恒等性</strong>：$x(n)*\delta(n) &#x3D; x(n)$</li>
-<li><strong>位移性</strong>：$x(n)*\delta(n-k) &#x3D; x(n-k)$</li>
-<li><strong>交换律</strong>：$x(n)*h(n) &#x3D; h(n)*x(n)$</li>
-<li><strong>结合律</strong>：$[x_1(n)*h_1(n)]<em>h_2(n) &#x3D;  x_1(n)</em>[h_1(n)*h_2(n)]$</li>
-<li><strong>分配律</strong>：$x(n)*[h_1(n) + h_2(n)] &#x3D; x_1(n)*h_1(n) + x_1(n)*h_2(n)$</li>
+<li><strong>恒等性</strong>：<span class="math inline">\(x(n)*\delta(n)
+= x(n)\)</span></li>
+<li><strong>位移性</strong>：<span class="math inline">\(x(n)*\delta(n-k) = x(n-k)\)</span></li>
+<li><strong>交换律</strong>：<span class="math inline">\(x(n)*h(n) =
+h(n)*x(n)\)</span></li>
+<li><strong>结合律</strong>：<span class="math inline">\([x_1(n)*h_1(n)]*h_2(n)
+=  x_1(n)*[h_1(n)*h_2(n)]\)</span></li>
+<li><strong>分配律</strong>：<span class="math inline">\(x(n)*[h_1(n) +
+h_2(n)] = x_1(n)*h_1(n) + x_1(n)*h_2(n)\)</span></li>
 </ul>
-<h2><span id="模拟信号采样">模拟信号采样</span></h2><p>$$<br>x(n) &#x3D; x_a(nT)<br>$$</p>
+<h3><span id="圆周卷积">圆周卷积</span></h3>
+<p>对于两个长度为 N 的序列 <span class="math inline">\(x(n)\)</span> 和
+<span class="math inline">\(h(n)\)</span>：<br>
+<span class="math display">\[
+x(n) \otimes h(n) = \sum\limits_{k=0}^{N-1} x(k) [h(n-k) \mod N]
+\]</span><br>
+即将 <span class="math inline">\(h(n)\)</span> 扩充为周期为 N
+的序列。</p>
+<p>可以通过 DFT 和 IDFT 的计算获得圆周卷积的结果： - 对输入序列 x(n) 和
+h(n) 分别进行 0 填充，使二者长度均变为 2N-1。 - 对填充后的序列做 2N-1 点
+DFT，得到 X(k) 和 H(k)。 - 对 X(k)H(k) 这个乘积做
+IDFT，即可得到圆周卷积的结果。</p>
+<h2><span id="模拟信号采样">模拟信号采样</span></h2>
+<p><span class="math display">\[
+x(n) = x_a(nT)
+\]</span></p>
 <ul>
-<li><p>模拟信号频率：$-\infty &lt; F &lt; \infty,\ -\infty &lt; \Omega &lt; \infty$  </p>
-</li>
-<li><p>采样周期：$T$  </p>
-</li>
-<li><p>采样频率：$F_s &#x3D; \dfrac{1}{T}$  </p>
-</li>
-<li><p>离散信号频率：$-\dfrac{1}{2} &lt; f &#x3D; \dfrac{F}{F_s} &lt; \dfrac{1}{2},\ -\pi &lt; \omega &#x3D; \Omega T &lt; \pi$</p>
-</li>
-<li><p>对某一采样率 $F_s$：$F_{max} &#x3D; \dfrac{F_s}{2} &#x3D; \dfrac{1}{2T},\ \Omega_{max} &#x3D; \pi F_s &#x3D; \dfrac{\pi}{T}$<br>超过的部分会发生混叠。</p>
-</li>
+<li><p>模拟信号频率：<span class="math inline">\(-\infty &lt; F &lt;
+\infty,\ -\infty &lt; \Omega &lt; \infty\)</span></p></li>
+<li><p>采样周期：<span class="math inline">\(T\)</span></p></li>
+<li><p>采样频率：<span class="math inline">\(F_s =
+\dfrac{1}{T}\)</span></p></li>
+<li><p>离散信号频率：<span class="math inline">\(-\dfrac{1}{2} &lt; f =
+\dfrac{F}{F_s} &lt; \dfrac{1}{2},\ -\pi &lt; \omega = \Omega T &lt;
+\pi\)</span></p></li>
+<li><p>对某一采样率 <span class="math inline">\(F_s\)</span>：<span class="math inline">\(F_{max} = \dfrac{F_s}{2} = \dfrac{1}{2T},\
+\Omega_{max} = \pi F_s = \dfrac{\pi}{T}\)</span><br>
+超过的部分会发生混叠。</p></li>
 </ul>
-<h2><span id="数学不好">数学不好</span></h2><ul>
-<li>$\sin \theta &#x3D; \dfrac{1}{2}(e^{j\theta} - e^{-j\theta}),\ \cos \theta &#x3D; \dfrac{1}{2}(e^{j\theta} + e^{-j\theta})$</li>
+<h2><span id="数学不好">数学不好</span></h2>
+<ul>
+<li><span class="math inline">\(\sin \theta = \dfrac{1}{2}(e^{j\theta} -
+e^{-j\theta}),\ \cos \theta = \dfrac{1}{2}(e^{j\theta} +
+e^{-j\theta})\)</span></li>
 </ul>
-<h1><span id="信号变换">信号变换</span></h1><h2><span id="傅里叶变换">傅里叶变换</span></h2><h3><span id="连续时间">连续时间</span></h3><p>连续时间信号具有非周期频谱。</p>
-<h4><span id="cfs">CFS</span></h4><p>连续时间周期信号的傅里叶极数。  </p>
-<p>对周期信号 $x(t)$：</p>
+<h1><span id="信号变换">信号变换</span></h1>
+<h2><span id="傅里叶变换">傅里叶变换</span></h2>
+<h3><span id="连续时间">连续时间</span></h3>
+<p>连续时间信号具有非周期频谱。</p>
+<h4><span id="cfs">CFS</span></h4>
+<p>连续时间周期信号的傅里叶极数。</p>
+对周期信号 <span class="math inline">\(x(t)\)</span>：
 <center>
-
 <table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
-<tr>
-<th align="center">变换</th>
-<th align="center">公式</th>
+<tr class="header">
+<th style="text-align: center;">变换</th>
+<th style="text-align: center;">公式</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">逆变换</td>
-<td align="center">$x(t) &#x3D; \sum\limits_{k &#x3D; -\infty}^{\infty} c_k e^{j 2\pi k F_0 t}$</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">逆变换</td>
+<td style="text-align: center;"><span class="math inline">\(x(t) =
+\sum\limits_{k = -\infty}^{\infty} c_k e^{j 2\pi k F_0 t}\)</span></td>
 </tr>
-<tr>
-<td align="center">正变换</td>
-<td align="center">$c_k &#x3D; \dfrac{1}{T_p}\displaystyle \int_{T_p} x(t) e^{-j 2\pi k F_0 t} dt$</td>
+<tr class="even">
+<td style="text-align: center;">正变换</td>
+<td style="text-align: center;"><span class="math inline">\(c_k =
+\dfrac{1}{T_p}\displaystyle \int_{T_p} x(t) e^{-j 2\pi k F_0 t}
+dt\)</span></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </center>
-
-<p>其中，$T_p &#x3D; \dfrac{1}{F_0}$ 为信号 $x(t)$ 的基本周期。</p>
-<p>一个周期信号具有无限能量，但具有一个有限的平均功率。<br><strong>功率信号的帕塞瓦关系式</strong>：<br>$$<br>P_x &#x3D; \dfrac{1}{T_p} \displaystyle \int_{T_p} |x(t)|^2 dt &#x3D; \sum\limits_{k &#x3D; -\infty}^{\infty} |c_k|^2<br>$$</p>
-<p>功率密度谱：以频率 $F &#x3D; kF_0$ 为横轴，$|c_k|^2$ 为纵轴，偶对称。</p>
-<p>$c_k$ 幅度谱偶对称，相位谱奇对称。</p>
-<h4><span id="cft">CFT</span></h4><p>连续时间非周期信号的傅里叶变换。</p>
-<p>对无限时长的非周期信号 $x(t)$：</p>
+<p>其中，<span class="math inline">\(T_p = \dfrac{1}{F_0}\)</span>
+为信号 <span class="math inline">\(x(t)\)</span> 的基本周期。</p>
+<p>一个周期信号具有无限能量，但具有一个有限的平均功率。<br>
+<strong>功率信号的帕塞瓦关系式</strong>：<br>
+<span class="math display">\[
+P_x = \dfrac{1}{T_p} \displaystyle \int_{T_p} |x(t)|^2 dt =
+\sum\limits_{k = -\infty}^{\infty} |c_k|^2
+\]</span></p>
+<p>功率密度谱：以频率 <span class="math inline">\(F = kF_0\)</span>
+为横轴，<span class="math inline">\(|c_k|^2\)</span>
+为纵轴，偶对称。</p>
+<p><span class="math inline">\(c_k\)</span>
+幅度谱偶对称，相位谱奇对称。</p>
+<h4><span id="cft">CFT</span></h4>
+<p>连续时间非周期信号的傅里叶变换。</p>
+对无限时长的非周期信号 <span class="math inline">\(x(t)\)</span>：
 <center>
-
 <table>
+<colgroup>
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 38%">
+</colgroup>
 <thead>
-<tr>
-<th align="center">变换</th>
-<th align="center">公式（频率）</th>
-<th align="center">公式（角频率）</th>
+<tr class="header">
+<th style="text-align: center;">变换</th>
+<th style="text-align: center;">公式（频率）</th>
+<th style="text-align: center;">公式（角频率）</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">逆变换</td>
-<td align="center">$x(t) &#x3D; \displaystyle \int_{-\infty}^{\infty} X(F) e^{j 2\pi F t} dF$</td>
-<td align="center">$x(t) &#x3D; \dfrac{1}{2\pi} \displaystyle\int_{-\infty}^{\infty} X(\Omega) e^{j \Omega t} d\Omega$</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">逆变换</td>
+<td style="text-align: center;"><span class="math inline">\(x(t) =
+\displaystyle \int_{-\infty}^{\infty} X(F) e^{j 2\pi F t}
+dF\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x(t) =
+\dfrac{1}{2\pi} \displaystyle\int_{-\infty}^{\infty} X(\Omega) e^{j
+\Omega t} d\Omega\)</span></td>
 </tr>
-<tr>
-<td align="center">正变换</td>
-<td align="center">$X(F) &#x3D; \displaystyle \int_{-\infty}^{\infty} x(t) e^{-j 2\pi F t} dt$</td>
-<td align="center">$X(\Omega) &#x3D; \displaystyle\int_{-\infty}^{\infty} x(t) e^{-j \Omega t} dt$</td>
+<tr class="even">
+<td style="text-align: center;">正变换</td>
+<td style="text-align: center;"><span class="math inline">\(X(F) =
+\displaystyle \int_{-\infty}^{\infty} x(t) e^{-j 2\pi F t}
+dt\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X(\Omega) =
+\displaystyle\int_{-\infty}^{\infty} x(t) e^{-j \Omega t}
+dt\)</span></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </center>
-
 <p>如果是有限时长的信号，修改积分上下限即可。</p>
-<p><strong>非周期有限能量信号的帕塞瓦关系式</strong>：<br>$$<br>E_x &#x3D; \displaystyle \int_{-\infty}^{\infty} |x(t)|^2 dt &#x3D; \displaystyle \int_{-\infty}^{\infty} |X(F)|^2 dF<br>$$</p>
-<p>能量密度谱：以频率 $F$ 为横轴，$S_{xx} &#x3D; |X(F)|^2$ 为纵轴。<br>实信号的能量密度谱偶对称，频域幅度谱偶对称，相位谱奇对称。</p>
-<h3><span id="离散时间">离散时间</span></h3><h4><span id="dtfs">DTFS</span></h4><p>离散时间周期信号的傅里叶极数。</p>
-<p>对周期为 $N$ 的序列 $x(n)$：</p>
+<p><strong>非周期有限能量信号的帕塞瓦关系式</strong>：<br>
+<span class="math display">\[
+E_x = \displaystyle \int_{-\infty}^{\infty} |x(t)|^2 dt = \displaystyle
+\int_{-\infty}^{\infty} |X(F)|^2 dF
+\]</span></p>
+<p>能量密度谱：以频率 <span class="math inline">\(F\)</span>
+为横轴，<span class="math inline">\(S_{xx} = |X(F)|^2\)</span>
+为纵轴。<br>
+实信号的能量密度谱偶对称，频域幅度谱偶对称，相位谱奇对称。</p>
+<h3><span id="离散时间">离散时间</span></h3>
+<h4><span id="dtfs">DTFS</span></h4>
+<p>离散时间周期信号的傅里叶极数。</p>
+对周期为 <span class="math inline">\(N\)</span> 的序列 <span class="math inline">\(x(n)\)</span>：
 <center>
-
 <table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
-<tr>
-<th align="center">变换</th>
-<th align="center">公式</th>
+<tr class="header">
+<th style="text-align: center;">变换</th>
+<th style="text-align: center;">公式</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">逆变换</td>
-<td align="center">$x(n) &#x3D; \sum\limits_{k&#x3D;0}^{N-1} &#x3D; c_k e^{j 2\pi k n&#x2F;N}$</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">逆变换</td>
+<td style="text-align: center;"><span class="math inline">\(x(n) =
+\sum\limits_{k=0}^{N-1} = c_k e^{j 2\pi k n/N}\)</span></td>
 </tr>
-<tr>
-<td align="center">正变换</td>
-<td align="center">$c_k &#x3D; \dfrac{1}{N} \sum\limits_{n&#x3D;0}^{N-1} x(n) e^{-j 2\pi k n&#x2F;N}$</td>
+<tr class="even">
+<td style="text-align: center;">正变换</td>
+<td style="text-align: center;"><span class="math inline">\(c_k =
+\dfrac{1}{N} \sum\limits_{n=0}^{N-1} x(n) e^{-j 2\pi k
+n/N}\)</span></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </center>
-
-<p>其中 $k &#x3D; 0, 1, \cdots, N-1$。<br>如果扩展到该范围之外，则 $c_{k+N} &#x3D; c_k$，即 $c_k$ 是周期为 $N$ 的序列。</p>
-<p><strong>离散周期信号的帕塞瓦关系式</strong>：<br>$$<br>P_x &#x3D; \sum\limits_{k&#x3D;0}^{N-1} |c_k|^2 &#x3D; \dfrac{1}{N} \sum\limits_{n&#x3D;0}^{N-1} |x(n)|^2<br>$$</p>
+<p>其中 <span class="math inline">\(k = 0, 1, \cdots,
+N-1\)</span>。<br>
+如果扩展到该范围之外，则 <span class="math inline">\(c_{k+N} =
+c_k\)</span>，即 <span class="math inline">\(c_k\)</span> 是周期为 <span class="math inline">\(N\)</span> 的序列。</p>
+<p><strong>离散周期信号的帕塞瓦关系式</strong>：<br>
+<span class="math display">\[
+P_x = \sum\limits_{k=0}^{N-1} |c_k|^2 = \dfrac{1}{N}
+\sum\limits_{n=0}^{N-1} |x(n)|^2
+\]</span></p>
 <p>与连续时间周期信号一样，频域幅度谱偶对称，相位谱奇对称。</p>
-<h4><span id="dtft">DTFT</span></h4><p>离散时间非周期信号的傅里叶变换。</p>
-<p>对能量有限离散时间信号 $x(n)$：</p>
+<h4><span id="dtft">DTFT</span></h4>
+<p>离散时间非周期信号的傅里叶变换。</p>
+对能量有限离散时间信号 <span class="math inline">\(x(n)\)</span>：
 <center>
-
 <table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
-<tr>
-<th align="center">变换</th>
-<th align="center">公式</th>
+<tr class="header">
+<th style="text-align: center;">变换</th>
+<th style="text-align: center;">公式</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">逆变换</td>
-<td align="center">$x(n) &#x3D; \dfrac{1}{2\pi} \displaystyle\int_{-\pi}^{\pi} X(\omega) e^{j \omega n} d\omega$</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">逆变换</td>
+<td style="text-align: center;"><span class="math inline">\(x(n) =
+\dfrac{1}{2\pi} \displaystyle\int_{-\pi}^{\pi} X(\omega) e^{j \omega n}
+d\omega\)</span></td>
 </tr>
-<tr>
-<td align="center">正变换</td>
-<td align="center">$X(\omega) &#x3D; \sum\limits_{n &#x3D; -\infty}^{\infty} x(n) e^{-j \omega n}$</td>
+<tr class="even">
+<td style="text-align: center;">正变换</td>
+<td style="text-align: center;"><span class="math inline">\(X(\omega) =
+\sum\limits_{n = -\infty}^{\infty} x(n) e^{-j \omega n}\)</span></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </center>
-
-<p>记 $X_N(\omega) &#x3D; \sum\limits_{n &#x3D; -N}^{N} x(n) e^{-j \omega n}$<br><strong>Gibbs 现象</strong>：在 $X(\omega)$ 的一个不连续点处，$X_N(\omega)$ 逼近 $X(\omega)$ 的振荡行为。</p>
-<p><strong>有限能量的离散时间非周期信号的帕塞瓦关系式</strong>：<br>$$<br>E_x &#x3D; \sum\limits_{n &#x3D; -\infty}^{\infty} |x(n)|^2 &#x3D; \dfrac{1}{2\pi} \displaystyle\int_{-\pi}^{\pi} |X(\Omega)|^2<br>$$</p>
-<p>记 $S_{xx} &#x3D; |X(\omega)|^2$，能量密度谱。<br>对于实信号，频域幅度谱偶对称，相位谱奇对称，能量密度谱偶对称。</p>
-<h3><span id="特点">特点</span></h3><ul>
+<p>记 <span class="math inline">\(X_N(\omega) = \sum\limits_{n = -N}^{N}
+x(n) e^{-j \omega n}\)</span><br>
+<strong>Gibbs 现象</strong>：在 <span class="math inline">\(X(\omega)\)</span> 的一个不连续点处，<span class="math inline">\(X_N(\omega)\)</span> 逼近 <span class="math inline">\(X(\omega)\)</span> 的振荡行为。</p>
+<p><strong>有限能量的离散时间非周期信号的帕塞瓦关系式</strong>：<br>
+<span class="math display">\[
+E_x = \sum\limits_{n = -\infty}^{\infty} |x(n)|^2 = \dfrac{1}{2\pi}
+\displaystyle\int_{-\pi}^{\pi} |X(\Omega)|^2
+\]</span></p>
+<p>记 <span class="math inline">\(S_{xx} =
+|X(\omega)|^2\)</span>，能量密度谱。<br>
+对于实信号，频域幅度谱偶对称，相位谱奇对称，能量密度谱偶对称。</p>
+<h3><span id="特点">特点</span></h3>
+<ul>
 <li>连续时间信号具有非周期频谱。</li>
 <li>离散时间信号具有周期频谱。</li>
 <li>周期信号具有离散频谱。</li>
 <li>非周期有限能量信号具有连续频谱。</li>
 </ul>
-<h2><span id="z-变换">z 变换</span></h2><h3><span id="双边">双边</span></h3><h4><span id="定义">定义</span></h4><p>$$<br>X(z) &#x3D; \sum\limits_{n &#x3D; -\infty}^{\infty} x(n) z^{-n}<br>$$</p>
-<p>收敛域：</p>
+<h2><span id="z-变换">z 变换</span></h2>
+<h3><span id="双边">双边</span></h3>
+<h4><span id="定义">定义</span></h4>
+<p><span class="math display">\[
+X(z) = \sum\limits_{n = -\infty}^{\infty} x(n) z^{-n}
+\]</span></p>
+<p>收敛域： - 因果序列：<span class="math inline">\(|z| &gt;
+r_2\)</span> - 非因果序列：<span class="math inline">\(|z| &lt;
+r_1\)</span> - 双边序列：<span class="math inline">\(r_1 &lt; |z| &lt;
+r_2\)</span></p>
+<h4><span id="常见-z-变换对">常见 z 变换对</span></h4>
+<center>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 45%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">信号</th>
+<th style="text-align: center;">Z变换结果</th>
+<th style="text-align: center;">收敛域</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\delta[n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;">全平面</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(u[n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1}{1
+- z^{-1}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\|z\| &gt;
+1\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(a^n
+u[n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{a
+z^{-1}}{(1 - az^{-1})^2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\|z\| &gt;
+\|a\|\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(n a^n
+u[n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1}{1
+- az^{-1}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\|z\| &gt;
+\|a\|\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\sin(\omega_0 n) u(n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{z^{-1} \sin(\omega_0)}{1 - 2
+z^{-1}\cos(\omega_0) + z^{-2}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\|z\| &gt;
+1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\cos(\omega_0 n) u(n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1 -
+z^{-1}\cos(\omega_0)}{1 - 2 z^{-1}\cos(\omega_0) + z^{-2}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\|z\| &gt;
+1\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(e^{j\omega_0
+n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1}{1
+- z^{-1}e^{j\omega_0}}\)</span></td>
+<td style="text-align: center;">全平面</td>
+</tr>
+</tbody>
+</table>
+</center>
+<h4><span id="性质">性质</span></h4>
+<center>
+<table>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">性质</th>
+<th style="text-align: center;">时域</th>
+<th style="text-align: center;">z 域</th>
+<th style="text-align: center;">收敛域</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">记号</td>
+<td style="text-align: center;"><span class="math inline">\(x(n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X(z)\)</span></td>
+<td style="text-align: center;">收敛域0：<br><span class="math inline">\(r_2 &lt; \|z\| &lt; r_1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(x_1(n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_1(z)\)</span></td>
+<td style="text-align: center;">收敛域1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(x_2(n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_2(z)\)</span></td>
+<td style="text-align: center;">收敛域2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">线性</td>
+<td style="text-align: center;"><span class="math inline">\(a_1x_1[n] +
+a_2x_2[n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(a_1X_1(z) +
+a_2X_2(z)\)</span></td>
+<td style="text-align: center;">至少是 1 和 2 的交集</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">时移</td>
+<td style="text-align: center;"><span class="math inline">\(x[n-n_0]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X(z)z_0^{-n}\)</span></td>
+<td style="text-align: center;">一般同 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">z 域尺度变换</td>
+<td style="text-align: center;"><span class="math inline">\(a^nx[n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X(a^{-1}z)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\|a\|r_2
+&lt; \|z\| &lt; \|a\|r_1\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">时间翻转</td>
+<td style="text-align: center;"><span class="math inline">\(x[-n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X(z^{-1})\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1}{r_1} &lt; \|z\|
+&lt;\dfrac{1}{r_2}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">共轭</td>
+<td style="text-align: center;"><span class="math inline">\(X^*(z^*)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^*[n]\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">实部</td>
+<td style="text-align: center;"><span class="math inline">\(Re\{x(n)\}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1}{2}[X(z) + X^*(z^*)]\)</span></td>
+<td style="text-align: center;">包括 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">虚部</td>
+<td style="text-align: center;"><span class="math inline">\(Im\{x(n)\}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1}{2}
+j [X(z) - X^*(z^*)]\)</span></td>
+<td style="text-align: center;">包括 0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">z 域求导</td>
+<td style="text-align: center;"><span class="math inline">\(nx[n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-z\dfrac{dX(z)}{dz}\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">时域积分</td>
+<td style="text-align: center;"><span class="math inline">\(\sum\limits_{n=0}^{\infty}
+x[n]z^{-n}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{X(z)}{1-z^{-1}}\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">卷积</td>
+<td style="text-align: center;"><span class="math inline">\(x_1[n] *
+x_2[n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_1(z) \cdot
+X_2(z)\)</span></td>
+<td style="text-align: center;">至少是 1 和 2 的交集</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">相关</td>
+<td style="text-align: center;"><span class="math inline">\(r_{x_1 x_2}
+= x_1[l] * x_2[-l]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(R_{x_1 x_2}
+= X_1(z)X_2(z)\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">初值定理</td>
+<td style="text-align: center;"><span class="math inline">\(x[0]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\lim\limits_{z \to \infty}X(z)\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">终值定理</td>
+<td style="text-align: center;"><span class="math inline">\(\lim\limits_{n \to \infty} x[n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\lim\limits_{z \to 1}(z-1)X(z)\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">频域平移</td>
+<td style="text-align: center;"><span class="math inline">\(e^{j\omega_0n}x[n]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X(ze^{j\omega_0})\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">频域缩放性质</td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{1}{\|a\|}x\left [\dfrac{n}{a}
+\right]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X(az)\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</center>
+<h4><span id="逆变换">逆变换</span></h4>
 <ul>
-<li>因果序列：$|z| &gt; r_2$</li>
-<li>非因果序列：$|z| &lt; r_1$</li>
-<li>双边序列：$r_1 &lt; |z| &lt; r_2$</li>
-</ul>
-<h4><span id="常见-z-变换对">常见 z 变换对</span></h4><center>
-
-<table>
-<thead>
-<tr>
-<th align="center">信号</th>
-<th align="center">Z变换结果</th>
-<th align="center">收敛域</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$\delta[n]$</td>
-<td align="center">$1$</td>
-<td align="center">全平面</td>
-</tr>
-<tr>
-<td align="center">$u[n]$</td>
-<td align="center">$\dfrac{1}{1 - z^{-1}}$</td>
-<td align="center">$|z| &gt; 1$</td>
-</tr>
-<tr>
-<td align="center">$a^n u[n]$</td>
-<td align="center">$\dfrac{a z^{-1}}{(1 - az^{-1})^2}$</td>
-<td align="center">$|z| &gt; |a|$</td>
-</tr>
-<tr>
-<td align="center">$n a^n u[n]$</td>
-<td align="center">$\dfrac{1}{1 - az^{-1}}$</td>
-<td align="center">$|z| &gt; |a|$</td>
-</tr>
-<tr>
-<td align="center">$\sin(\omega_0 n) u(n)$</td>
-<td align="center">$\dfrac{z^{-1} \sin(\omega_0)}{1 - 2 z^{-1}\cos(\omega_0) + z^{-2}}$</td>
-<td align="center">$|z| &gt; 1$</td>
-</tr>
-<tr>
-<td align="center">$\cos(\omega_0 n) u(n)$</td>
-<td align="center">$\dfrac{1 - z^{-1}\cos(\omega_0)}{1 - 2 z^{-1}\cos(\omega_0) + z^{-2}}$</td>
-<td align="center">$|z| &gt; 1$</td>
-</tr>
-<tr>
-<td align="center">$e^{j\omega_0 n}$</td>
-<td align="center">$\dfrac{1}{1 - z^{-1}e^{j\omega_0}}$</td>
-<td align="center">全平面</td>
-</tr>
-</tbody></table>
-</center>
-
-<h4><span id="性质">性质</span></h4><center>
-
-<table>
-<thead>
-<tr>
-<th align="center">性质</th>
-<th align="center">时域</th>
-<th align="center">z 域</th>
-<th align="center">收敛域</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">记号</td>
-<td align="center">$x(n)$</td>
-<td align="center">$X(z)$</td>
-<td align="center">收敛域0：<br>$r_2 &lt; |z| &lt; r_1$</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">$x_1(n)$</td>
-<td align="center">$X_1(z)$</td>
-<td align="center">收敛域1</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">$x_2(n)$</td>
-<td align="center">$X_2(z)$</td>
-<td align="center">收敛域2</td>
-</tr>
-<tr>
-<td align="center">线性</td>
-<td align="center">$a_1x_1[n] + a_2x_2[n]$</td>
-<td align="center">$a_1X_1(z) + a_2X_2(z)$</td>
-<td align="center">至少是 1 和 2 的交集</td>
-</tr>
-<tr>
-<td align="center">时移</td>
-<td align="center">$x[n-n_0]$</td>
-<td align="center">$X(z)z_0^{-n}$</td>
-<td align="center">一般同 0</td>
-</tr>
-<tr>
-<td align="center">z 域尺度变换</td>
-<td align="center">$a^nx[n]$</td>
-<td align="center">$X(a^{-1}z)$</td>
-<td align="center">$|a|r_2 &lt; |z| &lt; |a|r_1$</td>
-</tr>
-<tr>
-<td align="center">时间翻转</td>
-<td align="center">$x[-n]$</td>
-<td align="center">$X(z^{-1})$</td>
-<td align="center">$\dfrac{1}{r_1} &lt; |z| &lt;\dfrac{1}{r_2}$</td>
-</tr>
-<tr>
-<td align="center">共轭</td>
-<td align="center">$X^*(z^*)$</td>
-<td align="center">$x^*[n]$</td>
-<td align="center">0</td>
-</tr>
-<tr>
-<td align="center">实部</td>
-<td align="center">$Re{x(n)}$</td>
-<td align="center">$\dfrac{1}{2}[X(z) + X^*(z^*)]$</td>
-<td align="center">包括 0</td>
-</tr>
-<tr>
-<td align="center">虚部</td>
-<td align="center">$Im{x(n)}$</td>
-<td align="center">$\dfrac{1}{2} j [X(z) - X^*(z^*)]$</td>
-<td align="center">包括 0</td>
-</tr>
-<tr>
-<td align="center">z 域求导</td>
-<td align="center">$nx[n]$</td>
-<td align="center">$-z\dfrac{dX(z)}{dz}$</td>
-<td align="center">0</td>
-</tr>
-<tr>
-<td align="center">时域积分</td>
-<td align="center">$\sum\limits_{n&#x3D;0}^{\infty} x[n]z^{-n}$</td>
-<td align="center">$\dfrac{X(z)}{1-z^{-1}}$</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">卷积</td>
-<td align="center">$x_1[n] * x_2[n]$</td>
-<td align="center">$X_1(z) \cdot X_2(z)$</td>
-<td align="center">至少是 1 和 2 的交集</td>
-</tr>
-<tr>
-<td align="center">相关</td>
-<td align="center">$r_{x_1 x_2} &#x3D; x_1[l] * x_2[-l]$</td>
-<td align="center">$R_{x_1 x_2} &#x3D; X_1(z)X_2(z)$</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">初值定理</td>
-<td align="center">$x[0]$</td>
-<td align="center">$\lim\limits_{z \to \infty}X(z)$</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">终值定理</td>
-<td align="center">$\lim\limits_{n \to \infty} x[n]$</td>
-<td align="center">$\lim\limits_{z \to 1}(z-1)X(z)$</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">频域平移</td>
-<td align="center">$e^{j\omega_0n}x[n]$</td>
-<td align="center">$X(ze^{j\omega_0})$</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">频域缩放性质</td>
-<td align="center">$\dfrac{1}{|a|}x\left [\dfrac{n}{a} \right]$</td>
-<td align="center">$X(az)$</td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-</center>
-
-<h4><span id="逆变换">逆变换</span></h4><ul>
-<li><p><strong>围线积分法</strong><br>$$<br>x(n) &#x3D; \sum\limits_{z_i}\left[X(z)z^{n-1} 在 z&#x3D;z_i 的留数\right]<br>$$</p>
-<p>对于 m 阶极点 a，f(z) 的留数为：<br>$$<br>\dfrac{1}{(m-1)!} \lim\limits_{z \rightarrow a}\left[(z - a)^m f(z)\right]^{(m-1)}<br>$$</p>
-</li>
-<li><p><strong>幂级数展开法</strong><br>$$<br>X(z) &#x3D; \sum\limits_{n&#x3D;-\infty}^{\infty} c_n z^{-n} \rightarrow x(n) &#x3D; c_n<br>$$</p>
+<li><p><strong>围线积分法</strong> <span class="math display">\[
+x(n) = \sum\limits_{z_i}\left[X(z)z^{n-1} 在 z=z_i 的留数\right]
+\]</span></p>
+<p>对于 m 阶极点 a，f(z) 的留数为： <span class="math display">\[
+\dfrac{1}{(m-1)!} \lim\limits_{z \rightarrow a}\left[(z - a)^m
+f(z)\right]^{(m-1)}
+\]</span></p></li>
+<li><p><strong>幂级数展开法</strong><br>
+<span class="math display">\[
+X(z) = \sum\limits_{n=-\infty}^{\infty} c_n z^{-n} \rightarrow x(n) =
+c_n
+\]</span></p>
 <p>采用长除法</p>
 <ul>
 <li>因果序列：高次幂在前</li>
 <li>非因果序列：低次幂在前</li>
-</ul>
-</li>
-<li><p><strong>部分分式展开法</strong>  </p>
+</ul></li>
+<li><p><strong>部分分式展开法</strong></p>
 <ul>
-<li>$X(z)$有两个相异极点 $p_1,\ p_2$<br>$$<br>X(z) &#x3D; \dfrac{A_1}{z-p_1} + \dfrac{A_2}{z-p_2}<br>$$</li>
-<li>$X(z)$有两个相同极点 $p$<br>$$<br>X(z) &#x3D; \dfrac{A_1}{z-p} + \dfrac{A_2}{(z-p)^2}<br>$$</li>
+<li><p><span class="math inline">\(X(z)\)</span> 有两个相异极点 <span class="math inline">\(p_1,\ p_2\)</span><br>
+<span class="math display">\[
+X(z) = \dfrac{A_1}{z-p_1} + \dfrac{A_2}{z-p_2}
+\]</span></p></li>
+<li><p><span class="math inline">\(X(z)\)</span> 有两个相同极点 <span class="math inline">\(p\)</span><br>
+<span class="math display">\[
+X(z) = \dfrac{A_1}{z-p} + \dfrac{A_2}{(z-p)^2}
+\]</span></p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3><span id="单边">单边</span></h3><p>$$<br>X^+(z) &#x3D; \sum\limits_{n&#x3D;0}^{\infty} x(n)z^{-n}<br>$$</p>
+<h3><span id="单边">单边</span></h3>
+<p><span class="math display">\[
+X^+(z) = \sum\limits_{n=0}^{\infty} x(n)z^{-n}
+\]</span></p>
 <center>
-
 <table>
+<colgroup>
+<col style="width: 35%">
+<col style="width: 29%">
+<col style="width: 35%">
+</colgroup>
 <thead>
-<tr>
-<th align="center">性质</th>
-<th align="center">时域</th>
-<th align="center">z 域</th>
+<tr class="header">
+<th style="text-align: center;">性质</th>
+<th style="text-align: center;">时域</th>
+<th style="text-align: center;">z 域</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">时移</td>
-<td align="center">$x(n-k)$</td>
-<td align="center">$\left[x(-k) + x(-k+1)z^{-1} + \cdots +x(-1)z^{-k+1}\right] + z^{-k}X^+(z)$</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">时移</td>
+<td style="text-align: center;"><span class="math inline">\(x(n-k)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\left[x(-k)
++ x(-k+1)z^{-1} + \cdots +x(-1)z^{-k+1}\right] +
+z^{-k}X^+(z)\)</span></td>
 </tr>
-<tr>
-<td align="center">时间超前</td>
-<td align="center">$x(n+k)$</td>
-<td align="center">$z^k \left[ X^+(z) - \sum\limits_{n&#x3D;0}^{k-1} x(n)z^{-n}\right]$</td>
+<tr class="even">
+<td style="text-align: center;">时间超前</td>
+<td style="text-align: center;"><span class="math inline">\(x(n+k)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(z^k \left[
+X^+(z) - \sum\limits_{n=0}^{k-1} x(n)z^{-n}\right]\)</span></td>
 </tr>
-<tr>
-<td align="center">终值定理</td>
-<td align="center">$\lim\limits_{n \rightarrow \infty} x(n)$</td>
-<td align="center">$\lim\limits_{z \rightarrow 1} (z-1)X^+(z)$</td>
+<tr class="odd">
+<td style="text-align: center;">终值定理</td>
+<td style="text-align: center;"><span class="math inline">\(\lim\limits_{n \rightarrow \infty}
+x(n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\lim\limits_{z \rightarrow 1}
+(z-1)X^+(z)\)</span></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </center>
+<h3><span id="与傅里叶变换的关系">与傅里叶变换的关系</span></h3>
+<p><span class="math display">\[
+X(z=e^{j\omega}) = X(\omega) = \sum\limits_{n = -\infty}^{\infty} x(n)
+e^{-j\omega n}
+\]</span></p>
+<h1><span id="dft-amp-fft">DFT &amp; FFT</span></h1>
+<h2><span id="dft-amp-idft-的计算">DFT &amp; IDFT 的计算</span></h2>
+<p>记 <span class="math display">\[
+W_N = e^{-j 2\pi / N}
+\]</span> <span class="math inline">\(W_N\)</span>
+具有对称性和周期性，即 <span class="math display">\[
+W_N^{k + N/2} = -W_N^k
+\]</span> <span class="math display">\[
+W_N^{k + N} = W_N^k
+\]</span></p>
+<p>DFT：对长为 N 的数据序列 x(n) 计算长度为 N 的复序列 X(k)。<br>
+IDFT：DFT 的逆变换。</p>
+<center>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">变换</th>
+<th style="text-align: center;">公式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">DFT</td>
+<td style="text-align: center;"><span class="math inline">\(X(k) =
+\sum\limits_{n=0}^{N-1} x(n) W_N^{kn}\quad (0 \leq k \leq
+N-1)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">IDFT</td>
+<td style="text-align: center;"><span class="math inline">\(x(n) =
+\dfrac{1}{N} \sum\limits_{k=0}^{N-1} X(k) W_N^{-kn}\quad (0 \leq n \leq
+N-1)\)</span></td>
+</tr>
+</tbody>
+</table>
+</center>
+<p>对每个 k 值，直接计算 X(k) 涉及 N 次复数乘法（4N 次实数乘法）和 N-1
+次复数加法（4N-2 次实数加法）。<br>
+因此计算长度为 N 的 DFT 要求 <span class="math inline">\(N^2\)</span>
+次复数乘法和 <span class="math inline">\(N^2 - N\)</span>
+次复数加法。</p>
+<h2><span id="基2-fft-算法">基2 FFT 算法</span></h2>
+<p>适用于 <span class="math inline">\(N = 2^v\)</span>。</p>
+<h3><span id="按时间抽取">按时间抽取</span></h3>
+<p>将 <span class="math inline">\(x(n)\)</span> 划分为奇序列和偶序列（以
+2 为因子抽取），即 <span class="math display">\[
+f_1(n) = x(2n),\quad f_2(n) = x(2n + 1)\quad (n = 0, 1, \cdots,
+\frac{N}{2}-1)
+\]</span></p>
+<p>二者的 <span class="math inline">\(\frac{N}{2}\)</span> 点 DFT
+结果分别为 <span class="math inline">\(F_1(k)\)</span>、<span class="math inline">\(F_2(k)\)</span>。</p>
+<p>N 点 DFT 算法用抽取序列的 DFT 可表示为： <span class="math display">\[
+\begin{aligned}
+  X(k) &amp;= \sum\limits_{n=0}^{N-1} x(n) W_N^{kn},\quad k = 0,1,
+\cdots, N-1 \\
+  &amp;= \sum\limits_{n为偶数} x(n) W_N^{kn} + \sum\limits_{n为奇数}
+x(n) W_N^{kn} \\
+  &amp;= \sum\limits_{m=0}^{(N/2)-1} x(2m) W_N^{2mk} +
+\sum\limits_{m=0}^{(N/2)-1} x(2m+1) W_N^{(2m+1)k} \\
+  &amp;= \sum\limits_{m=0}^{(N/2)-1} f_1(m) W_{N/2}^{mk} + W_N^k
+\sum\limits_{m=0}^{(N/2)-1} f_2(m) W_{N/2}^{mk} \\
+  &amp;= F_1(k) + W_N^k F_2(k),\quad k = 0,1, \cdots, \frac{N}{2}-1 \\
+  X(k + \frac{N}{2}) &amp;= F_1(k) - W_N^k F_2(k)
+\end{aligned}
+\]</span></p>
+<p>直接计算 <span class="math inline">\(F_1(k)\)</span> 需要 <span class="math inline">\((\frac{N}{2})^2\)</span> 次复数乘法，直接计算
+<span class="math inline">\(F_2(k)\)</span> 同理，计算 <span class="math inline">\(W_N^k F_2(k)\)</span> 还需要 <span class="math inline">\(\frac{N}{2}\)</span> 次复数乘法。<br>
+所以，计算 <span class="math inline">\(X(k)\)</span> 一共需要 <span class="math inline">\(\frac{N^2 + N}{2}\)</span> 次复数乘法。</p>
+<p>同样的，对 <span class="math inline">\(F_1(k)\)</span>和<span class="math inline">\(F_2(k)\)</span> 的计算也可以通过计算 <span class="math inline">\(\frac{N}{4}\)</span> 点 DFT 来完成，从而只需要
+<span class="math inline">\(\frac{N^2 + 2N}{4}\)</span>
+次复数乘法。<br>
+这时计算 <span class="math inline">\(X(k)\)</span> 一共需要 <span class="math inline">\(\frac{N^2}{4} + N\)</span> 次复数乘法。</p>
+<p>数据序列的抽取可以不断重复，直到最后序列变为 1 点序列。<br>
+对于<span class="math inline">\(N = 2^v\)</span>，抽取次数为 <span class="math inline">\(v\)</span>，复数乘法总次数减少为 <span class="math inline">\(\frac{N}{2} \log_2(N)\)</span>，复数加法的次数为
+<span class="math inline">\(N \log_2(N)\)</span>。</p>
+<p>eg. 如果 <span class="math inline">\(x(n)\)</span> 为 N
+点实信号<br>
+从上述推导中可以得出：<br>
+<span class="math display">\[
+\begin{aligned}
+  F_1(k) &amp;= \dfrac{1}{2} \left[ X(k) + X(k + \frac{N}{2})\right] \\
+  F_2(k) &amp;= \dfrac{1}{2} \left[ X(k) - X(k + \frac{N}{2})\right]
+W_N^{-k}
+\end{aligned}
+\]</span><br>
+其中 <span class="math inline">\(k = 0, 1, \cdots, \frac{N}{2} -
+1\)</span>。<br>
+令 <span class="math inline">\(y(n) = f_1(n) + j f_2(n)\)</span>，易得
+<span class="math inline">\(Y(k) = F_1(k) + j F_2(k)\)</span>。<br>
+已知 <span class="math inline">\(y(n)\)</span>，则可以通过计算 <span class="math inline">\(Y(k)\)</span>（<span class="math inline">\(\frac{N}{2}\)</span> 点 DFT）得到 <span class="math inline">\(X(k)\)</span>（<span class="math inline">\(N\)</span> 点 DFT）；<br>
+已知 <span class="math inline">\(Y(k)\)</span>，则可以通过计算 <span class="math inline">\(y(n)\)</span>（<span class="math inline">\(\frac{N}{2}\)</span> 点 IDFT）得到 <span class="math inline">\(x(n)\)</span>（<span class="math inline">\(N\)</span> 点 IDFT）。</p>
+<h4><span id="蝶形运算">蝶形运算</span></h4>
+<p>对一对复数 (a, b)，将 b 乘上 <span class="math inline">\(W_N^k\)</span> 然后 a
+加上或减去这个积，得到一对新的复数 (A, B)。</p>
+<p>对于一个 2 点序列 <span class="math inline">\(x(0)\)</span>、<span class="math inline">\(x(1)\)</span>，它们各自做 1 点
+DFT，得到的结果就是它们自身，因此按上述基 2 FFT 算法，它们的 2 点 DFT
+结果为 <span class="math inline">\(X(0) = x(0) + W_2^0
+x(1)\)</span>、<span class="math inline">\(X(1) = x(0) - W_2^0
+x(1)\)</span>。<br>
+即上述蝶形运算中 <span class="math inline">\(a = x(0)\)</span>、<span class="math inline">\(b = x(1)\)</span>、<span class="math inline">\(A =
+X(0)\)</span>、<span class="math inline">\(B = X(1)\)</span>。</p>
+<p>eg. 计算 8 点基 2 FFT<br>
+- 序列抽取 - 第一次抽取： - <span class="math inline">\(x(0), x(2),
+x(4), x(6)\)</span> - <span class="math inline">\(x(1), x(3), x(5),
+x(7)\)</span> - 第二次抽取： - <span class="math inline">\(x(0),
+x(4)\)</span> - <span class="math inline">\(x(2), x(6)\)</span> - <span class="math inline">\(x(1), x(5)\)</span> - <span class="math inline">\(x(3), x(7)\)</span> - 第三次抽取：<br>
+<span class="math inline">\(y(n)\)</span> 表示当前位置存储的值。 - <span class="math inline">\(y(0) = x(0)\)</span><br>
+- <span class="math inline">\(y(1) = x(4)\)</span> - <span class="math inline">\(y(2) = x(2)\)</span> - <span class="math inline">\(y(3) = x(6)\)</span> - <span class="math inline">\(y(4) = x(1)\)</span> - <span class="math inline">\(y(5) = x(5)\)</span> - <span class="math inline">\(y(6) = x(3)\)</span> - <span class="math inline">\(y(6) = x(7)\)</span></p>
+<ul>
+<li>DFT 计算
+<ul>
+<li>第一阶段：4 级 4 组蝶形运算
+<ul>
+<li><span class="math inline">\(x(0), x(4)\)</span> 的 2 点 DFT
+结果：<br>
+<span class="math inline">\(y(0) = y(0) + W_2^0 y(1) = y(0) + W_8^0
+y(1)\)</span><br>
+<span class="math inline">\(y(1) = y(0) - W_2^0 y(1) = y(0) - W_8^0
+y(1)\)</span></li>
+<li>后续 <span class="math inline">\(y(n)\)</span> 的算法相同</li>
+</ul></li>
+<li>第二阶段：2 级 4 组蝶形运算
+<ul>
+<li><span class="math inline">\(x(0), x(2), x(4), x(6)\)</span> 4 点 DFT
+结果：<br>
+<span class="math inline">\(y(0) = y(0) + W_4^0 y(2) = y(0) +
+W_8^0y(2)\)</span><br>
+<span class="math inline">\(y(1) = y(1) + W_4^1 y(3) = y(1) +
+W_8^2y(3)\)</span><br>
+<span class="math inline">\(y(2) = y(0) - W_4^0 y(2) = y(0) -
+W_8^0y(2)\)</span><br>
+<span class="math inline">\(y(3) = y(1) - W_4^1 y(3) = y(1) -
+W_8^2y(3)\)</span></li>
+<li><span class="math inline">\(x(1), x(3), x(5), x(7)\)</span> 4 点 DFT
+运算方式相同</li>
+</ul></li>
+<li>第三阶段：1 级 4 组蝶形运算
+<ul>
+<li><span class="math inline">\(y(0) = y(0) + W_8^0 y(4)\)</span><br>
+<span class="math inline">\(y(1) = y(1) + W_8^1 y(5)\)</span><br>
+<span class="math inline">\(y(2) = y(2) + W_8^2 y(6)\)</span><br>
+<span class="math inline">\(y(3) = y(3) + W_8^3 y(7)\)</span><br>
+<span class="math inline">\(y(4) = y(0) - W_8^0 y(4)\)</span><br>
+<span class="math inline">\(y(5) = y(1) - W_8^1 y(5)\)</span><br>
+<span class="math inline">\(y(6) = y(2) - W_8^2 y(6)\)</span><br>
+<span class="math inline">\(y(7) = y(3) - W_8^3 y(7)\)</span></li>
+<li><span class="math inline">\(X(k) = y(k)\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3><span id="按频率抽取">按频率抽取</span></h3>
+<p>将 DFT 公式分为前 <span class="math inline">\(\frac{N}{2}\)</span>
+个数据点的求和与后 <span class="math inline">\(\frac{N}{2}\)</span>
+个数据点的求和： <span class="math display">\[
+\begin{aligned}
+  X(k) &amp;= \sum\limits_{m=0}^{(N/2)-1} x(n) W_N^{kn} +
+\sum\limits_{m=N/2}^{N-1} x(n) W_N^{kn} \\
+  &amp; = \sum\limits_{m=0}^{(N/2)-1} x(n) W_N^{kn} + W_N^{kn}
+\sum\limits_{m=0}^{(N/2)-1} x(n + \frac{N}{2}) W_N^{kn} \\
+  &amp; = \sum\limits_{m=0}^{(N/2)-1} \left[ x(n) + (-1)^k x(n +
+\frac{N}{2})\right] W_N^{kn}
+\end{aligned}
+\]</span></p>
+<p>将 <span class="math inline">\(X(k)\)</span>
+分拆成奇序列和偶序列：<br>
+<span class="math display">\[
+\begin{aligned}
+  X(2k) &amp;= \sum\limits_{m=0}^{(N/2)-1} \left[ x(n) + x(n +
+\frac{N}{2})\right] W_{N/2}^{kn} \\
+  X(2k+1) &amp;= \sum\limits_{m=0}^{(N/2)-1} \left\{ \left[ x(n) - x(n +
+\frac{N}{2})\right] W_N^{n} \right\} W_{N/2}^{kn}
+\end{aligned}
+\]</span></p>
+<p>定义 <span class="math inline">\(\frac{N}{2}\)</span> 点序列：<br>
+<span class="math display">\[
+\begin{aligned}
+  g_1(n) &amp;= x(n) + x(n + \frac{N}{2}) \\
+  g_2(n) &amp;= \left[ x(n) - x(n + \frac{N}{2})\right] W_N^{n},\quad n
+= 0,1, \cdots, \frac{N}{2}-1
+\end{aligned}
+\]</span></p>
+<p>则有 <span class="math display">\[
+\begin{aligned}
+  X(2k) &amp;= \sum\limits_{m=0}^{(N/2)-1} g_1(n) W_{N/2}^{kn} \\
+  X(2k+1) &amp;= \sum\limits_{m=0}^{(N/2)-1} g_2(n) W_{N/2}^{kn}
+\end{aligned}
+\]</span></p>
+<p>与按时间抽取类似的，该过程可以重复抽取。<br>
+整个计算过程的抽取次数、复数乘法次数、复数加法次数均与按时间抽取相同。</p>
+<h2><span id="基4-fft-算法">基4 FFT 算法</span></h2>
+<p><span class="math inline">\(N = 4^v\)</span></p>
+<p>与基2 FFT 算法的推导方式类似，将隔 2 个进行一次抽取改为隔 4
+个进行一次抽取。<br>
+令 <span class="math display">\[
+\begin{aligned}
+  x_0(n) &amp;= x(4n) \\
+  x_1(n) &amp;= x(4n+1) \\
+  x_2(n) &amp;= x(4n+2) \\
+  x_3(n) &amp;= x(4n+3),\quad 0 \leq n \leq \frac{N}{4} - 1
+\end{aligned}
+\]</span></p>
+<p>可以得到 <span class="math display">\[
+\left[
+\begin{matrix}
+  X(k) \\
+  X(k + \frac{N}{4}) \\
+  X(k + \frac{N}{2}) \\
+  X(k + \frac{3N}{4})
+\end{matrix}
+\right]
+=
+\left[
+\begin{matrix}
+  1 &amp; 1 &amp; 1 &amp; 1 \\
+  1 &amp; -j &amp; -1 &amp; j \\
+  1 &amp; -1 &amp; 1 &amp; -1 \\
+  1 &amp; j &amp; -1 &amp; -j
+\end{matrix}
+\right]
+\cdot
+\left[
+\begin{matrix}
+  X_0(k) \\
+  W_N^k X_1(k) \\
+  W_N^2k X_2(k) \\
+  W_N^3k X_3(k)
+\end{matrix}
+\right]
+\]</span></p>
+<p>按此方法继续抽取即可。</p>
+<h2><span id="n-为复合数的-fft-算法">N 为复合数的 FFT 算法</span></h2>
+<p>将 N 分解为两个整数的乘积：<span class="math inline">\(N =
+LM\)</span>。如果 N 是质数可以通过加 0 的方式使其满足该分解。<br>
+令 <span class="math inline">\(0 \leq l \leq L-1\)</span>，<span class="math inline">\(0 \leq m \leq M-1\)</span>；则可以选择映射 <span class="math inline">\(n = Ml + m\)</span>，即 <span class="math inline">\(x(n) = x(l, m)\)</span>，相当于将原序列分为 L
+组，每组的长度为 M。<br>
+同时 <span class="math inline">\(X(k)\)</span> 被映射为 <span class="math inline">\(X(p, q)\)</span>，即 <span class="math inline">\(k
+= Mp + q\ (0 \leq p \leq L-1,\ 0 \leq q \leq M-1)\)</span>。</p>
+<ul>
+<li><p>对每一组计算 M 点 DFT： <span class="math display">\[
+F(l, q) = \sum\limits_{m=0}^{M-1} x(l, m) W_M^{mq}
+\]</span></p></li>
+<li><p>计算 L 点 DFT：<br>
+<span class="math display">\[
+X(p, q) = \sum\limits_{l=0}^{L-1} W_N^{lq} F(l, q) W_L^{lp}
+\]</span></p></li>
+</ul>
+<p>需要复数乘法 <span class="math inline">\(N(M+L+1)\)</span>
+次，复数加法 <span class="math inline">\(N(M+L-2)\)</span> 次。</p>
+<p>同理可以选择映射 <span class="math inline">\(n = Lm +
+l\)</span>，即将原序列分为 M 组，每组长度为 L。<br>
+计算方法类似。</p>
+<h2><span id="调频-z-变换算法">调频 z 变换算法</span></h2>
+<p>N 点数据序列 x(n) 的 DFT 可视为单位圆上均匀分布的 N 点 z 变换。</p>
+<p>计算 <span class="math inline">\(x(n)\)</span> 在点集 <span class="math inline">\(\{z_k\}\)</span> 上的 z 变换<br>
+其中等高线是一个以 r 为半径的圆，且 <span class="math inline">\(z_k\)</span> 是 N 个等间距点，即 <span class="math inline">\(z_k = r W_N^{k}\)</span><br>
+则有：<br>
+<span class="math display">\[
+\begin{aligned}
+  X(z_k) &amp;= \sum\limits_{n=0}^{N-1} x(n) z_k^{-n} \\
+  &amp;= \sum\limits_{n=0}^{N-1} [x(n) r^{-n}] W_N^{-kn}
+\end{aligned}
+\]</span><br>
+即计算 <span class="math inline">\(x(n) r^{-n}\)</span> 的 DFT。</p>
+<h1><span id="离散时间系统">离散时间系统</span></h1>
+<h2><span id="系统函数">系统函数</span></h2>
+<p>用 N 阶差分方程描述：<br>
+<span class="math display">\[
+y(n) = -\sum\limits_{k=1}^{N} a_k y(n-k) + \sum\limits_{k=0}^{M} b_k
+x(n-k)
+\]</span></p>
+<p>对应的系统函数：<br>
+<span class="math display">\[
+H(z) = \dfrac{Y(z)}{X(z)}= \dfrac{\sum\limits_{k=0}^{M} b_k z^{-k}}{1 +
+\sum\limits_{k=1}^{N} a_k z^{-k}}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(a_k \neq 0,\ b_k \neq
+0\)</span>（既有零点又有极点）：零极点系统，IIR 系统</li>
+<li><span class="math inline">\(a_k =
+0\)</span>（只有零点）：全零点系统，FIR 系统</li>
+<li><span class="math inline">\(b_k = 0\)</span>（包含 N 个极点和一个
+z=0 的 N 阶零点）：全极点系统，IIR 系统</li>
+</ul>
+<h2><span id="fir-系统">FIR 系统</span></h2>
+<p>具有有限长冲激响应的系统。<br>
+系统函数里不包含极点。</p>
+<p>差分方程描述：<br>
+<span class="math display">\[
+y(n) = \sum\limits_{k=0}^{M-1} b_k x(n-k)
+\]</span></p>
+<p>系统函数描述：<br>
+<span class="math display">\[
+H(z) = \sum\limits_{k=0}^{M-1} b_k z^{-k}
+\]</span></p>
+<p>单位冲激响应：<br>
+<span class="math display">\[
+h(n) =
+\left\{
+  \begin{aligned}
+    &amp;b_n,\quad 0 \leq n \leq M-1 \\
+    &amp;0,\quad else
+  \end{aligned}
+\right.
+\]</span></p>
+<h3><span id="直接型结构">直接型结构</span></h3>
+<p>(P. 419)<br>
+对 <span class="math inline">\(b_k x(n-k)\)</span>，将 <span class="math inline">\(x(n)\)</span> 经过 k 个延时器（即 <span class="math inline">\(z^{-1}\)</span>）后乘 <span class="math inline">\(b_k\)</span>（即 <span class="math inline">\(h(k)\)</span>），在将每个 k
+值对应的结果通过加法器相加得到结果。</p>
+<p>该结构需要 M-1 个存储空间来存放 M-1 个输入，每个输出需要 M 次乘法和
+M-1 次加法。</p>
+<p>当 FIR
+系统具有线性相位时，单位冲激响应函数服从下面对称或不对称条件：<br>
+<span class="math display">\[
+h(n) = \pm h(M-1-n)
+\]</span></p>
+<p>对称的部分可以在延时后先相加，再一起乘对应的 <span class="math inline">\(h(k)\)</span>，因此乘法减为 <span class="math inline">\(\frac{M}{2}\)</span>（M 为偶数）次或 <span class="math inline">\(\frac{M - 1}{2}\)</span>（M 为奇数）次。</p>
+<h3><span id="级联型结构">级联型结构</span></h3>
+<p>将 <span class="math inline">\(H(z)\)</span> 拆分成多个 <span class="math inline">\(H_k(z)\)</span> 相乘。<br>
+用直接型结构实现 <span class="math inline">\(H_k(z)\)</span>
+再将它们级联起来。</p>
+<h2><span id="iir-系统">IIR 系统</span></h2>
+<p>具有无限长冲激响应的系统。<br>
+系统函数里包含极点。</p>
+<h3><span id="直接型结构">直接型结构</span></h3>
+<p>差分方程描述和系统函数描述与<a href="#系统函数">系统函数</a>中的相同。</p>
+<p>可以视为级联的两个系统，即 <span class="math inline">\(H(z) = H_1(z)
+H_2(z)\)</span><br>
+其中 <span class="math inline">\(H_1(z)\)</span> 包含 <span class="math inline">\(H(z)\)</span> 的零点，<span class="math inline">\(H_2(z)\)</span> 包含 <span class="math inline">\(H(z)\)</span> 的极点，即 <span class="math display">\[
+H_1(z) = \sum\limits_{k=0}^{M} b_k z^{-k}
+\]</span> <span class="math display">\[
+H_2(z) = \dfrac{1}{1 + \sum\limits_{k=1}^{N} a_k z^{-k}}
+\]</span></p>
+<p>这里面 <span class="math inline">\(H_1(z)\)</span> 是一个 FIR
+系统，<span class="math inline">\(H_2(z)\)</span> 是全极点系统。</p>
+<h4><span id="直接-i-型">直接 I 型</span></h4>
+<p>将 <span class="math inline">\(H_1(z)\)</span> 和 <span class="math inline">\(H_2(z)\)</span>
+分别使用直接型结构实现再级联起来即可。</p>
+<p>需要 M+N+1 次乘法，M+N 次加法和 M+N+1 个存储空间。</p>
+<h4><span id="直接-ii-型">直接 II 型</span></h4>
+<p>交换直接 I 型中 <span class="math inline">\(H_1(z)\)</span> 和 <span class="math inline">\(H_2(z)\)</span> 对应结构的位置，即将 <span class="math inline">\(H_2(z)\)</span> 置于 <span class="math inline">\(H_1(z)\)</span> 之前，二者公用一组延迟器。</p>
+<p>需要 M+N+1 次乘法，M+N 次加法和 max{M, N} 个存储空间。</p>
+<h3><span id="级联型结构">级联型结构</span></h3>
+<p>与 FIR 的级联型结构类似，同样是将 <span class="math inline">\(H(z)\)</span> 拆分成多个 <span class="math inline">\(H_k(z)\)</span> 相乘，每个 <span class="math inline">\(H_k(z)\)</span> 用直接型结构实现再级联起来。</p>
+<h3><span id="并联型结构">并联型结构</span></h3>
+<p>假设 <span class="math inline">\(N \geq M\)</span> 且极点是独立的，对
+<span class="math inline">\(H(z)\)</span> 使用<a href="#逆变换">部分分式展开法</a>： <span class="math display">\[
+H(z) = C + \sum\limits_{k=1}^{N} \dfrac{A_k}{1 - p_k z^{-1}} = C +
+\sum\limits_{k=1}^{K} H_k(z)
+\]</span> 其中，<span class="math inline">\(p_k\)</span> 是极点，<span class="math inline">\(A_k\)</span> 是部分分式展开的系数，<span class="math inline">\(C = \frac{b_N}{a_N}\)</span>。</p>
+<p>分别用直接型结构实现 <span class="math inline">\(H_k(z)\)</span>
+再并联起来即可。</p>
+<h1><span id="滤波器设计">滤波器设计</span></h1>
+<h2><span id="数字滤波器">数字滤波器</span></h2>
+<h3><span id="技术指标">技术指标</span></h3>
+<p>技术指标以其频率响应的幅度特性给出，有通带、阻带和过渡带。</p>
+<ul>
+<li>通带
+<ul>
+<li>通带截止频率：<span class="math inline">\(\omega_p\)</span></li>
+<li>通带波纹：<span class="math inline">\(\delta_1\)</span></li>
+<li>通带允许最大衰减：<span class="math inline">\(R_p \geq -20\lg
+(1-\delta_1)\ (dB)\)</span></li>
+</ul></li>
+<li>阻带
+<ul>
+<li>阻带截止频率：<span class="math inline">\(w_{st}\)</span></li>
+<li>阻带波纹：<span class="math inline">\(\delta_2\)</span></li>
+<li>阻带应达到的最小衰减：<span class="math inline">\(A_s \leq -20\lg
+(\delta_2)\ (dB)\)</span></li>
+</ul></li>
+</ul>
+<h3><span id="频率响应">频率响应</span></h3>
+<ul>
+<li><p>幅度平方响应：<br>
+<span class="math display">\[
+| H(e^{j\omega}) |^2 = H(z)H(z^{-1}) |_{z=e^{j\omega}}
+\]</span></p></li>
+<li><p>相位响应：<br>
+<span class="math display">\[
+\beta (e^{j\omega}) = \dfrac{1}{2j} \ln \left[
+\dfrac{H(z)}{H(z^{-1})}\right]_{z = e^{j\omega}}
+\]</span></p></li>
+<li><p>群延迟响应：<br>
+<span class="math display">\[
+\tau (e^{j\omega}) = -\dfrac{d \beta (e^{j\omega})}{d \omega}
+\]</span><br>
+是滤波器平均延时的一个度量。<br>
+当滤波器满足线性相位响应特性时，通带内群延迟为常数。</p></li>
+</ul>
+<h2><span id="iir-滤波器">IIR 滤波器</span></h2>
+<h3><span id="模拟滤波器">模拟滤波器</span></h3>
+<h4><span id="巴特沃斯低通滤波器">巴特沃斯低通滤波器</span></h4>
+<p>已知的参数 - 通带截止频率：<span class="math inline">\(\Omega_p\)</span> - 阻带截止频率：<span class="math inline">\(\Omega_{st}\)</span> - 通带最大衰减 (dB)：<span class="math inline">\(R_p\)</span> - 阻带最小衰减 (dB)：<span class="math inline">\(A_s\)</span></p>
+<p>要求的参数 - 滤波器阶数：N<br>
+<span class="math display">\[
+  N = \dfrac{\lg \left( \dfrac{10^{0.1 A_s} - 1}{10^{0.1 R_p} -
+1}\right)}{2\lg \left( \dfrac{\Omega_{st}}{\Omega_p}\right)}
+  \]</span></p>
+<p>特殊情况：<span class="math inline">\(R_p = 3dB,\ \Omega_p =
+\Omega_c\)</span><br>
+<span class="math display">\[
+  N \geq \dfrac{\lg (10^{0.1 A_s} - 1)}{2\lg \left(
+\dfrac{\Omega_{st}}{\Omega_p}\right)}
+  \]</span></p>
+<ul>
+<li>截止频率：<span class="math inline">\(\Omega_c\)</span><br>
+<span class="math display">\[
+\Omega_{cp} = \dfrac{\Omega_p}{\sqrt[2N]{10^{0.1R_p} - 1}}
+\leq \Omega_c \leq
+\dfrac{\Omega_{st}}{\sqrt[2N]{10^{0.1A_s} - 1}} = \Omega_{cs}
+\]</span></li>
+</ul>
+<p>得到滤波器的系统函数：<br>
+<span class="math display">\[
+H_a(s) = \dfrac{1}{\sqrt{1 + \left( \dfrac{s}{j\Omega_c}\right)^{2N}}}
+\]</span></p>
+<p>记归一化原型低通滤波器的系统函数为 <span class="math inline">\(H_{an}(s)\)</span>，则有：<br>
+<span class="math display">\[
+H_a(s) = H_{an} = \left( \dfrac{s}{\Omega_c}\right)
+\]</span></p>
+<p>实际应用时可以根据所求参数查表得到 <span class="math inline">\(H_{an}(s)\)</span>，再去归一化得到 <span class="math inline">\(H_a(s)\)</span></p>
+<h4><span id="切比雪夫-i-型低通滤波器">切比雪夫 I 型低通滤波器</span></h4>
+<p>已知的参数 - 通带截止频率：<span class="math inline">\(\Omega_p\)</span> - 阻带截止频率：<span class="math inline">\(\Omega_{st}\)</span> - 通带最大衰减 (dB)：<span class="math inline">\(R_p\)</span> - 阻带最小衰减 (dB)：<span class="math inline">\(A_s\)</span></p>
+<p>要求的参数 - 截止频率，指定 <span class="math inline">\(\Omega_c =
+\Omega_p\)</span></p>
+<ul>
+<li><p>波纹参数：<span class="math inline">\(\varepsilon =
+\sqrt{10^{0.1R_p} - 1}\)</span></p></li>
+<li><p>滤波器阶数：N<br>
+<span class="math display">\[
+N \geq \dfrac{\lg \left[ \sqrt{\dfrac{10^{0.1 A_s} - 1}{10^{0.1 R_p} -
+1}} + \sqrt{\dfrac{10^{0.1 A_s} - 1}{10^{0.1 R_p} - 1} - 1}\right]}{\lg
+\left[ \dfrac{\Omega_{st}}{\Omega_p} + \sqrt{\left(
+\dfrac{\Omega_{st}}{\Omega_p}\right)^2 - 1}\right]}
+\]</span></p></li>
+</ul>
+<p>由 N 和 <span class="math inline">\(\varepsilon\)</span> 查表可得
+<span class="math inline">\(H_{an}(s)\)</span>；由 <span class="math inline">\(\Omega_c\)</span> 去归一化可得 <span class="math inline">\(H_a(s)\)</span></p>
+<h4><span id="模拟频域频带变换">模拟频域频带变换</span></h4>
+<p>将归一化模拟低通滤波器转换成模拟低通、高通、带通、带阻滤波器。</p>
+<p>记归一化 <span class="math inline">\((\bar{\Omega}_p = 1)\)</span>
+模拟低通滤波器的系统函数为 <span class="math inline">\(H_{an}(\bar{s})\)</span>，频率响应为 <span class="math inline">\(H_{an}(j\bar{\Omega})\)</span>。<br>
+变换后各各类模拟滤波器的系统函数为 <span class="math inline">\(H_a(s)\)</span>，频率响应为 <span class="math inline">\(H_a(j\Omega)\)</span>。</p>
+<center>
+<table>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(H_a(s)\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\bar{s}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\bar{\Omega}\)</span></th>
+<th style="text-align: left;">补充</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">低通 <span class="math inline">\(H_{lp}(s)\)</span><br>通带截止频率 <span class="math inline">\(\Omega_{p}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\dfrac{s}{\Omega_{p}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\dfrac{\Omega}{\Omega_{p}}\)</span></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">高通 <span class="math inline">\(H_{hp}(s)\)</span><br>通带截止频率 <span class="math inline">\(\Omega_{p}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\dfrac{\Omega_{p}}{s}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-\dfrac{\Omega_{p}}{\Omega}\)</span></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">带通 <span class="math inline">\(H_{bp}(s)\)</span><br>通带截止频率 <span class="math inline">\(\Omega_{p1}\)</span> <span class="math inline">\(\Omega_{p2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\dfrac{s^2 +
+\Omega_{p0}^2}{B_p s}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\dfrac{\Omega^2 - \Omega_{p0}^2}{B_p
+\Omega}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\Omega_{p0} =
+\sqrt{\Omega_{p1}\Omega_{p2}}\)</span><br><span class="math inline">\(B_p = \Omega_{p2} - \Omega_{p1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">带阻 <span class="math inline">\(H_{bs}(s)\)</span><br>阻带截止频率 <span class="math inline">\(\Omega_{st1}\)</span> <span class="math inline">\(\Omega_{st2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\dfrac{\bar{\Omega}_{st} B_s s}{s^2 +
+\Omega_{st0}^2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\dfrac{\bar{\Omega}_{st} B_s \Omega}{s^2 +
+\Omega_{st0}^2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\Omega_{st0} =
+\sqrt{\Omega_{st1}\Omega_{st2}}\)</span><br><span class="math inline">\(B_s = \Omega_{st2} - \Omega_{st1}\)</span></td>
+</tr>
+</tbody>
+</table>
+</center>
+<h2><span id="fir-滤波器">FIR 滤波器</span></h2>
 
-
-<h3><span id="与傅里叶变换的关系">与傅里叶变换的关系</span></h3><p>$$<br>X(z&#x3D;e^{j\omega}) &#x3D; X(\omega) &#x3D; \sum\limits_{n &#x3D; -\infty}^{\infty} x(n) e^{-j\omega n}$$</p>
-<h2><span id="dft-amp-fft">DFT &amp; FFT</span></h2><h1><span id="lti-系统">LTI 系统</span></h1><h1><span id="滤波器设计">滤波器设计</span></h1><h2><span id="fir-滤波器">FIR 滤波器</span></h2><h2><span id="iir-滤波器">IIR 滤波器</span></h2>
       
 
       
@@ -660,15 +1377,6 @@
   
 <nav id="article-nav">
   
-    <a href="/2024/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
-  
   
     <a href="/2024/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">网络安全</div>
@@ -698,7 +1406,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">杂七杂八</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">卷积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">模拟信号采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">数学不好</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">信号变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">傅里叶变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.1.</span> <span class="toc-text">连续时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">CFS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">CFT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.2.</span> <span class="toc-text">离散时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">DTFS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">DTFT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.3.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">z 变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.1.</span> <span class="toc-text">双边</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">常见 z 变换对</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">逆变换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.2.</span> <span class="toc-text">单边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.3.</span> <span class="toc-text">与傅里叶变换的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text">DFT &amp; FFT</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">LTI 系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">滤波器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">FIR 滤波器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">IIR 滤波器</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">杂七杂八</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">卷积</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">线性卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">圆周卷积</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">模拟信号采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">数学不好</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">信号变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">傅里叶变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.1.</span> <span class="toc-text">连续时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">CFS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">CFT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.2.</span> <span class="toc-text">离散时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">DTFS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">DTFT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.3.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">z 变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.1.</span> <span class="toc-text">双边</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">常见 z 变换对</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">逆变换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.2.</span> <span class="toc-text">单边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.3.</span> <span class="toc-text">与傅里叶变换的关系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">DFT &amp; FFT</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">DFT &amp; IDFT 的计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">基2 FFT 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.1.</span> <span class="toc-text">按时间抽取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">蝶形运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.2.</span> <span class="toc-text">按频率抽取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text">基4 FFT 算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text">N 为复合数的 FFT 算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.5.</span> <span class="toc-text">调频 z 变换算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">离散时间系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">系统函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">FIR 系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.1.</span> <span class="toc-text">直接型结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.2.</span> <span class="toc-text">级联型结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text">IIR 系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.1.</span> <span class="toc-text">直接型结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">直接 I 型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.3.1.2.</span> <span class="toc-text">直接 II 型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.2.</span> <span class="toc-text">级联型结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.3.</span> <span class="toc-text">并联型结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">滤波器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">数字滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.1.</span> <span class="toc-text">技术指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.2.</span> <span class="toc-text">频率响应</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text">IIR 滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.1.</span> <span class="toc-text">模拟滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">巴特沃斯低通滤波器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.1.2.</span> <span class="toc-text">切比雪夫 I 型低通滤波器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.1.3.</span> <span class="toc-text">模拟频域频带变换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.3.</span> <span class="toc-text">FIR 滤波器</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -738,7 +1446,7 @@
     </div>
     <script>
 	var yiliaConfig = {
-		mathjax: true,
+		mathjax: [object Object],
 		isHome: false,
 		isPost: true,
 		isArchive: false,

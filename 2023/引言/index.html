@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://T-1031.github.io">
   <title>引言 | TG仓库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第1章 引言   协议层次结构 多层通信过程   服务 面向连接的服务 无连接服务   参考模型 OSI参考模型 TCP&#x2F;IP参考模型      协议层次结构绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。 协议：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层协议。 协议栈：一个特定的系统所">
+  <meta name="description" content="第1章 引言   协议层次结构  多层通信过程  服务  面向连接的服务 无连接服务  参考模型  OSI参考模型 TCP&#x2F;IP参考模型    协议层次结构 绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。 协议：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层">
 <meta property="og:type" content="article">
 <meta property="og:title" content="引言">
 <meta property="og:url" content="http://t-1031.github.io/2023/%E5%BC%95%E8%A8%80/index.html">
 <meta property="og:site_name" content="TG仓库">
-<meta property="og:description" content="第1章 引言   协议层次结构 多层通信过程   服务 面向连接的服务 无连接服务   参考模型 OSI参考模型 TCP&#x2F;IP参考模型      协议层次结构绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。 协议：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层协议。 协议栈：一个特定的系统所">
+<meta property="og:description" content="第1章 引言   协议层次结构  多层通信过程  服务  面向连接的服务 无连接服务  参考模型  OSI参考模型 TCP&#x2F;IP参考模型    协议层次结构 绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。 协议：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-12T08:15:10.000Z">
 <meta property="article:modified_time" content="2024-01-05T12:44:24.101Z">
@@ -164,105 +164,127 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="第1章-引言">第1章 引言</span></h1><!-- toc -->
-
+        <h1><span id="第1章-引言">第1章 引言</span></h1>
+<!-- toc -->
 <ul>
-<li><a href="#%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">协议层次结构</a><ul>
-<li><a href="#%E5%A4%9A%E5%B1%82%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B">多层通信过程</a></li>
-</ul>
-</li>
-<li><a href="#%E6%9C%8D%E5%8A%A1">服务</a><ul>
-<li><a href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%9C%8D%E5%8A%A1">面向连接的服务</a></li>
-<li><a href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1">无连接服务</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B">参考模型</a><ul>
-<li><a href="#osi%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B">OSI参考模型</a></li>
-<li><a href="#tcpip%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B">TCP&#x2F;IP参考模型</a></li>
-</ul>
-</li>
+<li><a href="#协议层次结构">协议层次结构</a>
+<ul>
+<li><a href="#多层通信过程">多层通信过程</a></li>
+</ul></li>
+<li><a href="#服务">服务</a>
+<ul>
+<li><a href="#面向连接的服务">面向连接的服务</a></li>
+<li><a href="#无连接服务">无连接服务</a></li>
+</ul></li>
+<li><a href="#参考模型">参考模型</a>
+<ul>
+<li><a href="#osi参考模型">OSI参考模型</a></li>
+<li><a href="#tcpip参考模型">TCP/IP参考模型</a></li>
+</ul></li>
 </ul>
 <!-- tocstop -->
-
-<h2><span id="协议层次结构">协议层次结构</span></h2><p>绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。</p>
+<h2><span id="协议层次结构">协议层次结构</span></h2>
+<p>绝大多数网络都组织成一个层次栈或分级栈，每一层都建立在其下一层的基础之上。</p>
 <p><strong>协议</strong>：指通信双方就如何进行通信的一种约定。一台机器上的第n层与另一台机器上的第n层进行对话时，所使用的规则和约定统称为第n层协议。</p>
 <p><strong>协议栈</strong>：一个特定的系统所使用的一组协议。</p>
 <p><strong>对等体</strong>：不同机器上构成相应层次的实体称为对等体。</p>
 <p><strong>接口</strong>：定义了下层向上层提供哪些原语操作和服务。</p>
 <p><strong>网络体系结构</strong>：层和协议的集合。</p>
-<h3><span id="多层通信过程">多层通信过程</span></h3><ol>
-<li>在输出端的机器上，上层向下层传递消息时，下层在消息前加上一个头，用来标识该信息，并把结果传递给再下一层。该头包含一些控制信息。  </li>
-<li>在限制消息大小的层（几乎所有的第3层协议），把入境消息分割成较小的单元，即数据包或包，并在每个数据包前面加上该层的头。每个数据包单独传输。  </li>
-<li>第2层给每个信息加上一个头和一个尾，然后将结果传送给第1层进行物理传输。  </li>
+<h3><span id="多层通信过程">多层通信过程</span></h3>
+<ol type="1">
+<li>在输出端的机器上，上层向下层传递消息时，下层在消息前加上一个头，用来标识该信息，并把结果传递给再下一层。该头包含一些控制信息。<br>
+</li>
+<li>在限制消息大小的层（几乎所有的第3层协议），把入境消息分割成较小的单元，即数据包或包，并在每个数据包前面加上该层的头。每个数据包单独传输。<br>
+</li>
+<li>第2层给每个信息加上一个头和一个尾，然后将结果传送给第1层进行物理传输。<br>
+</li>
 <li>在接收端的机器上，消息自底向上逐层传递，在传递过程中各个头被逐层剥离。没有一个第n层以下的头会被传递到第n层。</li>
 </ol>
-<h2><span id="服务">服务</span></h2><h3><span id="面向连接的服务">面向连接的服务</span></h3><p>首先在信源和信宿之间建立连接，然后在此连接上通信，最后拆除连接。</p>
+<h2><span id="服务">服务</span></h2>
+<h3><span id="面向连接的服务">面向连接的服务</span></h3>
+<p>首先在信源和信宿之间建立连接，然后在此连接上通信，最后拆除连接。</p>
 <p>特点：占用一定资源，可靠，按序传送。</p>
 <p>可靠服务：接收方向发送方确认收到的每个报文。确认过程本身要引入额外的开销和延迟。</p>
-<p>可靠的面向连接服务可分为可靠的报文流和可靠的字节流。前者保持报文的边界，而后者没有。此外还有不可靠的连接，及不进行确认。  </p>
-<h3><span id="无连接服务">无连接服务</span></h3><p>传送数据前不需要建立连接，即有即送。每个报文都携带了完整的目标地址。</p>
+<p>可靠的面向连接服务可分为可靠的报文流和可靠的字节流。前者保持报文的边界，而后者没有。此外还有不可靠的连接，及不进行确认。</p>
+<h3><span id="无连接服务">无连接服务</span></h3>
+<p>传送数据前不需要建立连接，即有即送。每个报文都携带了完整的目标地址。</p>
 <p>特点：每个数据包独自寻路（重复劳动），同一数据流的包可能经过不同的路径到达目的地，到达的顺序也可能颠倒。</p>
 <p>可分为不可靠的无连接服务（数据报服务），有确认的数据报服务，请求-应答服务（发送方传输一个包含了某个请求的数据报，接受方以一个包含了请求结果的应答数据报作为反馈）。</p>
-<h2><span id="参考模型">参考模型</span></h2><h3><span id="osi参考模型">OSI参考模型</span></h3><table>
+<h2><span id="参考模型">参考模型</span></h2>
+<h3><span id="osi参考模型">OSI参考模型</span></h3>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>名字</th>
 <th>功能</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td><strong>物理层</strong></td>
 <td>主要涉及机械，电子，时序接口，以及物理层之下的物理传输介质等。</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>数据链路层</strong></td>
 <td>发送方将输入数据拆分成数据帧，然后顺序发送；错误检测和纠正；流量控制。</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>网络层</strong></td>
 <td>寻址和路由数据包，拥塞控制。</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>传输层</strong></td>
 <td>接收来自上一层的数据（必要时分割），然后传递给网络层；决定了向会话层（用户）提供的服务类型。</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>会话层</strong></td>
 <td>建立（或清除）在两个通信的表示层之间的通信通道；包括交互管理，同步，异常报告。</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>表示层</strong></td>
 <td>负责数据的表示语法。</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>应用层</strong></td>
 <td>处理应用进程之间所发送和接收的数据中包含的信息内容，包含各种协议。</td>
 </tr>
-</tbody></table>
-<h3><span id="tcpx2fip参考模型">TCP&#x2F;IP参考模型</span></h3><table>
+</tbody>
+</table>
+<h3><span id="tcpip参考模型">TCP/IP参考模型</span></h3>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>名字</th>
 <th>功能</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td><strong>链路层</strong></td>
 <td>主机和传输线路之间的一个接口。</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>互联网层</strong></td>
 <td>提供非连接的分组交换功能；定义了官方的数据包格式和协议，因特网协议(IP)及辅助协议，因特网控制报文协议(ICMP)。</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>传输层</strong></td>
 <td>定义了两个端到端的传输协议：可靠的，面向连接的传输控制协议(TCP)；不可靠的，无连接的用户数据报协议(UDP)。</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>应用层</strong></td>
 <td>包含了所有的高层协议。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
       
 
@@ -428,7 +450,7 @@
     </div>
     <script>
 	var yiliaConfig = {
-		mathjax: true,
+		mathjax: [object Object],
 		isHome: false,
 		isPost: true,
 		isArchive: false,
