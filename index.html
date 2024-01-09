@@ -267,7 +267,11 @@
 <li><a href="#窗函数设计法">窗函数设计法</a>
 <ul>
 <li><a href="#计算步骤">计算步骤</a></li>
-<li><a href="#频谱搬移">频谱搬移</a></li>
+</ul></li>
+<li><a href="#频率抽样设计法">频率抽样设计法</a>
+<ul>
+<li><a href="#基本思路">基本思路</a></li>
+<li><a href="#设计公式">设计公式</a></li>
 </ul></li>
 <li><a href="#与-iir-比较">与 IIR 比较</a></li>
 </ul></li>
@@ -1450,7 +1454,7 @@ s = \dfrac{1 - 2z^{-1} \cos \omega_0 + z^{-2}}{1 - z^{-2}}
 得到 <span class="math inline">\(H_{bp}(z)\)</span></li>
 </ul></li>
 </ul>
-<p>我赌不考。</p>
+<p>懒得改了。。。。</p>
 <h2><span id="fir-滤波器">FIR 滤波器</span></h2>
 <h3><span id="滤波器特点">滤波器特点</span></h3>
 <ul>
@@ -1585,21 +1589,30 @@ w(n) = \left[0.42 - 0.5 \cos\left( \dfrac{2\pi n}{N-1}\right) + 0.08
 \]</span></p></li>
 </ul></li>
 </ul>
-<h4><span id="频谱搬移">频谱搬移</span></h4>
+<h3><span id="频率抽样设计法">频率抽样设计法</span></h3>
+<h4><span id="基本思路">基本思路</span></h4>
 <ul>
-<li>低通到高通
+<li><p>给定期望逼近的频率响应 <span class="math inline">\(H_d(e^{j\omega})\)</span>。</p></li>
+<li><p>在 <span class="math inline">\(\omega\)</span> 的一个周期 <span class="math inline">\([0, 2\pi)\)</span> 中进行 N 点等间距抽样得到 <span class="math inline">\(H(k)\)</span>，即<br>
+<span class="math display">\[
+H(k) = H_d(e^{j\omega}) |_{\omega = \frac{2\pi}{N}k},\quad k = 0, 1,
+\cdots, N-1
+\]</span></p></li>
+<li><p>求 <span class="math inline">\(h(n)\)</span><br>
+<span class="math display">\[
+h(n) = IDFT[H(k)] = \dfrac{1}{N} \sum\limits_{k=0}^{N-1} H(k)
+e^{j\frac{2\pi}{N} nk},\quad n = 0, 1, \cdots, N-1
+\]</span></p></li>
+</ul>
+<h4><span id="设计公式">设计公式</span></h4>
+<p>PPT 上懒得打了。</p>
+<p>计算方法：<br>
+- 在通带部分，<span class="math inline">\(|H(k)| =
+1\)</span>；在阻带部分，<span class="math inline">\(|H(k)| =
+0\)</span>；过渡带的值一般会给出。</p>
 <ul>
-<li>将高通滤波器指标转换为低通滤波器指标，即原 <span class="math inline">\(\omega_c\)</span> 转换为 <span class="math inline">\(\pi - \omega_c\)</span></li>
-<li>计算出低通滤波器的 <span class="math inline">\(h_{lp}(n)\)</span>，则 <span class="math inline">\(h_{hp}(n) = \cos(n\pi) h_{lp}(n) = (-1)^n
-h_{lp}(n)\)</span></li>
-</ul></li>
-<li>低通到带通
-<ul>
-<li>低通滤波器的 <span class="math inline">\(\omega_c = \frac{1}{2}
-(\omega_2 - \omega_1)\)</span></li>
-<li><span class="math inline">\(h_{bp}(n) = \cos[w_0(n -
-\tau)]\)</span>，其中</li>
-</ul></li>
+<li><p>通过已知的截止频率在整个周期中的占比，确定通带、阻带、过渡带各有哪几个点。</p></li>
+<li><p>结合上述设计公式得到 <span class="math inline">\(H(k)\)</span></p></li>
 </ul>
 <h3><span id="与-iir-比较">与 IIR 比较</span></h3>
 <ul>
