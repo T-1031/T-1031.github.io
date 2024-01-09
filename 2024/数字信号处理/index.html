@@ -16,7 +16,7 @@
 <meta property="og:description" content="杂七杂八  卷积  线性卷积 圆周卷积  模拟信号采样 数学不好  信号变换  傅里叶变换  连续时间  CFS CFT  离散时间  DTFS DTFT  特点  z 变换  双边  定义 常见 z 变换对 性质 逆变换  单边 与傅里叶变换的关系   DFT &amp; FFT  DFT &amp; ID">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-06T08:57:27.000Z">
-<meta property="article:modified_time" content="2024-01-08T16:52:13.052Z">
+<meta property="article:modified_time" content="2024-01-09T05:52:24.685Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -254,8 +254,23 @@
 <li><a href="#切比雪夫-i-型低通滤波器">切比雪夫 I 型低通滤波器</a></li>
 <li><a href="#模拟频域频带变换">模拟频域频带变换</a></li>
 </ul></li>
+<li><a href="#间接法设计数字滤波器">间接法设计数字滤波器</a>
+<ul>
+<li><a href="#冲激响应不变法">冲激响应不变法</a></li>
+<li><a href="#双线性变换法">双线性变换法</a></li>
+<li><a href="#数字频域频带变换">数字频域频带变换</a></li>
 </ul></li>
-<li><a href="#fir-滤波器">FIR 滤波器</a></li>
+</ul></li>
+<li><a href="#fir-滤波器">FIR 滤波器</a>
+<ul>
+<li><a href="#滤波器特点">滤波器特点</a></li>
+<li><a href="#窗函数设计法">窗函数设计法</a>
+<ul>
+<li><a href="#计算步骤">计算步骤</a></li>
+<li><a href="#频谱搬移">频谱搬移</a></li>
+</ul></li>
+<li><a href="#与-iir-比较">与 IIR 比较</a></li>
+</ul></li>
 </ul></li>
 </ul>
 <!-- tocstop -->
@@ -897,14 +912,38 @@ x(1)\)</span>、<span class="math inline">\(X(1) = x(0) - W_2^0
 x(1)\)</span>。<br>
 即上述蝶形运算中 <span class="math inline">\(a = x(0)\)</span>、<span class="math inline">\(b = x(1)\)</span>、<span class="math inline">\(A =
 X(0)\)</span>、<span class="math inline">\(B = X(1)\)</span>。</p>
-<p>eg. 计算 8 点基 2 FFT<br>
-- 序列抽取 - 第一次抽取： - <span class="math inline">\(x(0), x(2),
-x(4), x(6)\)</span> - <span class="math inline">\(x(1), x(3), x(5),
-x(7)\)</span> - 第二次抽取： - <span class="math inline">\(x(0),
-x(4)\)</span> - <span class="math inline">\(x(2), x(6)\)</span> - <span class="math inline">\(x(1), x(5)\)</span> - <span class="math inline">\(x(3), x(7)\)</span> - 第三次抽取：<br>
-<span class="math inline">\(y(n)\)</span> 表示当前位置存储的值。 - <span class="math inline">\(y(0) = x(0)\)</span><br>
-- <span class="math inline">\(y(1) = x(4)\)</span> - <span class="math inline">\(y(2) = x(2)\)</span> - <span class="math inline">\(y(3) = x(6)\)</span> - <span class="math inline">\(y(4) = x(1)\)</span> - <span class="math inline">\(y(5) = x(5)\)</span> - <span class="math inline">\(y(6) = x(3)\)</span> - <span class="math inline">\(y(6) = x(7)\)</span></p>
+<p>eg. 计算 8 点基 2 FFT</p>
 <ul>
+<li>序列抽取
+<ul>
+<li>第一次抽取：
+<ul>
+<li><span class="math inline">\(x(0), x(2), x(4), x(6)\)</span></li>
+<li><span class="math inline">\(x(1), x(3), x(5), x(7)\)</span><br>
+</li>
+</ul></li>
+<li>第二次抽取：
+<ul>
+<li><span class="math inline">\(x(0), x(4)\)</span></li>
+<li><span class="math inline">\(x(2), x(6)\)</span></li>
+<li><span class="math inline">\(x(1), x(5)\)</span></li>
+<li><span class="math inline">\(x(3), x(7)\)</span><br>
+</li>
+</ul></li>
+<li>第三次抽取：<br>
+<span class="math inline">\(y(n)\)</span> 表示当前位置存储的值。
+<ul>
+<li><span class="math inline">\(y(0) = x(0)\)</span><br>
+</li>
+<li><span class="math inline">\(y(1) = x(4)\)</span></li>
+<li><span class="math inline">\(y(2) = x(2)\)</span></li>
+<li><span class="math inline">\(y(3) = x(6)\)</span></li>
+<li><span class="math inline">\(y(4) = x(1)\)</span></li>
+<li><span class="math inline">\(y(5) = x(5)\)</span></li>
+<li><span class="math inline">\(y(6) = x(3)\)</span></li>
+<li><span class="math inline">\(y(6) = x(7)\)</span></li>
+</ul></li>
+</ul></li>
 <li>DFT 计算
 <ul>
 <li>第一阶段：4 级 4 组蝶形运算
@@ -1250,46 +1289,324 @@ N \geq \dfrac{\lg \left[ \sqrt{\dfrac{10^{0.1 A_s} - 1}{10^{0.1 R_p} -
 <thead>
 <tr class="header">
 <th style="text-align: left;"><span class="math inline">\(H_a(s)\)</span></th>
-<th style="text-align: left;"><span class="math inline">\(\bar{s}\)</span></th>
-<th style="text-align: left;"><span class="math inline">\(\bar{\Omega}\)</span></th>
-<th style="text-align: left;">补充</th>
+<th style="text-align: center;"><span class="math inline">\(\bar{s}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\bar{\Omega}\)</span></th>
+<th style="text-align: center;">补充</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">低通 <span class="math inline">\(H_{lp}(s)\)</span><br>通带截止频率 <span class="math inline">\(\Omega_{p}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\dfrac{s}{\Omega_{p}}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\dfrac{\Omega}{\Omega_{p}}\)</span></td>
-<td style="text-align: left;"></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{s}{\Omega_{p}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{\Omega}{\Omega_{p}}\)</span></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">高通 <span class="math inline">\(H_{hp}(s)\)</span><br>通带截止频率 <span class="math inline">\(\Omega_{p}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\dfrac{\Omega_{p}}{s}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(-\dfrac{\Omega_{p}}{\Omega}\)</span></td>
-<td style="text-align: left;"></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{\Omega_{p}}{s}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\dfrac{\Omega_{p}}{\Omega}\)</span></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">带通 <span class="math inline">\(H_{bp}(s)\)</span><br>通带截止频率 <span class="math inline">\(\Omega_{p1}\)</span> <span class="math inline">\(\Omega_{p2}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\dfrac{s^2 +
+<td style="text-align: center;"><span class="math inline">\(\dfrac{s^2 +
 \Omega_{p0}^2}{B_p s}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\dfrac{\Omega^2 - \Omega_{p0}^2}{B_p
+<td style="text-align: center;"><span class="math inline">\(\dfrac{\Omega^2 - \Omega_{p0}^2}{B_p
 \Omega}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\Omega_{p0} =
-\sqrt{\Omega_{p1}\Omega_{p2}}\)</span><br><span class="math inline">\(B_p = \Omega_{p2} - \Omega_{p1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\Omega_{p0}
+= \sqrt{\Omega_{p1}\Omega_{p2}}\)</span><br><span class="math inline">\(B_p = \Omega_{p2} - \Omega_{p1}\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">带阻 <span class="math inline">\(H_{bs}(s)\)</span><br>阻带截止频率 <span class="math inline">\(\Omega_{st1}\)</span> <span class="math inline">\(\Omega_{st2}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\dfrac{\bar{\Omega}_{st} B_s s}{s^2 +
+<td style="text-align: center;"><span class="math inline">\(\dfrac{\bar{\Omega}_{st} B_s s}{s^2 +
 \Omega_{st0}^2}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\dfrac{\bar{\Omega}_{st} B_s \Omega}{s^2 +
+<td style="text-align: center;"><span class="math inline">\(\dfrac{\bar{\Omega}_{st} B_s \Omega}{s^2 +
 \Omega_{st0}^2}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\Omega_{st0} =
-\sqrt{\Omega_{st1}\Omega_{st2}}\)</span><br><span class="math inline">\(B_s = \Omega_{st2} - \Omega_{st1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\Omega_{st0}
+= \sqrt{\Omega_{st1}\Omega_{st2}}\)</span><br><span class="math inline">\(B_s = \Omega_{st2} - \Omega_{st1}\)</span></td>
 </tr>
 </tbody>
 </table>
 </center>
+<ul>
+<li>带通滤波器计算步骤
+<ul>
+<li>频带变换
+<ul>
+<li>按上表中的公式求 <span class="math inline">\(\bar{\Omega}_{p0},\
+B_p,\ \bar{\Omega}_{st1},\ \bar{\Omega}_{st2}\)</span></li>
+<li>归一化模拟低通滤波器的阻带截止频率为 <span class="math inline">\(\bar{\Omega}_{st} = \min(|\bar{\Omega}_{st1}|,
+|\bar{\Omega}_{st2}|)\)</span></li>
+</ul></li>
+<li>利用 <span class="math inline">\(\bar{\Omega}_{p} = 1,\
+\bar{\Omega}_{st},\ R_p,\ A_s\)</span> 按照相应低通滤波器的求法求出
+<span class="math inline">\(H_{an}(\bar{s})\)</span>
+<ul>
+<li>如果是巴特沃斯滤波器，当 <span class="math inline">\(R_p \neq
+3dB\)</span> 时，<span class="math inline">\(\Omega_p \neq
+\Omega_c\)</span>，需要对求出的系统函数做去归一化，得到 <span class="math inline">\(H_a(\bar{s}) =
+H_{an}\left(\dfrac{\bar{s}}{\bar{\Omega}_c}\right)\)</span></li>
+</ul></li>
+<li>再次利用上表中的公式，将 <span class="math inline">\(\bar{s}\)</span> 变换为 <span class="math inline">\(s\)</span> 从而得到 <span class="math inline">\(H_{bp}(s)\)</span></li>
+</ul></li>
+<li>阻带滤波器计算步骤
+<ul>
+<li>频带变换
+<ul>
+<li>按上表中的公式求 <span class="math inline">\(\bar{\Omega}_{st0},\
+B_s,\ \bar{\Omega}_{p1},\ \bar{\Omega}_{p2}\)</span></li>
+<li>归一化模拟低通滤波器的通带截止频率为 <span class="math inline">\(\bar{\Omega}_{p} = \max(|\bar{\Omega}_{p1}|,
+|\bar{\Omega}_{p2}|)\)</span>（得到的是有关 <span class="math inline">\(\bar{\Omega}_{st}\)</span> 的式子）</li>
+<li>依据 <span class="math inline">\(\bar{\Omega}_p = 1\)</span> 计算出
+<span class="math inline">\(\bar{\Omega}_{st}\)</span></li>
+</ul></li>
+<li>利用 <span class="math inline">\(\bar{\Omega}_{p} = 1,\
+\bar{\Omega}_{st},\ R_p,\ A_s\)</span> 按照相应低通滤波器的求法求出
+<span class="math inline">\(H_{an}(\bar{s})\)</span>
+<ul>
+<li>如果是巴特沃斯滤波器，当 <span class="math inline">\(R_p \neq
+3dB\)</span> 时，<span class="math inline">\(\Omega_p \neq
+\Omega_c\)</span>，需要对求出的系统函数做去归一化，得到 <span class="math inline">\(H_a(\bar{s}) =
+H_{an}\left(\dfrac{\bar{s}}{\bar{\Omega}_c}\right)\)</span></li>
+</ul></li>
+<li>再次利用上表中的公式，将 <span class="math inline">\(\bar{s}\)</span> 变换为 <span class="math inline">\(s\)</span> 从而得到 <span class="math inline">\(H_{bp}(s)\)</span></li>
+</ul></li>
+</ul>
+<h3><span id="间接法设计数字滤波器">间接法设计数字滤波器</span></h3>
+<h4><span id="冲激响应不变法">冲激响应不变法</span></h4>
+<p>将模拟滤波器的单位冲激响应 <span class="math inline">\(h_a(t)\)</span> 映射成数字滤波器的单位冲激响应
+<span class="math inline">\(h(n)\)</span>。<br>
+记抽样周期为 <span class="math inline">\(T =
+\frac{1}{f_s}\)</span>，满足 <span class="math inline">\(h(n) =
+h_a(nT)\)</span>。</p>
+<p>要求： - 要求模拟滤波器是严格带限于 <span class="math inline">\(\frac{f_s}{2}\)</span>，不能用于设计高通滤波器和带阻滤波器。
+- 只适用于并联结构的系统函数，即系统函数必须先展开成部分分式。</p>
+<p>计算步骤： - 计算出相应模拟滤波器的系统函数 <span class="math inline">\(H_a(s)\)</span></p>
+<ul>
+<li><p>将该系统函数展开为部分分式之和的形式，即<br>
+<span class="math display">\[
+H_a(s) = \sum\limits_{k=1}^{N} \dfrac{A_k}{s - s_k}
+\]</span></p></li>
+<li><p>依据 <span class="math inline">\(H_a(s)\)</span> 和抽样周期 T
+得到数字滤波器的系统函数<br>
+<span class="math display">\[
+H(z) = \sum\limits_{k=1}^{N} \dfrac{A_k}{1 - e^{s_k T} z^{-1}}
+\]</span></p></li>
+</ul>
+<h4><span id="双线性变换法">双线性变换法</span></h4>
+<p>将模拟滤波器的系统函数 <span class="math inline">\(H_a(s)\)</span>
+映射成数字滤波器系统函数 <span class="math inline">\(H(z)\)</span>。</p>
+<p>计算步骤： - 根据模拟角频率 <span class="math inline">\(\Omega_p\)</span>、<span class="math inline">\(\Omega_{st}\)</span> 计算数字频率<br>
+<span class="math display">\[
+  \omega_p = \Omega_p T,\ \omega_{st} = \Omega_{st} T
+  \]</span></p>
+<ul>
+<li><p>计算频率预畸<br>
+<span class="math display">\[
+\Omega_p&#39; = \dfrac{2}{T} \tan \left( \dfrac{\omega_p}{2}\right)
+\]</span><br>
+<span class="math display">\[
+\Omega_{st}&#39; = \dfrac{2}{T} \tan \left(
+\dfrac{\omega_{st}}{2}\right)
+\]</span></p></li>
+<li><p>根据 <span class="math inline">\(\Omega_p&#39;,\
+\Omega_{st}&#39;,\ R_p,\ A_s\)</span> 计算出模拟滤波器的 <span class="math inline">\(H_a(s)\)</span></p></li>
+<li><p>令 <span class="math inline">\(H_a(s)\)</span> 中<br>
+<span class="math display">\[
+s = \dfrac{2}{T} \cdot \dfrac{1 - z^{-1}}{1 + z^{-1}}
+\]</span><br>
+从而根据 <span class="math inline">\(H_a(s)\)</span> 得到 <span class="math inline">\(H(z)\)</span></p></li>
+</ul>
+<h4><span id="数字频域频带变换">数字频域频带变换</span></h4>
+<p>要求将归一化模拟低通滤波器直接转换为低通、高通、带通、带阻数字滤波器。</p>
+<p>eg. 带通数字滤波器 - 将模拟域指标变换为数字域指标 <span class="math inline">\(\omega_{st1},\ \omega_{st2},\ \omega_{p1},\
+\omega_{p2}\)</span></p>
+<ul>
+<li><p>求中心频率<br>
+<span class="math display">\[
+\cos(\omega_0) = \dfrac{\cos\left( \dfrac{\omega_{p2} +
+\omega_{p1}}{2}\right)}{\cos\left( \dfrac{\omega_{p2} -
+\omega_{p1}}{2}\right)}
+\]</span></p></li>
+<li><p>将数字域频率指标转换，得到频域的通带截止频率和阻带截止频率</p>
+<ul>
+<li>选择 <span class="math inline">\(\omega_p = \max(\omega_{p1},
+\omega_{p2})\)</span></li>
+<li>变换到频域<br>
+<span class="math display">\[
+\Omega = \dfrac{\cos \omega_0 - \cos \omega}{\sin \omega}
+\]</span><br>
+</li>
+<li>取 <span class="math inline">\(\Omega_{st} = \min(|\Omega_{st1}|,
+|\Omega_{st2}|)\)</span></li>
+</ul></li>
+<li><p>根据 <span class="math inline">\(\Omega_p,\ \Omega_{st},\ R_p,\
+A_s\)</span> 按相应的模拟滤波器的设计方法得到 <span class="math inline">\(H_{a}(s)\)</span></p>
+<ul>
+<li>令 <span class="math inline">\(H_a(s)\)</span> 中<br>
+<span class="math display">\[
+s = \dfrac{1 - 2z^{-1} \cos \omega_0 + z^{-2}}{1 - z^{-2}}
+\]</span><br>
+得到 <span class="math inline">\(H_{bp}(z)\)</span></li>
+</ul></li>
+</ul>
+<p>我赌不考。</p>
 <h2><span id="fir-滤波器">FIR 滤波器</span></h2>
+<h3><span id="滤波器特点">滤波器特点</span></h3>
+<ul>
+<li><p>h(n) 具有对称性<br>
+<span class="math display">\[
+h(n) = \pm h(N-1-n)
+\]</span></p></li>
+<li><p>群延迟为常数<br>
+<span class="math display">\[
+\tau = \dfrac{N-1}{2}
+\]</span></p></li>
+</ul>
+<p>有四种情况： - <span class="math inline">\(h(n) =
+h(N-1-n)\)</span>，N 为奇数：<br>
+可用于设计任一种滤波器。 - <span class="math inline">\(h(n) =
+h(N-1-n)\)</span>，N 为偶数：<br>
+不能设计高通和带阻。 - <span class="math inline">\(h(n) =
+-h(N-1-n)\)</span>，N 为奇数：<br>
+只能用于带通。 - <span class="math inline">\(h(n) =
+-h(N-1-n)\)</span>，N 为偶数：<br>
+- 只能用于高通和带通。</p>
+<h3><span id="窗函数设计法">窗函数设计法</span></h3>
+<p>给定理想频率响应 <span class="math inline">\(H_d(e^{j\omega})\)</span>，导出 <span class="math inline">\(h_d(n)\)</span><br>
+对 <span class="math inline">\(h_d(n)\)</span> 截取有限长度，形成 <span class="math inline">\(h(n)\)</span></p>
+<h4><span id="计算步骤">计算步骤</span></h4>
+<ul>
+<li><p>求参数</p>
+<ul>
+<li><p>过渡带宽：<span class="math inline">\(\Delta \omega = \omega_{st}
+- \omega_p\)</span></p></li>
+<li><p>截止频率：<span class="math inline">\(\omega_c = \dfrac{\omega_p
++ \omega_{st}}{2}\)</span></p></li>
+<li><p>阻带最小衰减：<br>
+<span class="math display">\[
+A_s = -20\lg \left( \dfrac{\delta}{1 + \delta}\right)
+\]</span><br>
+因此给定 <span class="math inline">\(A_s\)</span> 可以得到波纹 <span class="math inline">\(\delta\)</span>：<br>
+<span class="math display">\[
+\delta = \dfrac{10^{-\frac{A_s}{20}}}{1 - 10^{-\frac{A_S}{20}}}
+\]</span></p></li>
+<li><p>通带最大衰减：<br>
+<span class="math display">\[
+R_p = -20\lg \left( \dfrac{1 - \delta}{1 + \delta}\right)
+\]</span></p></li>
+</ul></li>
+<li><p>求 <span class="math inline">\(h_d(n)\)</span></p>
+<ul>
+<li><p>低通滤波器<br>
+<span class="math display">\[
+h_d(n) =
+\left\{
+\begin{aligned}
+  &amp;\dfrac{\sin [\omega_c (n-\tau)]}{\pi (n-\tau)},\ n \neq \tau \\
+  &amp;\dfrac{\omega_c}{\pi},\ n = \tau
+\end{aligned}
+\right.
+\]</span></p></li>
+<li><p>带通滤波器<br>
+<span class="math display">\[
+h_d(n) =
+\left\{
+\begin{aligned}
+  &amp;\dfrac{\sin [\omega_2 (n-\tau)] - \sin [\omega_1 (n-\tau)]}{\pi
+(n-\tau)},\ n \neq \tau \\
+  &amp;\dfrac{\omega_2 - \omega_1}{\pi},\ n = \tau
+\end{aligned}
+\right.
+\]</span></p></li>
+<li><p>带阻滤波器<br>
+<span class="math display">\[
+h_d(n) =
+\left\{
+\begin{aligned}
+  &amp;\dfrac{\sin [\pi (n-\tau)] - \sin [\omega_2 (n-\tau)] + \sin
+[\omega_1 (n-\tau)]}{\pi (n-\tau)},\ n \neq \tau \\
+  &amp;1 - \dfrac{\omega_2}{\pi} + \dfrac{\omega_1}{\pi},\ n = \tau
+\end{aligned}
+\right.
+\]</span></p></li>
+<li><p>高通滤波器<br>
+<span class="math display">\[
+h_d(n) =
+\left\{
+\begin{aligned}
+  &amp;\dfrac{\sin [\omega_c (n-\tau)]}{\pi (n-\tau)},\ n \neq \tau \\
+  &amp;1 - \dfrac{\omega_c}{\pi},\ n = \tau
+\end{aligned}
+\right.
+\]</span></p></li>
+</ul></li>
+<li><p>加窗截断，得到 <span class="math inline">\(h(n) = h_d(n)
+w(n)\)</span><br>
+记<br>
+<span class="math display">\[
+R_N(n) =
+\left\{
+\begin{aligned}
+  &amp;1,\ -\frac{N}{2} \leq n \leq \frac{N}{2} \\
+  &amp; 0,\ else
+\end{aligned}
+\right.
+\]</span></p>
+<ul>
+<li><p>矩形窗<br>
+<span class="math display">\[
+w(n) = R_N(n)
+\]</span></p></li>
+<li><p>三角形窗<br>
+<span class="math display">\[
+w(n) =
+\left\{
+\begin{aligned}
+  &amp;\dfrac{2n}{N-1},\quad 0 \leq n \leq \frac{N-1}{2} \\
+  &amp;2 - \dfrac{2n}{N-1},\quad \frac{N-1}{2} &lt; n \leq N-1
+\end{aligned}
+\right.
+\]</span></p></li>
+<li><p>汉宁 (Hanning) 窗<br>
+<span class="math display">\[
+w(n) = \dfrac{1}{2}\left[1 - \cos\left( \dfrac{2\pi
+n}{N-1}\right)\right] R_N(n)
+\]</span></p></li>
+<li><p>海明 (Hamming) 窗<br>
+<span class="math display">\[
+w(n) = \left[0.54 - 0.46 \cos\left( \dfrac{2\pi n}{N-1}\right)\right]
+R_N(n)
+\]</span></p></li>
+<li><p>布莱克曼 (Blackman) 窗<br>
+<span class="math display">\[
+w(n) = \left[0.42 - 0.5 \cos\left( \dfrac{2\pi n}{N-1}\right) + 0.08
+\cos\left( \dfrac{4\pi n}{N-1}\right)\right] R_N(n)
+\]</span></p></li>
+</ul></li>
+</ul>
+<h4><span id="频谱搬移">频谱搬移</span></h4>
+<ul>
+<li>低通到高通
+<ul>
+<li>将高通滤波器指标转换为低通滤波器指标，即原 <span class="math inline">\(\omega_c\)</span> 转换为 <span class="math inline">\(\pi - \omega_c\)</span></li>
+<li>计算出低通滤波器的 <span class="math inline">\(h_{lp}(n)\)</span>，则 <span class="math inline">\(h_{hp}(n) = \cos(n\pi) h_{lp}(n) = (-1)^n
+h_{lp}(n)\)</span></li>
+</ul></li>
+<li>低通到带通
+<ul>
+<li>低通滤波器的 <span class="math inline">\(\omega_c = \frac{1}{2}
+(\omega_2 - \omega_1)\)</span></li>
+<li><span class="math inline">\(h_{bp}(n) = \cos[w_0(n -
+\tau)]\)</span>，其中</li>
+</ul></li>
+</ul>
+<h3><span id="与-iir-比较">与 IIR 比较</span></h3>
+<ul>
+<li>可以实现严格的线性相位。</li>
+<li>h(n) 有限长，一定稳定。</li>
+<li>相同的技术指标，FIR 所需阶数比 IIR 高得多。</li>
+</ul>
 
       
 
@@ -1406,7 +1723,7 @@ N \geq \dfrac{\lg \left[ \sqrt{\dfrac{10^{0.1 A_s} - 1}{10^{0.1 R_p} -
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">杂七杂八</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">卷积</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">线性卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">圆周卷积</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">模拟信号采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">数学不好</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">信号变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">傅里叶变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.1.</span> <span class="toc-text">连续时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">CFS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">CFT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.2.</span> <span class="toc-text">离散时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">DTFS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">DTFT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.3.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">z 变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.1.</span> <span class="toc-text">双边</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">常见 z 变换对</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">逆变换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.2.</span> <span class="toc-text">单边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.3.</span> <span class="toc-text">与傅里叶变换的关系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">DFT &amp; FFT</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">DFT &amp; IDFT 的计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">基2 FFT 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.1.</span> <span class="toc-text">按时间抽取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">蝶形运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.2.</span> <span class="toc-text">按频率抽取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text">基4 FFT 算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text">N 为复合数的 FFT 算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.5.</span> <span class="toc-text">调频 z 变换算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">离散时间系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">系统函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">FIR 系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.1.</span> <span class="toc-text">直接型结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.2.</span> <span class="toc-text">级联型结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text">IIR 系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.1.</span> <span class="toc-text">直接型结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">直接 I 型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.3.1.2.</span> <span class="toc-text">直接 II 型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.2.</span> <span class="toc-text">级联型结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.3.</span> <span class="toc-text">并联型结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">滤波器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">数字滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.1.</span> <span class="toc-text">技术指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.2.</span> <span class="toc-text">频率响应</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text">IIR 滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.1.</span> <span class="toc-text">模拟滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">巴特沃斯低通滤波器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.1.2.</span> <span class="toc-text">切比雪夫 I 型低通滤波器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.1.3.</span> <span class="toc-text">模拟频域频带变换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.3.</span> <span class="toc-text">FIR 滤波器</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">杂七杂八</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">卷积</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">线性卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">圆周卷积</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">模拟信号采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">数学不好</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">信号变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">傅里叶变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.1.</span> <span class="toc-text">连续时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">CFS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">CFT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.2.</span> <span class="toc-text">离散时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">DTFS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">DTFT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.3.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">z 变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.1.</span> <span class="toc-text">双边</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">常见 z 变换对</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">逆变换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.2.</span> <span class="toc-text">单边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.3.</span> <span class="toc-text">与傅里叶变换的关系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">DFT &amp; FFT</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">DFT &amp; IDFT 的计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">基2 FFT 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.1.</span> <span class="toc-text">按时间抽取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">蝶形运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.2.</span> <span class="toc-text">按频率抽取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text">基4 FFT 算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text">N 为复合数的 FFT 算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.5.</span> <span class="toc-text">调频 z 变换算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">离散时间系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">系统函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">FIR 系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.1.</span> <span class="toc-text">直接型结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.2.</span> <span class="toc-text">级联型结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text">IIR 系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.1.</span> <span class="toc-text">直接型结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">直接 I 型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.3.1.2.</span> <span class="toc-text">直接 II 型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.2.</span> <span class="toc-text">级联型结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.3.</span> <span class="toc-text">并联型结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">滤波器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">数字滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.1.</span> <span class="toc-text">技术指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.2.</span> <span class="toc-text">频率响应</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text">IIR 滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.1.</span> <span class="toc-text">模拟滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">巴特沃斯低通滤波器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.1.2.</span> <span class="toc-text">切比雪夫 I 型低通滤波器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.1.3.</span> <span class="toc-text">模拟频域频带变换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.2.</span> <span class="toc-text">间接法设计数字滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.2.1.</span> <span class="toc-text">冲激响应不变法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.2.2.</span> <span class="toc-text">双线性变换法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.2.2.3.</span> <span class="toc-text">数字频域频带变换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.3.</span> <span class="toc-text">FIR 滤波器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.3.1.</span> <span class="toc-text">滤波器特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.3.2.</span> <span class="toc-text">窗函数设计法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.3.2.1.</span> <span class="toc-text">计算步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.3.2.2.</span> <span class="toc-text">频谱搬移</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.3.3.</span> <span class="toc-text">与 IIR 比较</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
