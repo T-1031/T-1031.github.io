@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://T-1031.github.io">
-  <title>Archives | TG仓库</title>
+  <title>模拟调制系统 | TG仓库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="懒狗">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TG仓库">
-<meta property="og:url" content="http://t-1031.github.io/archives/page/2/index.html">
+  <meta name="description" content="第5章 模拟调制系统   幅度调制（线性调制）原理  AM（调幅） DSB（双边带调制） SSB（单边带调制）  滤波法 相移法  VSB（残边带调制） 线性调制的一般模型 相干解调 包络检波  角度调制（非线性调制）原理  FM（调频）&amp; PM（调相）  FM &amp; PM 基本概念 单音调制 FM &amp; PM  窄带调频 宽带">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模拟调制系统">
+<meta property="og:url" content="http://t-1031.github.io/2024/%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="TG仓库">
-<meta property="og:description" content="懒狗">
+<meta property="og:description" content="第5章 模拟调制系统   幅度调制（线性调制）原理  AM（调幅） DSB（双边带调制） SSB（单边带调制）  滤波法 相移法  VSB（残边带调制） 线性调制的一般模型 相干解调 包络检波  角度调制（非线性调制）原理  FM（调频）&amp; PM（调相）  FM &amp; PM 基本概念 单音调制 FM &amp; PM  窄带调频 宽带">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-25T03:06:25.000Z">
+<meta property="article:modified_time" content="2024-01-25T05:36:39.980Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -142,37 +144,150 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-模拟调制系统" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      模拟调制系统
+    </h1>
+  
+
+        
+        <a href="/2024/%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6%E7%B3%BB%E7%BB%9F/" class="archive-article-date">
+  	<time datetime="2024-01-25T03:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-25</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="第5章-模拟调制系统">第5章 模拟调制系统</span></h1>
+<!-- toc -->
+<ul>
+<li><a href="#幅度调制线性调制原理">幅度调制（线性调制）原理</a>
+<ul>
+<li><a href="#am调幅">AM（调幅）</a></li>
+<li><a href="#dsb双边带调制">DSB（双边带调制）</a></li>
+<li><a href="#ssb单边带调制">SSB（单边带调制）</a>
+<ul>
+<li><a href="#滤波法">滤波法</a></li>
+<li><a href="#相移法">相移法</a></li>
+</ul></li>
+<li><a href="#vsb残边带调制">VSB（残边带调制）</a></li>
+<li><a href="#线性调制的一般模型">线性调制的一般模型</a></li>
+<li><a href="#相干解调">相干解调</a></li>
+<li><a href="#包络检波">包络检波</a></li>
+</ul></li>
+<li><a href="#角度调制非线性调制原理">角度调制（非线性调制）原理</a>
+<ul>
+<li><a href="#fm调频-pm调相">FM（调频）&amp; PM（调相）</a>
+<ul>
+<li><a href="#fm-pm-基本概念">FM &amp; PM 基本概念</a></li>
+<li><a href="#单音调制-fm-pm">单音调制 FM &amp; PM</a></li>
+</ul></li>
+<li><a href="#窄带调频">窄带调频</a></li>
+<li><a href="#宽带调频">宽带调频</a></li>
+<li><a href="#频率信号的产生">频率信号的产生</a></li>
+<li><a href="#频率信号的解调">频率信号的解调</a></li>
+</ul></li>
+<li><a href="#各种模拟调制系统的比较">各种模拟调制系统的比较</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="幅度调制线性调制原理">幅度调制（线性调制）原理</span></h2>
+<p>设正弦型载波为<br>
+<span class="math display">\[
+c(t) = A \cos (\omega_c t + \varphi_0)
+\]</span><br>
+其中</p>
+<ul>
+<li><span class="math inline">\(A\)</span>：载波幅度</li>
+<li><span class="math inline">\(\omega_c\)</span>：载波角频率</li>
+<li><span class="math inline">\(\varphi_0\)</span>：载波初始相位，可假定为 0</li>
+</ul>
+<p>则幅度已调信号一般可表示成<br>
+<span class="math display">\[
+s_m(t) = A m(t) \cos \omega_c t
+\]</span><br>
+其中，<span class="math inline">\(m(t)\)</span> 为基带调制信号。</p>
+<p>已调信号的频谱<br>
+<span class="math display">\[
+S_m(\omega) = \dfrac{A}{2} [M(\omega + \omega_c) + M(\omega - \omega_c)]
+\]</span><br>
+其中，<span class="math inline">\(M(\omega)\)</span> 为 <span class="math inline">\(m(t)\)</span> 的频谱。</p>
+<h3><span id="am调幅">AM（调幅）</span></h3>
+<p>标准调幅，常规双边带调制。<br>
+将原信号叠加一个直流偏量后于载波相乘，得到带有载波分量的双边带信号。</p>
+<p>时域表达式： <span class="math display">\[
+s_{AM}(t) = [A_0 + m(t)] \cos \omega_c t= A_0 \cos \omega_c t + m(t)
+\cos \omega_c t
+\]</span></p>
+<p>若 <span class="math inline">\(m(t)\)</span> 为确知信号，则 AM
+信号的频谱为：<br>
+<span class="math display">\[
+S_{AM}(\omega) = \pi A_0 [\delta(\omega + \omega_c) + \delta(\omega -
+\omega_c)] + \dfrac{1}{2} [M(\omega + \omega_c) + M(\omega - \omega_c)]
+\]</span></p>
+<p>当满足条件 <span class="math inline">\(| m(t) |_{max} \leq
+A_0\)</span> 时，AM 波的包络与调制信号 <span class="math inline">\(m(t)\)</span> 的形状完全一样。</p>
+<p>记基带信号的带宽为 <span class="math inline">\(f_H\)</span>，则 AM
+信号的带宽 <span class="math inline">\(B_{AM} = 2 f_H\)</span>。</p>
+<h3><span id="dsb双边带调制">DSB（双边带调制）</span></h3>
+<p>抑制载波双边带信号 (DSB-SC)，简称双边带信号 (DSB)。</p>
+<p>时域表达式：<br>
+<span class="math display">\[
+s_{DSB}(t) = m(t) \cos \omega_c t
+\]</span></p>
+<p>频谱：<br>
+<span class="math display">\[
+S_{DSB}(\omega) = \dfrac{1}{2} [M(\omega + \omega_c) + M(\omega -
+\omega_c)]
+\]</span></p>
+<p>带宽与 AM 信号带宽相同。</p>
+<h3><span id="ssb单边带调制">SSB（单边带调制）</span></h3>
+<p>将双边带信号中的一个边带滤掉。</p>
+<h4><span id="滤波法">滤波法</span></h4>
+<p>保留上边带，使用高通滤波器；保留下边带，使用低通滤波器。</p>
+<p>频谱表示：<br>
+<span class="math display">\[
+S_{SSB}(\omega) = S_{DSB}(\omega) \cdot H(\omega)
+\]</span></p>
+<h4><span id="相移法">相移法</span></h4>
+<p><strong>希尔伯特变换</strong>：将原信号相移 <span class="math inline">\(\dfrac{\pi}{2}\)</span>，记为 <span class="math inline">\(\hat{}\)</span><br>
+<strong>希尔伯特滤波器</strong>：<span class="math inline">\(H_h(\omega)
+= -j sgn(\omega)\)</span></p>
+<p>时域表达式：<br>
+<span class="math display">\[
+s_{SSB}(t) = \dfrac{1}{2} m(t) \cos \omega_c t \mp \dfrac{1}{2}
+\hat{m}(t) \sin \omega_c t
+\]</span><br>
+其中，<span class="math inline">\(\hat{m}(t)\)</span> 是 <span class="math inline">\(m(t)\)</span> 的希尔伯特变换。<br>
+"<span class="math inline">\(-\)</span>" 表示上边带信号，"<span class="math inline">\(+\)</span>" 表示下边带信号。</p>
+<p>带宽：<span class="math inline">\(B_{SSB} = f_H\)</span></p>
+<h3><span id="vsb残边带调制">VSB（残边带调制）</span></h3>
+<h3><span id="线性调制的一般模型">线性调制的一般模型</span></h3>
+<h3><span id="相干解调">相干解调</span></h3>
+<h3><span id="包络检波">包络检波</span></h3>
+<h2><span id="角度调制非线性调制原理">角度调制（非线性调制）原理</span></h2>
+<h3><span id="fm调频amp-pm调相">FM（调频）&amp; PM（调相）</span></h3>
+<h4><span id="fm-amp-pm-基本概念">FM &amp; PM 基本概念</span></h4>
+<h4><span id="单音调制-fm-amp-pm">单音调制 FM &amp; PM</span></h4>
+<h3><span id="窄带调频">窄带调频</span></h3>
+<h3><span id="宽带调频">宽带调频</span></h3>
+<h3><span id="频率信号的产生">频率信号的产生</span></h3>
+<h3><span id="频率信号的解调">频率信号的解调</span></h3>
+<h2><span id="各种模拟调制系统的比较">各种模拟调制系统的比较</span></h2>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-11-29T02:39:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89/">电子系统设计（五）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -182,195 +297,123 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/电子系统设计//" class="article-tag-list-link color2">电子系统设计</a>
+        			<a href="/categories/课程复习/通信原理//" class="article-tag-list-link color5">通信原理</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://t-1031.github.io/2024/%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-11-28T14:47:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2024/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数字信号处理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%9B%9B%EF%BC%89/">电子系统设计（四）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/电子系统设计//" class="article-tag-list-link color2">电子系统设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">第5章 模拟调制系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">幅度调制（线性调制）原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">AM（调幅）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">DSB（双边带调制）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.3.</span> <span class="toc-text">SSB（单边带调制）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">滤波法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">相移法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.4.</span> <span class="toc-text">VSB（残边带调制）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.5.</span> <span class="toc-text">线性调制的一般模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.6.</span> <span class="toc-text">相干解调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.7.</span> <span class="toc-text">包络检波</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">角度调制（非线性调制）原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">FM（调频）&amp; PM（调相）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">FM &amp; PM 基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">单音调制 FM &amp; PM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">窄带调频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.3.</span> <span class="toc-text">宽带调频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.4.</span> <span class="toc-text">频率信号的产生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.5.</span> <span class="toc-text">频率信号的解调</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">各种模拟调制系统的比较</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-11-28T14:46:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%89%EF%BC%89/">电子系统设计（三）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/电子系统设计//" class="article-tag-list-link color2">电子系统设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-11-28T13:51:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/">电子系统设计（二）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/电子系统设计//" class="article-tag-list-link color2">电子系统设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-11-28T10:14:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/">电子系统设计（一）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/电子系统设计//" class="article-tag-list-link color2">电子系统设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -394,8 +437,8 @@
 	var yiliaConfig = {
 		mathjax: [object Object],
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
