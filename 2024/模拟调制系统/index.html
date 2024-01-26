@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://T-1031.github.io">
   <title>模拟调制系统 | TG仓库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第5章 模拟调制系统   幅度调制（线性调制）原理  AM（调幅） DSB（双边带调制） SSB（单边带调制）  滤波法 相移法  VSB（残边带调制） 线性调制的一般模型 相干解调 包络检波  角度调制（非线性调制）原理  FM（调频）&amp; PM（调相）  FM &amp; PM 基本概念 单音调制 FM &amp; PM  窄带调频 宽带">
+  <meta name="description" content="第5章 模拟调制系统   幅度调制（线性调制）原理  AM（调幅） DSB（双边带调制） SSB（单边带调制）  滤波法 相移法  VSB（残边带调制） 线性调制的一般模型  滤波法 相移法  相干解调 包络检波  角度调制（非线性调制）原理  FM（调频）&amp; PM（调相）  FM &amp; PM 基本概念 单音调制 FM &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模拟调制系统">
 <meta property="og:url" content="http://t-1031.github.io/2024/%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="TG仓库">
-<meta property="og:description" content="第5章 模拟调制系统   幅度调制（线性调制）原理  AM（调幅） DSB（双边带调制） SSB（单边带调制）  滤波法 相移法  VSB（残边带调制） 线性调制的一般模型 相干解调 包络检波  角度调制（非线性调制）原理  FM（调频）&amp; PM（调相）  FM &amp; PM 基本概念 单音调制 FM &amp; PM  窄带调频 宽带">
+<meta property="og:description" content="第5章 模拟调制系统   幅度调制（线性调制）原理  AM（调幅） DSB（双边带调制） SSB（单边带调制）  滤波法 相移法  VSB（残边带调制） 线性调制的一般模型  滤波法 相移法  相干解调 包络检波  角度调制（非线性调制）原理  FM（调频）&amp; PM（调相）  FM &amp; PM 基本概念 单音调制 FM &amp;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-25T03:06:25.000Z">
-<meta property="article:modified_time" content="2024-01-25T05:36:39.980Z">
+<meta property="article:modified_time" content="2024-01-26T08:10:17.086Z">
 <meta property="article:author" content="TG">
 <meta name="twitter:card" content="summary">
   
@@ -177,7 +177,11 @@
 <li><a href="#相移法">相移法</a></li>
 </ul></li>
 <li><a href="#vsb残边带调制">VSB（残边带调制）</a></li>
-<li><a href="#线性调制的一般模型">线性调制的一般模型</a></li>
+<li><a href="#线性调制的一般模型">线性调制的一般模型</a>
+<ul>
+<li><a href="#滤波法-1">滤波法</a></li>
+<li><a href="#相移法-1">相移法</a></li>
+</ul></li>
 <li><a href="#相干解调">相干解调</a></li>
 <li><a href="#包络检波">包络检波</a></li>
 </ul></li>
@@ -188,10 +192,14 @@
 <li><a href="#fm-pm-基本概念">FM &amp; PM 基本概念</a></li>
 <li><a href="#单音调制-fm-pm">单音调制 FM &amp; PM</a></li>
 </ul></li>
-<li><a href="#窄带调频">窄带调频</a></li>
-<li><a href="#宽带调频">宽带调频</a></li>
-<li><a href="#频率信号的产生">频率信号的产生</a></li>
-<li><a href="#频率信号的解调">频率信号的解调</a></li>
+<li><a href="#窄带调频-nbfm">窄带调频 (NBFM)</a></li>
+<li><a href="#宽带调频-wbfm">宽带调频 (WBFM)</a></li>
+<li><a href="#调频信号的产生">调频信号的产生</a>
+<ul>
+<li><a href="#直接调频法">直接调频法</a></li>
+<li><a href="#间接调频法">间接调频法</a></li>
+</ul></li>
+<li><a href="#调频信号的解调">调频信号的解调</a></li>
 </ul></li>
 <li><a href="#各种模拟调制系统的比较">各种模拟调制系统的比较</a></li>
 </ul>
@@ -267,17 +275,259 @@ s_{SSB}(t) = \dfrac{1}{2} m(t) \cos \omega_c t \mp \dfrac{1}{2}
 "<span class="math inline">\(-\)</span>" 表示上边带信号，"<span class="math inline">\(+\)</span>" 表示下边带信号。</p>
 <p>带宽：<span class="math inline">\(B_{SSB} = f_H\)</span></p>
 <h3><span id="vsb残边带调制">VSB（残边带调制）</span></h3>
+<p>跟单边带滤波法类似，只是不像 SSB 中一样完全抑制 DSB
+信号的一个边带，而是逐渐切割，使其残留一小部分。</p>
+<p>频谱为：<br>
+<span class="math display">\[
+S_{VSB}(\omega) = S_{DSB}(\omega) \cdot H(\omega)
+\]</span></p>
+<p>为保证相干解调的输出无失真地恢复调制信号 <span class="math inline">\(m(t)\)</span>，必须要求：<br>
+<span class="math display">\[
+H(\omega + \omega_c) + H(\omega - \omega_c) = 常数,\quad |\omega| \leq
+\omega_H
+\]</span><br>
+其中，<span class="math inline">\(\omega_H\)</span> 是 <span class="math inline">\(m(t)\)</span> 的截止角频率。</p>
 <h3><span id="线性调制的一般模型">线性调制的一般模型</span></h3>
+<h4><span id="滤波法">滤波法</span></h4>
+<p>输出已调信号的时域表达式：<br>
+<span class="math display">\[
+s_m(t) = [m(t) \cos \omega_c t] * h(t)
+\]</span><br>
+频域表达式：<br>
+<span class="math display">\[
+S_m(\omega) = \dfrac{1}{2} [M(\omega + \omega_c) + M(\omega - \omega_c)]
+H(\omega)
+\]</span></p>
+<h4><span id="相移法">相移法</span></h4>
+<p>将 <span class="math inline">\(s_m(t)\)</span>
+分解成两个互为正交调制分量，即<br>
+<span class="math display">\[
+s_m(t) = s_I(t) \cos \omega_c t + s_Q(t) \sin \omega_c t
+\]</span><br>
+其中<br>
+<span class="math display">\[
+\begin{aligned}
+   &amp;s_I(t) = h_I(t) * m(t),\quad h_I(t) = h(t) \cos \omega_c t \\
+   &amp;s_Q(t) = h_Q(t) * m(t),\quad h_Q(t) = h(t) \sin \omega_c t
+\end{aligned}
+\]</span></p>
 <h3><span id="相干解调">相干解调</span></h3>
+<p>适用于所有线性调制信号的解调。<br>
+对于 AM 信号，解调后加隔直电容。</p>
+<p>接收端提供一个与接收的已调载波严格同步（同频同相）的本地载波（称为相干载波），它与接收的已调信号相乘后，经低通滤波器取出低频分量，即可得到原始的基带调制信号。</p>
+<p>送入解调器的已调信号：<br>
+<span class="math display">\[
+s_m(t) = s_I(t) \cos \omega_c t + s_Q(t) \sin \omega_c t
+\]</span><br>
+与相干载波相乘得：<br>
+<span class="math display">\[
+s_p(t) = s_m(t) \cos \omega_c t = \dfrac{1}{2} s_I(t) + \dfrac{1}{2}
+s_I(t) \cos 2\omega_c t + \dfrac{1}{2} s_Q(t) \sin 2\omega_c t
+\]</span><br>
+经过低通滤波器 (LPF) 后得解调信号：<br>
+<span class="math display">\[
+s_d (t) = \dfrac{1}{2} s_I(t) \propto m(t)
+\]</span></p>
 <h3><span id="包络检波">包络检波</span></h3>
+<p>适用于满足 <span class="math inline">\(| m(t) |_{max} \leq
+A_0\)</span> 条件的 AM 信号。</p>
+<p>通常由半波或全波整流器和低通滤波器组成。<br>
+在包络的上升阶段，新作用在二极管正极的脉冲比原来脉冲的峰值大。在电容放了一点点电后，新的脉冲到来，使得二极管导通，再次给电容充电。电容电压变化整体趋势是沿着包络上升。<br>
+在包络的下降阶段，新作用在二极管正极的脉冲比原来脉冲的峰值小。相对包络上升阶段，电容的充电时刻集中在脉冲的顶部，充电时间相对减小，放电时间相对增多。电容电压变化的整体趋势是沿着包络下降。</p>
+<p>检波器的 RC 需要满足条件：<br>
+<span class="math display">\[
+f_H \leq \dfrac{1}{RC} \leq f_c
+\]</span><br>
+其中，<span class="math inline">\(f_H\)</span>
+是调制信号的最高频率，<span class="math inline">\(f_c\)</span>
+是载波的频率。</p>
+<p>条件满足时，检波器的输出为：<br>
+<span class="math display">\[
+s_d(t) = A_0 + m(t)
+\]</span></p>
 <h2><span id="角度调制非线性调制原理">角度调制（非线性调制）原理</span></h2>
 <h3><span id="fm调频amp-pm调相">FM（调频）&amp; PM（调相）</span></h3>
 <h4><span id="fm-amp-pm-基本概念">FM &amp; PM 基本概念</span></h4>
+<p>角度调制信号的一般表达式为<br>
+<span class="math display">\[
+s_m(t) = A \cos [\omega_c t + \varphi(t)]
+\]</span><br>
+其中</p>
+<ul>
+<li><span class="math inline">\(A\)</span>：载波的恒定振幅</li>
+<li><span class="math inline">\(\theta(t) = \omega_c t +
+\varphi(t)\)</span>：信号的瞬时相位</li>
+<li><span class="math inline">\(\omega_c t\)</span>：载波相位</li>
+<li><span class="math inline">\(\varphi(t)\)</span>：相对于载波相位的瞬时相位偏移</li>
+<li><span class="math inline">\(\omega(t) = \dfrac{d[\omega_c t +
+\varphi(t)]}{dt}\)</span>：信号的瞬时角频率</li>
+<li><span class="math inline">\(\dfrac{d\varphi(t)}{dt}\)</span>：相对于载频 <span class="math inline">\(\omega_c\)</span> 的瞬时频率偏移</li>
+</ul>
+<p><strong>相位调制</strong> (PM)，指瞬时相位偏移随调制信号 <span class="math inline">\(m(t)\)</span> 作线性变化，即<br>
+<span class="math display">\[
+\varphi(t) = K_p m(t)
+\]</span><br>
+其中，<span class="math inline">\(K_p\)</span> 为调相灵敏度 <span class="math inline">\((rad/V)\)</span>，含义是单位调制幅度引起 PM
+信号的相位偏移量。<br>
+带入可得调相信号为<br>
+<span class="math display">\[
+s_{PM}(t) = A\cos [\omega_c t + K_p m(t)]
+\]</span></p>
+<p><strong>频率调制</strong> (FM)，指瞬时频率偏移随调制信号 <span class="math inline">\(m(t)\)</span> 成比例变化，即<br>
+<span class="math display">\[
+\dfrac{d\varphi(t)}{dt} = K_f m(t)
+\]</span><br>
+其中，<span class="math inline">\(K_f\)</span> 为调频灵敏度 <span class="math inline">\((rad/(s \cdot V))\)</span>。<br>
+这时，相位偏移为<br>
+<span class="math display">\[
+\varphi(t) = K_f \int m(\tau) d\tau
+\]</span><br>
+带入可得调频信号为<br>
+<span class="math display">\[
+s_{FM} (t) = A \cos [\omega_c t + K_f \int m(\tau) d\tau]
+\]</span></p>
 <h4><span id="单音调制-fm-amp-pm">单音调制 FM &amp; PM</span></h4>
-<h3><span id="窄带调频">窄带调频</span></h3>
-<h3><span id="宽带调频">宽带调频</span></h3>
-<h3><span id="频率信号的产生">频率信号的产生</span></h3>
-<h3><span id="频率信号的解调">频率信号的解调</span></h3>
+<p>设调制信号为单一频率的正弦波，即<br>
+<span class="math display">\[
+m(t) = A_m \cos \omega_m t = A_m \cos 2\pi f_m t
+\]</span></p>
+<p>PM 信号：<br>
+<span class="math display">\[
+s_{PM}(t) = A \cos[\omega_c t + m_p \cos \omega_m t]
+\]</span><br>
+其中，<span class="math inline">\(m_p = K_p A_m\)</span>
+称为调相指数，表示最大的相位偏移。</p>
+<p>FM 信号：<br>
+<span class="math display">\[
+s_{FM}(t) = A \cos[\omega_c t + m_f \sin \omega_m t]
+\]</span><br>
+其中</p>
+<ul>
+<li><span class="math inline">\(m_f = \dfrac{K_f A_m}{\omega_m} =
+\dfrac{\Delta \omega}{\omega_m} = \dfrac{\Delta
+f}{f_m}\)</span>：调频指数，表示最大的相位偏移</li>
+<li><span class="math inline">\(\Delta \omega = K_f
+A_m\)</span>：最大角频偏</li>
+<li><span class="math inline">\(\Delta f = m_f \cdot
+f_m\)</span>：最大频偏</li>
+</ul>
+<h3><span id="窄带调频-nbfm">窄带调频 (NBFM)</span></h3>
+<p>FM 信号的最大瞬时相位偏移满足<br>
+<span class="math display">\[
+\left| K_f \int m(\tau) d\tau \right| \ll \dfrac{\pi}{6}\ (或 0.5)
+\]</span><br>
+此时有<br>
+<span class="math display">\[
+\begin{aligned}
+   &amp;\cos \left[ K_f \int m(\tau) d\tau \right] \approx 1 \\
+   &amp;\sin\left[ K_f \int m(\tau) d\tau \right] \approx K_f \int
+m(\tau) d\tau
+\end{aligned}
+\]</span></p>
+<p>FM 信号的时域表达式可化简为<br>
+<span class="math display">\[
+s_{NBFM}(t) \approx A \cos \omega_c t - \left[ A K_f \int m(\tau) d\tau
+\right] \sin \omega_c t
+\]</span><br>
+对应的频域表达式为<br>
+<span class="math display">\[
+S_{NBFM}(\omega) = \pi A [\delta(\omega + \omega_c) + \delta(\omega -
+\omega_c)] + \dfrac{A K_f}{2} \left[\dfrac{M(\omega - \omega_c)}{\omega
+- \omega_c} - \dfrac{M(\omega + \omega_c)}{\omega + \omega_c}\right]
+\]</span><br>
+带宽与 AM 信号相同，都为调制信号最高频率的两倍。</p>
+<h3><span id="宽带调频-wbfm">宽带调频 (WBFM)</span></h3>
+<p>最大瞬时相位偏移不满足窄带调频的条件。</p>
+<p>设单音调制信号为<br>
+<span class="math display">\[
+m(t) = A_m \cos \omega_m t = A_m \cos 2\pi f_m t
+\]</span><br>
+利用傅里叶极数展开可得<br>
+<span class="math display">\[
+\begin{aligned}
+   &amp;\cos (m_f \sin \omega_m t) = J_0(m_f) +
+\sum\limits_{n=1}^{\infty} 2J_{2n}(m_f) \cos 2n \omega_m t \\
+   &amp;\sin (m_f \sin \omega_m t) = 2\sum\limits_{n=1}^{\infty}
+J_{2n-1}(m_f) \sin (2n-1) \omega_m t
+\end{aligned}
+\]</span><br>
+其中，<span class="math inline">\(J_n(m_f)\)</span> 为第一类 n
+阶贝塞尔函数，具有以下性质<br>
+<span class="math display">\[
+\begin{aligned}
+   &amp;J_{-n}(m_f) = -J_n(m_f)\quad n 为奇数 \\
+   &amp;J_{-n}(m_f) = J_n(m_f)\quad n 为偶数
+\end{aligned}
+\]</span></p>
+<p>可以得到 FM 信号的级数展开形式为<br>
+<span class="math display">\[
+s_{FM}(t) = A\sum\limits_{-\infty}^{\infty} J_n(m_f) \cos (\omega_c +
+n\omega_m)t
+\]</span><br>
+对应的频域表达式为<br>
+<span class="math display">\[
+S_{FM}(\omega) = \pi A\sum\limits_{-\infty}^{\infty} J_n(m_f)
+[\delta(\omega - \omega_c - n\omega_m) + \delta(\omega + \omega_c +
+n\omega_m)]
+\]</span><br>
+带宽为<br>
+<span class="math display">\[
+B_{FM} = 2(m_f + 1)f_m = 2(\Delta f + f_m)
+\]</span><br>
+当 <span class="math inline">\(m_f \ll 1\)</span> 时，<span class="math inline">\(B_{FM} \approx 2f_m\)</span> (NBFM)；<br>
+当 <span class="math inline">\(m_f \gg 1\)</span> 时，<span class="math inline">\(B_{FM} \approx 2\Delta f\)</span> (WBFM)。</p>
+<h3><span id="调频信号的产生">调频信号的产生</span></h3>
+<h4><span id="直接调频法">直接调频法</span></h4>
+<p>用调制信号直接控制载波振荡器的频率，使其按调制信号的规律线性地变化。</p>
+<p><strong>锁相环 (PLL)
+调制器</strong>：使输出振荡器信号与参考信号同步。</p>
+<ul>
+<li><p><strong>晶体振荡器</strong>：产生频率稳定、精确的信号。</p></li>
+<li><p><strong>相位检测器</strong>
+(PD)：对两个信号的相位进行比较，并根据两个信号的相位差产生一个电压。<br>
+通常由模拟乘法器组成，两个输入信号分别为晶振的输出和 VCO 输出的 FM
+信号。</p>
+<p>设晶振的输出信号和 VCO 的输出信号分别为<br>
+<span class="math display">\[
+\begin{aligned}
+&amp;u_i(t) = U_{im} \sin [\omega_i t + \theta_i (t)] \\
+&amp;u_o(t) = U_{om} \sin [\omega_o t + \theta_o (t)]
+\end{aligned}
+\]</span><br>
+则模拟乘法器的输出电压为<br>
+<span class="math display">\[
+\begin{aligned}
+u_D(t) &amp;= K u_i(t) u_o(t) \\
+&amp;= \dfrac{1}{2} K U_{im} U_{om} \sin[(\omega_i t + \theta_i(t))
++  (\omega_o t + \theta_o(t))] \\
+&amp;+ \dfrac{1}{2} K U_{im} U_{om} \sin[(\omega_i t + \theta_i(t)) -
+(\omega_o t + \theta_o(t))]
+\end{aligned}
+\]</span></p></li>
+<li><p><strong>环路滤波器</strong> (LF)：为低通滤波器。过滤 PD
+的输出，即过滤掉 <span class="math inline">\(u_D(t)\)</span>
+中的和频分量，留下差频分量作为 VCO 的输入信号的一部分。</p>
+<p>PD 的输出信号为<br>
+<span class="math display">\[
+\begin{aligned}
+u_C(t) &amp;= \dfrac{1}{2} K U_{im} U_{om} \sin[(\omega_i t +
+\theta_i(t)) - (\omega_o t + \theta_o(t))] \\
+&amp;= U_{dm} \sin[(\omega_i - \omega_o)t + (\theta_i(t) - \theta_o(t))]
+\end{aligned}
+\]</span><br>
+当锁相环进入相位锁定状态时，<span class="math inline">\(u_C(t)\)</span>
+为恒定值，不随时间变化。</p></li>
+<li><p><strong>压控振荡器</strong>
+(VCO)：由外部电压控制振荡频率的振荡器，振荡频率正比于输入控制电压。<br>
+用于产生调频信号，通常被认为是回路的输出。</p>
+<p>将 LF 的输出和调制信号 <span class="math inline">\(m(t)\)</span>
+叠加后输入 VCO，可得输出信号的瞬时角频率为<br>
+<span class="math display">\[
+\omega(t) = \omega_0 + K_f m(t)
+\]</span></p></li>
+</ul>
+<h4><span id="间接调频法">间接调频法</span></h4>
+<h3><span id="调频信号的解调">调频信号的解调</span></h3>
 <h2><span id="各种模拟调制系统的比较">各种模拟调制系统的比较</span></h2>
 
       
@@ -395,7 +645,7 @@ s_{SSB}(t) = \dfrac{1}{2} m(t) \cos \omega_c t \mp \dfrac{1}{2}
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">第5章 模拟调制系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">幅度调制（线性调制）原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">AM（调幅）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">DSB（双边带调制）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.3.</span> <span class="toc-text">SSB（单边带调制）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">滤波法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">相移法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.4.</span> <span class="toc-text">VSB（残边带调制）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.5.</span> <span class="toc-text">线性调制的一般模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.6.</span> <span class="toc-text">相干解调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.7.</span> <span class="toc-text">包络检波</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">角度调制（非线性调制）原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">FM（调频）&amp; PM（调相）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">FM &amp; PM 基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">单音调制 FM &amp; PM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">窄带调频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.3.</span> <span class="toc-text">宽带调频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.4.</span> <span class="toc-text">频率信号的产生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.5.</span> <span class="toc-text">频率信号的解调</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">各种模拟调制系统的比较</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">第5章 模拟调制系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">幅度调制（线性调制）原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">AM（调幅）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">DSB（双边带调制）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.3.</span> <span class="toc-text">SSB（单边带调制）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">滤波法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">相移法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.4.</span> <span class="toc-text">VSB（残边带调制）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.5.</span> <span class="toc-text">线性调制的一般模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">滤波法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">相移法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.6.</span> <span class="toc-text">相干解调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.7.</span> <span class="toc-text">包络检波</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">角度调制（非线性调制）原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">FM（调频）&amp; PM（调相）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">FM &amp; PM 基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">单音调制 FM &amp; PM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">窄带调频 (NBFM)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.3.</span> <span class="toc-text">宽带调频 (WBFM)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.4.</span> <span class="toc-text">调频信号的产生</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">直接调频法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">间接调频法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.5.</span> <span class="toc-text">调频信号的解调</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">各种模拟调制系统的比较</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
