@@ -198,10 +198,15 @@
 <ul>
 <li><a href="#直接调频法">直接调频法</a></li>
 <li><a href="#间接调频法">间接调频法</a></li>
+<li><a href="#正交调制法">正交调制法</a></li>
 </ul></li>
-<li><a href="#调频信号的解调">调频信号的解调</a></li>
+<li><a href="#调频信号的解调">调频信号的解调</a>
+<ul>
+<li><a href="#非相干解调">非相干解调</a></li>
+<li><a href="#相干解调-1">相干解调</a></li>
+<li><a href="#正交解调">正交解调</a></li>
 </ul></li>
-<li><a href="#各种模拟调制系统的比较">各种模拟调制系统的比较</a></li>
+</ul></li>
 </ul>
 <!-- tocstop -->
 <h2><span id="幅度调制线性调制原理">幅度调制（线性调制）原理</span></h2>
@@ -527,8 +532,173 @@ u_C(t) &amp;= \dfrac{1}{2} K U_{im} U_{om} \sin[(\omega_i t +
 \]</span></p></li>
 </ul>
 <h4><span id="间接调频法">间接调频法</span></h4>
+<p>先将调制信号积分，然后对载波进行调相，即可产生一个 NBFM 信号，再经过
+n 次倍频器得到 WBFM 信号。</p>
+<p>记调制信号为 <span class="math inline">\(m(t)\)</span>，载波为 <span class="math inline">\(A \cos \omega_c t\)</span>。</p>
+<ul>
+<li><p>产生 NBFM 信号</p>
+<ul>
+<li>将 <span class="math inline">\(m(t)\)</span> 输入积分器，得到<br>
+<span class="math display">\[
+K_f \int m(\tau) d\tau
+\]</span></li>
+<li>对载波进行调相，使其相位 <span class="math inline">\(-\dfrac{\pi}{2}\)</span>，得到<br>
+<span class="math display">\[
+A \sin \omega_c t
+\]</span></li>
+<li>将两个信号相乘后，用原载波信号减去相乘结果，得到 NBFM 信号为<br>
+<span class="math display">\[
+s_{NBFM} = A \cos \omega_c t - \left[A K_f \int m(\tau) d\tau\right]\sin
+\omega_c t
+\]</span></li>
+</ul></li>
+<li><p>通过倍频器，提高调频指数 <span class="math inline">\(m_f\)</span>，得到 WBFM 信号。</p>
+<ul>
+<li><p>倍频器可用非线性器件实现，然后通过带通滤波器滤去不需要的频率分量。<br>
+以理想平方律器件为例，其输入输出特性为 <span class="math inline">\(s_o(t) = a s_i^2(t)\)</span>。</p>
+<p>当输入信号为调频信号时有<br>
+<span class="math display">\[
+\begin{aligned}
+s_i(t) &amp;= A \cos [\omega_c t + \varphi(t)] \\
+s_o(t) &amp;= \dfrac{1}{2} aA^2 [1 + \cos(2\omega_c t + 2 \varphi(t))]
+\end{aligned}
+\]</span><br>
+滤除直流成分后得到一个新的调频信号，其载频和相位偏移均增加到原来的 2
+倍，因此 <span class="math inline">\(m_f\)</span> 也增为原来的 2
+倍。<br>
+同理，经过 n 次倍频后增加为原来的 n 倍。</p></li>
+<li><p>倍频器在提高相位偏移的同时也会提高载波频率，需要混频器进行下变频来使载波频率符合要求。</p>
+<p>记原载频为 <span class="math inline">\(f_1\)</span>，经过 <span class="math inline">\(n_1\)</span> 次倍频得到的频率为 <span class="math inline">\(n_1 f_1\)</span>；<br>
+记混频器参考频率为 <span class="math inline">\(f_2\)</span>，则调频发射信号的载频为 <span class="math inline">\(f_c = n_2(n_1 f_1 - f_2)\)</span>。</p></li>
+</ul></li>
+</ul>
+<h4><span id="正交调制法">正交调制法</span></h4>
+<ul>
+<li><p>对调制信号 <span class="math inline">\(m(t)\)</span>
+进行积分，得到<br>
+<span class="math display">\[
+\Phi = K_f \int m(\tau) d\tau
+\]</span></p></li>
+<li><p>对积分后的信号分别取余弦和正弦，得到 I 路数据和 Q 路数据为<br>
+<span class="math display">\[
+\begin{aligned}
+I(t) &amp;= \cos(\Phi) \\
+Q(t) &amp;= \sin(\Phi)
+\end{aligned}
+\]</span></p></li>
+<li><p>两路信号分别乘上载波 <span class="math inline">\(A\cos (\omega_c
+t)\)</span> 和 <span class="math inline">\(-A\sin (\omega_c t)\)</span>
+相加，得到 FM 信号为<br>
+<span class="math display">\[
+\begin{aligned}
+s_{FM}(t) &amp;= A I(t) \cos (\omega_c t) - A Q(t) \sin (\omega_c t) \\
+&amp;= A \cos (\omega_c t + \Phi)
+\end{aligned}
+\]</span></p>
+<p>也可以将 <span class="math inline">\(I(t)\)</span> 和 <span class="math inline">\(Q(t)\)</span> 组成一个复信号 <span class="math inline">\(Z(t) = I(t) + j Q(t)\)</span>，然后乘以复载波
+<span class="math inline">\(\exp (j\omega_c t)\)</span>，取实部得 FM
+信号<br>
+<span class="math display">\[
+s_{FM}(t) = Re \{Z(t) \exp (j\omega_c t)\}
+\]</span></p></li>
+</ul>
 <h3><span id="调频信号的解调">调频信号的解调</span></h3>
-<h2><span id="各种模拟调制系统的比较">各种模拟调制系统的比较</span></h2>
+<p>调频信号的解调要产生一个与输入调频信号的频率呈线性关系的输出电压。<br>
+使用<strong>鉴频器</strong>来完成这种频率-电压转换关系。</p>
+<h4><span id="非相干解调">非相干解调</span></h4>
+<p>NBFM 信号和 WBFM 信号都适用。</p>
+<p>调频信号的一般表达式为<br>
+<span class="math display">\[
+s_{FM} (t) = A \cos [\omega_c t + K_f \int m(\tau) d\tau]
+\]</span></p>
+<p>常见的鉴频器为微分器和包络检波器。</p>
+<ul>
+<li><p>将调频信号通过一个带通滤波器 (BPF) 和限幅器。<br>
+BPF 滤除带外噪声及高次谐波分量。<br>
+限幅器消除信道中噪声和其他原因引起的调频波的幅度起伏。</p></li>
+<li><p>对限幅器输出的信号求微分，即把幅度恒定的调频信号变成幅度和频率都随调制信号
+<span class="math inline">\(m(t)\)</span> 变化的调幅调频波 <span class="math inline">\(s_d(t)\)</span>。<br>
+<span class="math display">\[
+\begin{aligned}
+s_d(t) &amp;= \dfrac{d s_{FM}(t)}{dt} \\
+&amp;= -A[\omega_c + K_f m(t)] \sin \left[\omega_c t + K_f \int m(\tau)
+d\tau\right]
+\end{aligned}
+\]</span></p></li>
+<li><p>通过包络检波器将其幅度变化检出并滤去直流，与 AM
+信号的包络检波同理。</p></li>
+<li><p>通过一个低通滤波器，滤除高频载波 (<span class="math inline">\(2\omega_c\)</span> 或 <span class="math inline">\(\omega_c\)</span>)，得到解调输出<br>
+<span class="math display">\[
+m_o(t) = K_d K_f m(t)
+\]</span><br>
+其中 <span class="math inline">\(K_d\)</span> 为鉴频灵敏度 <span class="math inline">\((V/(rad/s))\)</span></p></li>
+</ul>
+<h4><span id="相干解调">相干解调</span></h4>
+<p>仅适用于 NBFM 信号。</p>
+<p>窄带调频信号的表达式为<br>
+<span class="math display">\[
+s_{NBFM}(t) = A \cos \omega_c t - A \left[ K_f \int m(\tau) d\tau
+\right] \sin \omega_c t
+\]</span><br>
+相干载波为<br>
+<span class="math display">\[
+c(t) = -\sin \omega_c t
+\]</span></p>
+<ul>
+<li><p>将 NBFM 信号与相干载波相乘，得到<br>
+<span class="math display">\[
+s_p(t) = -\dfrac{A}{2} \sin 2\omega_c t + \dfrac{A}{2} \left[ K_f \int
+m(\tau) d\tau \right] (1 - \cos 2\omega_c t)
+\]</span></p></li>
+<li><p>经过低通滤波器取出其低频分量<br>
+<span class="math display">\[
+s_d(t) = \dfrac{A}{2} \left[ K_f \int m(\tau) d\tau \right]
+\]</span></p></li>
+<li><p>经过微分器，得到解调输出<br>
+<span class="math display">\[
+m_o(t) = \dfrac{A K_f}{2} m(t)
+\]</span></p></li>
+</ul>
+<h4><span id="正交解调">正交解调</span></h4>
+<p>正交解调也属于相干解调的一种，但具有较强的抗载频失配能力，不要求相干载波严格的同频同相。</p>
+<p>记 <span class="math inline">\(\Phi = K_f \int m(\tau)
+d\tau\)</span><br>
+原调频信号为<br>
+<span class="math display">\[
+\begin{aligned}
+   s_{FM} (t) &amp;= A \cos [\omega_c t + K_f \int m(\tau) d\tau] \\
+   &amp;= A \cos (\omega_c t + \Phi)
+\end{aligned}
+\]</span></p>
+<ul>
+<li><p>乘以正交相干载波得到 <span class="math inline">\(s_I(t)\)</span>
+和 <span class="math inline">\(s_Q(t)\)</span>，即<br>
+<span class="math display">\[
+\begin{aligned}
+s_I(t) &amp;= s_{FM}(t) \cos (\omega_c t) \\
+&amp;= \frac{A}{2} \cos(2\omega_c t + \Phi) + \dfrac{A}{2} \cos(\Phi) \\
+s_Q(t) &amp;= -s_{FM}(t) \sin (\omega_c t) \\
+&amp;= -\frac{A}{2} \sin(2\omega_c t + \Phi) + \dfrac{A}{2} \sin(\Phi)
+\end{aligned}
+\]</span></p></li>
+<li><p>通过低通滤波器，滤除高频分量可得<br>
+<span class="math display">\[
+\begin{aligned}
+s_I(t) &amp;= \dfrac{A}{2} \cos(\Phi) \\
+s_Q(t) &amp;= \dfrac{A}{2} \sin(\Phi)
+\end{aligned}
+\]</span></p></li>
+<li><p>通过反正切计算相位<br>
+<span class="math display">\[
+K_f \int m(\tau) d\tau = \Phi(t) =
+atan\left[\dfrac{s_Q(t)}{s_I(t)}\right]
+\]</span></p></li>
+<li><p>通过一个微分器得到解调结果 <span class="math inline">\(m_o(t)\)</span></p></li>
+<li><p>对于数字信号，可以采用改良算法，将上述两步合并成一步，得到<br>
+<span class="math display">\[
+m_o(n) = \dfrac{s_I(n-1) s_Q(n) - s_I(n) s_Q(n-1)}{s^2_I(n) + s^2_Q(n)}
+\]</span></p></li>
+</ul>
 
       
 
@@ -543,11 +713,7 @@ u_C(t) &amp;= \dfrac{1}{2} K U_{im} U_{om} \sin[(\omega_i t +
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/通信原理//" class="article-tag-list-link color5">通信原理</a>
+        			<a href="/categories/通信原理//" class="article-tag-list-link color5">通信原理</a>
         		</li>
       		
 		</ul>
@@ -2072,11 +2238,7 @@ e^{j\frac{2\pi}{N} nk},\quad n = 0, 1, \cdots, N-1
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/数字信号处理//" class="article-tag-list-link color2">数字信号处理</a>
+        			<a href="/categories/数字信号处理//" class="article-tag-list-link color2">数字信号处理</a>
         		</li>
       		
 		</ul>
@@ -2414,11 +2576,7 @@ TCP：为建立连接的SYN分组建立状态，只允许对该SYN的应答分�
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -2644,11 +2802,7 @@ DNS 系统找到资源所在的主机及 web 服务器的 IP 地址。 - 浏览�
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -3475,11 +3629,7 @@ ssthresh，再次执行 AIMD。</p></li>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -4020,11 +4170,7 @@ fragment)：1比特，表明后面还有更多的段。</li>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -5484,11 +5630,7 @@ IP | IS-IS | | 链路层 | | | | | | 物理层 | | | | |</p>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -6087,11 +6229,7 @@ C021：链路控制数据<br>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -6383,11 +6521,7 @@ d_{trans}\)</span></p>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -6577,11 +6711,7 @@ d_{trans}\)</span></p>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习//" class="article-tag-list-link color5">课程复习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/课程复习/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -6723,7 +6853,7 @@ MathJax.Hub.Queue(function() {
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="https://ys.mihoyo.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Here!</a>
+              <a href="https://ys.mihoyo.com/main/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Here!</a>
             </li>
           
         </ul>
